@@ -1,0 +1,13 @@
+tirateima
+tirateima.controlador
+tirateima.gerador
+tirateima.gui
+tirateima.gui.alerta
+tirateima.gui.arquivos
+tirateima.gui.console
+tirateima.gui.editortexto
+tirateima.gui.highlighting
+tirateima.gui.variaveis
+tirateima.main
+tirateima.parser
+tirateima.ui

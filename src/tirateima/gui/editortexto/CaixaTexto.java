@@ -89,7 +89,7 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 	/*Define qual linha deve ser destacada. Se for menor que zero, nenhuma.*/
 	private int linha_destacada = -1;
 
-	/*Índices de acesso aos nomes dos estilos...*/
+	/*Indices de acesso aos nomes dos estilos...*/
 	public static final String[] estilos = {"regular", "palavra_chave",
 		"literal", "comentario", "pontuacao", "num", "tipo", "diretivas"};
 

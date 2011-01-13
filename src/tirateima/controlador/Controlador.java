@@ -32,7 +32,7 @@ public class Controlador {
 	/*Lista dos estados.*/
 	List<Estado> estados = new ArrayList<Estado>();
 	
-	/*Índice para controle da lista de estados. */
+	/*Indice para controle da lista de estados. */
 	private int indice;
 	/**
 	*Método contrutor único/default.

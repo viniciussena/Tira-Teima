@@ -148,7 +148,7 @@ public class GerenciadorArquivos extends JComponent implements IEstado{
 	 * Retorna o índice de um arquivo na lista de arquivos.
 	 * 
 	 * @param nome Nome do arquivo a ser buscado.
-	 * @return Índice do arquivo.
+	 * @return Indice do arquivo.
 	 */
 	protected int buscarArquivo(String nome){
 		int indice = 0;
