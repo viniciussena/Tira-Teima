@@ -1,0 +1,18 @@
+1 function soma (int a, b;):void; 
+3;
+4 int x, y, z;
+
+13;
+14 x = 1;
+15 y = 2;
+16;
+
+6 start soma (x,y);
+7;
+8 z = 3;
+9 a = 10;
+10 b = 20;
+11;
+
+17 { end; writeln ("3");}
+18 ;

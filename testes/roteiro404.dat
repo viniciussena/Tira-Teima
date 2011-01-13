@@ -1,0 +1,180 @@
+1 {comenta("O comando repeat é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o final do laço de repetição é determinado por alguma condição que depende dos valores que estão sendo calculados.");
+   som();}
+3;
+4 int n cor(200,200,100) tamanho(60,30) posicao(40,40),
+      i cor(200,200,100) tamanho(60,30) posicao(140,40),
+      valor cor(200,200,100) tamanho(60,30) posicao(240,40);
+5 boolean primo cor(100,200,100) tamanho(60,30) posicao(40,140);
+7;
+8 writeln("Digite um numero inteiro positivo");
+9 {comenta("Este comando repeat serve para evitar que o usuário entre com um valor negativo. Ou seja, faz a crítica de dados de entrada.");
+   som();}
+10 {writeln(-5); valor = -5;
+   comenta("Neste caso o usuário errou e digitou um valor negativo. O laço será re-executado, até que entre com um valor positivo.");
+   som();}
+11;
+9;
+10 {writeln(10); valor = 10;}
+11;
+12 n= 1;
+13;
+14 primo = true;
+15;
+25;
+26 writeln ("1 e primo");
+28;
+12 n= 2;
+13;
+14 primo = true;
+15;
+25;
+26 writeln ("2 e primo");
+28;
+12 n= 3;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+22 i = 3;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque i > n div 2");
+   som();}
+24;
+25;
+26 writeln ("3 e primo");
+28;
+12 n= 4;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+21 primo = false;
+22 i = 3;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque primo = false");
+   som();}
+24;
+25;
+27 writeln("4 nao e primo");
+28;
+12 n= 5;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+22 i = 3;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque i > n div 2");
+   som();}
+24;
+25;
+26 writeln ("5 e primo");
+28;
+
+12 n= 6;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+21 primo = false;
+22 i = 3;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque primo = false");
+   som();}
+24;
+25;
+27 writeln ("6 nao e primo");
+28;
+
+12 n= 7;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+22 i = 3;
+23;
+19;
+20;
+22 i = 4;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque i > n div 2");
+   som();}
+24;
+25;
+26 writeln ("7 e primo");
+28;
+
+12 n= 8;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+21 primo = false;
+22 i = 3;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque primo = false");
+   som();}
+24;
+25;
+27 writeln ("8 nao e primo");
+28;
+
+12 n= 9;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+22 i = 3;
+23;
+19;
+20;
+21 primo = false;
+22 i = 4;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque primo = false");
+   som();}
+24;
+25;
+27 writeln ("9 nao e primo");
+28;
+
+12 n= 10;
+13;
+14 primo = true;
+15;
+16;
+17;
+18 i = 2;
+19;
+20;
+21 primo = false;
+22 i = 3;
+23 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque primo = false");
+   som();}
+24;
+25;
+27 writeln ("10 nao e primo");
+28;
+
+29;

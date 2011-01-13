@@ -1,0 +1,45 @@
+1 {comenta("Neste exemplo a ordem dos comandos dentro do repeat está invertida em relação ao exemplo anterior. Aqui o cálculo de fat é feito antes da atualização de cont. Por isso cont é inicializado com valor 1. Também por isso a condição de saída do repeat se altera em relação ao exemplo anterior.");
+  som();}
+3;
+4 {int num cor(150,150,200) tamanho(60,30) posicao(40,40),
+      fat cor(150,200,150) tamanho(60,30) posicao(140,40),
+	  cont cor(200,150,150) tamanho(60,30) posicao(240,40) ;
+   comenta("A variável num guarda o número do qual se deseja calcular o fatorial. A variável fat guarda o valor do fatorial que está sendo calculado. A variável cont serve para controlar a contagem da repetição do processo.");
+   som();}
+6;
+7 writeln ("entre com valor de num");
+8 {writeln ("5"); num = 5;}
+9 {cont = 1;
+   comenta("Inicialização da variável cont.");
+   som();}
+10 {fat = 1;
+   comenta("Inicialização da variável fat.");
+   som();}
+11;
+12  {fat = 1;
+   comenta("Cálculo da variável fat. Neste caso o cálculo de fat é efetuado antes da atualização da variável cont.");
+   som();}
+13  {cont = 2;
+   comenta("Atualização da variável cont, efetuada depois do cálculo de fat. A variável cont está preparada para o cálculo de fat no próximo laço.");
+   som();}
+14 {comenta("Teste da condição");
+   som();}
+11;
+12  fat = 2;
+13  cont = 3;
+14;
+11;
+12  fat = 6;
+13  cont = 4;
+14;
+11;
+12  fat = 24;
+13  cont = 5;
+14;
+11;
+12  fat = 120;
+13  cont = 6;
+14 {comenta("Pela primeira vez cont é maior que num, e o processo de repetição deve ser encerrado. Neste caso, cont fica preparado para um próximo cálculo, que não vai ocorrer.");
+   som();}
+15  writeln ("120");
+16;

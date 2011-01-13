@@ -1,0 +1,10 @@
+### História 2 - Representar Ponteiros ###
+
+COMO professor
+PARA viabilizar o ensino de C
+QUERO representar ponteiros
+
+Detalhes:
+- ponteiros nulos deverão ser representados com um ponto no meio.
+- ponteiros não inicializados deverão ser representados com hachurado. 
+- deverá haver uma forma de apontar um ponteiro para outro.

@@ -1,0 +1,57 @@
+1 {comenta("O comando for é utilizado para repetir um trecho de programa quando o número de repetições é conhecido de antemão.");
+   som();}
+3;
+4 {int n cor(150,150,200) tamanho(60,30) posicao(40,40),
+      cont cor(150,150,200) tamanho(60,30) posicao(140,40);
+   comenta("A variável n guarda o número de termos da série cuja soma se deseja. A variável cont serve para controlar a contagem da repetição do processo.");
+   som();}
+5 {int termo cor(200,150,200) tamanho(60,30) posicao(40,120),
+      soma cor(200,150,200) tamanho(60,30) posicao(140,120);
+   comenta("A variável termo guarda o termo atual da série. A variável soma armazena a soma dos termos da série.");
+   som();}
+7;
+8 writeln ("entre com valor de n");
+9 {writeln ("5");n = 5;}
+10 {termo = 1;
+   comenta("Inicialização da variável termo.");
+   som();}
+11 {soma = 0;
+   comenta("Inicialização da variável soma.");
+   som();}
+12 {cont = 1; 
+   comenta("O comando for inicializa e atualiza a variável contadora. Também testa se a variável contadora chegou no limite.");
+   som();}
+13 {comenta("Os comandos a serem repetidos pelo for devem ser delimitados por um conjunto begin - end.");
+   som();}
+14 termo = 2;
+15 soma = 2;
+16;
+
+12 cont = 2;
+13;
+14 termo = 4;
+15 soma = 6;
+16;
+
+12 cont = 3;
+13;
+14 termo = 8;
+15 soma = 14;
+16;
+
+12 cont = 4;
+13;
+14 termo = 16;
+15 soma = 30;
+16;
+
+12 {cont = 5;
+   comenta("A variável contadora chegou no seu limite. Os comandos serão executados mais uma vez e depois a repetição é encerrada.");
+   som();}
+13;
+14 termo = 32;
+15 soma = 62;
+16;
+
+17 writeln ("62");
+18;

@@ -1,0 +1,38 @@
+1;
+3;
+4 text arq1;
+5 string nomearq;
+6 string nome;
+7 real nota;
+8 int idade;
+10;
+11 writeln ("entre com o nome do arquivo");
+12 {writeln ("arq511.txt"); nomearq = "arq511.txt";}
+13 assign (arq1, "arq511.txt");
+14 reset (arq1);
+15;
+16;
+17 {read (arq1, nome, 10);
+   read (arq1, idade);
+   read (arq1, nota);}
+18 writeln ("Maria       20  10.0");
+19;
+15;
+16;
+17 {read (arq1, nome, 10);
+   read (arq1, idade);
+   read (arq1, nota);}
+18 writeln ("Zeca        19   5.0");
+19;
+15;
+16;
+17 {read (arq1, nome, 10);
+   read (arq1, idade);
+   read (arq1, nota);}
+18 writeln ("Joaquim     23   6.5");
+19;
+15;
+20;
+
+
+

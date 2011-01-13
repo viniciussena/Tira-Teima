@@ -1,0 +1,72 @@
+1 {comenta("O comando repeat é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o programa pergunta ao usuário, a cada laço de repetição, se quer continuar ou parar.");
+   som();}
+3;
+4 int numero cor(200,200,100) tamanho(60,30) posicao(40,40),
+      min cor(200,200,100) tamanho(60,30) posicao(140,40),
+      max cor(200,200,100) tamanho(60,30) posicao(240,40);
+5 char resp cor(200,100,200) tamanho(60,30) posicao(40,100);
+7;
+8 {comenta("Este comando repeat serve para evitar que o usuário entre com um valor diferente de 's' ou 'n'. Ou seja, faz a crítica de dados de entrada.");
+   som();}
+9 writeln ("deseja entrar com dados?  s/n");
+10 {writeln('x'); resp = 'x';
+   comenta("Neste caso o usuário errou e digitou 'x'. O laço será re-executado, até que entre com 's' ou 'n'.");
+   som();}
+11;
+8;
+9 writeln ("deseja entrar com dados?  s/n");
+10 {writeln('s'); resp = 's';}
+11;
+12;
+14;
+15;
+16 {writeln ("entre com um numero");
+   comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Esse primeiro valor deve ser lido e processado fora do laço de repetição.");
+   som();}
+17 {writeln(10); numero = 10;
+    comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Este primeiro valor deve ser lido e processado fora do laço de repetição.");}
+18 {min = 10;
+   comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Este primeiro valor deve ser lido e processado fora do laço de repetição.");}
+19 {max = 10;
+   comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Este primeiro valor deve ser lido e processado fora do laço de repetição.");}
+20;
+21;
+22 writeln ("deseja entrar com mais dados?  s/n");
+23 {writeln('s'); resp = 's';}
+24;
+25;
+26;
+27;
+28 writeln ("entre com um numero");
+29 {writeln(4); numero = 4;}
+30;
+32;
+33;
+34  min = 4;
+35;
+36;
+20;
+21;
+22 writeln ("deseja entrar com mais dados?  s/n");
+23 {writeln('s'); resp = 's';}
+24;
+25;
+26;
+27;
+28 writeln ("entre com um numero");
+29 {writeln(12); numero = 12;}
+30;
+31 max = 12;
+35;
+36;
+20;
+21;
+22 writeln ("deseja entrar com mais dados?  s/n");
+23 {writeln('n'); resp = 'n';}
+24;
+25;
+36;
+37 writeln ("maximo: 12");
+38 writeln ("minimo:  4");
+39;
+40;

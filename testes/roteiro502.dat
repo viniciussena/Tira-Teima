@@ -1,0 +1,9 @@
+1;
+3;
+4 text arq1;
+5 string nomearq;
+7;
+8 writeln ("entre com o nome do arquivo");
+9 {writeln ("arq502.txt"); nomearq = "arq502.txt";}
+10 assign (arq1, "arq502.txt");
+11;

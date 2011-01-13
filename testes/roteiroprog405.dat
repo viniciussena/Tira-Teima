@@ -1,0 +1,32 @@
+1 {comenta("O comando for é utilizado para repetir um trecho de programa quando o número de repetições é conhecido de antemão.");
+   som();}
+3;
+4 {int num cor(150,150,200) tamanho(60,30) posicao(40,40),
+      fat cor(150,200,150) tamanho(60,30) posicao(140,40),
+	  cont cor(200,150,150) tamanho(60,30) posicao(240,40) ;
+   comenta("A variável num guarda o número do qual se deseja calcular o fatorial. A variável fat guarda o valor do fatorial que está sendo calculado. A variável cont serve para controlar a contagem da repetição do processo.");
+   som();}
+6;
+7 writeln ("entre com valor de num");
+8 {writeln ("5");num = 5;}
+9 {fat = 1;
+   comenta("Inicialização da variável fat.");
+   som();}
+10 {cont = 1;
+   comenta("O comando for inicializa e atualiza a variável contadora. Também testa se a variável contadora chegou no limite.");
+   som();}
+11 {fat = 1;
+   comenta("Neste caso apenas este comando é repetido várias vezes: é o cálculo de fat.");
+   som();}
+10 cont = 2;
+11 fat = 2;
+10 cont = 3;
+11 fat = 6;
+10 cont = 4;
+11 fat = 24;
+10 {cont = 5;
+   comenta("A variável contadora chegou no seu limite. O comando de cálculo de fat será executado mais uma vez e depois a repetição é encerrada.");
+   som();}
+11 fat = 120;
+12  writeln ("120");
+13;

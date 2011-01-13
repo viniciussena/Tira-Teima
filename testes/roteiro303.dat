@@ -1,0 +1,30 @@
+1;
+3;
+4 char especializacao cor(240,0,0) tamanho(90,30) posicao(30,30),
+       mestrado cor(240,0,0) tamanho(90,30) posicao(140,30);
+5 real salario cor(0,200,0) tamanho(90,30) posicao(30,90),
+       remuneracao cor(0,200,0) tamanho(90,30) posicao(140,90);
+7;
+8 salario = 1000.00;
+9 remuneracao = 1000.00;
+10 writeln("Possui especializacao?");
+11 {writeln("s"); especializacao = 's';}
+12 writeln("Possui mestrado?");
+13 {writeln("s"); mestrado = 's';}
+14 {comenta("Neste caso a pessoa tem os dois cursos e por isso deve receber os dois aumentos.");
+    som();}
+15;
+16;
+17 remuneracao = 1030.00;
+18 writeln("Voce recebeu 3%.");
+19;
+22;
+23;
+24;
+25 {remuneracao = 1102.10;
+   comenta("Observe que a nova remuneração é calculada a partir da anterior; portanto os dois aumentos foram aplicados.");
+   som();}
+26 writeln("Voce recebeu 7%.");
+27;
+30  writeln("Sua remuneracao e de R$  1102.10.");
+31;

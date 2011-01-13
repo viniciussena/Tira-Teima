@@ -1,0 +1,31 @@
+1 {comenta("O comando for é utilizado para repetir um trecho de programa quando o número de repetições é conhecido de antemão.");
+   som();}
+3;
+4 real soma cor(150,150,200) tamanho(60,30) posicao(40,40);
+5 int  i cor(200,150,150) tamanho(60,30) posicao(40,120);
+7;
+8 soma = 0.0;
+9 i = 1;
+10 {soma = 0.50000; 
+   comenta("O comando repetido é apenas este. O termo a ser somado é calculado em função de i, e a soma é atualizada a cada repetição.");
+   som();}
+9 i = 2;
+10 soma = 0.75000; 
+9 i = 3;
+10 soma = 0.91667; 
+9 i = 4;
+10 soma = 1.04167; 
+9 i = 5;
+10 soma = 1.14167; 
+9 i = 6;
+10 soma = 1.22500; 
+9 i = 7;
+10 soma = 1.29643; 
+9 i = 8;
+10 soma = 1.15893; 
+9 i = 9;
+10 soma = 1.41448; 
+9 i = 10;
+10 soma = 1.46448; 
+11 writeln ("soma:   1.46");
+12;

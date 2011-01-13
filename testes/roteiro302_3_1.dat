@@ -1,0 +1,14 @@
+1;
+3;
+4 char dinheiro cor(200,0,200) tamanho(80,30) posicao(30,30),
+       imovel cor(0,200,200) tamanho(80,30) posicao(130,30);
+6;
+7 writeln ("Voce tem dinheiro?");
+8 {writeln ("s"); dinheiro = 's';}
+9 writeln ("Voce tem imovel?");
+10 {writeln ("n"); imovel = 'n';}
+11;
+12 {comenta("Neste caso, a pessoa tem dinheiro.");
+    som();}
+13 writeln ("Voce so precisa do passaporte.");
+14;

@@ -1,0 +1,88 @@
+1 {comenta("O comando while é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o final do laço de repetição é determinado por alguma condição que depende dos valores que estão sendo calculados. O comando while testa a condição antes de iniciar o laço de repetição.");
+   som();}
+3;
+4 int valor cor(200,200,100) tamanho(60,30) posicao(40,40),
+      i cor(200,200,100) tamanho(60,30) posicao(140,40);
+6;
+
+7 {comenta("Este comando repeat serve para evitar que o usuário entre com um n negativo. Ou seja, faz a crítica de dados de entrada.");
+   som();}
+8 writeln("entre com um numero inteiro positivo");
+9 {writeln(-5); valor = -5;
+   comenta("Neste caso o usuário errou e digitou um n negativo. O laço será re-executado, até que entre com um n positivo.");
+   som();}
+10;
+7;
+8 writeln("entre com um numero inteiro positivo");
+9 {writeln(10); valor = 10;}
+10;
+11 i = 1;
+
+12;
+13;
+14;
+15 writeln("1");
+16 i = 2;
+17;
+
+12;
+13;
+14;
+15 writeln("2");
+16 i = 3;
+17;
+
+12;
+13;
+14;
+16 i = 4;
+17;
+
+12;
+13;
+14;
+16 i = 5;
+17;
+
+12;
+13;
+14;
+15 writeln("5");
+16 i = 6;
+17;
+
+12;
+13;
+14;
+16 i = 7;
+17;
+
+12;
+13;
+14;
+16 i = 8;
+17;
+
+12;
+13;
+14;
+16 i = 9;
+17;
+
+12;
+13;
+14;
+16 i = 10;
+17;
+
+12;
+13;
+14;
+15 writeln("10");
+16 i = 11;
+17;
+
+12 {comenta("Pela primeira vez   i   é maior que  valor; por isso o laço será encerrado.");
+   som();}
+
+18;

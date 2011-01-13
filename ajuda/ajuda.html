@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="Andrew Biller - Universidade de Brasília">
+<meta name="description" content="Arquivo de ajuda da ferramenta Tira Teima do Tutorial de ICC">
+
+<!-- estilos -->
+<link rel="stylesheet" type="text/css" href="css/main2.css"/>
+<link rel="stylesheet" type="text/css" href="jquery-ui-1.7.2.custom/css/redmond/jquery-ui-1.7.2.custom.css" media="screen" />
+
+<style type="text/css">
+body {font-size: 12px; font-family: sans-serif; }
+p {font-size: 14px; }
+a:hover {color: red;}
+.esconde { display: none; }
+</style>
+
+<!-- javascripts -->
+<script type="text/javascript" src="jquery-ui-1.7.2.custom/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="jquery-ui-1.7.2.custom/js/jquery-ui-1.7.2.custom.min.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs();
+	});
+</script>
+
+<title>Ajuda do Tira Teima</title>
+</head>
+<body>
+
+<div id="tabs" class="pequeno">
+	<ul>
+		<li><a href="#tabs-1">Tira Teima</a></li>
+		<li><a href="#tabs-2">Código</a></li>
+		<li><a href="#tabs-3">Mostrador</a></li>
+		<li><a href="#tabs-4">Arquivos</a></li>
+		<li><a href="#tabs-5">Console</a></li>
+		<li><a href="#tabs-6">Barra de Ferramentas</a></li>
+		<li><a href="#tabs-7">Comentários</a></li>
+		<li><a href="#tabs-8">Redimensionar</a></li>
+	</ul>
+	<div id="imagens">
+	<div id="tabs-1">
+		<h3>Bem vindo ao Ajuda do Tira Teima.</h3>
+		<p>O Tira Teima é uma ferramenta que visa auxiliá-lo no entendimento da execução de programas.
+		Apesar de ser intuitivo, algumas dúvidas podem surgir de início.
+		
+		Em cada uma das abas superiores é possível aprender um pouco sobre uma das partes que compõem o Tira Teima.
+		Logo abaixo temos a tela principal que você provavelmente já conhece.</p>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/imagem_principal.png" alt="Tira Teima"/><br/>
+		</div>
+		
+		
+		<p>Ela é composta por várias partes tais como:</p>
+		<ul>
+			<li><a href='#' onclick="$('#tabs').tabs('select', 1);">código</a></li>
+			<li><a href='#' onclick="$('#tabs').tabs('select', 2);">mostrador</a></li>
+			<li><a href='#' onclick="$('#tabs').tabs('select', 3);">arquivos</a></li>
+			<li><a href='#' onclick="$('#tabs').tabs('select', 4);">console</a></li>
+			<li><a href='#' onclick="$('#tabs').tabs('select', 5);">barra de ferramentas</a></li>
+			<li><a href='#' onclick="$('#tabs').tabs('select', 6);">comentários</a></li>
+			<li><a href='#' onclick="$('#tabs').tabs('select', 7);">redimensionar</a></li>
+		</ul>
+	</div>
+	
+	<div id="tabs-2">
+		<h3>Código</h3>
+		<p>Na parte esquerda do programa é localizado o código referente ao programa que será "executado". As cores seguem um padrão que facilita a leitura do mesmo, 
+		como se estivesse num editor de código fonte.
+		</p>
+		<p>
+		Não é possível editá-lo, mas é permitido copiar algum ou todo o trecho de código (seleção da parte do código com o mouse e pressionamento as teclas control + C).
+		Com isso você pode tentar executar o código em qualquer compilador que desejar.
+		</p>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/codigo.png" alt="Tira Teima"/><br/>
+		</div>
+		
+	</div>
+	
+	<div id="tabs-3">
+		<h3>Mostrador</h3>
+		<p>O Mostrador situa-se na parte superior direita do Tira Teima. É nela que será simulada a criação de variáveis na memória.</p>
+		<p>Cada variável possui um nome que a identifica (especificado no código). Elas também possuem um certo tamanho e cor, variando de programa a programa.</p>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/mostrador.png" alt="Tira Teima"/><br/>
+		</div>
+		
+	</div>
+	
+	<div id="tabs-4">
+		<h3>Arquivos</h3>
+		<p>Os arquivos, quando o programa faz uso deles na execução do código, são visualizados na área central direita do Tira Teima.</p>
+		<p>Caso mais de um arquivo seja aberto, eles serão postos um do lado do outro, podendo ser abertos clicando-se na aba referente a cada um.</p>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/arquivos.png" alt="Tira Teima"/><br/>
+		</div>
+		
+	</div>
+	
+	<div id="tabs-5">
+		<h3>Console</h3>
+		<p>O Tira Teima possui uma área que simula as entradas e saída de um Console. Seu funcionamento é automático em resposta à execução do programa em questão</p>
+		<p>O Console fica localizado na parte inferior direita do Tira Teima.</p>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/console.png" alt="Tira Teima"/><br/>
+		</div>
+		
+	</div>
+	
+	<div id="tabs-6">
+		<h3>Barra de Ferramentas</h3>
+		<p>Na parte superior do Tira Teima encontra-se a Barra de Ferramentas. Através dela é possível interagir com a ferramenta.</p>
+		<p>Ela é dividida em três partes:</p>
+		<ul>
+			<li><a href='#' onclick="$('#ul_1').toggleClass('esconde');">Navegação</a>
+				<ul class="esconde" id="ul_1">
+				<li><b>Reiniciar</b>: permite iniciar a execução do código desde o início novamente</li>
+				<li><b>Anterior</b>: retorna um passo na execução</li>
+				<li><b>Iniciar/Próximo</b>: inicia e depois avança um passo na execução</li>
+				<li><b>Saltar Para Linha</b>: Salta para uma linha específica. Caso a linha escolhida não tenha execução prevista,
+				 o Tira Teima saltará para a próxima linha executável</li>
+				<li><b>Campo para a linha</b>: Local para indicar o número da linha. É possível apertar a tecla Enter ao invés de clicar no botão de saltar</li>
+				</ul>
+			</li>
+			<li><a href='#' onclick="$('#ul_2').toggleClass('esconde');">Zoom</a>
+				<ul class="esconde" id="ul_2">
+				<li><b>-</b>: diminui o zoom no mostrador</li>
+				<li><b>Reniciar Zoom</b>: ajusta o zoom para o nível inicial</li>
+				<li><b>+</b>: aumenta o zoom no mostrador</li>
+				</ul>
+			</li>
+			<li><a href='#' onclick="$('#ul_3').toggleClass('esconde');">Outros botões</a>
+				<ul class="esconde" id="ul_3">
+				<li><b>Som</b>: ativa ou desativa o som</li>
+				<li><b>Ajuda(?)</b>: abre a página de ajuda</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/barra_ferramenta.png" alt="Tira Teima"/><br/>
+		</div>
+		
+	</div>
+	
+	<div id="tabs-7">
+		<h3>Comentários</h3>
+		<p>A parte de comentários só é visível quando algum trecho específico do código possui um detalhe no qual o professor
+		deseja chamar atenção. Quando visível, os comentários são localizados na parte inferior e direita do Tira Teima.</p>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/comentarios.png" alt="Tira Teima"/><br/>
+		</div>
+		
+	</div>
+	
+	<div id="tabs-8">
+		<h3>Redimensionamento</h3>
+		<p>É possível redimensionar as diversas áreas do Tira Teima (código, mostrador, console, arquivos, comentários)
+		 posicionando o cursor nas linhas (em vermelho nas figuras) e movê-las segurando o botão esquerdo do mouse.</p>
+		
+		<div id="imagens" class="pequeno">
+			<img src="imagens/divisorias1.png" alt="Tira Teima"/><br/>
+			<img src="imagens/divisorias2.png" alt="Tira Teima"/><br/>
+		</div>
+		
+	</div>
+</div>
+
+</div>
+</body>
+</html>

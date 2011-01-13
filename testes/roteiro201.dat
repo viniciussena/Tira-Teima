@@ -1,0 +1,47 @@
+1 {comenta("Se você está entrando num Tira Teima pela primeira vez, utilize o botão Ajuda, para obter informações, no alto à direita.");
+   som();}
+3;
+4 {string titulo cor(150,150,150) tamanho(300,30) posicao(20,20);
+   titulo = "      Nome  Idade   Peso";
+   comenta("Uma constante é representada do mesmo modo que uma variável. A diferença é que o conteúdo da constante não pode se modificar. O fundo verde na constante título indica que o seu conteúdo acabou de ser criado.");
+   som();}
+6;
+7 {string nome1 cor(150,150,150) tamanho(200,30) posicao (20,90), 
+         nome2 cor(150,150,150) tamanho(200,30) posicao (240,90),
+		 nome3 cor(150,150,150) tamanho(200,30) posicao (460,90);
+   comenta("Note que as três variáveis foram criadas simultaneamente. O conteúdo das variáveis hachurado indica que elas não foram inicializadas. O fundo verde nas variáveis indica que elas acabaram de ser criadas ou modificadas.");
+   som();}
+8 int idade1 cor(210,0,0) tamanho(100,30) posicao (20,180),
+      idade2 cor(210,0,0) tamanho(100,30) posicao (140,180),
+	  idade3 cor(210,0,0) tamanho(100,30) posicao (260,180);
+9 real peso1 cor(200,200,0) tamanho(100,30) posicao (20,270),
+       peso2 cor(200,200,0) tamanho(100,30) posicao (140,270),
+	   peso3 cor(200,200,0) tamanho(100,30) posicao (260,270);
+11;
+12 writeln ("entre com o primeiro nome");
+13 {writeln ("Joao"); nome1 = "João";
+   comenta("Observe que o usuário entrou pelo console com a sequência de caracteres 'João'. A variável nome1 foi inicializada com esse valor. O fundo verde indica que a variável acabou de ser modificada.");
+   som();}
+14 writeln ("entre com a primeira idade");
+15 {writeln ("17"); idade1 = 17;}
+16 writeln ("entre com o primeiro peso");
+17 {writeln ("65.07"); peso1 = 65.07;}
+18 writeln ("entre com o segundo nome");
+19 {writeln ("Maria"); nome2 = "Maria";}
+20 writeln ("entre com a segunda idade");
+21 {writeln ("42"); idade2 = 42;}
+22 writeln ("entre com o segundo peso");
+23 {writeln ("53.00"); peso2 = 53.0;}
+24 writeln ("entre com o terceiro nome");
+25 {writeln ("Tereza"); nome3 = "Tereza";}
+26 writeln ("entre com a terceira idade");
+27 {writeln ("35"); idade3 = 35;}
+28 writeln ("entre com o terceiro peso");
+29 {writeln ("61.50"); peso3 = 61.5;}
+30 writeln ("      Nome  Idade   Peso");
+31 {writeln ("      Joao     17   65.07");
+   comenta("Observe a formatação dos dados de saída. O nome tem 10 caracteres: 6 espaços brancos e depois 'João'. Entre o nome e a idade há dois espaços em branco. A idade está formatada com 5 caracteres: 3 brancos seguidos por 17. Entre a idade e o peso há dois espaços brancos. O peso está formatado com um total de 6 caracteres, sendo 2 depois da vírgula. Neste caso, fica um espaço em branco, seguido pela sequência 65.07");
+   som();}
+32 writeln ("     Maria     42   53.00");
+33 writeln ("    Tereza     35   61.50");
+34;

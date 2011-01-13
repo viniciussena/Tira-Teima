@@ -1,0 +1,14 @@
+1;
+3;
+4 int nivel cor(150,150,200) tamanho(50,30) posicao(40,40);
+6;
+7 writeln ("qual o nivel do pais?");
+8 {writeln ("3"); nivel = 3;}
+9;
+12 {comenta("Uma única opção do case pode provocar a execução de vários comandos, se estiverem entre begin-end, como neste caso.");
+    som();}
+13 writeln ("investimento razoavel");
+14 writeln ("ha paises melhores");
+15;
+21;
+22;

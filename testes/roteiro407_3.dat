@@ -1,0 +1,48 @@
+1 {comenta("O comando while é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o final do laço de repetição é determinado por alguma condição que depende dos valores que estão sendo calculados.");
+   som();}
+3;
+4 int n cor(200,200,100) tamanho(60,30) posicao(40,40),
+      i cor(200,200,100) tamanho(60,30) posicao(140,40);
+5 boolean primo cor(100,200,100) tamanho(60,30) posicao(40,140);
+7;
+8 primo = true;
+9;
+10 writeln("entre com um numero inteiro positivo");
+11 {writeln("11"); n = 11;}
+12;
+13;
+14;
+15;
+16 i = 2;
+
+17;
+18;
+19;
+21 i = 3;
+22;
+
+17;
+18;
+19;
+21 i = 4;
+22;
+
+17;
+18;
+19;
+21 i = 5;
+22;
+
+17;
+18;
+19;
+21 i = 6;
+22;
+
+17 {comenta("O laço pode ser encerrado por uma das duas condições. Neste caso se encerra porque i >= n div 2");
+   som();}
+
+23;
+24;
+25 writeln ("11 e primo");
+27;

@@ -1,0 +1,10 @@
+1;
+3;
+4 {text arq1;
+  comenta("A variável arq1 identifica o arquivo no âmbito interno do programa. Observe o quadro verde acima, onde se representa o arquivo.");
+  som();}
+6;
+7 {assign (arq1, "arqp501.txt");
+  comenta("O comando assign associa a variável arq1 ao arquivo, cujo nome, neste caso é 'arqp501.txt'. Observe que no quadro verde que representa o arquivo, o nome 'arqp501.txt' aparece associado ao nome da variável arq1. O conteúdo do arquivo não aparece porque o arquivo ainda não foi aberto.");
+  som();}
+8;

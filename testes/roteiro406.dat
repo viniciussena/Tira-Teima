@@ -1,0 +1,88 @@
+1 {comenta("O comando while é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o programa pergunta ao usuário, a cada laço de repetição, se quer continuar ou parar.");
+   som();}
+3;
+4 int numero cor(200,200,100) tamanho(60,30) posicao(40,40),
+      min cor(200,200,100) tamanho(60,30) posicao(140,40),
+      max cor(200,200,100) tamanho(60,30) posicao(240,40);
+5 char resp cor(200,100,200) tamanho(60,30) posicao(40,100);
+7;
+8;
+9 writeln ("deseja entrar com dados?  s/n");
+10 {writeln('s'); resp = 's';}
+11;
+12;
+14;
+15;
+16 {writeln ("entre com um numero");
+   comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Esse primeiro valor deve ser lido e processado fora do laço de repetição.");
+   som();}
+17 {writeln(5); numero = 5;
+   comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Esse primeiro valor deve ser lido e processado fora do laço de repetição.");}
+18 {min = 5;
+   comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Esse primeiro valor deve ser lido e processado fora do laço de repetição.");}
+19 {max = 5;
+   comenta("O problema pede para determinar o máximo e o mínimo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo e também o mínimo. Esse primeiro valor deve ser lido e processado fora do laço de repetição.");}
+
+20;
+21;
+22;
+23 writeln ("deseja entrar com mais dados?  s/n");
+24 {writeln('s'); resp = 's';}
+25;
+26;
+27;
+28;
+29 writeln ("entre com um numero");
+30 {writeln(-8); numero = -8;}
+31;
+33;
+34;
+35 min = -8;
+36;
+37;
+20;
+21;
+22;
+23 writeln ("deseja entrar com mais dados?  s/n");
+24 {writeln('s'); resp = 's';}
+25;
+26;
+27;
+28;
+29 writeln ("entre com um numero");
+30 {writeln(0); numero = 0;}
+31;
+33;
+34;
+36;
+37;
+
+20;
+21;
+22;
+23 writeln ("deseja entrar com mais dados?  s/n");
+24 {writeln('s'); resp = 's';}
+25;
+26;
+27;
+28;
+29 writeln ("entre com um numero");
+30 {writeln(9); numero = 9;}
+31;
+32 max = 9;
+36;
+37;
+
+20;
+21;
+22;
+23 writeln ("deseja entrar com mais dados?  s/n");
+24 {writeln('n'); resp = 'n';}
+25;
+26;
+37;
+20;
+38 writeln ("maximo:  9");
+39 writeln ("minimo: -8");
+40;
+41;

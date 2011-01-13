@@ -1,0 +1,11 @@
+1;
+3;
+4 int nivel cor(150,150,200) tamanho(50,30) posicao(40,40);
+6;
+7 writeln ("qual o nivel do pais?");
+8 {writeln ("6"); nivel = 6;}
+9 {comenta("O valor escolhido pelo usuário não está presente nas opções possíveis. O comando case pode opcionalmente dispor de um else para executar um comando nesse caso.");
+	som();}
+15 writeln ("nivel invalido");
+16;
+17;

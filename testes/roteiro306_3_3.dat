@@ -1,0 +1,12 @@
+1;
+3;
+4 int nivel cor(150,150,200) tamanho(50,30) posicao(40,40);
+6;
+7 writeln ("qual o nivel do pais?");
+8 {writeln ("2"); nivel = 2;}
+9 {writeln ("2"); nivel = 2;
+   comenta("O case permite que as opções aceitem um intervalo de valores, em vez de apenas um valor.");
+   som();}
+10 writeln ("investimento ruim");
+17;
+18;

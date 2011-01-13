@@ -1,0 +1,14 @@
+1;
+3;
+4 text arq1;
+5 string nomearq;
+6 int x,y,w,z;
+8;
+9 writeln ("entre com o nome do arquivo");
+10 {writeln ("arq505.txt"); nomearq = "arq505.txt";}
+11 assign (arq1, "arq505.txt");
+12 reset (arq1);
+13 {read (arq1,w); readln(arq1,x);}
+14 {read (arq1,y); readln(arq1,z);}  
+15 writeln ("2 4 1 3");
+16;

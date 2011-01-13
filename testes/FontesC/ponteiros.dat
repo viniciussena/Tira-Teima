@@ -1,0 +1,9 @@
+3;
+4 int numero cor(150,150,150) tamanho(80,30) posicao (380,90); 
+5 pointer p cor(150,150,255) tamanho(50,20) posicao (392,160);
+6 p = null;
+7 p aponta(cima,50);
+8 numero = 10;
+9 writeln("10");
+10 p = null;
+11;

@@ -1,0 +1,52 @@
+1 {comenta("No comando while o teste da condição é feito antes da execução dos comandos internos do laço. Portanto, pode acontecer que esses comandos não sejam executados nenhuma vez. Os comandos são executados enquanto a condição é verdadeira.");
+   som();}
+3;
+4 {int num cor(150,150,200) tamanho(60,30) posicao(40,40),
+      fat cor(150,200,150) tamanho(60,30) posicao(140,40),
+	  cont cor(200,150,150) tamanho(60,30) posicao(240,40) ;
+   comenta("A variável num guarda o número do qual se deseja calcular o fatorial. A variável fat guarda o valor do fatorial que está sendo calculado. A variável cont serve para controlar a contagem da repetição do processo.");
+   som();}
+6;
+7 writeln ("entre com valor de num");
+8 {writeln ("5"); num = 5;}
+9 {cont = 0;
+   comenta("Inicialização da variável cont.");
+   som();}
+10 {fat = 1;
+   comenta("Inicialização da variável fat.");
+   som();}
+11 {comenta("Teste da condição.");
+   som();} 
+12 {comenta("Os comandos a serem repetidos, no caso do while, devem ser delimitados por um conjunto begin - end.");
+   som();} 
+13  {cont = 1;
+   comenta("Atualização da variável cont.");
+   som();}
+14  {fat = 1;
+   comenta("Cálculo da variável fat.");
+   som();}
+15;
+11; 
+12;
+13  cont = 2;
+14  fat = 2;
+15;
+11;
+12;
+13  cont = 3;
+14  fat = 6;
+15;
+11;
+12;
+13  cont = 4;
+14  fat = 24;
+15;
+11;
+12;
+13  cont = 5;
+14  fat = 120;
+15;
+11 {comenta("Pela primeira vez a condição cont < num é falsa, indicando que o processo de repetição deve ser encerrado.");
+   som();}
+16  writeln ("120");
+17;

@@ -1,0 +1,18 @@
+1 {comenta("Este exemplo apresenta comandos if's aninhados. Há um if externo e um interno. O if interno está no 'then' do if externo. O if interno não tem else, por isso ele deve ser colocado entre 'begin-end', deixando claro que o else que vem a seguir pertence ao if externo.");
+   som();}
+3;
+4 real a cor(240,240,0) tamanho(90,30) posicao(30,30),
+       b cor(240,240,0) tamanho(90,30) posicao(140,30);
+6;
+7 writeln ("Digite a parte real:");
+8 {writeln ("0.0"); a = 0.0;}
+9 writeln ("Digite a parte imaginaria:");
+10 {writeln ("3.0"); b = 3.0;}
+11;
+12;
+13;
+14;
+15;
+16 writeln("imaginario");
+17;
+20;

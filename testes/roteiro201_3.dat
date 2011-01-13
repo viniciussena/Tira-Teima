@@ -1,0 +1,48 @@
+1;
+
+3;
+4 {string titulo cor(150,150,150) tamanho(300,30) posicao(20,20);
+   titulo = "      Nome  Idade   Peso";
+   comenta("Uma constante é representada do mesmo modo que uma variável. A diferença é que o conteúdo da constante não pode se modificar. O fundo verde na constante título indica que o seu conteúdo acabou de ser criado.");
+   som();}
+6;
+7 {string nome1 cor(150,150,150) tamanho(200,30) posicao (20,90), 
+         nome2 cor(150,150,150) tamanho(200,30) posicao (240,90),
+		 nome3 cor(150,150,150) tamanho(200,30) posicao (460,90);
+   comenta("Note que as três variáveis foram criadas simultaneamente. O conteúdo das variáveis hachurado indica que elas não foram inicializadas. O fundo verde nas variáveis indica que elas acabaram de ser criadas ou modificadas.");
+   som();}
+8 int idade1 cor(210,0,0) tamanho(100,30) posicao (20,180),
+      idade2 cor(210,0,0) tamanho(100,30) posicao (140,180),
+	  idade3 cor(210,0,0) tamanho(100,30) posicao (260,180);
+9 real peso1 cor(200,200,0) tamanho(100,30) posicao (20,270),
+       peso2 cor(200,200,0) tamanho(100,30) posicao (140,270),
+	   peso3 cor(200,200,0) tamanho(100,30) posicao (260,270);
+
+11;
+12 writeln ("entre com o primeiro nome");
+13 {writeln("Marcelo"); nome1 = "Marcelo";
+   comenta("Observe que o usuário entrou pelo console com a sequência de caracteres 'Marcelo'. A variável nome1 foi inicializada com esse valor. O fundo verde indica que a variável acabou de ser modificada.");
+   som();}
+14 writeln ("entre com a primeira idade");
+15 {writeln(81); idade1 = 81;}
+16 writeln ("entre com o primeiro peso");
+17 {writeln(68.0); peso1 = 68.0;}
+18 writeln ("entre com o segundo nome");
+19 {writeln("Raquel"); nome2 = "Raquel";}
+20 writeln ("entre com a segunda idade");
+21 {writeln(9); idade2 = 9;}
+22 writeln ("entre com o segundo peso");
+23 {writeln(76.60); peso2 = 76.60;}
+24 writeln ("entre com o terceiro nome");
+25 {writeln("Mara"); nome3 = "Mara";}
+26 writeln ("entre com a terceira idade");
+27 {writeln(33); idade3 = 33;}
+28 writeln ("entre com o terceiro peso");
+29 {writeln(46.00); peso3 = 46.00;}
+30 writeln ("Nome     Idade    Peso");
+31 {writeln ("Marcelo  81  6.80000000000000E+001");
+   comenta("Observe que os dados de saída não têm formatação. Entre o nome e a idade há dois espaços em branco. Entre a idade e o peso também. O peso aparece na notação em forma de mantissa e expoente de 10.");
+   som();}
+32 writeln ("Raquel  9  2.95000000000000E+001");
+33 writeln ("Mara  33  4.60000000000000E+001");
+34;

@@ -1,0 +1,106 @@
+1 {comenta("O comando while é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso as repetições se encerram quando o usuário entrar com um 0.");
+   som();}
+3;
+4 int numero cor(150,150,200) tamanho(60,30) posicao(40,40),
+  somap cor(150,150,200) tamanho(60,30) posicao(120,40),
+  soman cor(150,150,200) tamanho(60,30) posicao(200,40);
+5 boolean ok cor(200,150,100) tamanho(60,30) posicao(40,110);
+7;
+8 somap = 0;
+9 soman = 0;
+10 ok = true;
+
+11 {comenta("Neste exercício o primeiro número só é lido dentro do laço. Para que o programa entre no laço, criou-se a variável ok, inicializada com true.");
+    som();}
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("1"); numero = 1;}
+15;
+17;
+18;
+19 somap = 1;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("-3"); numero = -3;}
+15;
+17;
+18;
+20 soman = -3;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("-1"); numero = -1;}
+15;
+17;
+18;
+20 soman = -4;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("3"); numero = 3;}
+15;
+17;
+18;
+19 somap = 4;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("-3"); numero = -3;}
+15;
+17;
+18;
+20 soman = -7;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("6"); numero = 6;}
+15;
+17;
+18;
+19 somap = 10;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("17"); numero = 17;}
+15;
+17;
+18;
+19 somap = 27;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("-10"); numero = -10;}
+15;
+17;
+18;
+20 soman = -17;
+21;
+
+11;
+12; 
+13 writeln ("entre com um numero (0 para encerrar)");
+14 {writeln ("0"); numero = 0;}
+15;
+16 {ok = false;
+    comenta("O número que entrou agora foi 0. Por isso, a variável ok é feita false, para indicar que o laço de repetição deve ser interrompido.");
+    som();}
+21;
+
+22 writeln ("soma dos numeros positivos:  27");
+23 writeln ("soma dos numeros negativos: -17");
+24;

@@ -1,0 +1,41 @@
+1 {comenta("O comando while é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o programa pergunta ao usuário, a cada laço de repetição, se quer continuar ou parar.");
+   som();}
+3;
+4 int numero cor(200,200,100) tamanho(60,30) posicao(40,40),
+      soma cor(200,200,100) tamanho(60,30) posicao(140,40);
+5 char resp cor(200,100,200) tamanho(60,30) posicao(40,100);
+7;
+8 writeln ("deseja entrar com dados?  s/n");
+9 {writeln('s'); resp = 's';}
+10;
+12;
+13;
+14 soma = 0;
+15;
+16;
+17 writeln ("entre com um numero");
+18 {writeln(5); numero = 5;}
+19 soma = 5;
+20 writeln ("deseja entrar com mais dados?  s/n");
+21 {writeln('s'); resp = 's';}
+22;
+15;
+16;
+17 writeln ("entre com um numero");
+18 {writeln(2); numero = 2;}
+19 soma = 7;
+20 writeln ("deseja entrar com mais dados?  s/n");
+21 {writeln('s'); resp = 's';}
+22;
+15;
+16;
+17 writeln ("entre com um numero");
+18 {writeln(8); numero = 8;}
+19 soma = 15;
+20 writeln ("deseja entrar com mais dados?  s/n");
+21 {writeln('n'); resp = 'n';}
+22;
+15;
+23 writeln ("soma: 15");
+24;
+25;

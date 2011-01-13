@@ -1,0 +1,77 @@
+1 {comenta("O comando repeat é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o final do laço de repetição é determinado por alguma condição que depende dos valores que estão sendo calculados. O comando repeat testa a condição depois de cada laço de repetição.");
+   som();}
+3;
+4 int valor cor(200,200,100) tamanho(60,30) posicao(40,40),
+      i cor(200,200,100) tamanho(60,30) posicao(140,40);
+6;
+
+7 {comenta("Este comando repeat serve para evitar que o usuário entre com um n negativo. Ou seja, faz a crítica de dados de entrada.");
+   som();}
+8 writeln("entre com um numero inteiro positivo");
+9 {writeln(-5); valor = -5;
+   comenta("Neste caso o usuário errou e digitou um n negativo. O laço será re-executado, até que entre com um n positivo.");
+   som();}
+10;
+7;
+8 writeln("entre com um numero inteiro positivo");
+9 {writeln(10); valor = 10;}
+10;
+11 i = 1;
+
+12;
+13;
+14 writeln("1");
+15 i = 2;
+16;
+
+12;
+13;
+14 writeln("2");
+15 i = 3;
+16;
+
+12;
+13;
+15 i = 4;
+16;
+
+12;
+13;
+15 i = 5;
+16;
+
+12;
+13;
+14 writeln("5");
+15 i = 6;
+16;
+
+12;
+13;
+15 i = 7;
+16;
+
+12;
+13;
+15 i = 8;
+16;
+
+12;
+13;
+15 i = 9;
+16;
+
+12;
+13;
+15 i = 10;
+16;
+
+12;
+13;
+14 writeln("10");
+15 i = 11;
+16 {comenta("Pela primeira vez   i   é maior que  valor; por isso o laço será encerrado.");
+   som();}
+
+17;
+18;

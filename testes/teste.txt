@@ -1,0 +1,38 @@
+1;
+2 comenta("bem vindo");
+3 boolean primeiroBoolean cor(160,0,0) tamanho(500,200);
+4 record ficha {string nome; int matric cor(160,100,70); real nota cor(160,50,240);} 
+5 comenta("A leitura do arquivo terminou");
+6 writeln("console");
+7 writeln("a = 0");
+8 writeln("b = 1");
+10 string nomeProfessor cor(60,100,70) tamanho(10,10) ;
+11 ficha aluno cor(200,100,170) , alumax cor(30,155,33) ;
+12 text arq;
+13 boolean primeiravez cor(255,11,128) tamanho(500,200) ;
+14 comenta("Agora Sim");
+15 function teste() : void{int b;}
+20 assign (arq, "arq701.txt");
+21 reset (arq);
+22 primeiravez = true;
+23;
+24;
+25 start teste();
+26 b = 5;
+27 end;
+28 {read(arq,alumax.nome,10); read(arq,alumax.matric); readln(arq,alumax.nota);}
+29 primeiravez = false;
+30;
+39;
+
+23;
+24;
+25;
+31;
+32;
+33 {read(arq,aluno.nome,10); read(arq,aluno.matric); readln(arq,aluno.nota);}
+34;
+35;
+36 {alumax.nome = "Daniela"; alumax.matric = 324; alumax.nota = 8.0;}
+37;
+38;

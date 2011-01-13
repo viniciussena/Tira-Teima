@@ -1,0 +1,37 @@
+1 {comenta("O comando repeat é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso o programa pergunta ao usuário, a cada laço de repetição, se quer continuar ou parar.");
+   som();}
+3;
+4 int numero cor(200,200,100) tamanho(60,30) posicao(40,40),
+      soma cor(200,200,100) tamanho(60,30) posicao(140,40);
+5 char resp cor(200,100,200) tamanho(60,30) posicao(40,100);
+7;
+8 writeln ("deseja entrar com dados?  s/n");
+9 {writeln ('s'); resp= 's';}
+10;
+12;
+13;
+14 soma = 0;
+15;
+16 writeln ("entre com um numero");
+17 {writeln (1); numero= 1;}
+18 soma = 1;
+19 writeln ("deseja entrar com mais dados?  s/n");
+20 {writeln ('s'); resp= 's';}
+21;
+15;
+16 writeln ("entre com um numero");
+17 {writeln (9); numero= 9;}
+18 soma = 10;
+19 writeln ("deseja entrar com mais dados?  s/n");
+20 {writeln ('s'); resp= 's';}
+21;
+15;
+16 writeln ("entre com um numero");
+17 {writeln (-5); numero= -5;}
+18 soma = 5;
+19 writeln ("deseja entrar com mais dados?  s/n");
+20 {writeln ('n'); resp= 'n';}
+21;
+22 writeln ("soma: 5");
+23;
+24;

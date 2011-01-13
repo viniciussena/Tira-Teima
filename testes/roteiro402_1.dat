@@ -1,0 +1,39 @@
+1 {comenta("O comando repeat é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso as repetições se encerram quando o usuário entrar com um 0.");
+   som();}
+3;
+4 int numero cor(150,150,200) tamanho(60,30) posicao(40,40),
+      soma cor(150,150,200) tamanho(60,30) posicao(120,40);
+6;
+7 soma = 0;
+8;
+9 writeln ("entre com um numero (0 para encerrar)");
+10 {writeln ("1"); numero = 1;}
+11{comenta("O comando repeat verifica a condição de saída no final. Por isso, deve sempre verificar se o número que entrou foi 0. Quando a entrada for igual a 0, ela não deve ser processada.");
+   som();}
+12 soma = 1;
+13;
+8;
+9 writeln ("entre com um numero (0 para encerrar)");
+10 {writeln ("2"); numero = 2;}
+11;
+12 soma = 3;
+13;
+8;
+9 writeln ("entre com um numero (0 para encerrar)");
+10 {writeln ("3"); numero = 3;}
+11;
+12 soma = 6;
+13;
+8;
+9 writeln ("entre com um numero (0 para encerrar)");
+10 {writeln ("4"); numero = 4;}
+11;
+12 soma = 10;
+13;
+8;
+9 writeln ("entre com um numero (0 para encerrar)");
+10 {writeln ("0"); numero = 0;}
+11;
+13;
+14 writeln ("soma dos numeros: 10");
+15;

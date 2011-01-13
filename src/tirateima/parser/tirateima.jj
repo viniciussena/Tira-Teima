@@ -1,0 +1,769 @@
+// Definição do parser para arquivos de instruções Tira Teima.
+
+options {
+	STATIC = false;
+	LOOKAHEAD = 2;
+	FORCE_LA_CHECK = true;
+}
+
+PARSER_BEGIN(TiraTeimaParser)
+
+package tirateima.parser;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Stack;
+
+import tirateima.gerador.CommandAttribution;
+import tirateima.gerador.CommandNewType;
+import tirateima.gerador.CommandNewVar;
+import tirateima.gerador.CommandNewVarText;
+import tirateima.gerador.CommandDirectPointer;
+import tirateima.gerador.FunctionDeclaration;
+import tirateima.gerador.CommandStartFunction;
+import tirateima.gerador.CommandEndFunction;
+import tirateima.gerador.CommandOperationCall;
+import tirateima.gerador.CommandInsertText;
+import tirateima.gerador.Index;
+import tirateima.gerador.Step;
+import tirateima.gerador.Type;
+import tirateima.gerador.TypeId;
+import tirateima.gerador.VarDefinition;
+
+import tirateima.gui.variaveis.Direcao;
+
+public class TiraTeimaParser {
+
+	/** Trata a string caractere a caractere, e troca as substrings de caracteres de escape 
+	*	por apenas um caractere de escape
+	*	@param s A string a ser tratada
+	*	@return Uma nova string com os caracteres que necessitam de tratamento já tratados
+	*/
+	private String tratarString(String s) {
+		char chars[] = s.toCharArray();
+		StringBuffer buffer = new StringBuffer();
+		
+		//ignora as aspas
+		int lim = chars.length - 1;
+		for(int i = 1; i < lim; i++) {
+			if (chars[i] == '\\') {
+				switch (chars[++i]) {
+					case '\\':
+						buffer.append('\\');
+						break;
+					case 't':
+						buffer.append('\t');
+						break;
+					case 'n':
+						buffer.append('\n');
+						break;
+					case 'r':
+						buffer.append('\r');
+						break;
+					case '"':
+						buffer.append('"');
+						break;
+				}
+			} else {
+				buffer.append(chars[i]);
+			}
+		}
+		
+		return buffer.toString();
+	}
+	
+	/** Trata uma string que seja um caractere, trocando as o valor por um caracteres de 
+	*		escape, se necessário
+	*	@param s A string a ser tratada como um caractere
+	*	@return Um novo caractere já tratado, caso tenha sido encontrado um literal
+	*/
+	private Character tratarChar(String s) {
+		char chars[] = s.toCharArray();
+		
+		//ignora as aspas
+		char c = chars[1];
+		if (c == '\\') {
+			switch (chars[2]) {
+				case '\\':
+					c = '\\';
+					break;
+				case 't':
+					c = '\t';
+					break;
+				case 'n':
+					c = '\n';
+					break;
+				case 'r':
+					c = '\r';
+					break;
+				case '\'':
+					c = '\'';
+					break;
+			}
+		}
+		
+		return new Character(c);
+	}
+}
+PARSER_END(TiraTeimaParser)
+
+	/** Um passo é uma indicação de linha seguida de um comando:
+  	*	[line] <nro linha> <comando> 
+  	*/
+Step step() : {
+	Token t;
+	Step p;
+}
+{
+	(
+		(<KW_LINE>)?
+		(t = <INT_NUMBER>){p = new Step(Integer.parseInt(t.image));}
+		command(p){return p;}
+	) |
+	(
+		<EOF>{return null;}
+	)
+}
+
+	/**	Um comando é um dos comandos básicos ou é um bloco de comandos
+	*	@param p Um Step
+	*/
+void command(Step p) : {}
+{
+	<SEMICOLON> |
+	cmd_new_type(p) |
+	cmd_new_var(p) |
+	cmd_atrib(p) |
+	cmd_direct_pointer(p) |
+	cmd_new_file(p) |
+	function_declaration(p) |
+	function_start(p) |
+	function_end(p) |
+	operation_call(p) |
+	cmd_insert_text(p) |
+	bloco(p)
+}
+
+/** Insere um texto de um determinado tamanho em uma dada posição */
+void cmd_insert_text(Step p) :
+{
+	String conteudo;
+	Point posicao;
+	Integer tamanho;
+	
+}
+{
+	<KW_INSERE_TEXTO>
+	(conteudo = conteudo())
+	(tamanho = font_size())
+	(posicao = posicao())
+	<SEMICOLON>	
+	{
+		p.addCommand(new CommandInsertText(conteudo,tamanho,posicao));
+	}
+}
+
+	/**	Cria um novo tipo, criando uma lista com as variáveis que compõem este tipo
+	*	@param p Um Step
+	*/
+void cmd_new_type(Step p) : {
+	Token t_name;
+	String name;
+	List<VarDefinition> aux, fields;
+}
+{
+	<KW_RECORD> {fields = new ArrayList<VarDefinition>();}
+	(t_name = <IDENTIFIER>) {name = t_name.image;}
+	<OPEN_BRACE>
+	(
+		aux = new_vars()
+		{fields.addAll(aux);}
+	)+
+	<CLOSE_BRACE> {
+		 p.addCommand(new CommandNewType(name, fields));
+	}
+}
+
+	/**	Gera um objeto list de VarDefinition's com as variáveis solicitadas
+	*	@return Uma lista com as N variáveis solicitadas.
+	*/
+List<VarDefinition> new_vars() : {
+	Type type;
+	VarDefinition v;
+	List<VarDefinition> vars = new ArrayList<VarDefinition>();
+}
+{
+	(type = type())
+	v = new_var(type){vars.add(v);}
+	(<COMMA>v = new_var(type){vars.add(v);})*
+	<SEMICOLON>{return vars;}
+}
+
+	/**	Retorna um objeto com o tipo selecionado, com base na KW encontrada
+	*	@return Um objeto com o tipo selecionado
+	*/
+Type type() : {
+	Token t;
+}
+{
+	(
+		(t = <KW_INT> {return new Type(TypeId.INTEGER);}) |
+		(t = <KW_REAL> {return new Type(TypeId.REAL);}) |
+		(t = <KW_CHAR> {return new Type(TypeId.CHAR);}) |
+		(t = <KW_STRING> {return new Type(TypeId.STRING);}) |
+		(t = <KW_BOOLEAN> {return new Type(TypeId.BOOLEAN);}) |
+		(t = <KW_POINTER> {return new Type(TypeId.POINTER);}) |
+		(t = <IDENTIFIER> {return new Type(TypeId.RECORD, t.image);})
+	)
+}
+
+	/**	Gera apenas uma VarDefinition já configurando cor interna e externa, tamanho e posição
+	*	@return Uma VarDefinition com a variável.
+	*/
+VarDefinition new_var(Type type) : {
+	Token t_name_var;
+	Index i = null;
+	Color color = null;
+	Color colorOutside = null;
+	Dimension dimension = null;
+	Point posicao = null;
+}
+{
+	(t_name_var = <IDENTIFIER>)
+	(i = index())?
+	(color = cor())?
+	(colorOutside = corExterna())?
+	(dimension = dimensao())?
+	(posicao = posicao())?
+	{
+		return new VarDefinition(type, t_name_var.image, i, color, colorOutside, dimension, posicao);
+	}
+}
+
+	/**	Cria e retorna um objeto de cor interna para a variável
+	*	@return Um objeto Color com a cor da variável
+	*/
+Color cor() : {
+	Token t_value;
+	int r=0;
+	int g=0;
+	int b=0;
+}
+{
+	<KW_COLOR>
+	<OPEN_PAR>
+	(t_value = <INT_NUMBER>){
+		r = Integer.parseInt(t_value.image);
+	}
+	(<COMMA>(t_value = <INT_NUMBER>){
+		g = Integer.parseInt(t_value.image);
+	})
+	(<COMMA>(t_value = <INT_NUMBER>){
+		b = Integer.parseInt(t_value.image);
+	})
+	<CLOSE_PAR>{return new Color(r,g,b);}
+}
+
+	/**	Cria e retorna um objeto de cor a ser utilizado para a cor externa da variável
+	*	@return Um objeto Color com a cor externa da variável
+	*/
+Color corExterna() : {
+	Token t_value;
+	int r=0;
+	int g=0;
+	int b=0;
+}
+{
+	<KW_COLOR_INSIDE>
+	<OPEN_PAR>
+	(t_value = <INT_NUMBER>){
+		r = Integer.parseInt(t_value.image);
+	}
+	(<COMMA>(t_value = <INT_NUMBER>){
+		g = Integer.parseInt(t_value.image);
+	})
+	(<COMMA>(t_value = <INT_NUMBER>){
+		b = Integer.parseInt(t_value.image);
+	})
+	<CLOSE_PAR>{return new Color(r,g,b);}
+}
+
+	/**	Retorna um objeto Dimension com os dados do tamanho da variável na GUI
+	*	@return O objeto Dimension para formatar o tamanho da variável.
+	*/
+Dimension dimensao() : {
+	Token t_value;
+	int largura=0;
+	int altura=0;
+}
+{
+	<KW_DIMENSION>
+	<OPEN_PAR>
+	(t_value = <INT_NUMBER>){
+		largura = Integer.parseInt(t_value.image);
+	}
+	(<COMMA>(t_value = <INT_NUMBER>){
+		altura = Integer.parseInt(t_value.image);
+	})
+	<CLOSE_PAR>{return new Dimension(largura,altura);}
+}
+
+/** Cria uma string a partir do texto passado no roteiro */
+String conteudo() : {  Token t_value;
+}
+{	<KW_CONTEUDO>
+	<OPEN_PAR>
+	(t_value = <STRING_LITERAL>)
+	<CLOSE_PAR>{return t_value.image;}
+}
+	/**	Cria um Point para posicionar o objeto na GUI, com base nos valores passados.
+	*	@return O objeto Point para ser utilizado no posicionamento da variável.
+	*/
+Point posicao() : {
+	Token t_value;
+	int x=0;
+	int y=0;
+}
+{
+	<KW_POSITION>
+	<OPEN_PAR>
+	(t_value = <INT_NUMBER>){
+		x = Integer.parseInt(t_value.image);
+	}
+	(<COMMA>(t_value = <INT_NUMBER>){
+		y = Integer.parseInt(t_value.image);
+	})
+	<CLOSE_PAR>{return new Point(x,y);}
+}
+
+Integer font_size() : {  Integer tamanho;
+}
+{
+	<KW_DIMENSION>
+	<OPEN_PAR>
+	(tamanho = size())
+	<CLOSE_PAR>{return tamanho;}
+}
+
+	/**	Cria e retorna um array ou matix.
+	*	@return Retorna um objeto Index (do pacote Gerador)
+	*/
+Index index() : {
+	Token t_value;
+	Index result = new Index();
+}
+{
+	<OPEN_BRACKET>
+	(t_value = <INT_NUMBER>){
+		result.first = Integer.parseInt(t_value.image);
+	}
+	(<COMMA>(t_value = <INT_NUMBER>){
+		result.second = Integer.parseInt(t_value.image);
+		result.isMatrix = true;
+	})?
+	<CLOSE_BRACKET>{return result;}
+}
+
+	/**	Chama a classe CommandNewVar para todas as variáveis instanciadas em um comando para um Step.
+	*	@param Step atual sendo lido
+	*/
+void cmd_new_var(Step p) : {
+	List<VarDefinition> vars;
+}
+{
+	vars = new_vars() {
+		ListIterator<VarDefinition> i = vars.listIterator();
+		while (i.hasNext()) {
+			p.addCommand(new CommandNewVar(i.next()));
+		}
+	}
+}
+
+/**	Chama a classe atribuição para representação de atribuição de valor à uma variável
+*	@param Step
+*/
+void cmd_atrib(Step p) : {
+	Stack<Object> var_stack = new Stack<Object>();
+	Object value;
+}
+{
+	variavel(var_stack)
+	<ATTRIBUTION>
+	value = constant()
+	<SEMICOLON> {
+		p.addCommand(new CommandAttribution(var_stack, value));
+	}
+}
+
+/**	Aponta o ponteiro para outra variavel, representando-se essa operacao por meio de uma seta de tamanho determinado
+* apontada para uma direcao que pode ser cima, baixo, esquerda, direita
+*	@param Step
+*/
+void cmd_direct_pointer(Step p) :{
+  	Stack<Object> var_stack = new Stack<Object>();
+	Direcao direcao;
+	Integer tamanho;} 
+{
+	variavel(var_stack)
+	<KW_POINT>
+	<OPEN_PAR>
+	direcao = direction()	  
+	<COMMA>
+	tamanho = size()
+	<CLOSE_PAR>
+	<SEMICOLON>	{
+	  p.addCommand(new CommandDirectPointer(var_stack, direcao, tamanho));	}
+}
+
+Direcao direction() :{
+	Token t_direction;}
+{
+	t_direction = <KW_CIMA>		{return Direcao.CIMA;} |
+	t_direction = <KW_BAIXO>
+		{return Direcao.BAIXO;} |
+	t_direction = <KW_ESQUERDA> 
+		{return Direcao.ESQUERDA;} | 
+	t_direction = <KW_DIREITA>
+		{return Direcao.DIREITA;}}
+
+Integer size() :
+{	Token t_size;
+}
+{	t_size = <INT_NUMBER>	{	  return Integer.parseInt(t_size.image);
+	}
+}
+	/**	
+	*	
+	*	
+	*/
+void variavel(Stack<Object> var_stack) : {
+	Token t_name;
+	Index i;
+}
+{
+	(t_name = <IDENTIFIER> {var_stack.push(t_name.image);})
+	(
+		(i = index() {var_stack.push(i);}) |
+		(
+			<DOT>
+			(t_name = <IDENTIFIER> {var_stack.push(t_name.image);})
+		)
+	)*
+}
+
+Object constant() : {
+	Token t;
+}
+{
+	t = <INT_NUMBER> {
+		return Integer.parseInt(t.image);
+	} |
+	t = <FLOAT_NUMBER> {
+		return Double.parseDouble(t.image);
+	} |
+	t = <STRING_LITERAL> {
+		return tratarString(t.image);
+	} |
+	t = <CHAR_LITERAL> {
+		return tratarChar(t.image);
+	} |
+	t = <KW_TRUE> {
+		return new Boolean(true);
+	} |
+	t = <KW_FALSE> {
+		return new Boolean(false);
+	} |
+	t = <KW_NULL> {
+		return null;
+	}
+}
+
+	/**	
+	*	
+	*	
+	*/
+void cmd_new_file(Step p) : {
+	Token t_name;
+}
+{
+	<KW_TEXT>
+	(t_name = <IDENTIFIER> {p.addCommand(new CommandNewVarText(t_name.image));})
+	(<COMMA>t_name = <IDENTIFIER> {p.addCommand(new CommandNewVarText(t_name.image));})*
+	<SEMICOLON>
+}
+
+	/**	
+	*	
+	*	
+	*/
+void function_declaration(Step p) : {
+	Token t_name;
+	Type type;
+	List<VarDefinition> param;
+	List<VarDefinition> local_vars;
+}
+{
+	<KW_FUNCTION>
+	(t_name = <IDENTIFIER>)
+	<OPEN_PAR>
+	(param = param_list())
+	<CLOSE_PAR>
+	<COLON>
+	(type = function_type())
+	(local_vars = local_vars_block()) {
+		p.addCommand(new FunctionDeclaration(
+			t_name.image, param, type, local_vars));
+	}
+}
+
+	/**	
+	*	
+	*	
+	*/
+List<VarDefinition> param_list() : {
+	List<VarDefinition> aux;
+	List<VarDefinition> vars = new ArrayList<VarDefinition>();
+}
+{
+	(
+		aux = new_vars() {
+			vars.addAll(aux);
+		}
+	)*
+	{return vars;}
+}
+
+	/**	
+	*	
+	*	
+	*/
+Type function_type() : {
+	Token t;
+}
+{
+	(
+		(t = <KW_INT> {return new Type(TypeId.INTEGER);}) |
+		(t = <KW_REAL> {return new Type(TypeId.REAL);}) |
+		(t = <KW_CHAR> {return new Type(TypeId.CHAR);}) |
+		(t = <KW_STRING> {return new Type(TypeId.STRING);}) |
+		(t = <KW_BOOLEAN> {return new Type(TypeId.BOOLEAN);}) |
+		(t = <KW_POINTER> {return new Type(TypeId.POINTER);}) |
+		(t = <KW_VOID> {return new Type(TypeId.VOID);}) |
+		(t = <IDENTIFIER> {return new Type(TypeId.RECORD, t.image);})
+	)
+}
+
+	/**	
+	*	
+	*	
+	*/
+List<VarDefinition> local_vars_block() : {
+	List<VarDefinition> vars = new ArrayList<VarDefinition>();
+	List<VarDefinition> aux;
+}
+{
+	(
+		<SEMICOLON> |
+		
+		(
+			<OPEN_BRACE>
+			(
+				aux = new_vars() {
+					vars.addAll(aux);
+				}
+			)*
+			<CLOSE_BRACE>
+			<SEMICOLON>
+		)
+	)
+	{return vars;}
+}
+
+	/**	
+	*	
+	*	
+	*/
+void function_start(Step p) : {
+	Token t;
+	List<Object> args;
+}
+{
+	<KW_START>
+	(t = <IDENTIFIER>)
+	(args = lst_args())
+	<SEMICOLON>
+	{p.addCommand(new CommandStartFunction(t.image, args));}
+}
+
+	/**	
+	*	
+	*	
+	*/
+void function_end(Step p) : {
+	Token t;
+}
+{
+	<KW_END>
+	<SEMICOLON>
+	{p.addCommand(new CommandEndFunction());}
+}
+
+	/**	
+	*	
+	*	
+	*/
+void operation_call(Step p) : {
+	Token cmd;
+	List<Object> args;
+}
+{
+	(cmd = operation())
+	(args = lst_args())
+	<SEMICOLON>{
+		p.addCommand(new CommandOperationCall(cmd, args));
+	}
+}
+
+	/**	
+	*	
+	*	
+	*/
+Token operation() : {
+	Token cmd;
+}
+{
+	((cmd = <KW_WRITE>) |
+	(cmd = <KW_WRITELN>) |
+	(cmd = <KW_COMMENT>) |
+	(cmd = <KW_SOUND>) |
+	(cmd = <KW_ASSIGN>) |
+	(cmd = <KW_RESET>) |
+	(cmd = <KW_REWRITE>) |
+	(cmd = <KW_READ>) |
+	(cmd = <KW_READLN>) |
+	(cmd = <KW_CLOSE>)){return cmd;}
+}
+
+	/**	
+	*	
+	*	
+	*/
+List<Object> lst_args() : {
+	Object a;
+	List<Object> result = new ArrayList<Object>();
+}
+{
+	<OPEN_PAR>	
+	  (a = arg(){result.add(a);})?		  (<COMMA>(a = arg()){result.add(a);})*
+	<CLOSE_PAR>{
+		return result;
+	}
+}
+
+	/**	
+	*	
+	*	
+	*/
+Object arg() : {
+	Object o;
+	Stack<Object> var_stack = new Stack<Object>();
+}
+{
+	variavel(var_stack){return var_stack;} |
+	(o = constant()){return o;} |
+	<KW_ENDERECO> variavel(var_stack){return var_stack;}
+}
+
+	/**	
+	*	
+	*	
+	*/
+void bloco(Step p) : {} {
+	<OPEN_BRACE>(command(p))*<CLOSE_BRACE>
+}
+
+// Pula espaços em branco e comentários
+SKIP : {
+	" " |
+	"\t" |
+	"\n" |
+	"\r" |
+	"\f" |
+	<COMMENT: "#" (~["\n","\r"])* ("\n"|"\r"|"\r\n")?>}
+
+// Algumas expressões regulares auxiliares
+TOKEN : {
+	<#DIGIT : (["0"-"9"])> |
+	<#DIGITS : (<DIGIT>)+> |
+	<#LETTER : ["a"-"z", "A"-"Z", "_"]> |
+	<#LETTERDIGIT : <LETTER> | <DIGIT>> |
+	<#SCAPE_SEQUENCE : "\\"("\\" | "t" | "n"| "r")>}
+
+// Palavras-chave
+TOKEN [IGNORE_CASE] : {
+	<KW_LINE : "line"> |
+	<KW_RECORD : "record"> |
+	<KW_INT : "int"> |
+	<KW_REAL : "real"> |
+	<KW_CHAR : "char"> |
+	<KW_STRING : "string"> |
+	<KW_BOOLEAN : "boolean"> |
+	<KW_POINTER : "pointer"> |
+	<KW_VOID : "void"> |
+	<KW_TEXT : "text">  |
+	<KW_WRITE : "write"> |
+	<KW_WRITELN : "writeln"> |
+	<KW_COMMENT : "comenta"> |
+	<KW_SOUND : "som"> |
+	<KW_ASSIGN : "assign"> |
+	<KW_REWRITE : "rewrite"> |
+	<KW_RESET : "reset"> |
+	<KW_READ : "read"> |
+	<KW_READLN : "readln"> |
+	<KW_CLOSE : "close"> |
+	<KW_FUNCTION : "function"> |
+	<KW_START : "start"> |
+	<KW_END : "end"> |
+	<KW_TRUE : "true"> |
+	<KW_FALSE : "false"> |
+	<KW_NULL : "null"> |
+	<KW_POINT : "aponta"> |
+	<KW_CIMA : "cima"> |
+	<KW_BAIXO : "baixo"> |
+	<KW_ESQUERDA : "esquerda"> |
+	<KW_DIREITA : "direita"> |
+	<KW_COLOR : "cor"> |
+	<KW_COLOR_INSIDE : "corexterna"> |
+	<KW_DIMENSION : "tamanho"> |
+	<KW_POSITION : "posicao"> |
+	<KW_INSERE_TEXTO : "insere_texto"> |
+	<KW_CONTEUDO : "conteudo"> |
+	<KW_ENDERECO : "endereco">
+	}
+	
+
+// Constantes
+TOKEN : {
+	<INT_NUMBER : ("+"|"-")?(<DIGITS>)> |
+	<IDENTIFIER : (<LETTER>)(<LETTERDIGIT>)*> |
+	<FLOAT_NUMBER : ("+"|"-")?(<DIGIT>)*"."(<DIGITS>)> |
+	<STRING_LITERAL : "\""((~["\"", "\r", "\n", "\\"]) | <SCAPE_SEQUENCE> | "\\\"")*"\""> |
+	<CHAR_LITERAL : "'"((~["'", "\r", "\n", "\\"]) | <SCAPE_SEQUENCE> | "\\'")"'">}
+
+// Pontuação
+TOKEN : {
+	<OPEN_BRACE : "{"> |
+	<CLOSE_BRACE : "}"> |
+	<OPEN_BRACKET : "["> |
+	<CLOSE_BRACKET : "]"> |
+	<OPEN_PAR : "("> |
+	<CLOSE_PAR : ")"> |
+	<DOT : "."> |
+	<COMMA : ","> |
+	<COLON : ":"> |
+	<SEMICOLON : ";"> |
+	<ATTRIBUTION : "=">}

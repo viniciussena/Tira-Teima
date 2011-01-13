@@ -1,0 +1,9 @@
+### História 2 - Representar Funções ###
+
+COMO professor
+PARA viabilizar o ensino de modularização
+QUERO representar adequadamente funções no Tira-Teima
+
+Detalhes:
+- Ponteiros também deverão ser representados como entradas e saídas de funções, bem como deve ser viável a utilização destes internamente.
+- Tal funcionalidade já está parcialmente implementada, deve-se testá-la e buscar pontos de melhoria.

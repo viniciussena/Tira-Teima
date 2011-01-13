@@ -1,0 +1,12 @@
+1;
+3;
+4 int nivel cor(150,150,200) tamanho(50,30) posicao(40,40);
+6;
+7 writeln ("qual o nivel do pais?");
+8 {writeln ("4"); nivel = 4;}
+9 {comenta("O comando case substitui uma série de comandos if's. É usado quando, dentre várias opções, apenas uma pode ser executada.");
+   som();}
+13 writeln ("investimento bom");
+15;
+16;
+

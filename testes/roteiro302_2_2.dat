@@ -1,0 +1,14 @@
+1;
+3;
+4 char passaporte cor(200,0,200) tamanho(80,30) posicao(30,30),
+       imovel cor(0,200,200) tamanho(80,30) posicao(130,30);
+6;
+7 writeln ("Voce tem passaporte?");
+8 {writeln ("s"); passaporte = 's';}
+9 writeln ("Voce tem imovel?");
+10 {writeln ("s"); imovel = 's';}
+11;
+12 {comenta("Neste caso a pessoa tem passaporte e imóvel.");
+    som();}
+13 writeln ("Voce pode trabalhar no pais.");
+14;

@@ -1,0 +1,56 @@
+1 {comenta("O comando while é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso as repetições se encerram quando o usuário entrar com um 0.");
+   som();}
+3;
+4 int numero cor(150,150,200) tamanho(60,30) posicao(40,40),
+      soma cor(150,150,200) tamanho(60,30) posicao(120,40);
+5 boolean ok cor(200,150,100) tamanho(60,30) posicao(40,110);
+6;
+7;
+8 ok = true;
+9 soma = 0;
+10 {comenta("Neste exercício o primeiro número só é lido dentro do laço. Para que o programa entre no laço, criou-se a variável ok, inicializada com true.");
+    som();}
+11;
+12 writeln ("entre com um numero (0 para encerrar)");
+13 {writeln ("1"); numero = 1;}
+14;
+16 soma = 1;
+17;
+
+10;
+11;
+12 writeln ("entre com um numero (0 para encerrar)");
+13 {writeln ("2"); numero = 2;}
+14;
+16 soma = 3;
+17;
+
+10;
+11;
+12 writeln ("entre com um numero (0 para encerrar)");
+13 {writeln ("3"); numero = 3;}
+14;
+16 soma = 6;
+17;
+
+10;
+11;
+12 writeln ("entre com um numero (0 para encerrar)");
+13 {writeln ("4"); numero = 4;}
+14;
+16 soma = 10;
+17;
+
+10;
+11;
+12 writeln ("entre com um numero (0 para encerrar)");
+13 {writeln ("0"); numero = 0;}
+14;
+15 {ok = false;
+    comenta("O número que entrou agora foi 0. Por isso, a variável ok é feita false, para indicar que o laço de repetição deve ser interrompido.");
+    som();}
+
+17;
+10;
+18 writeln ("soma dos numeros: 10");
+19;

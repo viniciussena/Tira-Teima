@@ -1,0 +1,64 @@
+1 {comenta("O comando while é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso as repetições se encerram quando o usuário entrar com um 0.");
+   som();}
+3;
+4 int numero cor(150,150,200) tamanho(60,30) posicao(40,40);
+5 int min cor(150,200,150) tamanho(60,30) posicao(40,120),
+      max cor(150,200,150) tamanho(60,30) posicao(150,120);
+7;
+8 writeln ("entre com um numero inteiro (0 para encerrar)");
+9 {writeln ("5"); numero = 5;}
+10;
+13;
+14;
+15 {max = 5;
+   comenta("O problema pede para determinar o valor máximo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo. Esse primeiro valor deve ser lido e processado fora do laço de repetição.");
+   som();}
+16 {min = 5;
+   comenta("Acontece o mesmo com o valor mímino: ele deve ser inicializado com o valor do primeiro elemento lido.");
+   som();}
+17;
+18;
+19 writeln ("entre com um numero inteiro (0 para encerrar)");
+20 {writeln ("4"); numero = 4;}
+21 {comenta("O comando while só vai verificar se este número lido é 0 no próximo laço. Por isso, deve sempre verificar se o número que entrou foi 0. Quando a entrada for igual a 0, ela não deve ser processada.");
+   som();}
+22;
+23;
+25;
+26;
+27 min = 4;
+28;
+
+17;
+18;
+19 writeln ("entre com um numero inteiro (0 para encerrar)");
+20 {writeln ("7"); numero = 7;}
+21;
+22;
+23;
+24 max = 7;
+28;
+
+17;
+18;
+19 writeln ("entre com um numero inteiro (0 para encerrar)");
+20 {writeln ("6"); numero = 6;}
+21;
+22;
+23;
+25;
+26;
+28;
+
+17;
+18;
+19 writeln ("entre com um numero inteiro (0 para encerrar)");
+20 {writeln ("0"); numero = 0;}
+21;
+28;
+
+17;
+29 writeln ("maximo: 7");
+30 writeln ("minimo: 4");
+31;
+32;

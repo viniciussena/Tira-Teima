@@ -1,0 +1,14 @@
+1 {comenta("Este programa mostra como o usuário pode escolher, durante a execução do programa, o nome do arquivo que ele quer abrir.");
+  som();}
+3;
+4 text arq1;
+5 string nomearq cor(255,0,0) tamanho (120,30) posicao(40,40);
+7;
+8 writeln ("entre com o nome do arquivo");
+9 {writeln ("arqp502.txt"); nomearq = "arqp502.txt";
+  comenta("O usuário entra com o nome do arquivo, que no caso é 'arqp502.txt'. Esse nome fica armazenado na variável nomearq.");
+  som();}
+10 {assign (arq1, "arqp502.txt");
+  comenta("O comando assign associa a variável arq1 ao arquivo externo, cujo nome está armazenado na variável nomearq. Observe que, no quadro verde que representa o arquivo, a variável arq1 aparece associada ao nome 'arqp502.txt'. Aqui também o conteúdo do arquivo não aparece porque o arquivo ainda não foi aberto.");
+  som();}
+11;

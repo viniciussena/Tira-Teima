@@ -1,0 +1,55 @@
+1 {comenta("O comando repeat é utilizado para repetir um trecho de programa quando o número de repetições é inicialmente desconhecido. Neste caso as repetições se encerram quando o usuário entrar com um 0.");
+   som();}
+3;
+4 int numero cor(150,150,200) tamanho(60,30) posicao(40,40);
+5 int min cor(150,200,150) tamanho(60,30) posicao(40,120),
+      max cor(150,200,150) tamanho(60,30) posicao(150,120);
+7;
+8 writeln ("entre com um numero inteiro (0 para encerrar)");
+9 {writeln ("5"); numero = 5;}
+10;
+13;
+14;
+15 {max = 5;
+   comenta("O problema pede para determinar o valor máximo entre os elementos da sequência. Para isso, o primeiro valor lido deve ser inicialmente considerado o máximo. Esse primeiro valor deve ser lido e processado fora do laço de repetição.");
+   som();}
+16 {min = 5;
+   comenta("Acontece o mesmo com o valor mímino: ele deve ser inicializado com o valor do primeiro elemento lido.");
+   som();}
+17;
+18 writeln ("entre com um numero inteiro (0 para encerrar)");
+19 {writeln ("4"); numero = 4;}
+20{comenta("O comando repeat verifica a condição de saída no final. Por isso, deve sempre verificar se o número que entrou foi 0. Quando a entrada for igual a 0, ela não deve ser processada.");
+   som();}
+21;
+22;
+24;
+25;
+26 min = 4;
+27;
+17;
+18 writeln ("entre com um numero inteiro (0 para encerrar)");
+19 {writeln ("7"); numero = 7;}
+20;
+21;
+22;
+23 max = 7;
+27;
+17;
+18 writeln ("entre com um numero inteiro (0 para encerrar)");
+19 {writeln ("6"); numero = 6;}
+20;
+21;
+22;
+24;
+25;
+27;
+17;
+18 writeln ("entre com um numero inteiro (0 para encerrar)");
+19 {writeln ("0"); numero = 0;}
+20;
+27;
+28 writeln ("maximo: 7");
+29 writeln ("minimo: 4");
+30;
+31;

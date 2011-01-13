@@ -1,0 +1,5 @@
+Beto         123 5.0
+Daniela      324 8.0
+Flavia       891 2.3
+Maria        234 9.8
+Valter       752 4.8

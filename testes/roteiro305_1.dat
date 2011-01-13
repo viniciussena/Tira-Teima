@@ -1,0 +1,18 @@
+1 {comenta("Este exemplo mostra um conjunto de comandos if em cascata. Apenas uma das opções é válida, e quando essa opção é encontrada, o programa encerra a procura.");
+   som();}
+3;
+4 real prestacao cor(240,240,0) tamanho(90,30) posicao(30,30);
+5 int dia cor(0,240,0) tamanho(90,30) posicao(140,30);
+7;
+8 writeln ("entre com o valor da prestacao");
+9 {writeln ("1000"); prestacao = 1000.00;}
+10 writeln ("entre com o dia de pagamento");
+11 {writeln ("14"); dia = 14;}
+12 {comenta("Observe a endentação utilizada neste exemplo. Quando os comandos if estão em cascata recomenda-se esta forma.");
+   som();}
+14;
+16;
+17 {writeln ("prestacao atualizada =  970.00");
+   comenta("Neste caso o desconto é de 3%");
+   som();}
+20;
