@@ -1,5 +1,5 @@
 1;
-2 comenta("bem vindo");
+2 comenta("bem vindo!");
 3 boolean primeiroBoolean cor(160,0,0) tamanho(500,200);
 4 record ficha {string nome; int matric cor(160,100,70); real nota cor(160,50,240);} 
 5 comenta("A leitura do arquivo terminou");
