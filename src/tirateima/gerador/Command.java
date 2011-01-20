@@ -1,5 +1,6 @@
 package tirateima.gerador;
 
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -7,7 +8,6 @@ import java.util.Map;
 import java.util.Stack;
 
 import tirateima.Par;
-import tirateima.gui.variaveis.Direcao;
 import tirateima.gui.variaveis.Mostrador;
 import tirateima.gui.variaveis.Seta;
 import tirateima.gui.variaveis.VarArray;
@@ -162,7 +162,7 @@ public abstract class Command {
 	 * @param tamanho
 	 */
 	protected void criarSeta(Mostrador mostrador, Stack<Object> var_stack,
-			Direcao direcao, Integer tamanho) throws TiraTeimaLanguageException{
+			Point posicaoApontada) throws TiraTeimaLanguageException{
 		
 		Object parent;
 		
@@ -171,7 +171,7 @@ public abstract class Command {
 		String nome_var = (String) parent;
 		if (!mostrador.hasVariavel(nome_var))
 			gerarErro("Variavel '" + nome_var + "' não foi declarada!");
-		mostrador.adicionarSeta(nome_var,new Seta(nome_var,direcao,tamanho));
+		mostrador.adicionarSeta(nome_var,new Seta(nome_var,posicaoApontada));
 		mostrador.modificarVariavel(nome_var, "");
 	}
 	

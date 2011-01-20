@@ -12,20 +12,21 @@ import javax.swing.JComponent;
 public class Seta extends JComponent {
 	
 	private static final long serialVersionUID = 101L;
+	
 	String nome;
-	Direcao direcao;
-	Integer tamanho;
+	Point posicaoPartida;/**< Posição de origem da seta*/
+	Point posicaoApontada;/**< Posição de destino da seta*/
+	Point posicaoOriginal;    /**< Localização da seta no conteiner pai (tudo)*/
+	
 	protected double proporcao = 1.0;
-	Point posicaoOriginal;
 
 	public Seta(){
 		super();
 	}
 	
-	public Seta(String nome, Direcao direcao, Integer tamanho) {
+	public Seta(String nome, Point posicaoApontada) {
 		this.nome = nome;
-		this.direcao = direcao;
-		this.tamanho = tamanho;
+		this.posicaoApontada = posicaoApontada;
 	}
 
 	public void setProporcao(double prop) {
@@ -36,82 +37,156 @@ public class Seta extends JComponent {
 		this.validate();
 	}
 
+	/**
+	 * Cria um quadrado com os lados tendo o dobro do tamanho máximo da seta.
+	 * @return
+	 */
 	private Dimension getTamanhoParaProporcao() {
-		Double larguraReal = this.tamanho.doubleValue() * proporcao;
-		Integer largura = (int)Math.round(larguraReal);
-		Double alturaReal = this.tamanho.doubleValue() * proporcao;
-		Integer altura = (int)Math.round(alturaReal);
+		Integer largura = (int)((double)Math.abs(posicaoApontada.x - posicaoPartida.x) * proporcao);
+		Integer altura  = (int)((double)Math.abs(posicaoApontada.y - posicaoPartida.y) * proporcao);
 		return new Dimension(largura,
 				             altura);
 	}
-	
+
+	/**
+	 * Método que desenha a seta.
+	 * 
+	 * Para se entender como ela é desenhada, veja:
+	 * 
+	 * Divida a variável pelo centro em quatro na horizontal e na vertical.
+	 * Imaginem-se quatro quadrantes, de modo que o primeiro esteja na parte inferior direita,
+	 * o segundo na inferior esquerda, o terceiro, na superior esquerda e o quarto na 
+	 * superior direita. Para calcular o quadrante em que ela estará, basta olhar para qual é maior, o x ou o
+	 * y de origem. Lembre-se que no swing o x aponta para baixo. Fica assim:
+	 * 
+	 * x destino > x origem e y destino > y origem - primeiro quadrante
+	 * x destino < x origem e y destino > y origem - segundo quadrante 
+	 * x destino < x origem e y destino < y origem - terceiro quadrante
+	 * x destino > x origem e y destino < y origem - quarto quadrante
+	 * 
+	 * Dessa forma, suas fronteiras (que serão um retângulo) deverá ser posicionado de modo que 
+	 * duas de suas laterais encostem em nos eixos que cortam a variável no meio. Isso se dá para
+	 * que a seta possa ser desenhada.
+	 * 
+	 * Além disso, de acordo com cada quadrante, a posição de origem da seta será diferente,
+	 * pois a seta é desenhada relativamente ao conteiner dela, não do conteiner no qual ela
+	 * está inserido. Será dessa forma.
+	 * 
+	 * Se estiver no primeiro quadrante, ela terá seu início no canto superior esquerdo.
+	 * Se estiver no segundo quadrante, ela terá seu início no canto superior direito.
+	 * Se estiver no terceiro quadrante, ela terá seu início no canto inferior direito.
+	 * Se estiver no quarto quadrante, ela terá seu início no canto inferior esquerdo. 
+	 * @param v
+	 * @return
+	 */
 	@Override
 	public void paint(Graphics g){
-		//prepara o desenho e os tamanhos da seta
 		Graphics2D g2d = (Graphics2D) g;
-		Double tamanhoReal = tamanho.doubleValue()*proporcao;
-		Integer tamanhoSeta = (int)Math.round(tamanhoReal);
-		Integer descontoSeta = tamanhoSeta / 5;
-		Integer alturaBase = tamanhoSeta - descontoSeta;
-		Polygon triangulo = new Polygon();
-		//referencias para o desenho da seta
-		Integer  valMaior = (int)Math.round(10*proporcao);
-		Integer  valMedio = (int)Math.round(5*proporcao);
-		Integer  valMenor = 0;
-		if(this.direcao == Direcao.BAIXO){
-			//desenha a base da seta
-			g2d.drawLine(valMedio, valMenor, valMedio, alturaBase);
-			//desenha o triangulo da seta			
-			triangulo.addPoint(valMedio, tamanhoSeta - 1);
-			triangulo.addPoint(valMaior, alturaBase);
-			triangulo.addPoint(valMenor, alturaBase);		
+		/* Desenha a variável de acorco com cada quadrante, transladando a origem e destino 
+		 * relativamente ao cada caso */
+		Point posicaoPartidaRelativa = new Point(0,0);
+		Point posicaoApontadaRelativa = new Point(0,0);
+		//TODO: Desenhar o triângulo da seta.
+		//Primeiro quadrante.
+		if (posicaoApontada.x > posicaoPartida.x && posicaoApontada.y > posicaoPartida.y){
+			//parte da origem
+			posicaoPartidaRelativa = 
+				new Point(0,
+						  0);
+			//chega até o canto inferior direito, respeitando o tamanho
+			posicaoApontadaRelativa = 
+				new Point(posicaoApontada.x - posicaoPartida.x,
+						  posicaoApontada.y - posicaoPartida.y);
+			/*//desenha o triangulo da seta
+			Polygon trianguloSeta = new Polygon();
+			trianguloSeta.addPoint(posicaoApontadaRelativa.x, posicaoApontadaRelativa.y);
+			trianguloSeta.addPoint(60,75);
+			trianguloSeta.addPoint(75,60);
+			g2d.dr
+			g2d.fillPolygon(trianguloSeta);*/
 		}
-		else if(this.direcao == Direcao.CIMA){
-			//desenha a base da seta
-			g2d.drawLine(valMedio, descontoSeta,valMedio, tamanhoSeta);
-			//desenha o triangulo da seta
-			triangulo.addPoint(valMedio,valMenor);
-			triangulo.addPoint(valMenor,descontoSeta);
-			triangulo.addPoint(valMaior,descontoSeta);
-		}else if(this.direcao == Direcao.ESQUERDA){
-			//desenha a base da seta
-			g2d.drawLine(descontoSeta,valMedio,tamanhoSeta,valMedio);
-			//desenha o triangulo da seta
-			triangulo.addPoint(valMenor,valMedio);
-			triangulo.addPoint(descontoSeta,valMenor);
-			triangulo.addPoint(descontoSeta,valMaior);
-		}else if(this.direcao == Direcao.DIREITA){
-			//desenha a base da seta
-			g2d.drawLine(valMenor,valMedio,alturaBase,valMedio);
-			//desenha o triangulo da seta
-			triangulo.addPoint(tamanhoSeta,valMedio);
-			triangulo.addPoint(alturaBase,valMenor);
-			triangulo.addPoint(alturaBase,valMaior);
+		//Segundo quadrante
+		else if (posicaoApontada.x < posicaoPartida.x && posicaoApontada.y > posicaoPartida.y){
+			//parte do canto superior direito
+			posicaoPartidaRelativa =
+				new Point(posicaoPartida.x - posicaoApontada.x,
+						  0);
+			//chega até o canto inferior esquerdo
+			posicaoApontadaRelativa = 
+				new Point(0,
+						  posicaoApontada.y - posicaoPartida.y);
 		}
-		g2d.fillPolygon(triangulo);
-		g2d.setColor(Color.BLACK);
+		//Terceiro quadrante
+		else if (posicaoApontada.x < posicaoPartida.x && posicaoApontada.y < posicaoPartida.y){
+			//parte do canto inferior direito
+			posicaoPartidaRelativa =
+				new Point(posicaoPartida.x-posicaoApontada.x,
+						  posicaoPartida.y-posicaoApontada.y);
+			//chega até a origem
+			posicaoApontadaRelativa = 
+				new Point(0,
+						  0);
+		}
+		//Quarto quadrante
+		else if (posicaoApontada.x > posicaoPartida.x && posicaoApontada.y < posicaoPartida.y){
+			//parte do canto inferior esquerdo
+			posicaoPartidaRelativa =
+				new Point(0,
+						  posicaoPartida.y-posicaoApontada.y);
+			//chega até o canto superior direito
+			posicaoApontadaRelativa =
+				new Point(posicaoApontada.x-posicaoPartida.x,
+						  0);
+		}
+
+		g2d.drawLine(posicaoPartidaRelativa.x,posicaoPartidaRelativa.y,posicaoApontadaRelativa.x,posicaoApontadaRelativa.y);
+		g2d.setBackground(Color.BLACK);
 		g2d.dispose();
 	}
 
 	public Seta criarCopia() {
-		Seta setaCopia = new Seta(this.nome,this.direcao,this.tamanho);
+		Seta setaCopia = new Seta(this.nome,this.posicaoApontada);
 		return setaCopia;
 	}
 
 	/**
 	 * Método que recebe uma variável e retorna um ponto a partir do qual ela será desenhada.
-	 * De acordo com o sentido (cima, baixo, esquerda ou direita) ela terá de ter seu posicio-
-	 * namento deslocado.
-	 * @param v
-	 * @return
+	 * Este ponto será sempre o centro da variável e deverá ser depois setado na 
+	 * posicaoOriginal para que ele funcione corretamente.
+	 * De acordo com o quadrante em que a variável se encontra, a posição da origem irá variar.
+	 * Veja:
+	 * 
+	 * Divida a variável pelo centro em quatro na horizontal e na vertical.
+	 * Imaginem-se quatro quadrantes, de modo que o primeiro esteja na parte inferior direita,
+	 * o segundo na inferior esquerda, o terceiro, na superior esquerda e o quarto na 
+	 * superior direita. Para calcular o quadrante em que ela estará, basta olhar para qual é maior, o x ou o
+	 * y de origem. Lembre-se que no swing o x aponta para baixo. Fica assim:
+	 * 
+	 * x destino > x origem e y destino > y origem - primeiro quadrante
+	 * x destino < x origem e y destino > y origem - segundo quadrante 
+	 * x destino < x origem e y destino < y origem - terceiro quadrante
+	 * x destino > x origem e y destino < y origem - quarto quadrante
+	 * 
+	 * Dessa forma, suas fronteiras (que serão um retângulo) deverá ser posicionado de modo que 
+	 * duas de suas laterais encostem em nos eixos que cortam a variável no meio. Isso se dá para
+	 * que a seta possa ser desenhada.
+	 * 
+	 * Além disso, de acordo com cada quadrante, a posição de origem da seta será diferente,
+	 * pois a seta é desenhada relativamente ao conteiner dela, não do conteiner no qual ela
+	 * está inserido. Será dessa forma.
+	 * 
+	 * Se estiver no primeiro quadrante, ela terá seu início no canto superior esquerdo.
+	 * Se estiver no segundo quadrante, ela terá seu início no canto superior direito.
+	 * Se estiver no terceiro quadrante, ela terá seu início no canto inferior direito.
+	 * Se estiver no quarto quadrante, ela terá seu início no canto inferior esquerdo. 
+	 * @param Variavel v
+	 * @return Point posicaoOriginal
 	 */
-	public Point calculaPosicao(Variavel v) {
-		Integer x;
-		Integer y;
-		//pega a largura e altura reais da variavel
+	public Point calculaPosicaoOriginal(Variavel v) {
+		//Pega a largura e altura reais da variavel
 		Integer larguraReal = v.getRealSize().width;
 		Integer alturaReal = v.getRealSize().height;
-		//inicializa o que for necessario (larguraReal, alturaReal e proporcao)
+		//Inicializa o que for necessario (larguraReal, alturaReal e proporcao)
 		if (larguraReal == 0){
 			larguraReal = v.dimensao.width;
 		}
@@ -121,27 +196,42 @@ public class Seta extends JComponent {
 		if (v.proporcao == 0.0){
 			v.proporcao = 1.0;
 		}
-		//se a seta for para baixo ou par direita, posiciona sua origem no centro da variavel.
-		if(this.direcao == Direcao.BAIXO){
-			x = v.posicao.x + larguraReal/2 - (int)Math.nextUp(4.0 * v.proporcao);
-			y = v.posicao.y + alturaReal/2 + (int)Math.nextUp(14 * v.proporcao);
+		//Calcula o centro da variável
+		Point centroVariavel = 
+			new Point(v.posicao.x + larguraReal/2,
+					  v.posicao.y + alturaReal/2 + (int)Math.nextUp(14 * v.proporcao));
+		//Assume de início que a posicao original da seta é o seu centro
+		posicaoPartida = centroVariavel;
+		//Calcula a dimensão da seta
+		Dimension dimensaoSeta 
+			= new Dimension(Math.abs(posicaoApontada.x - centroVariavel.x),
+					        Math.abs(posicaoApontada.y - centroVariavel.y));
+		//Calcula a posicao original de acordo com cada quadrante
+		//Primeiro quadrante.
+		if (posicaoApontada.x > posicaoPartida.x && posicaoApontada.y > posicaoPartida.y){
+			posicaoOriginal = 
+				new Point(centroVariavel.x,
+						  centroVariavel.y);
 		}
-		else if(this.direcao == Direcao.DIREITA){
-			x = v.posicao.x + larguraReal/2;
-			y = v.posicao.y + alturaReal/2 + (int)Math.nextUp(8 * v.proporcao);			
+		//Segundo quadrante
+		else if (posicaoApontada.x < posicaoPartida.x && posicaoApontada.y > posicaoPartida.y){
+			posicaoOriginal = 
+				new Point(centroVariavel.x - dimensaoSeta.width,
+						  centroVariavel.y);
 		}
-		//se a seta for para cima, prosiciona sua origem sobre a variavel
-		else if(this.direcao == Direcao.CIMA){
-			x = v.posicao.x + larguraReal/2 - (int)Math.nextUp(4 * v.proporcao);
-			y = v.posicao.y + alturaReal/2 + (int)Math.nextUp(14 * v.proporcao) - this.tamanho;
+		//Terceiro quadrante
+		else if (posicaoApontada.x < posicaoPartida.x && posicaoApontada.y < posicaoPartida.y){
+			posicaoOriginal = 
+				new Point(centroVariavel.x - dimensaoSeta.width,
+						  centroVariavel.y - dimensaoSeta.height);
 		}
-		//se a seta for para esquerda, posiciona sua origem `a esquerda da variavel
-		else if(this.direcao == Direcao.ESQUERDA){
-			x = v.posicao.x + larguraReal/2  - this.tamanho;
-			y = v.posicao.y + alturaReal/2 + (int)Math.nextUp(8 * v.proporcao);
-		}else{
-			return null;
+		//Quarto quadrante
+		else if (posicaoApontada.x > posicaoPartida.x && posicaoApontada.y < posicaoPartida.y){
+			posicaoOriginal = 
+				new Point(centroVariavel.x,
+						  centroVariavel.y - dimensaoSeta.height);
 		}
-		return new Point(x,y);
+		
+		return new Point(posicaoOriginal);
 	}
 }

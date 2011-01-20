@@ -34,8 +34,6 @@ import tirateima.gerador.Type;
 import tirateima.gerador.TypeId;
 import tirateima.gerador.VarDefinition;
 
-import tirateima.gui.variaveis.Direcao;
-
 public class TiraTeimaParser {
 
 	/** Trata a string caractere a caractere, e troca as substrings de caracteres de escape 
@@ -324,13 +322,20 @@ String conteudo() : {  Token t_value;
 	*	@return O objeto Point para ser utilizado no posicionamento da variável.
 	*/
 Point posicao() : {
-	Token t_value;
-	int x=0;
-	int y=0;
+	Point coordenadas;
 }
 {
 	<KW_POSITION>
-	<OPEN_PAR>
+	(coordenadas = coordenadas()){
+		return coordenadas;
+	}	  
+}
+
+Point coordenadas() : {	Token t_value;
+	int x=0;
+	int y=0;  
+}
+{	<OPEN_PAR>
 	(t_value = <INT_NUMBER>){
 		x = Integer.parseInt(t_value.image);
 	}
@@ -405,30 +410,14 @@ void cmd_atrib(Step p) : {
 */
 void cmd_direct_pointer(Step p) :{
   	Stack<Object> var_stack = new Stack<Object>();
-	Direcao direcao;
-	Integer tamanho;} 
+	Point posicaoApontada;} 
 {
 	variavel(var_stack)
 	<KW_POINT>
-	<OPEN_PAR>
-	direcao = direction()	  
-	<COMMA>
-	tamanho = size()
-	<CLOSE_PAR>
+	(posicaoApontada = coordenadas())
 	<SEMICOLON>	{
-	  p.addCommand(new CommandDirectPointer(var_stack, direcao, tamanho));	}
+	  p.addCommand(new CommandDirectPointer(var_stack, posicaoApontada));	}
 }
-
-Direcao direction() :{
-	Token t_direction;}
-{
-	t_direction = <KW_CIMA>		{return Direcao.CIMA;} |
-	t_direction = <KW_BAIXO>
-		{return Direcao.BAIXO;} |
-	t_direction = <KW_ESQUERDA> 
-		{return Direcao.ESQUERDA;} | 
-	t_direction = <KW_DIREITA>
-		{return Direcao.DIREITA;}}
 
 Integer size() :
 {	Token t_size;
@@ -436,10 +425,7 @@ Integer size() :
 {	t_size = <INT_NUMBER>	{	  return Integer.parseInt(t_size.image);
 	}
 }
-	/**	
-	*	
-	*	
-	*/
+
 void variavel(Stack<Object> var_stack) : {
 	Token t_name;
 	Index i;
@@ -732,10 +718,6 @@ TOKEN [IGNORE_CASE] : {
 	<KW_FALSE : "false"> |
 	<KW_NULL : "null"> |
 	<KW_POINT : "aponta"> |
-	<KW_CIMA : "cima"> |
-	<KW_BAIXO : "baixo"> |
-	<KW_ESQUERDA : "esquerda"> |
-	<KW_DIREITA : "direita"> |
 	<KW_COLOR : "cor"> |
 	<KW_COLOR_INSIDE : "corexterna"> |
 	<KW_DIMENSION : "tamanho"> |

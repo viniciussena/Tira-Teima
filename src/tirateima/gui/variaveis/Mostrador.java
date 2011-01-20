@@ -524,8 +524,6 @@ public class Mostrador extends JScrollPane implements IEstado {
 				Variavel[] vars = mapaVariaveis.get(cor).toArray(new Variavel[] {});
 				Arrays.sort(vars, comparadorVariavel);			
 				for (Variavel v : vars) {
-					
-					//TODO: consertar bounds dos textos olhando para as janelas
 					Janela j = new Janela(v);
 					tudo.add(j);
 					janelas.add(j);
@@ -542,9 +540,9 @@ public class Mostrador extends JScrollPane implements IEstado {
 						Seta seta = setas.setas.get(v.nome);
 						tudo.add(seta);
 						seta.validate();
-						Point pontoSeta = seta.calculaPosicao(v);
-						seta.setLocation(pontoSeta);
-						seta.posicaoOriginal = pontoSeta;
+						Point posicaoOriginal = seta.calculaPosicaoOriginal(v);
+						seta.posicaoOriginal = posicaoOriginal;
+						seta.setLocation(posicaoOriginal);
 						Integer posicaoSeta;
 						Integer posicaoJanela = tudo.getComponentZOrder(j);
 						//coloca a seta sobre a janela para que ela apareça
@@ -599,7 +597,7 @@ public class Mostrador extends JScrollPane implements IEstado {
 			}
 			for (Seta s : setas.setas.values()){
 				recalculaTamanhoTudo(tamanhoReal, s);
-				alteraPosicaoParaZoom(s, s.posicaoOriginal, prop);								
+				alteraPosicaoParaZoom(s, s.posicaoPartida, prop);								
 			}	
 			for(Texto t : textos){
 				recalculaTamanhoTudo(tamanhoReal,t);

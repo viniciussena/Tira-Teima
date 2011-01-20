@@ -1,25 +1,21 @@
 package tirateima.gerador;
 
+import java.awt.Point;
 import java.util.Stack;
-
-import tirateima.gui.variaveis.Direcao;
 
 public class CommandDirectPointer extends Command {
 	
 	private Stack<Object> var_stack;
-	Direcao direcao;
-	Integer tamanho;
+	Point posicaoApontada;
 
-	public CommandDirectPointer(Stack<Object> var_stack, Direcao direcao,
-			Integer tamanho) {
+	public CommandDirectPointer(Stack<Object> var_stack, Point posicaoApontada) {
 		this.var_stack = var_stack;
-		this.direcao = direcao;
-		this.tamanho = tamanho;
+		this.posicaoApontada = posicaoApontada;
 	}
 
 	@Override
 	public void execute(Gerador g) throws TiraTeimaLanguageException {
-		criarSeta(g.mostrador, var_stack, direcao, tamanho);
+		criarSeta(g.mostrador, var_stack, posicaoApontada);
 	}
 
 }

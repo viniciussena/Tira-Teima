@@ -77,59 +77,51 @@ public interface TiraTeimaParserConstants {
   /** RegularExpression Id. */
   int KW_POINT = 38;
   /** RegularExpression Id. */
-  int KW_CIMA = 39;
+  int KW_COLOR = 39;
   /** RegularExpression Id. */
-  int KW_BAIXO = 40;
+  int KW_COLOR_INSIDE = 40;
   /** RegularExpression Id. */
-  int KW_ESQUERDA = 41;
+  int KW_DIMENSION = 41;
   /** RegularExpression Id. */
-  int KW_DIREITA = 42;
+  int KW_POSITION = 42;
   /** RegularExpression Id. */
-  int KW_COLOR = 43;
+  int KW_INSERE_TEXTO = 43;
   /** RegularExpression Id. */
-  int KW_COLOR_INSIDE = 44;
+  int KW_CONTEUDO = 44;
   /** RegularExpression Id. */
-  int KW_DIMENSION = 45;
+  int KW_ENDERECO = 45;
   /** RegularExpression Id. */
-  int KW_POSITION = 46;
+  int INT_NUMBER = 46;
   /** RegularExpression Id. */
-  int KW_INSERE_TEXTO = 47;
+  int IDENTIFIER = 47;
   /** RegularExpression Id. */
-  int KW_CONTEUDO = 48;
+  int FLOAT_NUMBER = 48;
   /** RegularExpression Id. */
-  int KW_ENDERECO = 49;
+  int STRING_LITERAL = 49;
   /** RegularExpression Id. */
-  int INT_NUMBER = 50;
+  int CHAR_LITERAL = 50;
   /** RegularExpression Id. */
-  int IDENTIFIER = 51;
+  int OPEN_BRACE = 51;
   /** RegularExpression Id. */
-  int FLOAT_NUMBER = 52;
+  int CLOSE_BRACE = 52;
   /** RegularExpression Id. */
-  int STRING_LITERAL = 53;
+  int OPEN_BRACKET = 53;
   /** RegularExpression Id. */
-  int CHAR_LITERAL = 54;
+  int CLOSE_BRACKET = 54;
   /** RegularExpression Id. */
-  int OPEN_BRACE = 55;
+  int OPEN_PAR = 55;
   /** RegularExpression Id. */
-  int CLOSE_BRACE = 56;
+  int CLOSE_PAR = 56;
   /** RegularExpression Id. */
-  int OPEN_BRACKET = 57;
+  int DOT = 57;
   /** RegularExpression Id. */
-  int CLOSE_BRACKET = 58;
+  int COMMA = 58;
   /** RegularExpression Id. */
-  int OPEN_PAR = 59;
+  int COLON = 59;
   /** RegularExpression Id. */
-  int CLOSE_PAR = 60;
+  int SEMICOLON = 60;
   /** RegularExpression Id. */
-  int DOT = 61;
-  /** RegularExpression Id. */
-  int COMMA = 62;
-  /** RegularExpression Id. */
-  int COLON = 63;
-  /** RegularExpression Id. */
-  int SEMICOLON = 64;
-  /** RegularExpression Id. */
-  int ATTRIBUTION = 65;
+  int ATTRIBUTION = 61;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -175,10 +167,6 @@ public interface TiraTeimaParserConstants {
     "\"false\"",
     "\"null\"",
     "\"aponta\"",
-    "\"cima\"",
-    "\"baixo\"",
-    "\"esquerda\"",
-    "\"direita\"",
     "\"cor\"",
     "\"corexterna\"",
     "\"tamanho\"",
