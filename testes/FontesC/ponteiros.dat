@@ -2,7 +2,7 @@
 # 4 int numero cor(150,150,150) tamanho(80,30) posicao (380,90); 
 5 pointer p cor(150,150,255) tamanho(50,20) posicao (50,50);
 6 p = null;
-7 p aponta(150,150);
+7 p aponta(100,25);
 # 8 numero = 10;
 9 writeln("10");
 10 p = null;

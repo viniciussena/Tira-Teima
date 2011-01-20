@@ -6,8 +6,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.JComponent;
+
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.Transform;
 
 public class Seta extends JComponent {
 	
@@ -81,29 +84,34 @@ public class Seta extends JComponent {
 	 */
 	@Override
 	public void paint(Graphics g){
-		Graphics2D g2d = (Graphics2D) g;
-		/* Desenha a variável de acorco com cada quadrante, transladando a origem e destino 
-		 * relativamente ao cada caso */
-		Point posicaoPartidaRelativa = new Point(0,0);
-		Point posicaoApontadaRelativa = new Point(0,0);
+		//prepara o desenho
+		Graphics2D g2d = (Graphics2D) g;		
+		
 		//TODO: Desenhar o triângulo da seta.
-		//Primeiro quadrante.
+		//Desenha a seta de acordo com o quadrante em que ela se encontra.
+		Point posicaoPartidaRelativa;
+		Point posicaoApontadaRelativa;
+		Integer tamanhoSeta = 0;
+		Double anguloRotacaoSeta;
+		//Primeiro quadrante
 		if (posicaoApontada.x > posicaoPartida.x && posicaoApontada.y > posicaoPartida.y){
-			//parte da origem
+			//calcula a posição de partida da seta
 			posicaoPartidaRelativa = 
 				new Point(0,
 						  0);
-			//chega até o canto inferior direito, respeitando o tamanho
+			//calcula a posição apontada pela seta
 			posicaoApontadaRelativa = 
 				new Point(posicaoApontada.x - posicaoPartida.x,
 						  posicaoApontada.y - posicaoPartida.y);
-			/*//desenha o triangulo da seta
-			Polygon trianguloSeta = new Polygon();
-			trianguloSeta.addPoint(posicaoApontadaRelativa.x, posicaoApontadaRelativa.y);
-			trianguloSeta.addPoint(60,75);
-			trianguloSeta.addPoint(75,60);
-			g2d.dr
-			g2d.fillPolygon(trianguloSeta);*/
+			//calcula o tamanho da seta
+			tamanhoSeta = calculaTamanhoSeta(posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//calcula o angulo de rotação da seta
+			anguloRotacaoSeta = calculaAnguloRotacaoSeta(
+					posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//translada a seta dado o quadrante
+			g2d.translate(0,0);
+			//gira a seta no ângulo de rotação adequado
+			g2d.rotate(anguloRotacaoSeta);
 		}
 		//Segundo quadrante
 		else if (posicaoApontada.x < posicaoPartida.x && posicaoApontada.y > posicaoPartida.y){
@@ -115,6 +123,14 @@ public class Seta extends JComponent {
 			posicaoApontadaRelativa = 
 				new Point(0,
 						  posicaoApontada.y - posicaoPartida.y);
+			//calcula o tamanho da seta
+			tamanhoSeta = calculaTamanhoSeta(posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//calcula o angulo de rotação da seta
+			anguloRotacaoSeta = calculaAnguloRotacaoSeta(
+					posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//coloca a seta na posição correta
+			g2d.translate(posicaoPartidaRelativa.x, 0);
+			g2d.rotate(Math.PI+anguloRotacaoSeta);			
 		}
 		//Terceiro quadrante
 		else if (posicaoApontada.x < posicaoPartida.x && posicaoApontada.y < posicaoPartida.y){
@@ -126,6 +142,14 @@ public class Seta extends JComponent {
 			posicaoApontadaRelativa = 
 				new Point(0,
 						  0);
+			//calcula o tamanho da seta
+			tamanhoSeta = calculaTamanhoSeta(posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//calcula o angulo de rotação da seta
+			anguloRotacaoSeta = calculaAnguloRotacaoSeta(
+					posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//coloca a seta na posição correta
+			g2d.translate(posicaoPartidaRelativa.x, posicaoPartidaRelativa.y);
+			g2d.rotate(Math.PI+anguloRotacaoSeta);
 		}
 		//Quarto quadrante
 		else if (posicaoApontada.x > posicaoPartida.x && posicaoApontada.y < posicaoPartida.y){
@@ -137,11 +161,55 @@ public class Seta extends JComponent {
 			posicaoApontadaRelativa =
 				new Point(posicaoApontada.x-posicaoPartida.x,
 						  0);
+			//calcula o tamanho da seta
+			tamanhoSeta = calculaTamanhoSeta(posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//calcula o angulo de rotação da seta
+			anguloRotacaoSeta = calculaAnguloRotacaoSeta(
+					posicaoPartidaRelativa, posicaoApontadaRelativa);
+			//coloca a seta na posição correta
+			g2d.translate(0, posicaoPartidaRelativa.y);
+			g2d.rotate(anguloRotacaoSeta);
 		}
 
-		g2d.drawLine(posicaoPartidaRelativa.x,posicaoPartidaRelativa.y,posicaoApontadaRelativa.x,posicaoApontadaRelativa.y);
-		g2d.setBackground(Color.BLACK);
+		//desenha a linha
+		g2d.drawLine(0,
+				     0,
+				     tamanhoSeta,
+				     0);
+		//desenha o triângulo
+		Polygon trianguloSeta = new Polygon();
+		trianguloSeta.addPoint(tamanhoSeta,0);
+		trianguloSeta.addPoint(tamanhoSeta-15,-5);
+		trianguloSeta.addPoint(tamanhoSeta-15,5);
+		g2d.fillPolygon(trianguloSeta);			
+
+		g2d.setColor(Color.BLACK);
 		g2d.dispose();
+	}
+
+	private Double calculaAnguloRotacaoSeta(Point posicaoPartidaRelativa,
+			Point posicaoApontadaRelativa) {
+		Double anguloRotacaoSeta;
+		anguloRotacaoSeta = 
+			Math.atan(
+					((double)(posicaoApontadaRelativa.y-posicaoPartidaRelativa.y)/
+					 (double)(posicaoApontadaRelativa.x-posicaoPartidaRelativa.x))
+			);
+		return anguloRotacaoSeta;
+	}
+
+	/**
+	 * Método que calcula o tamanho da seta. Esse tamanho é dado pela fórmula da distância entre dois pontos.
+	 * 
+	 * @param posicaoPartidaRelativa
+	 * @param posicaoApontadaRelativa
+	 * @return Integer tamanho da seta
+	 */
+	private Integer calculaTamanhoSeta(Point posicaoPartidaRelativa, Point posicaoApontadaRelativa) {
+		Double distanciaSeta = 
+			Math.sqrt(Math.pow(posicaoApontadaRelativa.x-posicaoPartidaRelativa.x, 2)+
+					  Math.pow(posicaoApontadaRelativa.y-posicaoPartidaRelativa.y,2));
+		return (int)Math.round(distanciaSeta.doubleValue());
 	}
 
 	public Seta criarCopia() {
