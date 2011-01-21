@@ -19,7 +19,6 @@ package tirateima.gui.variaveis;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -32,7 +31,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -597,7 +595,7 @@ public class Mostrador extends JScrollPane implements IEstado {
 			}
 			for (Seta s : setas.setas.values()){
 				recalculaTamanhoTudo(tamanhoReal, s);
-				alteraPosicaoParaZoom(s, s.posicaoPartida, prop);								
+				alteraPosicaoParaZoom(s, s.posicaoOriginal, prop);								
 			}	
 			for(Texto t : textos){
 				recalculaTamanhoTudo(tamanhoReal,t);
@@ -624,21 +622,14 @@ public class Mostrador extends JScrollPane implements IEstado {
 			if(acaoZoom != null){
 				if(componente.getLocation().x > 0){
 					tmp = componente.getLocation().y;
-					if(acaoZoom == zoom.AUMENTA && proporcao > 1){
-						componente.setLocation((int) (posicaoOriginal.x * (proporcao)), tmp);
-					}
-					
-					if(acaoZoom == zoom.DIMINUI && proporcao > 1){
+					if((acaoZoom == zoom.AUMENTA || acaoZoom == zoom.DIMINUI) && proporcao > 1){
 						componente.setLocation((int) (posicaoOriginal.x * (proporcao)), tmp);
 					}
 				}
 					
 				if(componente.getLocation().y > 0){
 					tmp = componente.getLocation().x;
-					if(acaoZoom == zoom.AUMENTA && proporcao > 1){
-						componente.setLocation(tmp, (int) (posicaoOriginal.y * (proporcao)));
-					}
-					if(acaoZoom == zoom.DIMINUI && proporcao > 1){
+					if((acaoZoom == zoom.AUMENTA || acaoZoom == zoom.DIMINUI) && proporcao > 1){
 						componente.setLocation(tmp, (int) (posicaoOriginal.y * (proporcao)));
 					}
 				}

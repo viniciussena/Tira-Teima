@@ -93,8 +93,7 @@ public class VarMatriz extends VarGrade {
 	 * @throws Exception lança uma exceção caso haja algum erro ao criar
 	 *                   as variáveis. 
 	 */
-	@SuppressWarnings("unchecked")
-	public VarMatriz(String nome, int rows, int cols, Class tipo) throws Exception {
+	public VarMatriz(String nome, int rows, int cols, Class<Variavel> tipo) throws Exception {
 		super(nome, rows, cols, criarVariaveis(rows, cols, tipo));
 		this.rows = rows;
 		this.cols = cols;
@@ -155,8 +154,7 @@ public class VarMatriz extends VarGrade {
 		this.cols = cols;
 	}
 	
-	@SuppressWarnings("unchecked")
-	private static List<Variavel> criarVariaveis(int rows, int cols, Class tipo) 
+	private static List<Variavel> criarVariaveis(int rows, int cols, Class<Variavel> tipo) 
 			throws Exception 
 	{
 		int tamanho = rows * cols;

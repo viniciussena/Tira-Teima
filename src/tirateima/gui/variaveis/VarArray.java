@@ -72,8 +72,7 @@ public class VarArray extends VarGrade {
 	 * @throws Exception lança uma exceção caso haja algum erro ao criar
 	 *                   as variáveis. 
 	 */
-	@SuppressWarnings("unchecked")
-	public VarArray(String nome, int tamanho, Class tipo) throws Exception {
+	public VarArray(String nome, int tamanho, Class<Variavel> tipo) throws Exception {
 		super(nome, 1, tamanho, criarVariaveis(tamanho, tipo));
 	}
 	
@@ -132,8 +131,7 @@ public class VarArray extends VarGrade {
 		super.posicao = posicao;
 	}
 	
-	@SuppressWarnings("unchecked")
-	private static List<Variavel> criarVariaveis(int tamanho, Class tipo) throws Exception {
+	private static List<Variavel> criarVariaveis(int tamanho, Class<Variavel> tipo) throws Exception {
 		Variavel[] ret = new Variavel[tamanho];
 		Constructor<Variavel> constr = tipo.getConstructor(String.class);
 		for (int i = 0; i < tamanho; i++)

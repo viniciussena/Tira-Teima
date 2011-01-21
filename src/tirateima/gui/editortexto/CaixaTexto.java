@@ -78,7 +78,6 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 	private boolean mudou = false; 
 	private CParser parser = null;
 	private InputStream is = null;
-	private int fimColuna, fimLinha, iniColuna, iniLinha;
 
 	/* Posição inicial de cada linha. */
 	List<Integer> linhas;
@@ -285,8 +284,6 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 
 				Token t = CParser.getNextToken();
 
-				boolean coment_chave = false;
-				boolean coment_par = false;
 				String estilo;
 				int line = 1;
 				boolean insert_line = true;
@@ -497,11 +494,6 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 			}catch(Exception e){}
 		}
 		analisando = false;
-	}
-
-	private boolean isNome(int kind) {
-
-		return false;
 	}
 	
 	void setTabs( JTextPane textPane, int charactersPerTab)

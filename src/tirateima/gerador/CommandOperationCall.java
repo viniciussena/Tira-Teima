@@ -189,7 +189,7 @@ public class CommandOperationCall extends Command
 		Object first = args.get(0);
 		if (!(first instanceof Stack))
 			gerarErro("Era esperada uma variável.");
-		ListIterator<Object> i = ((Stack) first).listIterator();
+		ListIterator<Object> i = ((Stack<Object>) first).listIterator();
 		Variavel v = g.mostrador.getCopiaVariavel((String) i.next());
 		while (i.hasNext()) {
 			Object aux = i.next();
@@ -232,7 +232,7 @@ public class CommandOperationCall extends Command
 				((VarText) arq).readln();
 		}
 		
-		setValue(g.mostrador, (Stack) first, value);
+		setValue(g.mostrador, (Stack<Object>) first, value);
 	}
 	
 	/**

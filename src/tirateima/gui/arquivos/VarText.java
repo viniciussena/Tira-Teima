@@ -166,11 +166,6 @@ public class VarText extends AbstractArquivo implements IEstado{
 			this.off2 = off2;
 			this.valor = valor;
 		}
-		
-		public Linha criarCopia() {
-			Linha l = new Linha(new String(valor), off1, off2);
-			return l;
-		}
 	}
 	
 	private class EstadoVarText {
