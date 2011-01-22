@@ -5,8 +5,8 @@ CPP  = g++.exe -D__DEBUG__
 CC   = gcc.exe -D__DEBUG__
 WINDRES = windres.exe
 RES  = 
-OBJ  = ponteiros.o funcoes.o $(RES)
-LINKOBJ  = ponteiros.o funcoes.o $(RES)
+OBJ  = ponteiros.o funcoes.o condicionais.o iteracoes.o $(RES)
+LINKOBJ  = ponteiros.o funcoes.o condicionais.o iteracoes.o $(RES)
 LIBS =  -L"C:/Dev-Cpp/lib"  -g3 
 INCS =  -I"C:/Dev-Cpp/include" 
 CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
@@ -31,3 +31,9 @@ ponteiros.o: ponteiros.c
 
 funcoes.o: funcoes.c
 	$(CPP) -c funcoes.c -o funcoes.o $(CXXFLAGS)
+
+condicionais.o: condicionais.c
+	$(CPP) -c condicionais.c -o condicionais.o $(CXXFLAGS)
+
+iteracoes.o: iteracoes.c
+	$(CPP) -c iteracoes.c -o iteracoes.o $(CXXFLAGS)

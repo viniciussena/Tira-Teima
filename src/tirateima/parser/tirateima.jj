@@ -109,9 +109,9 @@ public class TiraTeimaParser {
 }
 PARSER_END(TiraTeimaParser)
 
-	/** Um passo é uma indicação de linha seguida de um comando:
-  	*	[line] <nro linha> <comando> 
-  	*/
+/** Um passo é uma indicação de linha seguida de um comando:
+*	[line] <nro linha> <comando> 
+*/
 Step step() : {
 	Token t;
 	Step p;
@@ -127,9 +127,9 @@ Step step() : {
 	)
 }
 
-	/**	Um comando é um dos comandos básicos ou é um bloco de comandos
-	*	@param p Um Step
-	*/
+/**	Um comando é um dos comandos básicos ou é um bloco de comandos
+*	@param p Um Step
+*/
 void command(Step p) : {}
 {
 	<SEMICOLON> |
@@ -165,9 +165,9 @@ void cmd_insert_text(Step p) :
 	}
 }
 
-	/**	Cria um novo tipo, criando uma lista com as variáveis que compõem este tipo
-	*	@param p Um Step
-	*/
+/**	Cria um novo tipo, criando uma lista com as variáveis que compõem este tipo
+*	@param p Um Step
+*/
 void cmd_new_type(Step p) : {
 	Token t_name;
 	String name;
@@ -186,9 +186,9 @@ void cmd_new_type(Step p) : {
 	}
 }
 
-	/**	Gera um objeto list de VarDefinition's com as variáveis solicitadas
-	*	@return Uma lista com as N variáveis solicitadas.
-	*/
+/**	Gera um objeto list de VarDefinition's com as variáveis solicitadas
+*	@return Uma lista com as N variáveis solicitadas.
+*/
 List<VarDefinition> new_vars() : {
 	Type type;
 	VarDefinition v;
@@ -201,9 +201,9 @@ List<VarDefinition> new_vars() : {
 	<SEMICOLON>{return vars;}
 }
 
-	/**	Retorna um objeto com o tipo selecionado, com base na KW encontrada
-	*	@return Um objeto com o tipo selecionado
-	*/
+/**	Retorna um objeto com o tipo selecionado, com base na KW encontrada
+*	@return Um objeto com o tipo selecionado
+*/
 Type type() : {
 	Token t;
 }
@@ -219,9 +219,9 @@ Type type() : {
 	)
 }
 
-	/**	Gera apenas uma VarDefinition já configurando cor interna e externa, tamanho e posição
-	*	@return Uma VarDefinition com a variável.
-	*/
+/**	Gera apenas uma VarDefinition já configurando cor interna e externa, tamanho e posição
+*	@return Uma VarDefinition com a variável.
+*/
 VarDefinition new_var(Type type) : {
 	Token t_name_var;
 	Index i = null;
@@ -242,9 +242,9 @@ VarDefinition new_var(Type type) : {
 	}
 }
 
-	/**	Cria e retorna um objeto de cor interna para a variável
-	*	@return Um objeto Color com a cor da variável
-	*/
+/**	Cria e retorna um objeto de cor interna para a variável
+*	@return Um objeto Color com a cor da variável
+*/
 Color cor() : {
 	Token t_value;
 	int r=0;
@@ -266,9 +266,9 @@ Color cor() : {
 	<CLOSE_PAR>{return new Color(r,g,b);}
 }
 
-	/**	Cria e retorna um objeto de cor a ser utilizado para a cor externa da variável
-	*	@return Um objeto Color com a cor externa da variável
-	*/
+/**	Cria e retorna um objeto de cor a ser utilizado para a cor externa da variável
+*	@return Um objeto Color com a cor externa da variável
+*/
 Color corExterna() : {
 	Token t_value;
 	int r=0;
@@ -290,9 +290,9 @@ Color corExterna() : {
 	<CLOSE_PAR>{return new Color(r,g,b);}
 }
 
-	/**	Retorna um objeto Dimension com os dados do tamanho da variável na GUI
-	*	@return O objeto Dimension para formatar o tamanho da variável.
-	*/
+/**	Retorna um objeto Dimension com os dados do tamanho da variável na GUI
+*	@return O objeto Dimension para formatar o tamanho da variável.
+*/
 Dimension dimensao() : {
 	Token t_value;
 	int largura=0;
@@ -318,9 +318,10 @@ String conteudo() : {  Token t_value;
 	(t_value = <STRING_LITERAL>)
 	<CLOSE_PAR>{return t_value.image;}
 }
-	/**	Cria um Point para posicionar o objeto na GUI, com base nos valores passados.
-	*	@return O objeto Point para ser utilizado no posicionamento da variável.
-	*/
+
+/**	Cria um Point para posicionar o objeto na GUI, com base nos valores passados.
+*	@return O objeto Point para ser utilizado no posicionamento da variável.
+*/
 Point posicao() : {
 	Point coordenadas;
 }
@@ -354,9 +355,9 @@ Integer font_size() : {  Integer tamanho;
 	<CLOSE_PAR>{return tamanho;}
 }
 
-	/**	Cria e retorna um array ou matix.
-	*	@return Retorna um objeto Index (do pacote Gerador)
-	*/
+/**	Cria e retorna um array ou matix.
+*	@return Retorna um objeto Index (do pacote Gerador)
+*/
 Index index() : {
 	Token t_value;
 	Index result = new Index();
@@ -373,9 +374,9 @@ Index index() : {
 	<CLOSE_BRACKET>{return result;}
 }
 
-	/**	Chama a classe CommandNewVar para todas as variáveis instanciadas em um comando para um Step.
-	*	@param Step atual sendo lido
-	*/
+/**	Chama a classe CommandNewVar para todas as variáveis instanciadas em um comando para um Step.
+*	@param Step atual sendo lido
+*/
 void cmd_new_var(Step p) : {
 	List<VarDefinition> vars;
 }
@@ -468,10 +469,10 @@ Object constant() : {
 	}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 void cmd_new_file(Step p) : {
 	Token t_name;
 }
@@ -482,10 +483,10 @@ void cmd_new_file(Step p) : {
 	<SEMICOLON>
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 void function_declaration(Step p) : {
 	Token t_name;
 	Type type;
@@ -506,10 +507,10 @@ void function_declaration(Step p) : {
 	}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 List<VarDefinition> param_list() : {
 	List<VarDefinition> aux;
 	List<VarDefinition> vars = new ArrayList<VarDefinition>();
@@ -523,10 +524,10 @@ List<VarDefinition> param_list() : {
 	{return vars;}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 Type function_type() : {
 	Token t;
 }
@@ -543,10 +544,10 @@ Type function_type() : {
 	)
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 List<VarDefinition> local_vars_block() : {
 	List<VarDefinition> vars = new ArrayList<VarDefinition>();
 	List<VarDefinition> aux;
@@ -569,10 +570,10 @@ List<VarDefinition> local_vars_block() : {
 	{return vars;}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 void function_start(Step p) : {
 	Token t;
 	List<Object> args;
@@ -585,10 +586,10 @@ void function_start(Step p) : {
 	{p.addCommand(new CommandStartFunction(t.image, args));}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 void function_end(Step p) : {
 	Token t;
 }
@@ -598,10 +599,10 @@ void function_end(Step p) : {
 	{p.addCommand(new CommandEndFunction());}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 void operation_call(Step p) : {
 	Token cmd;
 	List<Object> args;
@@ -614,10 +615,10 @@ void operation_call(Step p) : {
 	}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 Token operation() : {
 	Token cmd;
 }
@@ -634,10 +635,10 @@ Token operation() : {
 	(cmd = <KW_CLOSE>)){return cmd;}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 List<Object> lst_args() : {
 	Object a;
 	List<Object> result = new ArrayList<Object>();
@@ -650,10 +651,10 @@ List<Object> lst_args() : {
 	}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 Object arg() : {
 	Object o;
 	Stack<Object> var_stack = new Stack<Object>();
@@ -664,10 +665,10 @@ Object arg() : {
 	<KW_ENDERECO> variavel(var_stack){return var_stack;}
 }
 
-	/**	
-	*	
-	*	
-	*/
+/**	
+*	
+*	
+*/
 void bloco(Step p) : {} {
 	<OPEN_BRACE>(command(p))*<CLOSE_BRACE>
 }
