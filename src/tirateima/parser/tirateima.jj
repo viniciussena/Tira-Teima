@@ -146,7 +146,9 @@ void command(Step p) : {}
 	bloco(p)
 }
 
-/** Insere um texto de um determinado tamanho em uma dada posição */
+/**
+*Insere um texto de um determinado tamanho em uma dada posição
+*/
 void cmd_insert_text(Step p) :
 {
 	String conteudo;
@@ -310,7 +312,9 @@ Dimension dimensao() : {
 	<CLOSE_PAR>{return new Dimension(largura,altura);}
 }
 
-/** Cria uma string a partir do texto passado no roteiro */
+/**
+*   Cria uma string a partir do texto passado no roteiro
+*/
 String conteudo() : {  Token t_value;
 }
 {	<KW_CONTEUDO>
@@ -318,9 +322,9 @@ String conteudo() : {  Token t_value;
 	(t_value = <STRING_LITERAL>)
 	<CLOSE_PAR>{return t_value.image;}
 }
-
-/**	Cria um Point para posicionar o objeto na GUI, com base nos valores passados.
-*	@return O objeto Point para ser utilizado no posicionamento da variável.
+/**
+*   Cria um Point para posicionar o objeto na GUI, com base nos valores passados.
+*   @return O objeto Point para ser utilizado no posicionamento da variável.
 */
 Point posicao() : {
 	Point coordenadas;
@@ -332,6 +336,9 @@ Point posicao() : {
 	}	  
 }
 
+/**
+*   Cria um par de coordenadas x, y 
+*/
 Point coordenadas() : {	Token t_value;
 	int x=0;
 	int y=0;  
@@ -346,6 +353,9 @@ Point coordenadas() : {	Token t_value;
 	<CLOSE_PAR>{return new Point(x,y);}
 }
 
+/**
+*   Cria um tamanho de fonte (size) para formatação
+*/
 Integer font_size() : {  Integer tamanho;
 }
 {
@@ -420,6 +430,9 @@ void cmd_direct_pointer(Step p) :{
 	  p.addCommand(new CommandDirectPointer(var_stack, posicaoApontada));	}
 }
 
+/**
+*   Cria um tamanho escalar (size)
+*/
 Integer size() :
 {	Token t_size;
 }
@@ -427,6 +440,10 @@ Integer size() :
 	}
 }
 
+/**
+*   Coloca uma variável identificada na pilha de variáveis
+*   @param Stack<Object> var_stac 
+*/
 void variavel(Stack<Object> var_stack) : {
 	Token t_name;
 	Index i;
@@ -442,6 +459,9 @@ void variavel(Stack<Object> var_stack) : {
 	)*
 }
 
+/**
+*   Retorna um literal (inteiro, numérico, string, char, boolena etc.)
+*/
 Object constant() : {
 	Token t;
 }
@@ -470,8 +490,8 @@ Object constant() : {
 }
 
 /**	
-*	
-*	
+*	Cria um novo arquivo adicionando-o no passo.
+*   @param Step p
 */
 void cmd_new_file(Step p) : {
 	Token t_name;
@@ -484,8 +504,8 @@ void cmd_new_file(Step p) : {
 }
 
 /**	
-*	
-*	
+*	Declara uma nova função, colocando-a no passo.
+*   @param Step p
 */
 void function_declaration(Step p) : {
 	Token t_name;
@@ -508,8 +528,8 @@ void function_declaration(Step p) : {
 }
 
 /**	
-*	
-*	
+*	Cria uma lista de variáveis a serem passadas como parâmetro.
+*   @return List<VarDefinition> lista com definições de variáveis. 
 */
 List<VarDefinition> param_list() : {
 	List<VarDefinition> aux;
@@ -525,8 +545,8 @@ List<VarDefinition> param_list() : {
 }
 
 /**	
-*	
-*	
+*	Possibilidades para o tipo de função.
+*   @return Type tipo da função
 */
 Type function_type() : {
 	Token t;
@@ -545,8 +565,8 @@ Type function_type() : {
 }
 
 /**	
-*	
-*	
+*	Cria uma lista de variáveis locais a uma função.
+*   @return List<VarDefinition> lista de variáveis locais a uma função.
 */
 List<VarDefinition> local_vars_block() : {
 	List<VarDefinition> vars = new ArrayList<VarDefinition>();
@@ -571,8 +591,8 @@ List<VarDefinition> local_vars_block() : {
 }
 
 /**	
-*	
-*	
+*	Cria um comando de inicialização de uma função, adicionando-o ao passo.
+*   @param Step p
 */
 void function_start(Step p) : {
 	Token t;
@@ -586,9 +606,9 @@ void function_start(Step p) : {
 	{p.addCommand(new CommandStartFunction(t.image, args));}
 }
 
-/**	
-*	
-*	
+/**
+*   Cria um comando para finalizar uma função, adicionando-o ao passo. 
+*	@param Step p
 */
 void function_end(Step p) : {
 	Token t;
@@ -600,8 +620,8 @@ void function_end(Step p) : {
 }
 
 /**	
-*	
-*	
+*	Chama um comando de operação de sistema e adiciona-a ao passo. 
+*   @param Step p
 */
 void operation_call(Step p) : {
 	Token cmd;
@@ -616,8 +636,9 @@ void operation_call(Step p) : {
 }
 
 /**	
-*	
-*	
+*	Define os tipos de operação do sistema (escreve no console, escreve em nova linha do
+*   console, comentário, som, etc.).
+*   @return Token tipo de operação de sistema.
 */
 Token operation() : {
 	Token cmd;
@@ -636,8 +657,8 @@ Token operation() : {
 }
 
 /**	
-*	
-*	
+*	Cria uma lista de argumentos passados para uma função.
+*   @return List<Object> lista de argumentos passados para a função.
 */
 List<Object> lst_args() : {
 	Object a;
@@ -652,8 +673,8 @@ List<Object> lst_args() : {
 }
 
 /**	
-*	
-*	
+*	Cria o argumento de uma função (variável, constante ou variável.
+*   @return Object
 */
 Object arg() : {
 	Object o;
@@ -666,8 +687,9 @@ Object arg() : {
 }
 
 /**	
-*	
-*	
+*	Define um conjunto de comandos (bloco de comandos) para adicionar ao passo. Afinal, um
+*   passo pode possuir um comando, ou uma lista de comandos.
+*   @param Step p.
 */
 void bloco(Step p) : {} {
 	<OPEN_BRACE>(command(p))*<CLOSE_BRACE>
@@ -728,7 +750,6 @@ TOKEN [IGNORE_CASE] : {
 	<KW_ENDERECO : "endereco">
 	}
 	
-
 // Constantes
 TOKEN : {
 	<INT_NUMBER : ("+"|"-")?(<DIGITS>)> |

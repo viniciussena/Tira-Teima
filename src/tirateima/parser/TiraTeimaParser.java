@@ -98,9 +98,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                 return new Character(c);
         }
 
-        /** Um passo é uma indicação de linha seguida de um comando:
-  	*	[line] <nro linha> <comando> 
-  	*/
+/** Um passo é uma indicação de linha seguida de um comando:
+*	[line] <nro linha> <comando> 
+*/
   final public Step step() throws ParseException {
         Token t;
         Step p;
@@ -124,9 +124,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Um comando é um dos comandos básicos ou é um bloco de comandos
-	*	@param p Um Step
-	*/
+/**	Um comando é um dos comandos básicos ou é um bloco de comandos
+*	@param p Um Step
+*/
   final public void command(Step p) throws ParseException {
     if (jj_2_4(2)) {
       jj_consume_token(SEMICOLON);
@@ -158,7 +158,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     }
   }
 
-/** Insere um texto de um determinado tamanho em uma dada posição */
+/**
+*Insere um texto de um determinado tamanho em uma dada posição
+*/
   final public void cmd_insert_text(Step p) throws ParseException {
         String conteudo;
         Point posicao;
@@ -171,9 +173,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                 p.addCommand(new CommandInsertText(conteudo,tamanho,posicao));
   }
 
-        /**	Cria um novo tipo, criando uma lista com as variáveis que compõem este tipo
-	*	@param p Um Step
-	*/
+/**	Cria um novo tipo, criando uma lista com as variáveis que compõem este tipo
+*	@param p Um Step
+*/
   final public void cmd_new_type(Step p) throws ParseException {
         Token t_name;
         String name;
@@ -197,9 +199,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                  p.addCommand(new CommandNewType(name, fields));
   }
 
-        /**	Gera um objeto list de VarDefinition's com as variáveis solicitadas
-	*	@return Uma lista com as N variáveis solicitadas.
-	*/
+/**	Gera um objeto list de VarDefinition's com as variáveis solicitadas
+*	@return Uma lista com as N variáveis solicitadas.
+*/
   final public List<VarDefinition> new_vars() throws ParseException {
         Type type;
         VarDefinition v;
@@ -223,9 +225,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Retorna um objeto com o tipo selecionado, com base na KW encontrada
-	*	@return Um objeto com o tipo selecionado
-	*/
+/**	Retorna um objeto com o tipo selecionado, com base na KW encontrada
+*	@return Um objeto com o tipo selecionado
+*/
   final public Type type() throws ParseException {
         Token t;
     if (jj_2_18(2)) {
@@ -256,9 +258,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Gera apenas uma VarDefinition já configurando cor interna e externa, tamanho e posição
-	*	@return Uma VarDefinition com a variável.
-	*/
+/**	Gera apenas uma VarDefinition já configurando cor interna e externa, tamanho e posição
+*	@return Uma VarDefinition com a variável.
+*/
   final public VarDefinition new_var(Type type) throws ParseException {
         Token t_name_var;
         Index i = null;
@@ -296,9 +298,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Cria e retorna um objeto de cor interna para a variável
-	*	@return Um objeto Color com a cor da variável
-	*/
+/**	Cria e retorna um objeto de cor interna para a variável
+*	@return Um objeto Color com a cor da variável
+*/
   final public Color cor() throws ParseException {
         Token t_value;
         int r=0;
@@ -319,9 +321,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Cria e retorna um objeto de cor a ser utilizado para a cor externa da variável
-	*	@return Um objeto Color com a cor externa da variável
-	*/
+/**	Cria e retorna um objeto de cor a ser utilizado para a cor externa da variável
+*	@return Um objeto Color com a cor externa da variável
+*/
   final public Color corExterna() throws ParseException {
         Token t_value;
         int r=0;
@@ -342,9 +344,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Retorna um objeto Dimension com os dados do tamanho da variável na GUI
-	*	@return O objeto Dimension para formatar o tamanho da variável.
-	*/
+/**	Retorna um objeto Dimension com os dados do tamanho da variável na GUI
+*	@return O objeto Dimension para formatar o tamanho da variável.
+*/
   final public Dimension dimensao() throws ParseException {
         Token t_value;
         int largura=0;
@@ -361,7 +363,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-/** Cria uma string a partir do texto passado no roteiro */
+/**
+*   Cria uma string a partir do texto passado no roteiro
+*/
   final public String conteudo() throws ParseException {
   Token t_value;
     jj_consume_token(KW_CONTEUDO);
@@ -372,9 +376,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Cria um Point para posicionar o objeto na GUI, com base nos valores passados.
-	*	@return O objeto Point para ser utilizado no posicionamento da variável.
-	*/
+/**
+*   Cria um Point para posicionar o objeto na GUI, com base nos valores passados.
+*   @return O objeto Point para ser utilizado no posicionamento da variável.
+*/
   final public Point posicao() throws ParseException {
         Point coordenadas;
     jj_consume_token(KW_POSITION);
@@ -383,6 +388,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
+/**
+*   Cria um par de coordenadas x, y 
+*/
   final public Point coordenadas() throws ParseException {
         Token t_value;
         int x=0;
@@ -398,6 +406,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
+/**
+*   Cria um tamanho de fonte (size) para formatação
+*/
   final public Integer font_size() throws ParseException {
   Integer tamanho;
     jj_consume_token(KW_DIMENSION);
@@ -408,9 +419,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Cria e retorna um array ou matix.
-	*	@return Retorna um objeto Index (do pacote Gerador)
-	*/
+/**	Cria e retorna um array ou matix.
+*	@return Retorna um objeto Index (do pacote Gerador)
+*/
   final public Index index() throws ParseException {
         Token t_value;
         Index result = new Index();
@@ -430,9 +441,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	Chama a classe CommandNewVar para todas as variáveis instanciadas em um comando para um Step.
-	*	@param Step atual sendo lido
-	*/
+/**	Chama a classe CommandNewVar para todas as variáveis instanciadas em um comando para um Step.
+*	@param Step atual sendo lido
+*/
   final public void cmd_new_var(Step p) throws ParseException {
         List<VarDefinition> vars;
     vars = new_vars();
@@ -469,6 +480,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
           p.addCommand(new CommandDirectPointer(var_stack, posicaoApontada));
   }
 
+/**
+*   Cria um tamanho escalar (size)
+*/
   final public Integer size() throws ParseException {
         Token t_size;
     t_size = jj_consume_token(INT_NUMBER);
@@ -476,6 +490,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
+/**
+*   Coloca uma variável identificada na pilha de variáveis
+*   @param Stack<Object> var_stac 
+*/
   final public void variavel(Stack<Object> var_stack) throws ParseException {
         Token t_name;
         Index i;
@@ -502,6 +520,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     }
   }
 
+/**
+*   Retorna um literal (inteiro, numérico, string, char, boolena etc.)
+*/
   final public Object constant() throws ParseException {
         Token t;
     if (jj_2_34(2)) {
@@ -532,10 +553,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Cria um novo arquivo adicionando-o no passo.
+*   @param Step p
+*/
   final public void cmd_new_file(Step p) throws ParseException {
         Token t_name;
     jj_consume_token(KW_TEXT);
@@ -555,10 +576,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     jj_consume_token(SEMICOLON);
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Declara uma nova função, colocando-a no passo.
+*   @param Step p
+*/
   final public void function_declaration(Step p) throws ParseException {
         Token t_name;
         Type type;
@@ -576,10 +597,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                         t_name.image, param, type, local_vars));
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Cria uma lista de variáveis a serem passadas como parâmetro.
+*   @return List<VarDefinition> lista com definições de variáveis. 
+*/
   final public List<VarDefinition> param_list() throws ParseException {
         List<VarDefinition> aux;
         List<VarDefinition> vars = new ArrayList<VarDefinition>();
@@ -597,10 +618,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Possibilidades para o tipo de função.
+*   @return Type tipo da função
+*/
   final public Type function_type() throws ParseException {
         Token t;
     if (jj_2_43(2)) {
@@ -634,10 +655,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Cria uma lista de variáveis locais a uma função.
+*   @return List<VarDefinition> lista de variáveis locais a uma função.
+*/
   final public List<VarDefinition> local_vars_block() throws ParseException {
         List<VarDefinition> vars = new ArrayList<VarDefinition>();
         List<VarDefinition> aux;
@@ -665,10 +686,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Cria um comando de inicialização de uma função, adicionando-o ao passo.
+*   @param Step p
+*/
   final public void function_start(Step p) throws ParseException {
         Token t;
         List<Object> args;
@@ -679,10 +700,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
          p.addCommand(new CommandStartFunction(t.image, args));
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**
+*   Cria um comando para finalizar uma função, adicionando-o ao passo. 
+*	@param Step p
+*/
   final public void function_end(Step p) throws ParseException {
         Token t;
     jj_consume_token(KW_END);
@@ -690,10 +711,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
          p.addCommand(new CommandEndFunction());
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Chama um comando de operação de sistema e adiciona-a ao passo. 
+*   @param Step p
+*/
   final public void operation_call(Step p) throws ParseException {
         Token cmd;
         List<Object> args;
@@ -703,10 +724,11 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                 p.addCommand(new CommandOperationCall(cmd, args));
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Define os tipos de operação do sistema (escreve no console, escreve em nova linha do
+*   console, comentário, som, etc.).
+*   @return Token tipo de operação de sistema.
+*/
   final public Token operation() throws ParseException {
         Token cmd;
     if (jj_2_54(2)) {
@@ -737,10 +759,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Cria uma lista de argumentos passados para uma função.
+*   @return List<Object> lista de argumentos passados para a função.
+*/
   final public List<Object> lst_args() throws ParseException {
         Object a;
         List<Object> result = new ArrayList<Object>();
@@ -767,10 +789,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Cria o argumento de uma função (variável, constante ou variável.
+*   @return Object
+*/
   final public Object arg() throws ParseException {
         Object o;
         Stack<Object> var_stack = new Stack<Object>();
@@ -791,10 +813,11 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-        /**	
-	*	
-	*	
-	*/
+/**	
+*	Define um conjunto de comandos (bloco de comandos) para adicionar ao passo. Afinal, um
+*   passo pode possuir um comando, ou uma lista de comandos.
+*   @param Step p.
+*/
   final public void bloco(Step p) throws ParseException {
     jj_consume_token(OPEN_BRACE);
     label_8:
@@ -1292,29 +1315,8 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     finally { jj_save(68, xla); }
   }
 
-  private boolean jj_3_49() {
-    if (jj_scan_token(KW_VOID)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_23() {
-    if (jj_scan_token(OPEN_BRACKET)) return true;
-    if (jj_scan_token(INT_NUMBER)) return true;
-    return false;
-  }
-
-  private boolean jj_3_48() {
-    if (jj_scan_token(KW_POINTER)) return true;
-    return false;
-  }
-
-  private boolean jj_3_47() {
-    if (jj_scan_token(KW_BOOLEAN)) return true;
-    return false;
-  }
-
-  private boolean jj_3_46() {
-    if (jj_scan_token(KW_STRING)) return true;
+  private boolean jj_3_42() {
+    if (jj_3R_21()) return true;
     return false;
   }
 
@@ -1324,23 +1326,8 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_45() {
-    if (jj_scan_token(KW_CHAR)) return true;
-    return false;
-  }
-
-  private boolean jj_3_44() {
-    if (jj_scan_token(KW_REAL)) return true;
-    return false;
-  }
-
-  private boolean jj_3_43() {
-    if (jj_scan_token(KW_INT)) return true;
-    return false;
-  }
-
-  private boolean jj_3_42() {
-    if (jj_3R_21()) return true;
+  private boolean jj_3R_35() {
+    if (jj_scan_token(OPEN_PAR)) return true;
     return false;
   }
 
@@ -1350,8 +1337,14 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3R_35() {
-    if (jj_scan_token(OPEN_PAR)) return true;
+  private boolean jj_3_69() {
+    if (jj_3R_9()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_15() {
+    if (jj_scan_token(KW_FUNCTION)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -1362,6 +1355,12 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private boolean jj_3_14() {
     if (jj_3R_19()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_27() {
+    if (jj_scan_token(KW_POSITION)) return true;
+    if (jj_3R_35()) return true;
     return false;
   }
 
@@ -1390,12 +1389,6 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3R_27() {
-    if (jj_scan_token(KW_POSITION)) return true;
-    if (jj_3R_35()) return true;
-    return false;
-  }
-
   private boolean jj_3_8() {
     if (jj_3R_13()) return true;
     return false;
@@ -1403,6 +1396,17 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private boolean jj_3_7() {
     if (jj_3R_12()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_20() {
+    if (jj_scan_token(OPEN_BRACE)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_69()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(CLOSE_BRACE)) return true;
     return false;
   }
 
@@ -1461,13 +1465,14 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_1() {
-    if (jj_scan_token(KW_LINE)) return true;
+  private boolean jj_3_41() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
-  private boolean jj_3R_15() {
-    if (jj_scan_token(KW_FUNCTION)) return true;
+  private boolean jj_3R_14() {
+    if (jj_scan_token(KW_TEXT)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
@@ -1477,51 +1482,8 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_69() {
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
-  private boolean jj_3_3() {
-    if (jj_scan_token(0)) return true;
-    return false;
-  }
-
-  private boolean jj_3_2() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_1()) jj_scanpos = xsp;
-    if (jj_scan_token(INT_NUMBER)) return true;
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_20() {
-    if (jj_scan_token(OPEN_BRACE)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_69()) { jj_scanpos = xsp; break; }
-    }
-    if (jj_scan_token(CLOSE_BRACE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_41() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_26() {
-    if (jj_scan_token(KW_DIMENSION)) return true;
-    if (jj_scan_token(OPEN_PAR)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_14() {
-    if (jj_scan_token(KW_TEXT)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
+  private boolean jj_3_1() {
+    if (jj_scan_token(KW_LINE)) return true;
     return false;
   }
 
@@ -1554,6 +1516,20 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
+  private boolean jj_3_3() {
+    if (jj_scan_token(0)) return true;
+    return false;
+  }
+
+  private boolean jj_3_2() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_1()) jj_scanpos = xsp;
+    if (jj_scan_token(INT_NUMBER)) return true;
+    if (jj_3R_9()) return true;
+    return false;
+  }
+
   private boolean jj_3_40() {
     if (jj_scan_token(KW_NULL)) return true;
     return false;
@@ -1564,14 +1540,20 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_38() {
-    if (jj_scan_token(KW_TRUE)) return true;
-    return false;
-  }
-
   private boolean jj_3_65() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_28()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_26() {
+    if (jj_scan_token(KW_DIMENSION)) return true;
+    if (jj_scan_token(OPEN_PAR)) return true;
+    return false;
+  }
+
+  private boolean jj_3_38() {
+    if (jj_scan_token(KW_TRUE)) return true;
     return false;
   }
 
@@ -1582,12 +1564,6 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private boolean jj_3_37() {
     if (jj_scan_token(CHAR_LITERAL)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_25() {
-    if (jj_scan_token(KW_COLOR_INSIDE)) return true;
-    if (jj_scan_token(OPEN_PAR)) return true;
     return false;
   }
 
@@ -1636,9 +1612,24 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
+  private boolean jj_3_63() {
+    if (jj_scan_token(KW_CLOSE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_62() {
+    if (jj_scan_token(KW_READLN)) return true;
+    return false;
+  }
+
   private boolean jj_3_33() {
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  private boolean jj_3_61() {
+    if (jj_scan_token(KW_READ)) return true;
     return false;
   }
 
@@ -1654,21 +1645,6 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     jj_scanpos = xsp;
     if (jj_3_33()) return true;
     }
-    return false;
-  }
-
-  private boolean jj_3_63() {
-    if (jj_scan_token(KW_CLOSE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_62() {
-    if (jj_scan_token(KW_READLN)) return true;
-    return false;
-  }
-
-  private boolean jj_3_61() {
-    if (jj_scan_token(KW_READ)) return true;
     return false;
   }
 
@@ -1689,6 +1665,12 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private boolean jj_3_57() {
     if (jj_scan_token(KW_SOUND)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_25() {
+    if (jj_scan_token(KW_COLOR_INSIDE)) return true;
+    if (jj_scan_token(OPEN_PAR)) return true;
     return false;
   }
 
@@ -1751,15 +1733,27 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
+  private boolean jj_3R_18() {
+    if (jj_3R_31()) return true;
+    if (jj_3R_32()) return true;
+    return false;
+  }
+
   private boolean jj_3R_24() {
     if (jj_scan_token(KW_COLOR)) return true;
     if (jj_scan_token(OPEN_PAR)) return true;
     return false;
   }
 
-  private boolean jj_3R_18() {
-    if (jj_3R_31()) return true;
-    if (jj_3R_32()) return true;
+  private boolean jj_3R_17() {
+    if (jj_scan_token(KW_END)) return true;
+    if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_13() {
+    if (jj_3R_29()) return true;
+    if (jj_scan_token(KW_POINT)) return true;
     return false;
   }
 
@@ -1788,20 +1782,19 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
+  private boolean jj_3_51() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
   private boolean jj_3R_22() {
     if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
-  private boolean jj_3R_13() {
-    if (jj_3R_29()) return true;
-    if (jj_scan_token(KW_POINT)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_17() {
-    if (jj_scan_token(KW_END)) return true;
-    if (jj_scan_token(SEMICOLON)) return true;
+  private boolean jj_3R_16() {
+    if (jj_scan_token(KW_START)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -1817,6 +1810,12 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private boolean jj_3_22() {
     if (jj_scan_token(KW_BOOLEAN)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_12() {
+    if (jj_3R_29()) return true;
+    if (jj_scan_token(ATTRIBUTION)) return true;
     return false;
   }
 
@@ -1840,20 +1839,19 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_51() {
-    if (jj_3R_21()) return true;
+  private boolean jj_3_53() {
+    if (jj_scan_token(OPEN_BRACE)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_51()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(CLOSE_BRACE)) return true;
     return false;
   }
 
-  private boolean jj_3R_12() {
-    if (jj_3R_29()) return true;
-    if (jj_scan_token(ATTRIBUTION)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_16() {
-    if (jj_scan_token(KW_START)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
+  private boolean jj_3_52() {
+    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
@@ -1882,9 +1880,29 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
+  private boolean jj_3R_11() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
   private boolean jj_3_17() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_22()) return true;
+    return false;
+  }
+
+  private boolean jj_3_50() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  private boolean jj_3_49() {
+    if (jj_scan_token(KW_VOID)) return true;
+    return false;
+  }
+
+  private boolean jj_3_48() {
+    if (jj_scan_token(KW_POINTER)) return true;
     return false;
   }
 
@@ -1894,29 +1912,23 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3R_11() {
-    if (jj_3R_21()) return true;
+  private boolean jj_3_47() {
+    if (jj_scan_token(KW_BOOLEAN)) return true;
     return false;
   }
 
-  private boolean jj_3_53() {
-    if (jj_scan_token(OPEN_BRACE)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_51()) { jj_scanpos = xsp; break; }
-    }
-    if (jj_scan_token(CLOSE_BRACE)) return true;
+  private boolean jj_3_46() {
+    if (jj_scan_token(KW_STRING)) return true;
     return false;
   }
 
-  private boolean jj_3_52() {
-    if (jj_scan_token(SEMICOLON)) return true;
+  private boolean jj_3_45() {
+    if (jj_scan_token(KW_CHAR)) return true;
     return false;
   }
 
-  private boolean jj_3_16() {
-    if (jj_3R_21()) return true;
+  private boolean jj_3_44() {
+    if (jj_scan_token(KW_REAL)) return true;
     return false;
   }
 
@@ -1926,8 +1938,19 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_50() {
-    if (jj_scan_token(IDENTIFIER)) return true;
+  private boolean jj_3_43() {
+    if (jj_scan_token(KW_INT)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_23() {
+    if (jj_scan_token(OPEN_BRACKET)) return true;
+    if (jj_scan_token(INT_NUMBER)) return true;
+    return false;
+  }
+
+  private boolean jj_3_16() {
+    if (jj_3R_21()) return true;
     return false;
   }
 
