@@ -3,7 +3,7 @@
 8 int x cor(150,150,150) tamanho(50,20) posicao (20,20);
 9 x = 10;
 10;
-3 {start incrementa(endereco x); p aponta(80,80); insere_texto conteudo("x") tamanho(12) posicao(34,10);}
+3 {start incrementa(endereco x); p aponta(45,30); insere_texto conteudo("x") tamanho(12) posicao(34,10);}
 4 x = 11;
 5 end;
 10;

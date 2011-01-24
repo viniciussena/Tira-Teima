@@ -78,6 +78,8 @@ public class Principal extends JPanel {
 	private JButton btnAnterior = null;
 	private Console console = null;
 	private Alerta alerta = null;
+	public Boolean jump = Boolean.FALSE; 
+	public String jumpTo = null;	
 	private GerenciadorArquivos ga = null;
 	@SuppressWarnings("unused")
 	private Controlador control = null;
@@ -116,7 +118,9 @@ public class Principal extends JPanel {
 				editor,
 				console,
 				alerta,
-				ga);
+				ga,
+				jump,
+				jumpTo);
 		
 		control = new Controlador(
 				gerador.parse(arq_texto),

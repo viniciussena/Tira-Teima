@@ -2,12 +2,14 @@
 package tirateima.controlador;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import sun.security.action.GetLongAction;
 import tirateima.IEstado;
 
 /**
@@ -28,6 +30,11 @@ public class Controlador {
 	private IEstado console;
 	private IEstado alerta;
 	private IEstado ga;
+	
+	/* Variáveis que controlam tanto se há jump (desvio de execução) quanto para onde esse é o 
+	 * jump, caso haja */
+	private Boolean jump;
+	private String jumpTo;
 	
 	/*Lista dos estados.*/
 	List<Estado> estados = new ArrayList<Estado>();
@@ -65,6 +72,9 @@ public class Controlador {
 	    this.editor = editor;
 	    this.console = console;
 	    this.alerta = alerta;
+	    
+	    this.jump = Boolean.FALSE;
+	    this.jumpTo = null;
 	    
 	    mostrador.setEstado(null);
 	    ga.setEstado(null);
@@ -152,17 +162,58 @@ public class Controlador {
 		console.setEstado(e.est_console);
 		alerta.setEstado(e.est_alerta);
 		ga.setEstado(e.est_ga);
+		prepararProximoPasso(e);
 		ajustarBotoes();
 	}
-    /**
-	* Define o próximo estado incrementando índice e chama método setEstado
+	/**
+	 * Prepara o próximo passo marcando (agendando) para dar um jump (desvio na linha de 
+	 * execução) caso seja necessário.
+	 * @param Estado e
+	 */
+    private void prepararProximoPasso(Estado e) {
+    	//se o próximo for jump, prepara para trocar de estado
+    	if ((Boolean)e.est_jump == Boolean.TRUE){
+    		this.jump = Boolean.TRUE;
+    		this.jumpTo = (String)e.est_jumpTo;
+    	}
+    	//se o próximo não for jump, limpa as variáveis de jump
+    	else{
+    		this.jump = Boolean.FALSE;
+    		this.jumpTo = null;
+    	}
+	}
+	/**
+	* Define o próximo estado incrementando índice e chama método setEstado. 
+	* 
+	* Caso o fluxo de execução sofra desvio, vai para o estado de label indicado.
+	* Caso o fluxo de execução não tenha sofrido desvio (jump), passa ao estado seguinte. 
+	* 
 	* @see setEstado
 	*/
 	public void proxEstado (){
-		if(indice < estados.size()-1){
-			Estado e = (Estado) estados.get(++indice);
-			setEstado(e);
+		Estado e = null;
+		if(jump == Boolean.TRUE){
+			e = procuraEstadoPorLabel();
+			indice = estados.indexOf(e);
 		}
+		else if(indice < estados.size()-1){
+			e = (Estado) estados.get(++indice);
+		}
+		setEstado(e);
+	}
+	
+	/** Procura o estado com um label indicado. */
+	private Estado procuraEstadoPorLabel() {
+		String labelEstado;
+		for (Estado e : estados) {
+			if (e.est_label != null){
+				labelEstado = (String)e.est_label;
+				if(labelEstado.equals(jumpTo)){
+					return e;
+				}
+			}
+		}
+		return null;
 	}
 	/**
 	* Define o estado anterior decrementando índice e chama método setEstado

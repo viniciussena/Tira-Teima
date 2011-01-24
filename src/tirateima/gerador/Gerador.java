@@ -44,7 +44,12 @@ public class Gerador {
 	
 	/** O gerador de arquivos. */
 	public GerenciadorArquivos ga;
+
+	/** Indica se há jump ou não no passo */
+	public Boolean jump;
 	
+	/** Indica para qual estado ir em caso de haver jump no passo */ 
+	public String jumpTo;	
 	
 	/**
 	 * Constrói um novo gerador. Recebe cada uma dos componentes gráficos da tela do tirateima para poder setar seus estados.
@@ -59,13 +64,17 @@ public class Gerador {
 			EditorTexto editor,
 			Console console,
 			Alerta alerta,
-			GerenciadorArquivos ga) {
+			GerenciadorArquivos ga,
+			Boolean jump,
+			String jumpTo) {
 		
 		this.mostrador = mostrador;
 		this.editor_texto = editor;
 		this.console = console;
 		this.alerta = alerta;
 		this.ga = ga;
+		this.jump = jump;
+		this.jumpTo = jumpTo;
 	}
 	
 	/**
@@ -96,7 +105,7 @@ public class Gerador {
 				c.execute(this);
 			}
 			/** Salva o estado de cada componente para a linha informada, agregando mais um estado à lista de estados. */
-			saveState(result, step.line);
+			saveState(result, step.line, step.label);
 		}
 		
 		return result;
@@ -108,7 +117,7 @@ public class Gerador {
 	 * @param states
 	 * @param line
 	 */
-	private void saveState(List<Estado> states, int line) {
+	private void saveState(List<Estado> states, int line,String label) {
 		/** Cria um novo estado */
 		Estado e = new Estado();
 		/** Coloca no estado criado a condição de cada elemento gráfico do tirateima. */
@@ -118,6 +127,17 @@ public class Gerador {
 		e.est_console = console.getEstado();
 		e.est_alerta = alerta.getEstado();
 		e.est_ga = ga.getEstado();
+		//TODO: cuidar para que o usuário não crie dois labels iguais. Talvez use-se hashmap.
+		e.est_label = label;
+		if(jumpTo != null){
+			e.est_jumpTo = new String(jumpTo);
+		}
+		e.est_jump = jump.booleanValue();
+		
+		/** Limpa os atributos de jump para a criação dos próximos estados */
+		jump = Boolean.FALSE;
+		jumpTo = null;
+		
 		/** Adiciona o estado criado à lista de estados. */
 		states.add(e);
 	}

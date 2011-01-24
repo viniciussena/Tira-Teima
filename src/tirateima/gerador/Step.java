@@ -15,6 +15,9 @@ public class Step {
 	/** Os comandos a serem executados neste passo. */
 	public List<Command> commands = null;
 	
+	/** Label do passo para fins de goto (desvio de execução) */
+	public String label;
+	
 	/**
 	 * Cria um novo passo com a linha dada e lista de comandos vazia.
 	 * 

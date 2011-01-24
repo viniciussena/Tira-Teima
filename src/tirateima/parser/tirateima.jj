@@ -2,7 +2,7 @@
 
 options {
 	STATIC = false;
-	LOOKAHEAD = 2;
+	LOOKAHEAD = 3;
 	FORCE_LA_CHECK = true;
 }
 
@@ -19,6 +19,7 @@ import java.util.ListIterator;
 import java.util.Stack;
 
 import tirateima.gerador.CommandAttribution;
+import tirateima.gerador.CommandJump;
 import tirateima.gerador.CommandNewType;
 import tirateima.gerador.CommandNewVar;
 import tirateima.gerador.CommandNewVarText;
@@ -109,17 +110,19 @@ public class TiraTeimaParser {
 }
 PARSER_END(TiraTeimaParser)
 
-/** Um passo é uma indicação de linha seguida de um comando:
-*	[line] <nro linha> <comando> 
+/** Um passo é uma indicação de linha seguida de um comando com ou sem label:
+*	[line] <nro linha> [label] <comando> 
 */
 Step step() : {
-	Token t;
+	Token nroLinha;
+	Token label;
 	Step p;
 }
 {
 	(
 		(<KW_LINE>)?
-		(t = <INT_NUMBER>){p = new Step(Integer.parseInt(t.image));}
+		(nroLinha = <INT_NUMBER>){p = new Step(Integer.parseInt(nroLinha.image));}
+		(label(p))?
 		command(p){return p;}
 	) |
 	(
@@ -138,12 +141,50 @@ void command(Step p) : {}
 	cmd_atrib(p) |
 	cmd_direct_pointer(p) |
 	cmd_new_file(p) |
+	cmd_jump(p) |
 	function_declaration(p) |
 	function_start(p) |
 	function_end(p) |
 	operation_call(p) |
 	cmd_insert_text(p) |
 	bloco(p)
+}
+
+/** Adiciona um label ao passo caso caso exista */
+void label(Step p) :
+{
+	Token label;
+}
+{
+	(label = <IDENTIFIER>){p.label = label.image;}
+	<COLON>
+}
+
+/**
+*   Cria um comando de jump e o insere na lista de passos. O comando jump faz com que se vá
+*   para um estado que não necessáriamente é o próximo da lista. Procura-se, então, o passo
+*   que possui um determinado label associado e o fluxo de execução recomeça a partir dele.
+*
+*   Essa estrutura se parece com os jumps do assembly ou com os goto de algumas linguagens.
+* 
+*   Esse jump pode ser de dois tipos:
+*   - JUMP CONDICIONAL: vai para o passo com um determinado label se uma condição for tida.
+*   - JUMP INCONDICIONAL: vai para o passo com um label determinado independente de qualquer
+*     condição.
+*/
+void cmd_jump(Step p) :
+{
+    Token label;
+}
+{
+	<KW_GOTO>
+	<OPEN_PAR>
+	(label = <IDENTIFIER>)
+	{
+		p.addCommand(new CommandJump(label.image));
+	}
+	<CLOSE_PAR>
+	<SEMICOLON>
 }
 
 /**
@@ -747,7 +788,8 @@ TOKEN [IGNORE_CASE] : {
 	<KW_POSITION : "posicao"> |
 	<KW_INSERE_TEXTO : "insere_texto"> |
 	<KW_CONTEUDO : "conteudo"> |
-	<KW_ENDERECO : "endereco">
+	<KW_ENDERECO : "endereco"> |
+	<KW_GOTO : "vaipara">
 	}
 	
 // Constantes
