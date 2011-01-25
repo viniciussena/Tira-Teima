@@ -10,7 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import tirateima.IEstado;
+import tirateima.gerador.Command;
 import tirateima.gerador.Gerador;
+import tirateima.gerador.Step;
 import tirateima.gerador.TiraTeimaLanguageException;
 import tirateima.parser.ParseException;
 
@@ -27,6 +29,10 @@ public class Controlador {
 	private JButton btnPular;
 	private JTextField txtLinha;
 	
+	/* Gerador utilizado para criar estados. */
+	Gerador gerador;
+	
+	/* Variáveis auxiliares de estado */
 	private IEstado mostrador;
 	private IEstado editor;
 	private IEstado console;
@@ -67,8 +73,10 @@ public class Controlador {
 	                JButton btnAnt, JButton btnProx,
 	                JButton btnReiniciar, JButton btnPular, JTextField txtLinha) throws TiraTeimaLanguageException, ParseException {
 		
+		//recebe o gerador
+		this.gerador = gerador;
 		//cria a lista de estados com label, nro de liha e passo a ser executado
-	    this.estados = gerador.parse(arq_texto);
+	    this.estados = this.gerador.parse(arq_texto);
 	
 	    indice = -1;
 	
@@ -101,7 +109,11 @@ public class Controlador {
         /*Cria evento.*/
         btnProx.addActionListener(new java.awt.event.ActionListener() {
 		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		        proxEstado();
+		        try {
+					proxEstado();
+				} catch (TiraTeimaLanguageException e) {
+					e.printStackTrace();
+				}
 		    }
 		});
         
@@ -167,6 +179,8 @@ public class Controlador {
 		console.setEstado(e.est_console);
 		alerta.setEstado(e.est_alerta);
 		ga.setEstado(e.est_ga);
+		jump = (Boolean)e.est_jump;
+		jumpTo = (String)e.est_label;
 		prepararProximoPasso(e);
 		ajustarBotoes();
 	}
@@ -192,18 +206,31 @@ public class Controlador {
 	* 
 	* Caso o fluxo de execução sofra desvio, vai para o estado de label indicado.
 	* Caso o fluxo de execução não tenha sofrido desvio (jump), passa ao estado seguinte. 
+	 * @throws TiraTeimaLanguageException 
 	* 
 	* @see setEstado
 	*/
-	public void proxEstado (){
+	public void proxEstado () throws TiraTeimaLanguageException{
 		Estado e = null;
+		/*Seleciona o estado*/
+		//Se for jump, pega o estado pelo label.
 		if(jump == Boolean.TRUE){
 			e = procuraEstadoPorLabel();
 			indice = estados.indexOf(e);
 		}
+		//Se não for jump, pega o próximo estado da lista.
 		else if(indice < estados.size()-1){
 			e = (Estado) estados.get(++indice);
 		}
+		
+		/*Executa o estado.*/
+		Step passoEstado = (Step)e.est_passo;
+		for(Command c : passoEstado.commands){
+			c.execute(gerador);
+		}
+		
+		/*Salva o estado*/
+		gerador.saveState(e, passoEstado);		
 		setEstado(e);
 	}
 	

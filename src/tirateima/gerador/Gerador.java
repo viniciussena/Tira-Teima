@@ -93,27 +93,28 @@ public class Gerador {
 		TiraTeimaParser parser = new TiraTeimaParser(reader);
 		/** Inicializa a lista de estados e os passos a serem executados sobre a variável step */
 		Step step;
-		List<Estado> result = new ArrayList<Estado>();
+		List<Estado> estados = new ArrayList<Estado>();
 		/** Enquanto o parser ler um passo e retorná-lo */
 		while ((step = parser.step()) != null) {
 			/** Imprime o passo para fins de depuração */
 			System.out.println(step.toString());
+			/** Cria um novo estado */
+			Estado e = new Estado();
 			/** Salva o estado de cada componente para a linha informada, agregando mais um estado à lista de estados. */
-			saveState(result, step);
+			saveState(e, step);
+			/** Adiciona o estado criado à lista de estados. */
+			estados.add(e);
 		}
-		return result;
+		return estados;
 	}
 	
 	/**
-	 * Salva um estado na lsita de estados.
-	 * Recebe a lista de estados e um número de linha para aquele estado, cria e salva o novo estado.
+	 * Salva um estado de acordo com os atributos setados no passo e no gerador.
 	 * @param states
 	 * @param line
 	 * @throws TiraTeimaLanguageException 
 	 */
-	private void saveState(List<Estado> states, Step step) throws TiraTeimaLanguageException {
-		/** Cria um novo estado */
-		Estado e = new Estado();
+	public void saveState(Estado e, Step step){
 		/** Coloca no estado criado a condição de cada elemento gráfico do tirateima. */
 		editor_texto.getCaixaTexto().setMarcada(step.line);
 		e.est_passo = step;
@@ -122,29 +123,13 @@ public class Gerador {
 		e.est_console = console.getEstado();
 		e.est_alerta = alerta.getEstado();
 		e.est_ga = ga.getEstado();
-		verificaLabelExistente(step.label,(Integer)step.line,states);
 		e.est_label = step.label;
-		e.est_jumpTo = null;
-		e.est_jump = null;
-		
-		/** Adiciona o estado criado à lista de estados. */
-		states.add(e);
-	}
-
-	/**
-	 * Verifica se já existe um label na lista de estados. Se houver lança uma exceção.
-	 * @param label - Label do estado
-	 * @param states - Lista de estados
-	 * @return
-	 * @throws TiraTeimaLanguageException 
-	 */
-	private void verificaLabelExistente(String label, Integer linha, List<Estado> states) throws TiraTeimaLanguageException {
-		for(Estado e : states){
-			if(e.est_label != null){
-				if(((String)e.est_label).equals(label)){ 
-					throw new TiraTeimaLanguageException("O label " + label + " já foi utilizado. Labels não podem ser utilizados mais de uma vez.", linha, 0);
-				}
-			}
+		if(jumpTo != null){
+			e.est_jumpTo = jumpTo;
 		}
+		e.est_jump = jump.booleanValue();
+		/** Limpa os atributos de jump para a criação dos próximos estados */
+		jump = Boolean.FALSE;
+		jumpTo = null;
 	}
 }
