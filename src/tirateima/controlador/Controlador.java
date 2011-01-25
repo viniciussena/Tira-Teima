@@ -1,16 +1,18 @@
 // Copyright (C) 2007  Luciano Santos e Ian Schechtman
 package tirateima.controlador;
 
+import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import sun.security.action.GetLongAction;
 import tirateima.IEstado;
+import tirateima.gerador.Gerador;
+import tirateima.gerador.TiraTeimaLanguageException;
+import tirateima.parser.ParseException;
 
 /**
 * Classe que fornece os métodos de controle da execução do programa tirateima
@@ -54,16 +56,18 @@ public class Controlador {
 	*@param btnReiniciar Botao que reinicia a execução
 	*@param btnPular Botao para pular à linha informado pelo usuário na caixa txtLinha
 	*@param txtLinha Caixa de texto que serve de argumento ao botao pular linha.
+	 * @throws ParseException 
+	 * @throws TiraTeimaLanguageException 
 	*/
-	public Controlador(List<Estado> estados,
+	public Controlador(Gerador gerador,
+					Reader arq_texto,
 	                IEstado mostrador, IEstado ga,
 	                IEstado editor, IEstado console,
 	                IEstado alerta,
 	                JButton btnAnt, JButton btnProx,
-	                JButton btnReiniciar, JButton btnPular, JTextField txtLinha) {
-	    if(estados != null){
-	            this.estados = estados;
-	    }
+	                JButton btnReiniciar, JButton btnPular, JTextField txtLinha) throws TiraTeimaLanguageException, ParseException {
+		
+	    this.estados = gerador.parse(arq_texto);
 	
 	    indice = -1;
 	

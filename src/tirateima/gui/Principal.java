@@ -123,7 +123,8 @@ public class Principal extends JPanel {
 				jumpTo);
 		
 		control = new Controlador(
-				gerador.parse(arq_texto),
+				gerador,
+				arq_texto,
 				mostrador,
 				ga,
 				editor,

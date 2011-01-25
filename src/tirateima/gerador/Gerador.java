@@ -59,8 +59,7 @@ public class Gerador {
 	 * @param console
 	 * @param ga
 	 */
-	public Gerador(
-			Mostrador mostrador,
+	public Gerador(Mostrador mostrador,
 			EditorTexto editor,
 			Console console,
 			Alerta alerta,
@@ -99,15 +98,9 @@ public class Gerador {
 		while ((step = parser.step()) != null) {
 			/** Imprime o passo para fins de depuração */
 			System.out.println(step.toString());
-			/** Para cada passo gerado */
-			for (Command c : step.commands) {
-				/** Executa os comandos contidos no passo */
-				c.execute(this);
-			}
 			/** Salva o estado de cada componente para a linha informada, agregando mais um estado à lista de estados. */
-			saveState(result, step.line, step.label);
+			saveState(result, step);
 		}
-		
 		return result;
 	}
 	
@@ -117,26 +110,20 @@ public class Gerador {
 	 * @param states
 	 * @param line
 	 */
-	private void saveState(List<Estado> states, int line,String label) {
+	private void saveState(List<Estado> states, Step step) {
 		/** Cria um novo estado */
 		Estado e = new Estado();
 		/** Coloca no estado criado a condição de cada elemento gráfico do tirateima. */
-		editor_texto.getCaixaTexto().setMarcada(line);
+		editor_texto.getCaixaTexto().setMarcada(step.line);
+		e.est_passo = step;
 		e.est_mostrador = mostrador.getEstado();
 		e.est_editor = editor_texto.getEstado();
 		e.est_console = console.getEstado();
 		e.est_alerta = alerta.getEstado();
 		e.est_ga = ga.getEstado();
-		//TODO: cuidar para que o usuário não crie dois labels iguais. Talvez use-se hashmap.
-		e.est_label = label;
-		if(jumpTo != null){
-			e.est_jumpTo = new String(jumpTo);
-		}
-		e.est_jump = jump.booleanValue();
-		
-		/** Limpa os atributos de jump para a criação dos próximos estados */
-		jump = Boolean.FALSE;
-		jumpTo = null;
+		e.est_label = step.label;
+		e.est_jumpTo = null;
+		e.est_jump = null;
 		
 		/** Adiciona o estado criado à lista de estados. */
 		states.add(e);
