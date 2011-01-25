@@ -109,8 +109,9 @@ public class Gerador {
 	 * Recebe a lista de estados e um número de linha para aquele estado, cria e salva o novo estado.
 	 * @param states
 	 * @param line
+	 * @throws TiraTeimaLanguageException 
 	 */
-	private void saveState(List<Estado> states, Step step) {
+	private void saveState(List<Estado> states, Step step) throws TiraTeimaLanguageException {
 		/** Cria um novo estado */
 		Estado e = new Estado();
 		/** Coloca no estado criado a condição de cada elemento gráfico do tirateima. */
@@ -121,11 +122,29 @@ public class Gerador {
 		e.est_console = console.getEstado();
 		e.est_alerta = alerta.getEstado();
 		e.est_ga = ga.getEstado();
+		verificaLabelExistente(step.label,(Integer)step.line,states);
 		e.est_label = step.label;
 		e.est_jumpTo = null;
 		e.est_jump = null;
 		
 		/** Adiciona o estado criado à lista de estados. */
 		states.add(e);
+	}
+
+	/**
+	 * Verifica se já existe um label na lista de estados. Se houver lança uma exceção.
+	 * @param label - Label do estado
+	 * @param states - Lista de estados
+	 * @return
+	 * @throws TiraTeimaLanguageException 
+	 */
+	private void verificaLabelExistente(String label, Integer linha, List<Estado> states) throws TiraTeimaLanguageException {
+		for(Estado e : states){
+			if(e.est_label != null){
+				if(((String)e.est_label).equals(label)){ 
+					throw new TiraTeimaLanguageException("O label " + label + " já foi utilizado. Labels não podem ser utilizados mais de uma vez.", linha, 0);
+				}
+			}
+		}
 	}
 }

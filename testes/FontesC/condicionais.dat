@@ -1,0 +1,15 @@
+3;
+4 int a cor(10,10,10) tamanho(50,20) posicao(10,10);
+5 a = 10;
+6 vaipara(label1);
+9 {writeln("número negativo"); vaipara(label2);}
+7 label1: writeln("número positivo");
+10 label1:;
+# ONDE SE QUER CHEGAR
+# 3;
+# 4  int a cor(10,10,10) tamanho(50,20) posicao(10,10);
+# 5  leia(a);
+# 6  se(a>=0) vaipara(label1);
+# 9  write("número negativo"); vaipara(label2);
+# 7  label1: write("número positivo");
+# 10 label2:;

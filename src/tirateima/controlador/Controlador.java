@@ -67,6 +67,7 @@ public class Controlador {
 	                JButton btnAnt, JButton btnProx,
 	                JButton btnReiniciar, JButton btnPular, JTextField txtLinha) throws TiraTeimaLanguageException, ParseException {
 		
+		//cria a lista de estados com label, nro de liha e passo a ser executado
 	    this.estados = gerador.parse(arq_texto);
 	
 	    indice = -1;
