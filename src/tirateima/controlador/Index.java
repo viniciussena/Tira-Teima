@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 /**
  * Modela um índice do Tira-Teima, que pode ser de matriz ou array de uma dimensão.

@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 
 /**
@@ -16,8 +16,8 @@ public class CommandNewVar extends Command {
 	 * Executa o comando de criação de variável adicionando a nova variável ao mostrador
 	 */
 	@Override
-	public void execute(Gerador g)
+	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {
-		g.mostrador.adicionarVariavel(newVar(g, ref));
+		c.mostrador.adicionarVariavel(newVar(c, ref));
 	}
 }

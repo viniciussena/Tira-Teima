@@ -157,7 +157,7 @@ public class Programa extends JFrame {
 		programa.setVisible(true);
 		
 		if(msg != null){
-			JOptionPane.showMessageDialog(null, msg, "AlgoStep", msg_type);
+			JOptionPane.showMessageDialog(null, msg, "Tira-Teima", msg_type);
 		}
 	}
 }

@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.List;
 import java.util.ListIterator;
 
-import tirateima.gerador.Type;
-import tirateima.gerador.TypeId;
+import tirateima.controlador.Type;
+import tirateima.controlador.TypeId;
 import tirateima.gui.arquivos.FileBorder;
 
 /**

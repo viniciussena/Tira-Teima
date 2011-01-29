@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +41,13 @@ public class FunctionDeclaration extends Command
 	 * Recebe o gerador de estados e adiciona a declaração no mapa de funções declaradas.
 	 * @param Gerador g
 	 */
-	public void execute(Gerador g)
+	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {
 		/** Testa se já não há declaração com o nome dado */
-		if (g.declared_functions.containsKey(name))
+		if (c.declared_functions.containsKey(name))
 			gerarErro("Função '" + name + "' redeclarada!");
 		/** Declara a função colocando-a na lista de declarações do gerador. */
-		g.declared_functions.put(name, this);
+		c.declared_functions.put(name, this);
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class FunctionDeclaration extends Command
 	 * @return
 	 * @throws TiraTeimaLanguageException
 	 */
-	public Function newFunction(Gerador g, List<Object> args)
+	public Function newFunction(Controlador c, List<Object> args)
 			throws TiraTeimaLanguageException {
 		/** Testa se foram passadas todas as variáveis */
 		if (args.size() != param.size())
@@ -71,7 +71,7 @@ public class FunctionDeclaration extends Command
 		/** Para cada nova definição de variável passada por parâmetro */
 		for (VarDefinition v : param) {
 			/** Cria uma nova variável */
-			vaux = newVar(g, v);
+			vaux = newVar(c, v);
 			try {
 				vaux.setValor(i.next());
 			} catch (ClassCastException e) {
@@ -86,7 +86,7 @@ public class FunctionDeclaration extends Command
 		/** Para cada nova definição de variável local */
 		for (VarDefinition v : local_vars) {
 			/** Cria uma nova variável */
-			vars.add(newVar(g, v));
+			vars.add(newVar(c, v));
 		}
 		
 		/** Retona uma nova função */

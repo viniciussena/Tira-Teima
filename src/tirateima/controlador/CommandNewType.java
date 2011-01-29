@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +22,17 @@ public class CommandNewType extends Command {
 	/**
 	 * Executa o comando de novo tipo adicionando os campos e salvando o novo tipo no mapa de registros declarados.
 	 */
-	public void execute(Gerador g)
+	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {
 		
-		if (g.declared_records.containsKey(name))
+		if (c.declared_records.containsKey(name))
 			gerarErro("Tipo '" + name + "' redeclarado!");
 		
 		List<Variavel> vars = new ArrayList<Variavel>();
 		for (VarDefinition ref : fields) {
-			vars.add(newVar(g, ref));
+			vars.add(newVar(c, ref));
 		}
 		
-		g.declared_records.put(name, new RecordDefinition(name, vars));
+		c.declared_records.put(name, new RecordDefinition(name, vars));
 	}
 }

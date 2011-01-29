@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 /**
  * Uma exceção lançada pelo lexer/parser/gerador.

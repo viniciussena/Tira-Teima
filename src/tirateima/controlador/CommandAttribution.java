@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.util.Stack;
 
@@ -20,8 +20,8 @@ public class CommandAttribution extends Command {
 	/**
 	 * Executa o comando de atribuição setando o valor da variável (respeitado seu escopo). 
 	 */
-	public void execute(Gerador g)
+	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {
-		setValue(g.mostrador, var_stack, value);
+		setValue(c.mostrador, var_stack, value);
 	}
 }

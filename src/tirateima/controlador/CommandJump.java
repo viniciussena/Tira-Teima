@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 /**
  * Classe que modela um comando de jump para alterar a ordem de execução dos passos do 
@@ -16,9 +16,9 @@ public class CommandJump extends Command {
 	}
 	
 	@Override
-	public void execute(Gerador g) throws TiraTeimaLanguageException {
-		g.jump = Boolean.TRUE;
-		g.jumpTo = this.label;
+	public void execute(Controlador c) throws TiraTeimaLanguageException {
+		c.jump = Boolean.TRUE;
+		c.jumpTo = this.label;
 	}
 
 }

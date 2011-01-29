@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import tirateima.gui.arquivos.VarText;
 
@@ -17,9 +17,9 @@ public class CommandNewVarText extends Command {
 	/**
 	 * Executa o comando de nova variável de texto, adicionando a variável criada ao gerenciador de arquivo.
 	 */
-	public void execute(Gerador g)
+	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {
 		VarText arq = new VarText(name);
-		g.ga.adicionarArquivo(arq);
+		c.ga.adicionarArquivo(arq);
 	}
 }

@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 /**
  * Modela um tipo primitivo da linguagem.

@@ -36,7 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import tirateima.IEstado;
-import tirateima.gerador.TiraTeimaLanguageException;
+import tirateima.controlador.TiraTeimaLanguageException;
 
 
 /**

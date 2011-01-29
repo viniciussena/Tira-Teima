@@ -46,7 +46,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
 import tirateima.controlador.Controlador;
-import tirateima.gerador.Gerador;
+import tirateima.controlador.Gerador;
 import tirateima.gui.alerta.Alerta;
 import tirateima.gui.arquivos.ArquivoVisivelEventListener;
 import tirateima.gui.arquivos.GerenciadorArquivos;
@@ -113,17 +113,7 @@ public class Principal extends JPanel {
 		inicializar();
 		editor.getCaixaTexto().setText(arq_fonte);
 		
-		Gerador gerador = new Gerador(
-				mostrador,
-				editor,
-				console,
-				alerta,
-				ga,
-				jump,
-				jumpTo);
-		
 		control = new Controlador(
-				gerador,
 				arq_texto,
 				mostrador,
 				ga,

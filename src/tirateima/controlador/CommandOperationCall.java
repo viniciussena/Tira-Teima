@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -40,7 +40,7 @@ public class CommandOperationCall extends Command
 	 * 
 	 * Recebe os tipos de operações e as executa.
 	 */
-	public void execute(Gerador g)
+	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {
 		
 		AbstractArquivo arq;
@@ -52,28 +52,28 @@ public class CommandOperationCall extends Command
 			case KW_READ:
 			case KW_READLN:
 			case KW_CLOSE:
-				if ((arq = getFile(g, args)) == null)
+				if ((arq = getFile(c, args)) == null)
 					gerarErro("Arquivo não encontrado!");
 				args.remove(0);
-				executeFileOperation(g, cmd, arq, args);
+				executeFileOperation(c, cmd, arq, args);
 				break;
 			case KW_WRITE:
 			case KW_WRITELN:
 				try {
-					if ((arq = getFile(g, args)) == null)
+					if ((arq = getFile(c, args)) == null)
 						gerarErro("Arquivo não encontrado!");
 					args.remove(0);
-					executeWriteOperation(g, cmd, arq, args);
+					executeWriteOperation(c, cmd, arq, args);
 					break;
 				} catch (TiraTeimaLanguageException e) {
-					executeWriteOperation(g, cmd, null, args);
+					executeWriteOperation(c, cmd, null, args);
 				}
 				break;
 			case KW_COMMENT:
-				executeAlertOperation(g, cmd, args);
+				executeAlertOperation(c, cmd, args);
 				break;
 			case KW_SOUND:
-				executeSoundOperation(g, cmd);
+				executeSoundOperation(c, cmd);
 				break;
 		}
 	}
@@ -87,7 +87,7 @@ public class CommandOperationCall extends Command
 	 * @return
 	 * @throws TiraTeimaLanguageException
 	 */
-	private AbstractArquivo getFile(Gerador g, List<Object> args)
+	private AbstractArquivo getFile(Controlador c, List<Object> args)
 			throws TiraTeimaLanguageException {
 		ListIterator<Object> i = args.listIterator();
 		if (!i.hasNext())
@@ -99,7 +99,7 @@ public class CommandOperationCall extends Command
 			Stack<Object> stack = (Stack<Object>) obj;
 			if (stack.size() == 1) {
 				String name = (String) stack.pop();
-				return g.ga.getArquivo(name);
+				return c.ga.getArquivo(name);
 			}
 			else
 				gerarErro("Nome de arquivo era esperado.");
@@ -123,7 +123,7 @@ public class CommandOperationCall extends Command
 	 * @throws TiraTeimaLanguageException
 	 */
 	private void executeFileOperation(
-			Gerador g,
+			Controlador c,
 			Token cmd,
 			AbstractArquivo arq,
 			List<Object> args) throws TiraTeimaLanguageException {
@@ -157,7 +157,7 @@ public class CommandOperationCall extends Command
 					break;
 				case KW_READ:
 				case KW_READLN:
-					executeReadOperation(g, cmd, arq, args);
+					executeReadOperation(c, cmd, arq, args);
 					break;
 			}
 		} catch (Exception e) {
@@ -175,7 +175,7 @@ public class CommandOperationCall extends Command
 	 * @throws Exception
 	 */
 	private void executeReadOperation(
-			Gerador g,
+			Controlador c,
 			Token cmd,
 			AbstractArquivo arq,
 			List<Object> args) throws TiraTeimaLanguageException, Exception {
@@ -190,7 +190,7 @@ public class CommandOperationCall extends Command
 		if (!(first instanceof Stack))
 			gerarErro("Era esperada uma variável.");
 		ListIterator<Object> i = ((Stack<Object>) first).listIterator();
-		Variavel v = g.mostrador.getCopiaVariavel((String) i.next());
+		Variavel v = c.mostrador.getCopiaVariavel((String) i.next());
 		while (i.hasNext()) {
 			Object aux = i.next();
 			if (aux instanceof String) {
@@ -232,7 +232,7 @@ public class CommandOperationCall extends Command
 				((VarText) arq).readln();
 		}
 		
-		setValue(g.mostrador, (Stack<Object>) first, value);
+		setValue(c.mostrador, (Stack<Object>) first, value);
 	}
 	
 	/**
@@ -243,7 +243,7 @@ public class CommandOperationCall extends Command
 	 * @param args
 	 */
 	private void executeWriteOperation(
-			Gerador g,
+			Controlador c,
 			Token cmd,
 			AbstractArquivo arq,
 			List<Object> args) {
@@ -255,14 +255,14 @@ public class CommandOperationCall extends Command
 			obj = i.next();
 			
 			if (obj instanceof List<?>)
-				obj = getValue(g, (List<Object>) obj);
+				obj = getValue(c, (List<Object>) obj);
 			
 			//escreve no arquivo
 			if (arq != null) {
 				((VarText) arq).write(obj.toString());
 			}
 			else { //escreve no console
-				g.console.print(obj.toString());
+				c.console.print(obj.toString());
 			}
 		}
 		
@@ -271,7 +271,7 @@ public class CommandOperationCall extends Command
 				((VarText) arq).writeln("");
 			}
 			else { //escreve no console
-				g.console.println();
+				c.console.println();
 			}
 		}
 	}
@@ -283,7 +283,7 @@ public class CommandOperationCall extends Command
 	 * @param args
 	 */
 	private void executeAlertOperation(
-			Gerador g,
+			Controlador c,
 			Token cmd,
 			List<Object> args) {
 		
@@ -294,10 +294,10 @@ public class CommandOperationCall extends Command
 			obj = i.next();
 			
 			if (obj instanceof List<?>)
-				obj = getValue(g, (List<Object>) obj);
+				obj = getValue(c, (List<Object>) obj);
 			
 			//marca estado para mostrar um comentario
-			g.alerta.print(obj.toString());
+			c.alerta.print(obj.toString());
 		}
 	}
 	
@@ -307,9 +307,9 @@ public class CommandOperationCall extends Command
 	 * @param cmd
 	 */
 	private void executeSoundOperation(
-			Gerador g,
+			Controlador c,
 			Token cmd) {
 			//marca estado para tocar um som
-			g.alerta.tocaSom();
+			c.alerta.tocaSom();
 		}
 }

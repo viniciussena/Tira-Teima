@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.util.ArrayList;
 import java.util.List;

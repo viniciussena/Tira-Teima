@@ -7,22 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
-import tirateima.gerador.CommandAttribution;
-import tirateima.gerador.CommandJump;
-import tirateima.gerador.CommandNewType;
-import tirateima.gerador.CommandNewVar;
-import tirateima.gerador.CommandNewVarText;
-import tirateima.gerador.CommandDirectPointer;
-import tirateima.gerador.FunctionDeclaration;
-import tirateima.gerador.CommandStartFunction;
-import tirateima.gerador.CommandEndFunction;
-import tirateima.gerador.CommandOperationCall;
-import tirateima.gerador.CommandInsertText;
-import tirateima.gerador.Index;
-import tirateima.gerador.Step;
-import tirateima.gerador.Type;
-import tirateima.gerador.TypeId;
-import tirateima.gerador.VarDefinition;
+
+import tirateima.controlador.CommandAttribution;
+import tirateima.controlador.CommandDirectPointer;
+import tirateima.controlador.CommandEndFunction;
+import tirateima.controlador.CommandInsertText;
+import tirateima.controlador.CommandJump;
+import tirateima.controlador.CommandNewType;
+import tirateima.controlador.CommandNewVar;
+import tirateima.controlador.CommandNewVarText;
+import tirateima.controlador.CommandOperationCall;
+import tirateima.controlador.CommandStartFunction;
+import tirateima.controlador.FunctionDeclaration;
+import tirateima.controlador.Index;
+import tirateima.controlador.Step;
+import tirateima.controlador.Type;
+import tirateima.controlador.TypeId;
+import tirateima.controlador.VarDefinition;
 
 /** Token Manager. */
 public class TiraTeimaParserTokenManager implements TiraTeimaParserConstants

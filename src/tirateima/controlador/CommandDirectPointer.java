@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.awt.Point;
 import java.util.Stack;
@@ -14,8 +14,8 @@ public class CommandDirectPointer extends Command {
 	}
 
 	@Override
-	public void execute(Gerador g) throws TiraTeimaLanguageException {
-		criarSeta(g.mostrador, var_stack, posicaoApontada);
+	public void execute(Controlador c) throws TiraTeimaLanguageException {
+		criarSeta(c.mostrador, var_stack, posicaoApontada);
 	}
 
 }

@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.awt.Point;
 import java.util.HashMap;
@@ -31,12 +31,12 @@ public abstract class Command {
 	/**
 	 * Executa esse comando, alterarndo os estados dos componentes.
 	 * 
-	 * @param g O gerador de estados.
+	 * @param c O gerador de estados.
 	 * @param steps A lista de estados sendo gerada. 
 	 * 
 	 * @throws TiraTeimaLanguageException
 	 */
-	public abstract void execute(Gerador g)
+	public abstract void execute(Controlador c)
 			throws TiraTeimaLanguageException;
 	
 	/**
@@ -60,7 +60,7 @@ public abstract class Command {
 	 * 
 	 * @throws TiraTeimaLanguageException
 	 */
-	protected Variavel newVar(Gerador g, VarDefinition var_def)
+	protected Variavel newVar(Controlador c, VarDefinition var_def)
 			throws TiraTeimaLanguageException {
 		
 		Variavel v = null;
@@ -88,10 +88,10 @@ public abstract class Command {
 				v = new VarPointer(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao());
 				break;
 			case RECORD:
-				if (!g.declared_records.containsKey(t.getName()))
+				if (!c.declared_records.containsKey(t.getName()))
 					gerarErro("Tipo '" + t.getName() + "' não foi declarado!");
 				
-				RecordDefinition def = g.declared_records.get(t.getName()).clone();
+				RecordDefinition def = c.declared_records.get(t.getName()).clone();
 				v = new VarRecord(t.getName(), var_def.getName(), def.fields, var_def.getColor(), 
 						var_def.getcorExterna(), var_def.getDimension(), var_def.getPosicao());
 				break;
@@ -126,11 +126,11 @@ public abstract class Command {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected Object getValue(Gerador g, List<Object> var) {
+	protected Object getValue(Controlador c, List<Object> var) {
 		Object aux, value;
 		
 		ListIterator<Object> i = var.listIterator();
-		value = g.mostrador.getCopiaVariavel((String) i.next()).getValor();
+		value = c.mostrador.getCopiaVariavel((String) i.next()).getValor();
 		
 		while(i.hasNext()) {
 			aux = i.next();

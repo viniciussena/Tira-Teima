@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.awt.Point;
 
@@ -17,8 +17,8 @@ public class CommandInsertText extends Command {
 	}
 	
 	@Override
-	public void execute(Gerador g) throws TiraTeimaLanguageException {
-		g.mostrador.adicionarTexto(new Texto(conteudo,tamanho,posicao));
+	public void execute(Controlador c) throws TiraTeimaLanguageException {
+		c.mostrador.adicionarTexto(new Texto(conteudo,tamanho,posicao));
 		
 	}
 

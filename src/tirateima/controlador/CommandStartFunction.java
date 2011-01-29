@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ public class CommandStartFunction extends Command {
 	 * Recebe o gerador e executa o comando de startFunction.
 	 */
 	@SuppressWarnings("unchecked")
-	public void execute(Gerador g) throws TiraTeimaLanguageException {
+	public void execute(Controlador c) throws TiraTeimaLanguageException {
 		/** Verifica se a função foi declarada */
-		if (!g.declared_functions.containsKey(name)) {
+		if (!c.declared_functions.containsKey(name)) {
 			gerarErro("Função '" + name + "' não declarada!");
 		}
 		/** Para cada argumento */
@@ -34,12 +34,12 @@ public class CommandStartFunction extends Command {
 		for (Object arg : args) {
 			/** adiciona este à lista de argumentos*/
 			if (arg instanceof List<?>)
-				values.add(getValue(g, (List<Object>) arg));
+				values.add(getValue(c, (List<Object>) arg));
 			else
 				values.add(arg);
 		}
 		/** Inicia a função no mostrador  */
-		g.mostrador.startFunction(g.declared_functions.get(name)
-				.newFunction(g, values));
+		c.mostrador.startFunction(c.declared_functions.get(name)
+				.newFunction(c, values));
 	}
 }

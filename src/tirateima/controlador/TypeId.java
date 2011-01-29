@@ -1,4 +1,4 @@
-package tirateima.gerador;
+package tirateima.controlador;
 
 /**
  * Enum que informa os tipos primitivos possíveis da linguagem.
