@@ -8,7 +8,6 @@ import java.util.Stack;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
 import tirateima.gui.alerta.Alerta;
 import tirateima.gui.arquivos.GerenciadorArquivos;
@@ -54,17 +53,15 @@ public class Controlador {
 	private JButton btnAnt;
 	private JButton btnProx;
 	private JButton btnReiniciar;
-	private JButton btnPular;
-	private JTextField txtLinha;
 	
 	/** Lista sequencial dos passos fornecidos.*/
-	List<Step> passos;
+	private List<Step> passos;
 	
 	/** Pilha de estados que guarda a ordem de execução do código. */
-	Stack<Estado> estados;
+	private Stack<Estado> estados;
 	
 	/** É o estado atual do Tira-Teima*/
-	Estado estado;
+	private Estado estado;
 	
 	/** Indice para controle da lista de estados. */
 	private int indice;
@@ -89,7 +86,7 @@ public class Controlador {
 	                EditorTexto editorTexto, Console console,
 	                Alerta alerta,
 	                JButton btnAnt, JButton btnProx,
-	                JButton btnReiniciar, JButton btnPular, JTextField txtLinha) throws TiraTeimaLanguageException, ParseException {
+	                JButton btnReiniciar) throws TiraTeimaLanguageException, ParseException {
 		
 		//recebe o gerador
 		gerador = new Gerador();
@@ -151,30 +148,15 @@ public class Controlador {
         /*Cria evento.*/
         btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
-        		indice = 0;
+        		indice = -1;
         		ajustarBotoes();
-        		setEstado(0); //Reinicia
+        		//Reseta os valores do controlador.
+        		setEstado(new Estado());
+        		estado = null;
+        		jump = Boolean.FALSE;
+        		jumpTo = null;
         	}
         });
-        
-        /*Botão para pular linha.*/
-        this.btnPular = btnPular;
-        /*Cria evento.*/
-        btnPular.addActionListener(new java.awt.event.ActionListener() {
-        	public void actionPerformed(java.awt.event.ActionEvent evt) {
-        		pularEstado();
-        	}
-        });
-        
-        /*Caixa de texto para pular linha.*/
-        this.txtLinha = txtLinha;
-        /*Cria evento. Le botao 'enter' */
-        txtLinha.addActionListener(new java.awt.event.ActionListener() {
-        	public void actionPerformed(java.awt.event.ActionEvent evt) {
-        		pularEstado();
-        	}
-        });
-        
         ajustarBotoes();
 	}
 	/** 
@@ -187,7 +169,6 @@ public class Controlador {
 		/* Ativar/desativar botão "Anterior" */
 		btnAnt.setEnabled(indice > 0);
 		btnReiniciar.setEnabled(indice > 0);
-		btnPular.setEnabled(true);
 		
 		/* Ativar/desativar botão "Próximo" */
 		btnProx.setEnabled(indice < passos.size()-1);
@@ -208,8 +189,13 @@ public class Controlador {
 		console.setEstado(e.est_console);
 		alerta.setEstado(e.est_alerta);
 		ga.setEstado(e.est_ga);
-		jump = (Boolean)e.est_jump;
-		jumpTo = (String)e.est_label;
+		if(e.est_jump != null){
+			jump = (Boolean)e.est_jump;
+		}
+		else{
+			jump = Boolean.FALSE;
+		}
+		jumpTo = (String)e.est_jumpTo;
 		ajustarBotoes();
 	}
 	
@@ -264,6 +250,9 @@ public class Controlador {
 			
 			/*Salva o estado atual do Tira-Teima*/
 			saveState(estado, passo);
+			
+			/*Seta o estado*/
+			setEstado(estado);
 		}
 		//Ajusta os botões
 		ajustarBotoes();
@@ -289,67 +278,31 @@ public class Controlador {
 	 * @see setEstado
 	 */
 	public void antEstado () throws TiraTeimaLanguageException{
-// TODO: refazer a lógica de ant estado
-//		/*Retira o estado da pilha*/
-//		estadoAtual = estados.pop();
-//		indiceAtual = passos.indexOf(estadoAtual);
-//		
-//		/*Seta o estado no Tira-Teima*/		
-//		setEstado(estadoAtual);
-	}
-	/**
-	* Pula para o estado informado correspondente à linha que usuário colocou no campo txtLinha
-	*/
-	public void pularEstado (){
-//TODO: refazer a lógica de pular estado.
-//		try{
-//			int linhaUsuario = Integer.valueOf(txtLinha.getText());
-//			if(linhaUsuario>0){
-//				Integer estado;
-//				for(int contador=0; contador < passos.size(); contador++){
-//					estado = (Integer) passos.get(contador).est_editor;
-//					if(linhaUsuario <= estado){
-//						setEstado(contador);
-//						indiceAtual = contador;
-//						break;
-//					}
-//				}
-//				ajustarBotoes();
-//			}
-//		}catch (Exception e) {
-//			// Não é número, ignorar
-//		}
-	}
-	/**
-	* Utiliza o numero da linha passada para setar o estado correspondente e define seus atributos.
-	* @param linha Linha correspondente ao estado que será carregado.
-	*/
-	public void setEstado (int linha){
-//TODO: refazer a lógica de setar estado
-//		if((linha >= 0)){
-//			Estado e = (Estado) passos.get(linha);
-//			setEstado(e);
-//		}
+		/*Retira o estado da pilha*/
+		estado = estados.pop();
+		indice = passos.indexOf(estado.est_passo);
+		
+		/*Seta o estado no Tira-Teima*/		
+		setEstado(estado);
 	}
 	
 	/**
 	 * Salva um estado de acordo com os atributos setados no passo e no gerador.
-	 * @param states
-	 * @param line
-	 * @throws TiraTeimaLanguageException 
+	 * @param Estado e
+	 * @param Step passo
 	 */
-	public void saveState(Estado e, Step step){
+	public void saveState(Estado e, Step passo){
 		/** Coloca no estado criado a condição de cada elemento gráfico do tirateima. */
+		e.est_passo = passo;
 		e.est_mostrador = mostrador.getEstado();
 		e.est_editor = editorTexto.getEstado();
 		e.est_console = console.getEstado();
 		e.est_alerta = alerta.getEstado();
 		e.est_ga = ga.getEstado();
-		e.est_label = step.label;
+		e.est_label = passo.label;
 		if(jumpTo != null){
 			e.est_jumpTo = jumpTo;
 		}
 		e.est_jump = jump.booleanValue();
-	}
-	
+	}	
 }

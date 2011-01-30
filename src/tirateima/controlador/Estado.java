@@ -7,6 +7,7 @@
 package tirateima.controlador;
 
 public class Estado {
+	public Object est_passo;
 	public Object est_mostrador;
 	public Object est_editor;
 	public Object est_console;

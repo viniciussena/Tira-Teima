@@ -46,7 +46,6 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
 import tirateima.controlador.Controlador;
-import tirateima.controlador.Gerador;
 import tirateima.gui.alerta.Alerta;
 import tirateima.gui.arquivos.ArquivoVisivelEventListener;
 import tirateima.gui.arquivos.GerenciadorArquivos;
@@ -71,9 +70,7 @@ import tirateima.ui.Ajuda;
 public class Principal extends JPanel {
 	private EditorTexto editor = null;
 	private Mostrador mostrador = null;
-	private JTextField txtLinha = null;
 	private JButton btnReiniciar = null;
-	private JButton btnPular = null;
 	private JButton btnProximo = null;
 	private JButton btnAnterior = null;
 	private Console console = null;
@@ -122,9 +119,7 @@ public class Principal extends JPanel {
 				alerta,
 				btnAnterior,
 				btnProximo, 
-				btnReiniciar, 
-				btnPular, 
-				txtLinha);
+				btnReiniciar);
 		
 		//Inicializa o número de linhas
 			editor.setNumeracao(editor.getCaixaTexto().getTotalLinhas());
@@ -178,18 +173,6 @@ public class Principal extends JPanel {
 	}
 	
 	/**
-	 * Muda para o estado definido na caixa de texto
-	 */
-	public JButton getBtnPula(){
-		if(btnPular == null){
-			final ImageIcon iconePular = new ImageIcon(getClass().getResource("/resources/pular.png"));
-			btnPular = new JButton(" linha  ->", iconePular);
-		}
-		
-		return btnPular;
-	}
-	
-	/**
 	 * Vai para a primeira linha do editor
 	 */
 	public JButton getBtnReinicia(){
@@ -199,22 +182,6 @@ public class Principal extends JPanel {
 		}
 		
 		return btnReiniciar;
-	}
-	
-	/**
-	 * Texto de entrada para numero de linha
-	 */
-	public JTextField getTxtFieldLinha(){
-		if(txtLinha == null){
-			txtLinha = new JTextField();
-			txtLinha.setPreferredSize(new Dimension(35, 25));
-			txtLinha.setToolTipText("Digite o número da linha e tecle Enter ou pressione o botão ao lado esquerdo");
-			
-			// Limita o número de caracters
-			txtLinha.setDocument(new FixedLengthDocument(4));
-		}
-		
-		return txtLinha;
 	}
 	
 	/**
@@ -288,8 +255,6 @@ public class Principal extends JPanel {
 			controleNavegacao.add(getBtnReinicia());
 			controleNavegacao.add(getBtnAnterior());
 			controleNavegacao.add(getBtnProximo());
-			controleNavegacao.add(getBtnPula());
-			controleNavegacao.add(getTxtFieldLinha());
 			
 			// controles de zoom
 			final ImageIcon iconeZoomMenos = new ImageIcon(getClass().getResource("/resources/zoom_out.png"));
