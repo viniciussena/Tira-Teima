@@ -64,10 +64,10 @@ public class Controlador {
 	Stack<Estado> estados;
 	
 	/** É o estado atual do Tira-Teima*/
-	Estado estadoAtual;
+	Estado estado;
 	
 	/** Indice para controle da lista de estados. */
-	private int indiceAtual;
+	private int indice;
 	/**
 	*Método contrutor único/default.
 	*@param passos Array contendo a lista de estados que o programa executará.
@@ -98,12 +98,12 @@ public class Controlador {
 	    //inicializa a pilha de estados executados
 	    estados = new Stack<Estado>();
 	    //inicializa o estado atual
-	    estadoAtual = null;
+	    estado = null;
 	    //inicializa os registros e as funções
 	    declared_records = new HashMap<String, RecordDefinition>();
 		declared_functions = new HashMap<String, FunctionDeclaration>();
 	
-	    indiceAtual = -1;
+	    indice = -1;
 	
 	    this.mostrador = mostrador;
 	    this.ga = ga;
@@ -151,7 +151,7 @@ public class Controlador {
         /*Cria evento.*/
         btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
-        		indiceAtual = 0;
+        		indice = 0;
         		ajustarBotoes();
         		setEstado(0); //Reinicia
         	}
@@ -185,18 +185,18 @@ public class Controlador {
 	*/
 	private void ajustarBotoes(){
 		/* Ativar/desativar botão "Anterior" */
-		btnAnt.setEnabled(indiceAtual > 0);
-		btnReiniciar.setEnabled(indiceAtual > 0);
+		btnAnt.setEnabled(indice > 0);
+		btnReiniciar.setEnabled(indice > 0);
 		btnPular.setEnabled(true);
 		
 		/* Ativar/desativar botão "Próximo" */
-		btnProx.setEnabled(indiceAtual < passos.size()-1);
+		btnProx.setEnabled(indice < passos.size()-1);
 		
 		/* Definir título do botão "Próximo" */
-		btnProx.setText(indiceAtual < 0 ? "Iniciar" : "Próximo");
+		btnProx.setText(indice < 0 ? "Iniciar" : "Próximo");
 		final ImageIcon iconeIniciar = new ImageIcon(getClass().getResource("/resources/iniciar.png"));
 		final ImageIcon iconeProximo = new ImageIcon(getClass().getResource("/resources/proximo.png"));
-		btnProx.setIcon(indiceAtual < 0 ? iconeIniciar : iconeProximo);
+		btnProx.setIcon(indice < 0 ? iconeIniciar : iconeProximo);
 	}
     /**
 	* Define todos os atributos do objeto estado passado como parâmetro.
@@ -210,26 +210,9 @@ public class Controlador {
 		ga.setEstado(e.est_ga);
 		jump = (Boolean)e.est_jump;
 		jumpTo = (String)e.est_label;
-		prepararProximoPasso(e);
 		ajustarBotoes();
 	}
-	/**
-	 * Prepara o próximo passo marcando (agendando) para dar um jump (desvio na linha de 
-	 * execução) caso seja necessário.
-	 * @param Estado e
-	 */
-    private void prepararProximoPasso(Estado e) {
-    	//se o próximo for jump, prepara para trocar de estado
-    	if ((Boolean)e.est_jump == Boolean.TRUE){
-    		this.jump = Boolean.TRUE;
-    		this.jumpTo = (String)e.est_jumpTo;
-    	}
-    	//se o próximo não for jump, limpa as variáveis de jump
-    	else{
-    		this.jump = Boolean.FALSE;
-    		this.jumpTo = null;
-    	}
-	}
+	
 	/**
 	 * Define o próximo estado incrementando índice e chama método setEstado. 
 	 * 
@@ -242,42 +225,57 @@ public class Controlador {
 	 * @see setEstado
 	 */
 	public void proxEstado () throws TiraTeimaLanguageException{
-//TODO: refazer a lógica de passagem de estado.
-//		/*Coloca o estado atual na pilha, caso haja, para ser possível retornar a ele.*/
-//		if(estadoAtual != null){
-//			estados.push(estadoAtual);
-//		}
-//		
-//		/*Seleciona o estado*/
-//		//Se for jump, pega o estado pelo label.
-//		if(jump == Boolean.TRUE){
-//			passoAtual = procuraPassoPorLabel();
-//			indiceAtual = passos.indexOf(passoAtual);
-//		}
-//		//Se não for jump, pega o próximo estado da lista.
-//		else if(indiceAtual < passos.size()-1){
-//			estadoAtual = (Estado) passos.get(++indiceAtual);
-//		}
-//		
-//		/*Executa os commandos relativos ao passo do estado.*/
-//		Step passoEstado = (Step)estadoAtual.est_passo;
-//		for(Command c : passoEstado.commands){
-//			c.execute(this);
-//		}
-//		
-//		/*Salva o estado*/
-//		saveState(estadoAtual, passoEstado);	
-//		
-//		/*Seta o estado no Tira-Teima*/		
-//		setEstado(estadoAtual);
+		/*Coloca o estado atual na pilha, caso haja, para ser possível retornar a ele.*/
+		if(estado != null){
+			estados.push(estado);
+		}
+		
+		/*Cria um novo estado*/
+		estado = new Estado();
+		
+		/*Seleciona o passo*/
+		Step passo;
+		//Se for jump, pega o passo pelo label.
+		if(jump == Boolean.TRUE){
+			passo = procuraPassoPorLabel();
+			indice = passos.indexOf(passo);
+			//Limpa os atributos de jump
+			jump = Boolean.FALSE;
+			jumpTo = null;
+		}
+		//Se não for jump, pega o próximo passo da lista.
+		else if(indice < passos.size()-1){
+			passo = passos.get(++indice);
+		}
+		//Caso contrário, apenas inicializa a variável, pois os passos acabaram.
+		else{
+			passo = null;
+		}
+		
+		//Caso os passos não tenham acabado
+		if(passo != null){
+			/*Executa os commandos relativos ao passo selecionado.*/
+			for(Command c : passo.commands){
+				c.execute(this);
+			}
+			
+			/*Destaca a linha do editor correspondente ao passo.*/
+			editorTexto.getCaixaTexto().setMarcada(passo.line);
+			
+			/*Salva o estado atual do Tira-Teima*/
+			saveState(estado, passo);
+		}
+		//Ajusta os botões
+		ajustarBotoes();
 	}
 	
-	/** Procura o passo com um label indicado. */
+	/** Procura o passo com um label indicado. 
+	 * @return Step passo */
 	private Step procuraPassoPorLabel() {
 		String labelPasso;
 		for (Step p : passos) {
 			if (p.label != null){
-				labelPasso = (String)p.label;
+				labelPasso = p.label;
 				if(labelPasso.equals(jumpTo)){
 					return p;
 				}
@@ -342,8 +340,6 @@ public class Controlador {
 	 */
 	public void saveState(Estado e, Step step){
 		/** Coloca no estado criado a condição de cada elemento gráfico do tirateima. */
-		editorTexto.getCaixaTexto().setMarcada(step.line);
-		e.est_passo = step;
 		e.est_mostrador = mostrador.getEstado();
 		e.est_editor = editorTexto.getEstado();
 		e.est_console = console.getEstado();
@@ -354,9 +350,6 @@ public class Controlador {
 			e.est_jumpTo = jumpTo;
 		}
 		e.est_jump = jump.booleanValue();
-		/** Limpa os atributos de jump para a criação dos próximos estados */
-		jump = Boolean.FALSE;
-		jumpTo = null;
 	}
 	
 }
