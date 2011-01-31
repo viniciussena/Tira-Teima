@@ -25,9 +25,6 @@ public class CommandNewType extends Command {
 	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {
 		
-		if (c.declared_records.containsKey(name))
-			gerarErro("Tipo '" + name + "' redeclarado!");
-		
 		List<Variavel> vars = new ArrayList<Variavel>();
 		for (VarDefinition ref : fields) {
 			vars.add(newVar(c, ref));
