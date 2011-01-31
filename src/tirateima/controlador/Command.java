@@ -188,13 +188,16 @@ public abstract class Command {
 	 */
 	protected void setValue(Mostrador mostrador, Stack<Object> var_stack, Object value)
 			throws TiraTeimaLanguageException {
+		//pilha que armazenará temporariamente os valores desempilhados para posterior restauração
+		Stack<Object> pilhaAux = new Stack<Object>();
 		
 		Object child, parent;
 		
 		parent = child = var_stack.pop();
+		pilhaAux.push(parent);
 		while (!var_stack.empty()) {
 			parent = var_stack.pop();
-				
+			pilhaAux.push(parent);
 			if (child instanceof Index) {
 				Index i = (Index) child;
 				if (i.isMatrix) {
@@ -225,6 +228,18 @@ public abstract class Command {
 			mostrador.removerSeta(nome_var);
 		} catch (ClassCastException e) {
 			gerarErro("Atribuição inválida!");
+		}
+		restaurarPilha(var_stack,pilhaAux);
+	}
+
+	/**
+	 * Restaura uma pilha a partira de um a pilha axiliar.
+	 * @param var_stack - pilha a ser restaurada
+	 * @param pilhaAux - pilha usada para armazernar temporariamente os valores.
+	 */
+	private void restaurarPilha(Stack<Object> var_stack, Stack<Object> pilhaAux) {
+		while(!pilhaAux.empty()){
+			var_stack.push(pilhaAux.pop());
 		}
 	}
 }
