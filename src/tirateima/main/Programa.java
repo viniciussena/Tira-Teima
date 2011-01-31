@@ -59,8 +59,8 @@ public class Programa extends JFrame {
 	/**
 	 * Método construtor que recebe 2 strings com os caminhos dos arquivos de parâmetros
 	 * Cria e inicializa os componentes
-	 * @param arq_fonte Arquivo Fonte .PAS
-	 * @param arq_texto Arquivo Texto Roteiro .TXT
+	 * @param arq_fonte Arquivo Fonte .C OU .PAS
+	 * @param arq_texto Arquivo Texto Roteiro .TXT OU .DAT
 	 */
 	public Programa(String arq_fonte, String arq_texto) throws Exception{
 		this(new FileReader(arq_fonte), new FileReader(arq_texto));
@@ -121,15 +121,10 @@ public class Programa extends JFrame {
 		
 		if (args.length > 0) {
 			String arq_texto, arq_fonte;
+
+			arq_fonte = args[0];
+			arq_texto = args[1];
 			
-			if (args.length == 1) {
-				String nome_base = args[0];
-				arq_texto = nome_base + ".txt";
-				arq_fonte = nome_base + ".pas";
-			} else {
-				arq_fonte = args[0];
-				arq_texto = args[1];
-			}
 			
 			try {
 				programa = new Programa(arq_fonte, arq_texto);
@@ -139,10 +134,10 @@ public class Programa extends JFrame {
 				programa = new Programa();
 				
 				File txt = new File(arq_texto);
-				File pas = new File(arq_fonte);
+				File src = new File(arq_fonte);
 				
 				String nome_arq = txt.exists() ?
-						pas.getPath() : txt.getPath();
+						src.getPath() : txt.getPath();
 				msg = new String("Não foi possível encontrar o arquivo: " +
 						nome_arq + ".");
 			}

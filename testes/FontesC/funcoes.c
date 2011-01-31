@@ -9,6 +9,5 @@ int main(int argc, char *argv[]){
     x = 10;
     incrementa(&x);
     printf("%d",x);
-    getchar();
     return 1;   
 }

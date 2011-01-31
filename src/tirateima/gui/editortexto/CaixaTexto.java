@@ -34,9 +34,9 @@ import javax.swing.text.StyledDocument;
 import javax.swing.text.TabSet;
 import javax.swing.text.TabStop;
 
-import tirateima.gui.highlighting.CParser;
-import tirateima.gui.highlighting.CParserConstants;
-import tirateima.gui.highlighting.Token;
+import tirateima.gui.highlighting.c.CParser;
+import tirateima.gui.highlighting.c.CParserConstants;
+import tirateima.gui.highlighting.c.Token;
 
 class FullLineHighlightPainter implements Highlighter.HighlightPainter {
 	Color color;
@@ -263,9 +263,6 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 		StyledDocument doc = getStyledDocument();
 		analisando = true;
 		if(highlighted){
-			//Anlex anlex = new Anlex(texto);
-			//Token t = anlex.getToken();
-
 			if ((!texto.equals("")) && (texto != null)) {
 				try {
 					is = new ByteArrayInputStream(texto.getBytes("UTF-8"));
@@ -274,13 +271,8 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 					e.printStackTrace();
 				}
 
-
-
 				if (parser == null)
 					parser = new CParser(is);
-
-
-
 
 				Token t = CParser.getNextToken();
 

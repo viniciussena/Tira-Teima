@@ -163,16 +163,20 @@ public abstract class Command {
 	 */
 	protected void criarSeta(Mostrador mostrador, Stack<Object> var_stack,
 			Point posicaoApontada) throws TiraTeimaLanguageException{
+		//Pilha auxiliar para armazenar temporariamente os valores da pilha.
+		Stack<Object> pilhaAux = new Stack<Object>();
 		
 		Object parent;
 		
 		parent = var_stack.pop();
+		pilhaAux.push(parent);
 				
 		String nome_var = (String) parent;
 		if (!mostrador.hasVariavel(nome_var))
 			gerarErro("Variavel '" + nome_var + "' não foi declarada!");
 		mostrador.adicionarSeta(nome_var,new Seta(nome_var,posicaoApontada));
 		mostrador.modificarVariavel(nome_var, "");
+		restaurarPilha(var_stack,pilhaAux);
 	}
 	
 	
