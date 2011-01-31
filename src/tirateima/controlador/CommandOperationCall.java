@@ -54,8 +54,15 @@ public class CommandOperationCall extends Command
 			case KW_CLOSE:
 				if ((arq = getFile(c, args)) == null)
 					gerarErro("Arquivo não encontrado!");
-				args.remove(0);
+				
+				//remove o primeiro argumento para usar o método executeFileOperation
+				Object argumento = args.remove(0);
+				
 				executeFileOperation(c, cmd, arq, args);
+				
+				//restaura o primeiro argumento para caso o comando seja re-executado
+				args.add(0, argumento);
+				
 				break;
 			case KW_WRITE:
 			case KW_WRITELN:
@@ -89,6 +96,9 @@ public class CommandOperationCall extends Command
 	 */
 	private AbstractArquivo getFile(Controlador c, List<Object> args)
 			throws TiraTeimaLanguageException {
+		//Pilha auxiliar para armazenar temporariamente os valores da pilha.
+		Stack<Object> pilhaAux = new Stack<Object>();
+		
 		ListIterator<Object> i = args.listIterator();
 		if (!i.hasNext())
 			gerarErro("Nome de arquivo era esperado");
@@ -99,6 +109,9 @@ public class CommandOperationCall extends Command
 			Stack<Object> stack = (Stack<Object>) obj;
 			if (stack.size() == 1) {
 				String name = (String) stack.pop();
+				pilhaAux.push(name);
+				restaurarPilha(stack, pilhaAux);
+				obj = stack;
 				return c.ga.getArquivo(name);
 			}
 			else

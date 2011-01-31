@@ -241,7 +241,7 @@ public abstract class Command {
 	 * @param var_stack - pilha a ser restaurada
 	 * @param pilhaAux - pilha usada para armazernar temporariamente os valores.
 	 */
-	private void restaurarPilha(Stack<Object> var_stack, Stack<Object> pilhaAux) {
+	public void restaurarPilha(Stack<Object> var_stack, Stack<Object> pilhaAux) {
 		while(!pilhaAux.empty()){
 			var_stack.push(pilhaAux.pop());
 		}
