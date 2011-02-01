@@ -111,7 +111,10 @@ public class VarChar extends VarLinha {
 			lixo = true;
 		else {
 			lixo = false;
-			Character v = (Character) valor;
+			if(valor.toString().length() > 1){
+				throw new RuntimeException("Só é aceito um caracter");
+			}
+			Character v = valor.toString().charAt(0);
 			this.valor = v;
 			String t;
 			switch (v.charValue()) {

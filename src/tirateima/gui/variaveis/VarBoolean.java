@@ -103,7 +103,15 @@ public class VarBoolean extends VarLinha {
 			lixo = true;
 		else {
 			lixo = false;
-			this.valor = (Boolean) valor;
+			try{
+				this.valor = (Boolean) valor;
+			}catch (Exception e) {
+				if(valor.toString().equalsIgnoreCase("true")){
+					this.valor = Boolean.TRUE;
+				} else if (valor.toString().equalsIgnoreCase("false")){
+					this.valor = Boolean.FALSE;
+				}
+			}
 			this.setTexto(String.valueOf(this.valor));
 		}
 	}

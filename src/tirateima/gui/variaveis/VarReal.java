@@ -111,7 +111,11 @@ public class VarReal extends VarLinha {
 			lixo = true;
 		else {
 			lixo = false;
-			this.valor = (Double) valor;
+			try{
+				this.valor = (Double) valor;
+			} catch (Exception e) {
+				this.valor = Double.parseDouble(valor.toString());
+			}
 			this.setTexto(String.valueOf(this.valor));
 		}
 	}
