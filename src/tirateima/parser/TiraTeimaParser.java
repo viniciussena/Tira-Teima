@@ -10,16 +10,17 @@ import java.util.ListIterator;
 import java.util.Stack;
 
 import tirateima.controlador.CommandAttribution;
-import tirateima.controlador.CommandDirectPointer;
-import tirateima.controlador.CommandEndFunction;
-import tirateima.controlador.CommandInsertText;
 import tirateima.controlador.CommandJump;
 import tirateima.controlador.CommandNewType;
 import tirateima.controlador.CommandNewVar;
 import tirateima.controlador.CommandNewVarText;
-import tirateima.controlador.CommandOperationCall;
-import tirateima.controlador.CommandStartFunction;
+import tirateima.controlador.CommandDirectPointer;
+import tirateima.controlador.CommandReadInput;
 import tirateima.controlador.FunctionDeclaration;
+import tirateima.controlador.CommandStartFunction;
+import tirateima.controlador.CommandEndFunction;
+import tirateima.controlador.CommandOperationCall;
+import tirateima.controlador.CommandInsertText;
 import tirateima.controlador.Index;
 import tirateima.controlador.Step;
 import tirateima.controlador.Type;
@@ -150,16 +151,18 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     } else if (jj_2_11(3)) {
       cmd_jump(p);
     } else if (jj_2_12(3)) {
-      function_declaration(p);
+      cmd_read(p);
     } else if (jj_2_13(3)) {
-      function_start(p);
+      function_declaration(p);
     } else if (jj_2_14(3)) {
-      function_end(p);
+      function_start(p);
     } else if (jj_2_15(3)) {
-      operation_call(p);
+      function_end(p);
     } else if (jj_2_16(3)) {
-      cmd_insert_text(p);
+      operation_call(p);
     } else if (jj_2_17(3)) {
+      cmd_insert_text(p);
+    } else if (jj_2_18(3)) {
       bloco(p);
     } else {
       jj_consume_token(-1);
@@ -173,6 +176,16 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     label = jj_consume_token(IDENTIFIER);
                                p.label = label.image;
     jj_consume_token(COLON);
+  }
+
+  final public void cmd_read(Step p) throws ParseException {
+        Stack<Object> var_stack = new Stack<Object>();
+    jj_consume_token(KW_READ_FROM_USER);
+    jj_consume_token(OPEN_PAR);
+    variavel(var_stack);
+    jj_consume_token(CLOSE_PAR);
+    jj_consume_token(SEMICOLON);
+                         p.addCommand(new CommandReadInput(var_stack));
   }
 
 /**
@@ -228,7 +241,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     while (true) {
       aux = new_vars();
                  fields.addAll(aux);
-      if (jj_2_18(3)) {
+      if (jj_2_19(3)) {
         ;
       } else {
         break label_1;
@@ -250,7 +263,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                           vars.add(v);
     label_2:
     while (true) {
-      if (jj_2_19(3)) {
+      if (jj_2_20(3)) {
         ;
       } else {
         break label_2;
@@ -269,25 +282,25 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 */
   final public Type type() throws ParseException {
         Token t;
-    if (jj_2_20(3)) {
+    if (jj_2_21(3)) {
       t = jj_consume_token(KW_INT);
                                {if (true) return new Type(TypeId.INTEGER);}
-    } else if (jj_2_21(3)) {
+    } else if (jj_2_22(3)) {
       t = jj_consume_token(KW_REAL);
                                 {if (true) return new Type(TypeId.REAL);}
-    } else if (jj_2_22(3)) {
+    } else if (jj_2_23(3)) {
       t = jj_consume_token(KW_CHAR);
                                 {if (true) return new Type(TypeId.CHAR);}
-    } else if (jj_2_23(3)) {
+    } else if (jj_2_24(3)) {
       t = jj_consume_token(KW_STRING);
                                   {if (true) return new Type(TypeId.STRING);}
-    } else if (jj_2_24(3)) {
+    } else if (jj_2_25(3)) {
       t = jj_consume_token(KW_BOOLEAN);
                                    {if (true) return new Type(TypeId.BOOLEAN);}
-    } else if (jj_2_25(3)) {
+    } else if (jj_2_26(3)) {
       t = jj_consume_token(KW_POINTER);
                                    {if (true) return new Type(TypeId.POINTER);}
-    } else if (jj_2_26(3)) {
+    } else if (jj_2_27(3)) {
       t = jj_consume_token(IDENTIFIER);
                                    {if (true) return new Type(TypeId.RECORD, t.image);}
     } else {
@@ -308,27 +321,27 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
         Dimension dimension = null;
         Point posicao = null;
     t_name_var = jj_consume_token(IDENTIFIER);
-    if (jj_2_27(3)) {
+    if (jj_2_28(3)) {
       i = index();
     } else {
       ;
     }
-    if (jj_2_28(3)) {
+    if (jj_2_29(3)) {
       color = cor();
     } else {
       ;
     }
-    if (jj_2_29(3)) {
+    if (jj_2_30(3)) {
       colorOutside = corExterna();
     } else {
       ;
     }
-    if (jj_2_30(3)) {
+    if (jj_2_31(3)) {
       dimension = dimensao();
     } else {
       ;
     }
-    if (jj_2_31(3)) {
+    if (jj_2_32(3)) {
       posicao = posicao();
     } else {
       ;
@@ -467,7 +480,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     jj_consume_token(OPEN_BRACKET);
     t_value = jj_consume_token(INT_NUMBER);
                 result.first = Integer.parseInt(t_value.image);
-    if (jj_2_32(3)) {
+    if (jj_2_33(3)) {
       jj_consume_token(COMMA);
       t_value = jj_consume_token(INT_NUMBER);
                 result.second = Integer.parseInt(t_value.image);
@@ -540,15 +553,15 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                                 var_stack.push(t_name.image);
     label_3:
     while (true) {
-      if (jj_2_33(3)) {
+      if (jj_2_34(3)) {
         ;
       } else {
         break label_3;
       }
-      if (jj_2_34(3)) {
+      if (jj_2_35(3)) {
         i = index();
                               var_stack.push(i);
-      } else if (jj_2_35(3)) {
+      } else if (jj_2_36(3)) {
         jj_consume_token(DOT);
         t_name = jj_consume_token(IDENTIFIER);
                                                 var_stack.push(t_name.image);
@@ -564,25 +577,25 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 */
   final public Object constant() throws ParseException {
         Token t;
-    if (jj_2_36(3)) {
+    if (jj_2_37(3)) {
       t = jj_consume_token(INT_NUMBER);
                 {if (true) return Integer.parseInt(t.image);}
-    } else if (jj_2_37(3)) {
+    } else if (jj_2_38(3)) {
       t = jj_consume_token(FLOAT_NUMBER);
                 {if (true) return Double.parseDouble(t.image);}
-    } else if (jj_2_38(3)) {
+    } else if (jj_2_39(3)) {
       t = jj_consume_token(STRING_LITERAL);
                 {if (true) return tratarString(t.image);}
-    } else if (jj_2_39(3)) {
+    } else if (jj_2_40(3)) {
       t = jj_consume_token(CHAR_LITERAL);
                 {if (true) return tratarChar(t.image);}
-    } else if (jj_2_40(3)) {
+    } else if (jj_2_41(3)) {
       t = jj_consume_token(KW_TRUE);
                 {if (true) return new Boolean(true);}
-    } else if (jj_2_41(3)) {
+    } else if (jj_2_42(3)) {
       t = jj_consume_token(KW_FALSE);
                 {if (true) return new Boolean(false);}
-    } else if (jj_2_42(3)) {
+    } else if (jj_2_43(3)) {
       t = jj_consume_token(KW_NULL);
                 {if (true) return null;}
     } else {
@@ -603,7 +616,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                                 p.addCommand(new CommandNewVarText(t_name.image));
     label_4:
     while (true) {
-      if (jj_2_43(3)) {
+      if (jj_2_44(3)) {
         ;
       } else {
         break label_4;
@@ -645,7 +658,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
         List<VarDefinition> vars = new ArrayList<VarDefinition>();
     label_5:
     while (true) {
-      if (jj_2_44(3)) {
+      if (jj_2_45(3)) {
         ;
       } else {
         break label_5;
@@ -663,28 +676,28 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 */
   final public Type function_type() throws ParseException {
         Token t;
-    if (jj_2_45(3)) {
+    if (jj_2_46(3)) {
       t = jj_consume_token(KW_INT);
                                {if (true) return new Type(TypeId.INTEGER);}
-    } else if (jj_2_46(3)) {
+    } else if (jj_2_47(3)) {
       t = jj_consume_token(KW_REAL);
                                 {if (true) return new Type(TypeId.REAL);}
-    } else if (jj_2_47(3)) {
+    } else if (jj_2_48(3)) {
       t = jj_consume_token(KW_CHAR);
                                 {if (true) return new Type(TypeId.CHAR);}
-    } else if (jj_2_48(3)) {
+    } else if (jj_2_49(3)) {
       t = jj_consume_token(KW_STRING);
                                   {if (true) return new Type(TypeId.STRING);}
-    } else if (jj_2_49(3)) {
+    } else if (jj_2_50(3)) {
       t = jj_consume_token(KW_BOOLEAN);
                                    {if (true) return new Type(TypeId.BOOLEAN);}
-    } else if (jj_2_50(3)) {
+    } else if (jj_2_51(3)) {
       t = jj_consume_token(KW_POINTER);
                                    {if (true) return new Type(TypeId.POINTER);}
-    } else if (jj_2_51(3)) {
+    } else if (jj_2_52(3)) {
       t = jj_consume_token(KW_VOID);
                                 {if (true) return new Type(TypeId.VOID);}
-    } else if (jj_2_52(3)) {
+    } else if (jj_2_53(3)) {
       t = jj_consume_token(IDENTIFIER);
                                    {if (true) return new Type(TypeId.RECORD, t.image);}
     } else {
@@ -701,13 +714,13 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
   final public List<VarDefinition> local_vars_block() throws ParseException {
         List<VarDefinition> vars = new ArrayList<VarDefinition>();
         List<VarDefinition> aux;
-    if (jj_2_54(3)) {
+    if (jj_2_55(3)) {
       jj_consume_token(SEMICOLON);
-    } else if (jj_2_55(3)) {
+    } else if (jj_2_56(3)) {
       jj_consume_token(OPEN_BRACE);
       label_6:
       while (true) {
-        if (jj_2_53(3)) {
+        if (jj_2_54(3)) {
           ;
         } else {
           break label_6;
@@ -770,25 +783,25 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 */
   final public Token operation() throws ParseException {
         Token cmd;
-    if (jj_2_56(3)) {
+    if (jj_2_57(3)) {
       cmd = jj_consume_token(KW_WRITE);
-    } else if (jj_2_57(3)) {
-      cmd = jj_consume_token(KW_WRITELN);
     } else if (jj_2_58(3)) {
-      cmd = jj_consume_token(KW_COMMENT);
+      cmd = jj_consume_token(KW_WRITELN);
     } else if (jj_2_59(3)) {
-      cmd = jj_consume_token(KW_SOUND);
+      cmd = jj_consume_token(KW_COMMENT);
     } else if (jj_2_60(3)) {
-      cmd = jj_consume_token(KW_ASSIGN);
+      cmd = jj_consume_token(KW_SOUND);
     } else if (jj_2_61(3)) {
-      cmd = jj_consume_token(KW_RESET);
+      cmd = jj_consume_token(KW_ASSIGN);
     } else if (jj_2_62(3)) {
-      cmd = jj_consume_token(KW_REWRITE);
+      cmd = jj_consume_token(KW_RESET);
     } else if (jj_2_63(3)) {
-      cmd = jj_consume_token(KW_READ);
+      cmd = jj_consume_token(KW_REWRITE);
     } else if (jj_2_64(3)) {
-      cmd = jj_consume_token(KW_READLN);
+      cmd = jj_consume_token(KW_READ);
     } else if (jj_2_65(3)) {
+      cmd = jj_consume_token(KW_READLN);
+    } else if (jj_2_66(3)) {
       cmd = jj_consume_token(KW_CLOSE);
     } else {
       jj_consume_token(-1);
@@ -806,7 +819,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
         Object a;
         List<Object> result = new ArrayList<Object>();
     jj_consume_token(OPEN_PAR);
-    if (jj_2_66(3)) {
+    if (jj_2_67(3)) {
       a = arg();
                      result.add(a);
     } else {
@@ -814,7 +827,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     }
     label_7:
     while (true) {
-      if (jj_2_67(3)) {
+      if (jj_2_68(3)) {
         ;
       } else {
         break label_7;
@@ -835,13 +848,13 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
   final public Object arg() throws ParseException {
         Object o;
         Stack<Object> var_stack = new Stack<Object>();
-    if (jj_2_68(3)) {
+    if (jj_2_69(3)) {
       variavel(var_stack);
                             {if (true) return var_stack;}
-    } else if (jj_2_69(3)) {
+    } else if (jj_2_70(3)) {
       o = constant();
                          {if (true) return o;}
-    } else if (jj_2_70(3)) {
+    } else if (jj_2_71(3)) {
       jj_consume_token(KW_ENDERECO);
       variavel(var_stack);
                                           {if (true) return var_stack;}
@@ -861,7 +874,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     jj_consume_token(OPEN_BRACE);
     label_8:
     while (true) {
-      if (jj_2_71(3)) {
+      if (jj_2_72(3)) {
         ;
       } else {
         break label_8;
@@ -1368,51 +1381,23 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     finally { jj_save(70, xla); }
   }
 
-  private boolean jj_3R_16() {
-    if (jj_scan_token(KW_GOTO)) return true;
-    if (jj_scan_token(OPEN_PAR)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
+  private boolean jj_2_72(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_72(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(71, xla); }
   }
 
-  private boolean jj_3R_22() {
-    if (jj_scan_token(OPEN_BRACE)) return true;
+  private boolean jj_3R_31() {
     Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_71()) { jj_scanpos = xsp; break; }
+    xsp = jj_scanpos;
+    if (jj_3_69()) {
+    jj_scanpos = xsp;
+    if (jj_3_70()) {
+    jj_scanpos = xsp;
+    if (jj_3_71()) return true;
     }
-    if (jj_scan_token(CLOSE_BRACE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_43() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_15() {
-    if (jj_scan_token(KW_TEXT)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_43()) { jj_scanpos = xsp; break; }
     }
-    if (jj_scan_token(SEMICOLON)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_36() {
-    if (jj_scan_token(KW_CONTEUDO)) return true;
-    if (jj_scan_token(OPEN_PAR)) return true;
-    return false;
-  }
-
-  private boolean jj_3_70() {
-    if (jj_scan_token(KW_ENDERECO)) return true;
-    if (jj_3R_31()) return true;
     return false;
   }
 
@@ -1421,26 +1406,66 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3R_30() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_68()) {
-    jj_scanpos = xsp;
-    if (jj_3_69()) {
-    jj_scanpos = xsp;
-    if (jj_3_70()) return true;
-    }
-    }
-    return false;
-  }
-
-  private boolean jj_3_68() {
-    if (jj_3R_31()) return true;
+  private boolean jj_3_43() {
+    if (jj_scan_token(KW_NULL)) return true;
     return false;
   }
 
   private boolean jj_3_42() {
-    if (jj_scan_token(KW_NULL)) return true;
+    if (jj_scan_token(KW_FALSE)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_17() {
+    if (jj_scan_token(KW_READ_FROM_USER)) return true;
+    if (jj_scan_token(OPEN_PAR)) return true;
+    if (jj_3R_32()) return true;
+    return false;
+  }
+
+  private boolean jj_3_68() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_29() {
+    if (jj_scan_token(KW_DIMENSION)) return true;
+    if (jj_scan_token(OPEN_PAR)) return true;
+    if (jj_scan_token(INT_NUMBER)) return true;
+    return false;
+  }
+
+  private boolean jj_3_41() {
+    if (jj_scan_token(KW_TRUE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_67() {
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
+  private boolean jj_3_40() {
+    if (jj_scan_token(CHAR_LITERAL)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_35() {
+    if (jj_scan_token(OPEN_PAR)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_67()) jj_scanpos = xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_68()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(CLOSE_PAR)) return true;
+    return false;
+  }
+
+  private boolean jj_3_39() {
+    if (jj_scan_token(STRING_LITERAL)) return true;
     return false;
   }
 
@@ -1450,107 +1475,14 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_41() {
-    if (jj_scan_token(KW_FALSE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_67() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_30()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_28() {
-    if (jj_scan_token(KW_DIMENSION)) return true;
-    if (jj_scan_token(OPEN_PAR)) return true;
-    if (jj_scan_token(INT_NUMBER)) return true;
-    return false;
-  }
-
-  private boolean jj_3_40() {
-    if (jj_scan_token(KW_TRUE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_66() {
-    if (jj_3R_30()) return true;
-    return false;
-  }
-
-  private boolean jj_3_39() {
-    if (jj_scan_token(CHAR_LITERAL)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_34() {
-    if (jj_scan_token(OPEN_PAR)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_66()) jj_scanpos = xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_67()) { jj_scanpos = xsp; break; }
-    }
-    if (jj_scan_token(CLOSE_PAR)) return true;
-    return false;
-  }
-
-  private boolean jj_3_17() {
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  private boolean jj_3_16() {
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
-  private boolean jj_3_15() {
-    if (jj_3R_20()) return true;
-    return false;
-  }
-
   private boolean jj_3_38() {
-    if (jj_scan_token(STRING_LITERAL)) return true;
-    return false;
-  }
-
-  private boolean jj_3_14() {
-    if (jj_3R_19()) return true;
-    return false;
-  }
-
-  private boolean jj_3_13() {
-    if (jj_3R_18()) return true;
-    return false;
-  }
-
-  private boolean jj_3_12() {
-    if (jj_3R_17()) return true;
-    return false;
-  }
-
-  private boolean jj_3_37() {
     if (jj_scan_token(FLOAT_NUMBER)) return true;
     return false;
   }
 
-  private boolean jj_3_11() {
-    if (jj_3R_16()) return true;
-    return false;
-  }
-
-  private boolean jj_3_10() {
-    if (jj_3R_15()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_32() {
+  private boolean jj_3R_33() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_36()) {
-    jj_scanpos = xsp;
     if (jj_3_37()) {
     jj_scanpos = xsp;
     if (jj_3_38()) {
@@ -1561,7 +1493,171 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     jj_scanpos = xsp;
     if (jj_3_41()) {
     jj_scanpos = xsp;
-    if (jj_3_42()) return true;
+    if (jj_3_42()) {
+    jj_scanpos = xsp;
+    if (jj_3_43()) return true;
+    }
+    }
+    }
+    }
+    }
+    }
+    return false;
+  }
+
+  private boolean jj_3_37() {
+    if (jj_scan_token(INT_NUMBER)) return true;
+    return false;
+  }
+
+  private boolean jj_3_18() {
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  private boolean jj_3_66() {
+    if (jj_scan_token(KW_CLOSE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_17() {
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  private boolean jj_3_65() {
+    if (jj_scan_token(KW_READLN)) return true;
+    return false;
+  }
+
+  private boolean jj_3_16() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  private boolean jj_3_36() {
+    if (jj_scan_token(DOT)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  private boolean jj_3_64() {
+    if (jj_scan_token(KW_READ)) return true;
+    return false;
+  }
+
+  private boolean jj_3_15() {
+    if (jj_3R_20()) return true;
+    return false;
+  }
+
+  private boolean jj_3_35() {
+    if (jj_3R_26()) return true;
+    return false;
+  }
+
+  private boolean jj_3_34() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_35()) {
+    jj_scanpos = xsp;
+    if (jj_3_36()) return true;
+    }
+    return false;
+  }
+
+  private boolean jj_3_63() {
+    if (jj_scan_token(KW_REWRITE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_14() {
+    if (jj_3R_19()) return true;
+    return false;
+  }
+
+  private boolean jj_3_62() {
+    if (jj_scan_token(KW_RESET)) return true;
+    return false;
+  }
+
+  private boolean jj_3_13() {
+    if (jj_3R_18()) return true;
+    return false;
+  }
+
+  private boolean jj_3_61() {
+    if (jj_scan_token(KW_ASSIGN)) return true;
+    return false;
+  }
+
+  private boolean jj_3_12() {
+    if (jj_3R_17()) return true;
+    return false;
+  }
+
+  private boolean jj_3_60() {
+    if (jj_scan_token(KW_SOUND)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_28() {
+    if (jj_scan_token(KW_COLOR_INSIDE)) return true;
+    if (jj_scan_token(OPEN_PAR)) return true;
+    if (jj_scan_token(INT_NUMBER)) return true;
+    return false;
+  }
+
+  private boolean jj_3_11() {
+    if (jj_3R_16()) return true;
+    return false;
+  }
+
+  private boolean jj_3_59() {
+    if (jj_scan_token(KW_COMMENT)) return true;
+    return false;
+  }
+
+  private boolean jj_3_10() {
+    if (jj_3R_15()) return true;
+    return false;
+  }
+
+  private boolean jj_3_57() {
+    if (jj_scan_token(KW_WRITE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_58() {
+    if (jj_scan_token(KW_WRITELN)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_36() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_57()) {
+    jj_scanpos = xsp;
+    if (jj_3_58()) {
+    jj_scanpos = xsp;
+    if (jj_3_59()) {
+    jj_scanpos = xsp;
+    if (jj_3_60()) {
+    jj_scanpos = xsp;
+    if (jj_3_61()) {
+    jj_scanpos = xsp;
+    if (jj_3_62()) {
+    jj_scanpos = xsp;
+    if (jj_3_63()) {
+    jj_scanpos = xsp;
+    if (jj_3_64()) {
+    jj_scanpos = xsp;
+    if (jj_3_65()) {
+    jj_scanpos = xsp;
+    if (jj_3_66()) return true;
+    }
+    }
+    }
     }
     }
     }
@@ -1573,11 +1669,6 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private boolean jj_3_9() {
     if (jj_3R_14()) return true;
-    return false;
-  }
-
-  private boolean jj_3_36() {
-    if (jj_scan_token(INT_NUMBER)) return true;
     return false;
   }
 
@@ -1593,6 +1684,16 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private boolean jj_3_6() {
     if (jj_3R_11()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_32() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_34()) { jj_scanpos = xsp; break; }
+    }
     return false;
   }
 
@@ -1623,7 +1724,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     jj_scanpos = xsp;
     if (jj_3_16()) {
     jj_scanpos = xsp;
-    if (jj_3_17()) return true;
+    if (jj_3_17()) {
+    jj_scanpos = xsp;
+    if (jj_3_18()) return true;
+    }
     }
     }
     }
@@ -1644,59 +1748,8 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_65() {
-    if (jj_scan_token(KW_CLOSE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_64() {
-    if (jj_scan_token(KW_READLN)) return true;
-    return false;
-  }
-
-  private boolean jj_3_35() {
-    if (jj_scan_token(DOT)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
-  private boolean jj_3_63() {
-    if (jj_scan_token(KW_READ)) return true;
-    return false;
-  }
-
-  private boolean jj_3_34() {
-    if (jj_3R_25()) return true;
-    return false;
-  }
-
-  private boolean jj_3_33() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_34()) {
-    jj_scanpos = xsp;
-    if (jj_3_35()) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3_62() {
-    if (jj_scan_token(KW_REWRITE)) return true;
-    return false;
-  }
-
   private boolean jj_3_2() {
     if (jj_3R_9()) return true;
-    return false;
-  }
-
-  private boolean jj_3_61() {
-    if (jj_scan_token(KW_RESET)) return true;
-    return false;
-  }
-
-  private boolean jj_3_60() {
-    if (jj_scan_token(KW_ASSIGN)) return true;
     return false;
   }
 
@@ -1705,79 +1758,14 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_59() {
-    if (jj_scan_token(KW_SOUND)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_27() {
-    if (jj_scan_token(KW_COLOR_INSIDE)) return true;
-    if (jj_scan_token(OPEN_PAR)) return true;
-    if (jj_scan_token(INT_NUMBER)) return true;
-    return false;
-  }
-
-  private boolean jj_3_58() {
-    if (jj_scan_token(KW_COMMENT)) return true;
-    return false;
-  }
-
-  private boolean jj_3_56() {
-    if (jj_scan_token(KW_WRITE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_57() {
-    if (jj_scan_token(KW_WRITELN)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_35() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_56()) {
-    jj_scanpos = xsp;
-    if (jj_3_57()) {
-    jj_scanpos = xsp;
-    if (jj_3_58()) {
-    jj_scanpos = xsp;
-    if (jj_3_59()) {
-    jj_scanpos = xsp;
-    if (jj_3_60()) {
-    jj_scanpos = xsp;
-    if (jj_3_61()) {
-    jj_scanpos = xsp;
-    if (jj_3_62()) {
-    jj_scanpos = xsp;
-    if (jj_3_63()) {
-    jj_scanpos = xsp;
-    if (jj_3_64()) {
-    jj_scanpos = xsp;
-    if (jj_3_65()) return true;
-    }
-    }
-    }
-    }
-    }
-    }
-    }
-    }
-    }
-    return false;
-  }
-
   private boolean jj_3_4() {
     if (jj_scan_token(0)) return true;
     return false;
   }
 
-  private boolean jj_3R_31() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_33()) { jj_scanpos = xsp; break; }
-    }
+  private boolean jj_3R_21() {
+    if (jj_3R_36()) return true;
+    if (jj_3R_35()) return true;
     return false;
   }
 
@@ -1792,29 +1780,28 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3R_20() {
-    if (jj_3R_35()) return true;
-    if (jj_3R_34()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_26() {
+  private boolean jj_3R_27() {
     if (jj_scan_token(KW_COLOR)) return true;
     if (jj_scan_token(OPEN_PAR)) return true;
     if (jj_scan_token(INT_NUMBER)) return true;
     return false;
   }
 
-  private boolean jj_3R_19() {
+  private boolean jj_3R_20() {
     if (jj_scan_token(KW_END)) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
   private boolean jj_3R_14() {
-    if (jj_3R_31()) return true;
+    if (jj_3R_32()) return true;
     if (jj_scan_token(KW_POINT)) return true;
-    if (jj_3R_33()) return true;
+    if (jj_3R_34()) return true;
+    return false;
+  }
+
+  private boolean jj_3_32() {
+    if (jj_3R_30()) return true;
     return false;
   }
 
@@ -1838,21 +1825,14 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_27() {
-    if (jj_3R_25()) return true;
+  private boolean jj_3_54() {
+    if (jj_3R_24()) return true;
     return false;
   }
 
-  private boolean jj_3_53() {
-    if (jj_3R_23()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_24() {
+  private boolean jj_3R_25() {
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_27()) jj_scanpos = xsp;
     xsp = jj_scanpos;
     if (jj_3_28()) jj_scanpos = xsp;
     xsp = jj_scanpos;
@@ -1861,80 +1841,80 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     if (jj_3_30()) jj_scanpos = xsp;
     xsp = jj_scanpos;
     if (jj_3_31()) jj_scanpos = xsp;
+    xsp = jj_scanpos;
+    if (jj_3_32()) jj_scanpos = xsp;
     return false;
   }
 
-  private boolean jj_3R_18() {
+  private boolean jj_3R_19() {
     if (jj_scan_token(KW_START)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
-    if (jj_3R_34()) return true;
+    if (jj_3R_35()) return true;
+    return false;
+  }
+
+  private boolean jj_3_27() {
+    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
   private boolean jj_3_26() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
-  private boolean jj_3_25() {
     if (jj_scan_token(KW_POINTER)) return true;
     return false;
   }
 
-  private boolean jj_3_24() {
+  private boolean jj_3_25() {
     if (jj_scan_token(KW_BOOLEAN)) return true;
     return false;
   }
 
   private boolean jj_3R_13() {
-    if (jj_3R_31()) return true;
-    if (jj_scan_token(ATTRIBUTION)) return true;
     if (jj_3R_32()) return true;
+    if (jj_scan_token(ATTRIBUTION)) return true;
+    if (jj_3R_33()) return true;
     return false;
   }
 
-  private boolean jj_3_23() {
+  private boolean jj_3_24() {
     if (jj_scan_token(KW_STRING)) return true;
     return false;
   }
 
-  private boolean jj_3_22() {
+  private boolean jj_3_23() {
     if (jj_scan_token(KW_CHAR)) return true;
     return false;
   }
 
-  private boolean jj_3_21() {
+  private boolean jj_3_22() {
     if (jj_scan_token(KW_REAL)) return true;
     return false;
   }
 
-  private boolean jj_3_20() {
+  private boolean jj_3_21() {
     if (jj_scan_token(KW_INT)) return true;
     return false;
   }
 
-  private boolean jj_3_55() {
+  private boolean jj_3_56() {
     if (jj_scan_token(OPEN_BRACE)) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_53()) { jj_scanpos = xsp; break; }
+      if (jj_3_54()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(CLOSE_BRACE)) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  private boolean jj_3_54() {
+  private boolean jj_3_55() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  private boolean jj_3R_37() {
+  private boolean jj_3R_38() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_20()) {
-    jj_scanpos = xsp;
     if (jj_3_21()) {
     jj_scanpos = xsp;
     if (jj_3_22()) {
@@ -1945,7 +1925,9 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     jj_scanpos = xsp;
     if (jj_3_25()) {
     jj_scanpos = xsp;
-    if (jj_3_26()) return true;
+    if (jj_3_26()) {
+    jj_scanpos = xsp;
+    if (jj_3_27()) return true;
     }
     }
     }
@@ -1956,91 +1938,91 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
   }
 
   private boolean jj_3R_12() {
-    if (jj_3R_23()) return true;
-    return false;
-  }
-
-  private boolean jj_3_19() {
-    if (jj_scan_token(COMMA)) return true;
     if (jj_3R_24()) return true;
     return false;
   }
 
-  private boolean jj_3_52() {
+  private boolean jj_3_20() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_25()) return true;
+    return false;
+  }
+
+  private boolean jj_3_53() {
     if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
-  private boolean jj_3_51() {
+  private boolean jj_3_52() {
     if (jj_scan_token(KW_VOID)) return true;
     return false;
   }
 
-  private boolean jj_3_50() {
+  private boolean jj_3_51() {
     if (jj_scan_token(KW_POINTER)) return true;
     return false;
   }
 
-  private boolean jj_3R_23() {
-    if (jj_3R_37()) return true;
-    if (jj_3R_24()) return true;
+  private boolean jj_3R_24() {
+    if (jj_3R_38()) return true;
+    if (jj_3R_25()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_19()) { jj_scanpos = xsp; break; }
+      if (jj_3_20()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  private boolean jj_3_49() {
+  private boolean jj_3_50() {
     if (jj_scan_token(KW_BOOLEAN)) return true;
     return false;
   }
 
-  private boolean jj_3_48() {
+  private boolean jj_3_49() {
     if (jj_scan_token(KW_STRING)) return true;
     return false;
   }
 
-  private boolean jj_3_47() {
+  private boolean jj_3_48() {
     if (jj_scan_token(KW_CHAR)) return true;
     return false;
   }
 
-  private boolean jj_3_46() {
+  private boolean jj_3_47() {
     if (jj_scan_token(KW_REAL)) return true;
     return false;
   }
 
-  private boolean jj_3_32() {
+  private boolean jj_3_33() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_scan_token(INT_NUMBER)) return true;
     return false;
   }
 
-  private boolean jj_3_45() {
+  private boolean jj_3_46() {
     if (jj_scan_token(KW_INT)) return true;
     return false;
   }
 
-  private boolean jj_3R_25() {
+  private boolean jj_3R_26() {
     if (jj_scan_token(OPEN_BRACKET)) return true;
     if (jj_scan_token(INT_NUMBER)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_32()) jj_scanpos = xsp;
+    if (jj_3_33()) jj_scanpos = xsp;
     if (jj_scan_token(CLOSE_BRACKET)) return true;
     return false;
   }
 
-  private boolean jj_3_18() {
-    if (jj_3R_23()) return true;
+  private boolean jj_3_19() {
+    if (jj_3R_24()) return true;
     return false;
   }
 
-  private boolean jj_3_44() {
-    if (jj_3R_23()) return true;
+  private boolean jj_3_45() {
+    if (jj_3R_24()) return true;
     return false;
   }
 
@@ -2051,32 +2033,85 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3R_33() {
+  private boolean jj_3R_34() {
     if (jj_scan_token(OPEN_PAR)) return true;
     if (jj_scan_token(INT_NUMBER)) return true;
     return false;
   }
 
-  private boolean jj_3R_21() {
+  private boolean jj_3R_22() {
     if (jj_scan_token(KW_INSERE_TEXTO)) return true;
-    if (jj_3R_36()) return true;
+    if (jj_3R_37()) return true;
     return false;
   }
 
-  private boolean jj_3_71() {
+  private boolean jj_3_72() {
     if (jj_3R_10()) return true;
     return false;
   }
 
-  private boolean jj_3R_17() {
+  private boolean jj_3R_18() {
     if (jj_scan_token(KW_FUNCTION)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     if (jj_scan_token(OPEN_PAR)) return true;
     return false;
   }
 
-  private boolean jj_3R_29() {
+  private boolean jj_3R_30() {
     if (jj_scan_token(KW_POSITION)) return true;
+    if (jj_3R_34()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_16() {
+    if (jj_scan_token(KW_GOTO)) return true;
+    if (jj_scan_token(OPEN_PAR)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_23() {
+    if (jj_scan_token(OPEN_BRACE)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_72()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(CLOSE_BRACE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_44() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_15() {
+    if (jj_scan_token(KW_TEXT)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_44()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_37() {
+    if (jj_scan_token(KW_CONTEUDO)) return true;
+    if (jj_scan_token(OPEN_PAR)) return true;
+    return false;
+  }
+
+  private boolean jj_3_71() {
+    if (jj_scan_token(KW_ENDERECO)) return true;
+    if (jj_3R_32()) return true;
+    return false;
+  }
+
+  private boolean jj_3_70() {
     if (jj_3R_33()) return true;
     return false;
   }
@@ -2105,7 +2140,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[71];
+  final private JJCalls[] jj_2_rtns = new JJCalls[72];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -2289,7 +2324,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[63];
+    boolean[] la1tokens = new boolean[64];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -2306,7 +2341,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
         }
       }
     }
-    for (int i = 0; i < 63; i++) {
+    for (int i = 0; i < 64; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
@@ -2333,7 +2368,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 71; i++) {
+    for (int i = 0; i < 72; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -2411,6 +2446,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
             case 68: jj_3_69(); break;
             case 69: jj_3_70(); break;
             case 70: jj_3_71(); break;
+            case 71: jj_3_72(); break;
           }
         }
         p = p.next;

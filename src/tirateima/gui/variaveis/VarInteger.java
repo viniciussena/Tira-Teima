@@ -114,7 +114,7 @@ public class VarInteger extends VarLinha {
 			lixo = true;
 		else {
 			lixo = false;
-			this.valor = (Integer) valor;
+			this.valor = Integer.parseInt(valor.toString());
 			this.setTexto(String.valueOf(this.valor));
 		}
 	}

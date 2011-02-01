@@ -18,7 +18,8 @@ public class CommandAttribution extends Command {
 	}
 	
 	/**
-	 * Executa o comando de atribuição setando o valor da variável (respeitado seu escopo). 
+	 * Executa o comando de atribuição setando o valor da variável (respeitado 
+	 * seu escopo). 
 	 */
 	public void execute(Controlador c)
 			throws TiraTeimaLanguageException {

@@ -18,22 +18,23 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
-import tirateima.gerador.CommandAttribution;
-import tirateima.gerador.CommandJump;
-import tirateima.gerador.CommandNewType;
-import tirateima.gerador.CommandNewVar;
-import tirateima.gerador.CommandNewVarText;
-import tirateima.gerador.CommandDirectPointer;
-import tirateima.gerador.FunctionDeclaration;
-import tirateima.gerador.CommandStartFunction;
-import tirateima.gerador.CommandEndFunction;
-import tirateima.gerador.CommandOperationCall;
-import tirateima.gerador.CommandInsertText;
-import tirateima.gerador.Index;
-import tirateima.gerador.Step;
-import tirateima.gerador.Type;
-import tirateima.gerador.TypeId;
-import tirateima.gerador.VarDefinition;
+import tirateima.controlador.CommandAttribution;
+import tirateima.controlador.CommandJump;
+import tirateima.controlador.CommandNewType;
+import tirateima.controlador.CommandNewVar;
+import tirateima.controlador.CommandNewVarText;
+import tirateima.controlador.CommandDirectPointer;
+import tirateima.controlador.CommandReadInput;
+import tirateima.controlador.FunctionDeclaration;
+import tirateima.controlador.CommandStartFunction;
+import tirateima.controlador.CommandEndFunction;
+import tirateima.controlador.CommandOperationCall;
+import tirateima.controlador.CommandInsertText;
+import tirateima.controlador.Index;
+import tirateima.controlador.Step;
+import tirateima.controlador.Type;
+import tirateima.controlador.TypeId;
+import tirateima.controlador.VarDefinition;
 
 public class TiraTeimaParser {
 
@@ -142,6 +143,7 @@ void command(Step p) : {}
 	cmd_direct_pointer(p) |
 	cmd_new_file(p) |
 	cmd_jump(p) |
+	cmd_read(p) |
 	function_declaration(p) |
 	function_start(p) |
 	function_end(p) |
@@ -158,6 +160,16 @@ void label(Step p) :
 {
 	(label = <IDENTIFIER>){p.label = label.image;}
 	<COLON>
+}
+
+void cmd_read(Step p) :
+{	Stack<Object> var_stack = new Stack<Object>();	
+}
+{	<KW_READ_FROM_USER>
+	<OPEN_PAR>
+	variavel(var_stack) 
+	<CLOSE_PAR>
+	<SEMICOLON>	{p.addCommand(new CommandReadInput(var_stack));}
 }
 
 /**
@@ -789,7 +801,8 @@ TOKEN [IGNORE_CASE] : {
 	<KW_INSERE_TEXTO : "insere_texto"> |
 	<KW_CONTEUDO : "conteudo"> |
 	<KW_ENDERECO : "endereco"> |
-	<KW_GOTO : "vaipara">
+	<KW_GOTO : "vaipara"> |
+	<KW_READ_FROM_USER : "recebe">
 	}
 	
 // Constantes
