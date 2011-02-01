@@ -35,9 +35,10 @@ public abstract class Command {
 	 * @param steps A lista de estados sendo gerada. 
 	 * 
 	 * @throws TiraTeimaLanguageException
+	 * @throws ExecutionException 
 	 */
 	public abstract void execute(Controlador c)
-			throws TiraTeimaLanguageException;
+			throws TiraTeimaLanguageException, ExecutionException;
 	
 	/**
 	 * Cria uma nova exceção com a mensagem especificada.

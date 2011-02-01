@@ -2,6 +2,7 @@
 package tirateima.controlador;
 
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -15,6 +16,7 @@ import tirateima.gui.console.Console;
 import tirateima.gui.editortexto.EditorTexto;
 import tirateima.gui.variaveis.Mostrador;
 import tirateima.parser.ParseException;
+import tirateima.parser.TiraTeimaParser;
 
 /**
 * Classe que fornece os métodos de controle da execução do programa tirateima
@@ -22,9 +24,6 @@ import tirateima.parser.ParseException;
 * @Author Luciano Santos e Ian Schechtman
 */
 public class Controlador {
-	/** Gerador utilizado para criar estados. */
-	Gerador gerador;	
-	
 	/** Editor de texto.*/
 	public EditorTexto editorTexto;
 	
@@ -88,10 +87,8 @@ public class Controlador {
 	                JButton btnAnt, JButton btnProx,
 	                JButton btnReiniciar) throws TiraTeimaLanguageException, ParseException {
 		
-		//recebe o gerador
-		gerador = new Gerador();
 		//cria a lista de estados com label, nro de liha e passo a ser executado
-	    passos = this.gerador.parse(arq_texto);
+	    passos = parse(arq_texto);
 	    //inicializa a pilha de estados executados
 	    estados = new Stack<Estado>();
 	    //inicializa o estado atual
@@ -240,19 +237,28 @@ public class Controlador {
 		
 		//Caso os passos não tenham acabado
 		if(passo != null){
-			/*Executa os commandos relativos ao passo selecionado.*/
-			for(Command c : passo.commands){
-				c.execute(this);
+			try{
+			
+				/*Executa os commandos relativos ao passo selecionado.*/
+				for(Command c : passo.commands){
+					c.execute(this);
+				}
+				
+				/*Destaca a linha do editor correspondente ao passo.*/
+				editorTexto.getCaixaTexto().setMarcada(passo.line);
+			
+				/*Salva o estado atual do Tira-Teima*/
+				saveState(estado, passo);
+				
+				/*Seta o estado*/
+				setEstado(estado);
+				
+			}catch (ExecutionException e) {
+				/*Volta para o estado anterior */
+				antEstado();
 			}
 			
-			/*Destaca a linha do editor correspondente ao passo.*/
-			editorTexto.getCaixaTexto().setMarcada(passo.line);
-			
-			/*Salva o estado atual do Tira-Teima*/
-			saveState(estado, passo);
-			
-			/*Seta o estado*/
-			setEstado(estado);
+				
 		}
 		//Ajusta os botões
 		ajustarBotoes();
@@ -305,4 +311,29 @@ public class Controlador {
 		}
 		e.est_jump = jump.booleanValue();
 	}	
+	
+	/**
+	 * Analisa um arquivo de comandos do Tira-Teima e gera a lista de passos.
+	 * Recebe um arquivo reader a ser lido, inicializa o parser e chama o 
+	 * parser para ler passo a passo o roteiro do programa.
+	 *  
+	 * @param reader
+	 * @return List<Step> uma lista de de passos.
+	 * @throws TiraTeimaLanguageException
+	 * @throws ParseException
+	 */
+	private List<Step> parse(Reader reader) throws TiraTeimaLanguageException, ParseException {		
+		TiraTeimaParser parser = new TiraTeimaParser(reader);
+		/** Inicializa a lista de estados e os passos a serem executados sobre a variável step */
+		Step step;
+		List<Step> passos = new ArrayList<Step>();
+		/** Enquanto o parser ler um passo e retorná-lo */
+		while ((step = parser.step()) != null) {
+			/** Imprime o passo para fins de depuração */
+			System.out.println(step.toString());
+			/** Adiciona o estado criado à lista de estados. */
+			passos.add(step);
+		}
+		return passos;
+	}
 }
