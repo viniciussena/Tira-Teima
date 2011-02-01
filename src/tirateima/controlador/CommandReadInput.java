@@ -37,6 +37,15 @@ public class CommandReadInput extends Command{
 				null, 
 				null, 
 				null);
+		//Informa condição de prosseguimento
+		if(value == null){
+			JOptionPane.showMessageDialog(null, 
+					"Para prosseguir, o valor deverá ser informado.", 
+					"Aviso", 
+					JOptionPane.WARNING_MESSAGE);
+			throw new ExecutionException("Valor não informado.", this.getClass().toString());
+		}
+		
 		//Tenta setar o valor de entrada para o usuário.
 		try{
 			setValue(c.mostrador, var_stack, value);
@@ -49,7 +58,7 @@ public class CommandReadInput extends Command{
 					"Erro", 
 					JOptionPane.ERROR_MESSAGE);
 			//TODO: lançar mensagens diferentes para os diferentes tipos de exceção (mais didático).
-			throw new ExecutionException("Valor não informado ou incorreto.", this.getClass().toString());
+			throw new ExecutionException("Valor incorreto.", this.getClass().toString());
 		}
 	}
 
