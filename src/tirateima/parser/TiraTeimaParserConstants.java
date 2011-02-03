@@ -95,37 +95,39 @@ public interface TiraTeimaParserConstants {
   /** RegularExpression Id. */
   int KW_READ_FROM_USER = 47;
   /** RegularExpression Id. */
-  int INT_NUMBER = 48;
+  int KW_IF = 48;
   /** RegularExpression Id. */
-  int IDENTIFIER = 49;
+  int INT_NUMBER = 49;
   /** RegularExpression Id. */
-  int FLOAT_NUMBER = 50;
+  int IDENTIFIER = 50;
   /** RegularExpression Id. */
-  int STRING_LITERAL = 51;
+  int FLOAT_NUMBER = 51;
   /** RegularExpression Id. */
-  int CHAR_LITERAL = 52;
+  int STRING_LITERAL = 52;
   /** RegularExpression Id. */
-  int OPEN_BRACE = 53;
+  int CHAR_LITERAL = 53;
   /** RegularExpression Id. */
-  int CLOSE_BRACE = 54;
+  int OPEN_BRACE = 54;
   /** RegularExpression Id. */
-  int OPEN_BRACKET = 55;
+  int CLOSE_BRACE = 55;
   /** RegularExpression Id. */
-  int CLOSE_BRACKET = 56;
+  int OPEN_BRACKET = 56;
   /** RegularExpression Id. */
-  int OPEN_PAR = 57;
+  int CLOSE_BRACKET = 57;
   /** RegularExpression Id. */
-  int CLOSE_PAR = 58;
+  int OPEN_PAR = 58;
   /** RegularExpression Id. */
-  int DOT = 59;
+  int CLOSE_PAR = 59;
   /** RegularExpression Id. */
-  int COMMA = 60;
+  int DOT = 60;
   /** RegularExpression Id. */
-  int COLON = 61;
+  int COMMA = 61;
   /** RegularExpression Id. */
-  int SEMICOLON = 62;
+  int COLON = 62;
   /** RegularExpression Id. */
-  int ATTRIBUTION = 63;
+  int SEMICOLON = 63;
+  /** RegularExpression Id. */
+  int ATTRIBUTION = 64;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -180,6 +182,7 @@ public interface TiraTeimaParserConstants {
     "\"endereco\"",
     "\"vaipara\"",
     "\"recebe\"",
+    "\"se\"",
     "<INT_NUMBER>",
     "<IDENTIFIER>",
     "<FLOAT_NUMBER>",
