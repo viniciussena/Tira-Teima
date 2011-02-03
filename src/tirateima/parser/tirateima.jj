@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
+import tirateima.controlador.Controlador;
+import tirateima.controlador.Command;
+
 import tirateima.controlador.CommandAttribution;
 import tirateima.controlador.CommandJump;
 import tirateima.controlador.CommandConditionalJump;
@@ -180,29 +183,31 @@ void cmd_read(Step p) :
  * desvio se a expressão avaliada for verdadeira.
  */
 void cmd_conditional_jump(Step p) :
-{	Token expressao;
+{	Stack<Object> pilhaSimbolos;
 	Token label;
 }
 {	<KW_IF>
 	<OPEN_PAR>
-	(expressao = expression())
+	(pilhaSimbolos = expression())
 	<CLOSE_PAR>
 	<KW_GOTO>
 	<OPEN_PAR>
 	(label = <IDENTIFIER>)	{
-	  p.addCommand(new CommandConditionalJump(label.image,expressao.image));	}
+	  p.addCommand(new CommandConditionalJump(label.image,pilhaSimbolos));	}
 	<CLOSE_PAR>
 	<SEMICOLON>
 }
 
 /**
- * Executa o parse de uma expressão.
+ * Executa o parse de uma expressão. Coloca cada símbolo encontrado em uma
+ * pilha para ser computada em tempo de execução.
  */
-Token expression() :
-{	Token expressao;
+Stack<Object> expression() :
+{
+	Stack<Object> var_stack = new Stack<Object>();
 }
-{	(expressao = <KW_TRUE>) |
-	(expressao = <KW_FALSE>)	{		return expressao;
+{	variavel(var_stack)	{
+		return var_stack;
 	}
 }
 

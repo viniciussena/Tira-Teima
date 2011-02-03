@@ -143,6 +143,7 @@ public class Controlador {
         /*Botão para reiniciar.*/
         this.btnReiniciar = btnReiniciar;
         /*Cria evento.*/
+        //TODO: arrumar reset, pois valores de variáveis não são apagados.
         btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
         		indice = -1;

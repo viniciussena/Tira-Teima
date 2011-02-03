@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
+import tirateima.controlador.Controlador;
+import tirateima.controlador.Command;
 import tirateima.controlador.CommandAttribution;
 import tirateima.controlador.CommandJump;
 import tirateima.controlador.CommandConditionalJump;

@@ -127,7 +127,7 @@ public abstract class Command {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected Object getValue(Controlador c, List<Object> var) {
+	static public Object getValue(Controlador c, List<Object> var) {
 		Object aux, value;
 		
 		ListIterator<Object> i = var.listIterator();
