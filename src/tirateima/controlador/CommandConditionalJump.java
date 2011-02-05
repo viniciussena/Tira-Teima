@@ -16,7 +16,10 @@ public class CommandConditionalJump extends Command {
 	public void execute(Controlador c) throws TiraTeimaLanguageException,
 			ExecutionException {
 		/** Executa o Jump se a expressão for verdadeira */
-		
+		if(!pilhaSimbolos.empty()){
+			System.out.println(pilhaSimbolos.toString());
+			System.out.println(pilhaSimbolos.pop().toString());
+		}
 //		if((Integer)getValue(c, pilhaSimbolos) >= 0){
 //			c.jump = Boolean.TRUE;
 //			c.jumpTo = this.label;

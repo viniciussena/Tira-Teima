@@ -20,6 +20,7 @@ import java.util.Stack;
 
 import tirateima.controlador.Controlador;
 import tirateima.controlador.Command;
+import tirateima.controlador.Operando;
 
 import tirateima.controlador.CommandAttribution;
 import tirateima.controlador.CommandJump;
@@ -187,7 +188,7 @@ void cmd_conditional_jump(Step p) :
 }
 {	<KW_IF>
 	<OPEN_PAR>
-	expression()
+	expression(pilhaSimbolos)
 	<CLOSE_PAR>
 	<KW_GOTO>
 	<OPEN_PAR>
@@ -204,79 +205,112 @@ void cmd_conditional_jump(Step p) :
  * arquivo C.jj deste projeto. Ele utiliza a mesma sintaxe, porém com menos
  * possiblidades, o que poderá ser acrescentado de acordo com os requisitos
  * da evolução do Tira-Teima.
+ *
+ * @param Stack<Object> pilha de símbolos para receber cada valor lido.
  */
-void expression() : {}
-{	AssignmentExpression()
+void expression(Stack<Object> pilhaSimbolos) : {}
+{	AssignmentExpression(pilhaSimbolos)
 }
 
-void AssignmentExpression() : {}
+void AssignmentExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	  LOOKAHEAD(UnaryExpression() AssignmentOperator()) UnaryExpression() AssignmentOperator() AssignmentExpression() |
-	  LOOKAHEAD(3) ConditionalExpression()
+	  LOOKAHEAD(UnaryExpression(pilhaSimbolos) AssignmentOperator(pilhaSimbolos)) UnaryExpression(pilhaSimbolos) AssignmentOperator(pilhaSimbolos) AssignmentExpression(pilhaSimbolos) |
+	  LOOKAHEAD(3) ConditionalExpression(pilhaSimbolos)
 }
 
-void UnaryExpression() : {}
+void UnaryExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	LOOKAHEAD(3) PrimaryExpression() |
-	UnaryOperator() UnaryExpression()
+	LOOKAHEAD(3) PrimaryExpression(pilhaSimbolos) |
+	UnaryOperator(pilhaSimbolos) UnaryExpression(pilhaSimbolos)
 }
 
-void AssignmentOperator() : {}
+void AssignmentOperator(Stack<Object> pilhaSimbolos) : {}
 {
-	<ATTRIBUTION>
+	<ATTRIBUTION> {pilhaSimbolos.push(Operando.ASSIGN);}
 }
 
-void ConditionalExpression() : {}
+void ConditionalExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	LogicalORExpression()
+	LogicalORExpression(pilhaSimbolos)
 }
 
-void UnaryOperator() : {}
+void UnaryOperator(Stack<Object> pilhaSimbolos) : {}
 {
-	<NOT_OP> |
-	<ADD_OP> |
-	<SUB_OP>
+	<NOT_OP> {pilhaSimbolos.push(Operando.NOT_OP);}
 }
 
-void PrimaryExpression() :
+void PrimaryExpression(Stack<Object> pilhaSimbolos) :
 {
 	Stack<Object> var_stack = new Stack<Object>();
+	Object constante;
 }
 {
-	variavel(var_stack) |
-	constant() |
-	<OPEN_PAR> expression() <CLOSE_PAR>
+	variavel(var_stack) {pilhaSimbolos.push(var_stack);}      |
+	(constante = constant()) {pilhaSimbolos.push(constante);} |
+	<OPEN_PAR> {pilhaSimbolos.push(Operando.OPEN_PAR);}
+	expression(pilhaSimbolos)
+	<CLOSE_PAR> {pilhaSimbolos.push(Operando.CLOSE_PAR);}
 }
 
-void LogicalORExpression() : {}
+void LogicalORExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	LogicalANDExpression() [ <OR_OP> LogicalORExpression() ]
+	LogicalANDExpression(pilhaSimbolos)
+	[ <OR_OP> {pilhaSimbolos.push(Operando.OR_OP);}
+		LogicalORExpression(pilhaSimbolos)
+	]
 }
 
-void LogicalANDExpression() : {}
+void LogicalANDExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	EqualityExpression() [ <AND_OP> LogicalANDExpression() ]
+	EqualityExpression(pilhaSimbolos)
+	[ <AND_OP> {pilhaSimbolos.push(Operando.AND_OP);}
+		LogicalANDExpression(pilhaSimbolos)
+	]
 }
 
-void EqualityExpression() : {}
+void EqualityExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	RelationalExpression() [ ( <EQ_OP> | <NE_OP> ) EqualityExpression() ]
+	RelationalExpression(pilhaSimbolos)
+	[
+		(<EQ_OP> {pilhaSimbolos.push(Operando.EQ_OP);}|
+		 <NE_OP> {pilhaSimbolos.push(Operando.NE_OP);})
+		EqualityExpression(pilhaSimbolos)
+	]
 }
 
-void RelationalExpression() : {}
+void RelationalExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	AdditiveExpression() [ ( <LT_OP> | <GT_OP> | <LE_OP> | <GE_OP> ) RelationalExpression() ]
+	AdditiveExpression(pilhaSimbolos)
+	[
+		(<LT_OP> {pilhaSimbolos.push(Operando.LT_OP);}|
+		 <GT_OP> {pilhaSimbolos.push(Operando.GT_OP);}|
+		 <LE_OP> {pilhaSimbolos.push(Operando.LE_OP);}|
+		 <GE_OP> {pilhaSimbolos.push(Operando.GE_OP);})
+		RelationalExpression(pilhaSimbolos)
+	]
 }
 
-void AdditiveExpression() : {}
+void AdditiveExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	MultiplicativeExpression() [ ( <ADD_OP> | <SUB_OP> ) AdditiveExpression() ]
+	MultiplicativeExpression(pilhaSimbolos)
+	[
+		(<ADD_OP> {pilhaSimbolos.push(Operando.ADD_OP);}|
+		 <SUB_OP> {pilhaSimbolos.push(Operando.SUB_OP);})
+		AdditiveExpression(pilhaSimbolos)
+	]
 }
 
-void MultiplicativeExpression() : {}
+void MultiplicativeExpression(Stack<Object> pilhaSimbolos) : {}
 {
-	UnaryExpression() [ ( <MULT_OP> | <DIV_OP> | <MOD_OP> ) MultiplicativeExpression() ]
+	UnaryExpression(pilhaSimbolos)
+	[
+		(<MULT_OP> {pilhaSimbolos.push(Operando.MULT_OP);}|
+		 <DIV_OP>  {pilhaSimbolos.push(Operando.DIV_OP);}|
+		 <MOD_OP>  {pilhaSimbolos.push(Operando.MOD_OP);})
+		MultiplicativeExpression(pilhaSimbolos)
+	]
 }
+
 /**
 *   Cria um comando de jump incondicional e o insere na lista de passos. O comando jump faz com que se vá
 *   para um estado que não necessáriamente é o próximo da lista. Procura-se, então, o passo
