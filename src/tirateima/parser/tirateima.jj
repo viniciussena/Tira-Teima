@@ -187,7 +187,7 @@ void cmd_conditional_jump(Step p) :
 }
 {	<KW_IF>
 	<OPEN_PAR>
-	expression(pilhaSimbolos)
+	expression()
 	<CLOSE_PAR>
 	<KW_GOTO>
 	<OPEN_PAR>
@@ -208,71 +208,83 @@ void cmd_conditional_jump(Step p) :
  * foram substituídas por
  * A -> a (x)*
  */
-void expression(Stack<Object> pilhaSimbolos) : {}
-{	logical_or_expression(pilhaSimbolos) |
-	unary_expression(pilhaSimbolos) assignment_operator(pilhaSimbolos) expression(pilhaSimbolos)
+void expression() : {}
+{	AssignmentExpression()
 }
 
-void unary_expression(Stack<Object> pilhaSimbolos) : {}
+void AssignmentExpression() : {}
 {
-  	postfix_expression(pilhaSimbolos) |
-  	unary_operator(pilhaSimbolos) unary_expression(pilhaSimbolos)}
+	  LOOKAHEAD(UnaryExpression() AssignmentOperator()) UnaryExpression() AssignmentOperator() AssignmentExpression() |
+	  LOOKAHEAD(3) ConditionalExpression()
+}
 
-void assignment_operator(Stack<Object> pilhaSimbolos) : {}
+void UnaryExpression() : {}
+{
+	LOOKAHEAD(3) PostfixExpression() |
+	UnaryOperator() UnaryExpression()
+}
+
+void AssignmentOperator() : {}
 {
 	<ATTRIBUTION>
 }
 
-void logical_or_expression(Stack<Object> pilhaSimbolos) : {}
+void ConditionalExpression() : {}
 {
-  	logical_and_expression(pilhaSimbolos) (<OR_OP> logical_or_expression(pilhaSimbolos))*}
+	LogicalORExpression()
+}
 
-void postfix_expression(Stack<Object> pilhaSimbolos) : {}
+void PostfixExpression() : {}
 {
-	primary_expression(pilhaSimbolos)}
+	PrimaryExpression()
+}
 
-void unary_operator(Stack<Object> pilhaSimbolos) : {}
+void UnaryOperator() : {}
 {
 	<NOT_OP> |
 	<ADD_OP> |
-	<SUB_OP>	 }
+	<SUB_OP>
+}
 
-void logical_and_expression(Stack<Object> pilhaSimbolos) : {}
-{
-	equality_expression(pilhaSimbolos) (<AND_OP> logical_and_expression(pilhaSimbolos))* }
-
-void primary_expression(Stack<Object> pilhaSimbolos) :
+void PrimaryExpression() :
 {
 	Stack<Object> var_stack = new Stack<Object>();
 }
 {
 	variavel(var_stack) |
 	constant() |
-	<OPEN_PAR> expression(pilhaSimbolos) <CLOSE_PAR>}
+	<OPEN_PAR> expression() <CLOSE_PAR>
+}
 
-void equality_expression(Stack<Object> pilhaSimbolos) : {}
+void LogicalORExpression() : {}
 {
-	relational_expression(pilhaSimbolos) (<EQ_OP> equality_expression(pilhaSimbolos))* |
-	relational_expression(pilhaSimbolos) (<NE_OP> equality_expression(pilhaSimbolos))*}
+	LogicalANDExpression() [ <OR_OP> LogicalORExpression() ]
+}
 
-void relational_expression(Stack<Object> pilhaSimbolos) : {}
+void LogicalANDExpression() : {}
 {
-	aditive_expression(pilhaSimbolos) (<LT_OP> relational_expression(pilhaSimbolos))* |
-	aditive_expression(pilhaSimbolos) (<GT_OP> relational_expression(pilhaSimbolos))* |
-	aditive_expression(pilhaSimbolos) (<LE_OP> relational_expression(pilhaSimbolos))* |
-	aditive_expression(pilhaSimbolos) (<GE_OP> relational_expression(pilhaSimbolos))*}
+	EqualityExpression() [ <AND_OP> LogicalANDExpression() ]
+}
 
-void aditive_expression(Stack<Object> pilhaSimbolos) : {}
+void EqualityExpression() : {}
 {
-	multiplicative_expression(pilhaSimbolos) (<ADD_OP> aditive_expression(pilhaSimbolos))* |
-	multiplicative_expression(pilhaSimbolos) (<SUB_OP> aditive_expression(pilhaSimbolos))*}
+	RelationalExpression() [ ( <EQ_OP> | <NE_OP> ) EqualityExpression() ]
+}
 
-void multiplicative_expression(Stack<Object> pilhaSimbolos) : {}
+void RelationalExpression() : {}
 {
-	unary_expression(pilhaSimbolos) (<MULT_OP> multiplicative_expression(pilhaSimbolos))* |
-	unary_expression(pilhaSimbolos) (<DIV_OP> multiplicative_expression(pilhaSimbolos))* |
-	unary_expression(pilhaSimbolos) (<MOD_OP> multiplicative_expression(pilhaSimbolos))*}
+	AdditiveExpression() [ ( <LT_OP> | <GT_OP> | <LE_OP> | <GE_OP> ) RelationalExpression() ]
+}
 
+void AdditiveExpression() : {}
+{
+	MultiplicativeExpression() [ ( <ADD_OP> | <SUB_OP> ) AdditiveExpression() ]
+}
+
+void MultiplicativeExpression() : {}
+{
+	UnaryExpression() [ ( <MULT_OP> | <DIV_OP> | <MOD_OP> ) MultiplicativeExpression() ]
+}
 /**
 *   Cria um comando de jump incondicional e o insere na lista de passos. O comando jump faz com que se vá
 *   para um estado que não necessáriamente é o próximo da lista. Procura-se, então, o passo
