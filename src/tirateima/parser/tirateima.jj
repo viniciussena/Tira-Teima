@@ -200,13 +200,10 @@ void cmd_conditional_jump(Step p) :
 /**
  * Executa o parse de uma expressão. Coloca cada símbolo encontrado em uma
  * pilha para ser computada em tempo de execução. Para tanto, foi utilizada
- * uma gramática reduzida baseada na gramática do C ANSI, de modo que
- * posteriormente ela poderá atender a novas necessidades.
- * Por não se aceitar recursão à esquerda no JavaCC, as regras no C ANSI do
- * tipo
- * A -> a | Ax
- * foram substituídas por
- * A -> a (x)*
+ * uma gramática reduzida baseada na gramática do C, a qual encontra-se no
+ * arquivo C.jj deste projeto. Ele utiliza a mesma sintaxe, porém com menos
+ * possiblidades, o que poderá ser acrescentado de acordo com os requisitos
+ * da evolução do Tira-Teima.
  */
 void expression() : {}
 {	AssignmentExpression()
@@ -220,7 +217,7 @@ void AssignmentExpression() : {}
 
 void UnaryExpression() : {}
 {
-	LOOKAHEAD(3) PostfixExpression() |
+	LOOKAHEAD(3) PrimaryExpression() |
 	UnaryOperator() UnaryExpression()
 }
 
@@ -232,11 +229,6 @@ void AssignmentOperator() : {}
 void ConditionalExpression() : {}
 {
 	LogicalORExpression()
-}
-
-void PostfixExpression() : {}
-{
-	PrimaryExpression()
 }
 
 void UnaryOperator() : {}
@@ -629,28 +621,37 @@ void variavel(Stack<Object> var_stack) : {
 *   Retorna um literal (inteiro, numérico, string, char, boolena etc.)
 */
 Object constant() : {
-	Token t;
+    Token sinal = null;
+	Token constante;
 }
 {
-	t = <INT_NUMBER> {
-		return Integer.parseInt(t.image);
+  	(sinal = <ADD_OP> | sinal = <SUB_OP>)?
+	(constante = <INT_NUMBER>) {
+	  	if(sinal != null)
+			return Integer.parseInt(sinal.image + constante.image);
+		else
+			return Integer.parseInt(constante.image);
 	} |
-	t = <FLOAT_NUMBER> {
-		return Double.parseDouble(t.image);
+	(sinal = <ADD_OP> | sinal = <SUB_OP>)?
+	(constante = <FLOAT_NUMBER>) {
+	  	if(sinal != null)
+			return Double.parseDouble(sinal.image + constante.image);
+		else
+			return Double.parseDouble(constante.image);
 	} |
-	t = <STRING_LITERAL> {
-		return tratarString(t.image);
+	constante = <STRING_LITERAL> {
+		return tratarString(constante.image);
 	} |
-	t = <CHAR_LITERAL> {
-		return tratarChar(t.image);
+	constante = <CHAR_LITERAL> {
+		return tratarChar(constante.image);
 	} |
-	t = <KW_TRUE> {
+	constante = <KW_TRUE> {
 		return new Boolean(true);
 	} |
-	t = <KW_FALSE> {
+	constante = <KW_FALSE> {
 		return new Boolean(false);
 	} |
-	t = <KW_NULL> {
+	constante = <KW_NULL> {
 		return null;
 	}
 }
@@ -921,9 +922,9 @@ TOKEN [IGNORE_CASE] : {
 	
 // Constantes
 TOKEN : {
-	<INT_NUMBER : ("+"|"-")?(<DIGITS>)> |
+	<INT_NUMBER : (<DIGITS>)> |
 	<IDENTIFIER : (<LETTER>)(<LETTERDIGIT>)*> |
-	<FLOAT_NUMBER : ("+"|"-")?(<DIGIT>)*"."(<DIGITS>)> |
+	<FLOAT_NUMBER : (<DIGIT>)*"."(<DIGITS>)> |
 	<STRING_LITERAL : "\""((~["\"", "\r", "\n", "\\"]) | <SCAPE_SEQUENCE> | "\\\"")*"\""> |
 	<CHAR_LITERAL : "'"((~["'", "\r", "\n", "\\"]) | <SCAPE_SEQUENCE> | "\\'")"'">}
 
