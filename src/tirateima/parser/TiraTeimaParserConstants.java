@@ -128,6 +128,34 @@ public interface TiraTeimaParserConstants {
   int SEMICOLON = 63;
   /** RegularExpression Id. */
   int ATTRIBUTION = 64;
+  /** RegularExpression Id. */
+  int OR_OP = 65;
+  /** RegularExpression Id. */
+  int AND_OP = 66;
+  /** RegularExpression Id. */
+  int EQ_OP = 67;
+  /** RegularExpression Id. */
+  int NE_OP = 68;
+  /** RegularExpression Id. */
+  int LT_OP = 69;
+  /** RegularExpression Id. */
+  int GT_OP = 70;
+  /** RegularExpression Id. */
+  int LE_OP = 71;
+  /** RegularExpression Id. */
+  int GE_OP = 72;
+  /** RegularExpression Id. */
+  int NOT_OP = 73;
+  /** RegularExpression Id. */
+  int ADD_OP = 74;
+  /** RegularExpression Id. */
+  int SUB_OP = 75;
+  /** RegularExpression Id. */
+  int MULT_OP = 76;
+  /** RegularExpression Id. */
+  int DIV_OP = 77;
+  /** RegularExpression Id. */
+  int MOD_OP = 78;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -199,6 +227,20 @@ public interface TiraTeimaParserConstants {
     "\":\"",
     "\";\"",
     "\"=\"",
+    "\"||\"",
+    "\"&&\"",
+    "\"==\"",
+    "\"!=\"",
+    "\"<\"",
+    "\">\"",
+    "\"<=\"",
+    "\">=\"",
+    "\"!\"",
+    "\"+\"",
+    "\"-\"",
+    "\"*\"",
+    "\"/\"",
+    "\"%\"",
   };
 
 }

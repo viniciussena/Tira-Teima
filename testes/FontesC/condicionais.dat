@@ -1,7 +1,7 @@
 3;
 4 int a cor(170,170,170) tamanho(50,20) posicao(10,10);
 5 recebe(a);
-6 se (a) vaipara(label1);
+6 se (a > 0) vaipara(label1);
 9 {writeln("número negativo"); vaipara(label2);}
 7 label1: writeln("número positivo");
 10 label2:;

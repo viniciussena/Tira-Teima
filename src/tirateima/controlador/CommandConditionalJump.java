@@ -17,10 +17,10 @@ public class CommandConditionalJump extends Command {
 			ExecutionException {
 		/** Executa o Jump se a expressão for verdadeira */
 		
-		if((Integer)getValue(c, pilhaSimbolos) >= 0){
-			c.jump = Boolean.TRUE;
-			c.jumpTo = this.label;
-		}
+//		if((Integer)getValue(c, pilhaSimbolos) >= 0){
+//			c.jump = Boolean.TRUE;
+//			c.jumpTo = this.label;
+//		}
 		
 	}
 

@@ -1,0 +1,4 @@
+TODO:
+[ ] Remover warnings do JavaCC (problema com lookahead).
+[ ] Fazer o tira-teima voltar a aceitar Pascal como linguagem.
+[ ] Passar a aceitar expressões à direita da atribuição.
