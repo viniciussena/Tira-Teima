@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import tirateima.gui.Principal;
+import tirateima.gui.editortexto.Linguagem;
 
 
 /**
@@ -46,6 +47,8 @@ import tirateima.gui.Principal;
 @SuppressWarnings("serial")
 public class Programa extends JFrame {
 	private Principal principal;
+	//Linguagem do programa.
+	private Linguagem linguagem;
 	
 	/**
 	 * Método Construtor que inicia o programa sem nenhum argumento.
@@ -62,8 +65,8 @@ public class Programa extends JFrame {
 	 * @param arq_fonte Arquivo Fonte .C OU .PAS
 	 * @param arq_texto Arquivo Texto Roteiro .TXT OU .DAT
 	 */
-	public Programa(String arq_fonte, String arq_texto) throws Exception{
-		this(new FileReader(arq_fonte), new FileReader(arq_texto));
+	public Programa(String arq_fonte, String arq_texto, Linguagem linguagem) throws Exception{
+		this(new FileReader(arq_fonte), new FileReader(arq_texto), linguagem);		
 	}
 	/**
 	 * Método Construtor que lê caracteres com os nome dos arquivos fonte e texto.
@@ -72,9 +75,9 @@ public class Programa extends JFrame {
 	 * @param texto Streamer com o texto do arquivo texto
 	 * @throws Exception
 	 */
-	public Programa(Reader fonte, Reader texto) throws Exception{
+	public Programa(Reader fonte, Reader texto, Linguagem linguagem) throws Exception{
 		super("Tira-Teima");
-		principal = new Principal(fonte, texto);
+		principal = new Principal(fonte, texto, linguagem);
 		inicializar();
 	}
 	
@@ -115,19 +118,25 @@ public class Programa extends JFrame {
 	public static void main(String[] args) throws Exception, IOException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		Programa programa;
-		String msg = null;
 		int msg_type = JOptionPane.ERROR_MESSAGE;
+		//Possível mensagem de erro
+		String msg = null;
+		//Linguagem do arquivo fonte
+		Linguagem linguagem = null;
 		
-		
-		if (args.length > 0) {
+		if (args.length == 2) {
 			String arq_texto, arq_fonte;
 
 			arq_fonte = args[0];
 			arq_texto = args[1];
 			
-			
+			if(arq_fonte.endsWith(".c") || arq_fonte.endsWith(".C"))
+				linguagem = Linguagem.C;
+			else if(arq_fonte.endsWith(".pas") || arq_fonte.endsWith(".PAS"))
+				linguagem = Linguagem.PASCAL;				
+							
 			try {
-				programa = new Programa(arq_fonte, arq_texto);
+				programa = new Programa(arq_fonte, arq_texto,linguagem);
 			} catch(FileNotFoundException e) {
 				e.printStackTrace();
 				
@@ -143,7 +152,12 @@ public class Programa extends JFrame {
 			}
 		} else {
 			programa = new Programa();
-			msg = new String("Nenhum arquivo fornecido como parâmetro.");
+			if(args.length == 1)
+				msg = new String("Devem ser passados dois arquivos como parâmetro.");
+			else if(args.length == 0)
+				msg = new String("Nenhum arquivo fornecido como parâmetro.");
+			else
+				msg = new String("Número de parâmetros incorretos.");
 			msg_type = JOptionPane.WARNING_MESSAGE;
 		}
 		

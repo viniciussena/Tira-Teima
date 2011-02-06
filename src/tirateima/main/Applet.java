@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 import tirateima.gui.Principal;
 import tirateima.gui.arquivos.AbstractArquivo;
+import tirateima.gui.editortexto.Linguagem;
 
 
 /**
@@ -69,19 +70,19 @@ public class Applet extends java.applet.Applet {
 	public void prepararEntrada(String str_fonte, String str_texto)
 			throws MalformedURLException 
 	{
-		prepararEntrada(normalizarURL(str_fonte), normalizarURL(str_texto));
+		prepararEntrada(normalizarURL(str_fonte), normalizarURL(str_texto), null);
 	}
 	
 	/**
 	 * Prepara em background uma entrada. Isso significa baixar todos os
 	 * arquivos e interpretá-los.
 	 */
-	private void prepararEntrada(final URL url_fonte, final URL url_texto) {
+	private void prepararEntrada(final URL url_fonte, final URL url_texto,final Linguagem linguagem) {
 		new Thread(new Runnable() {
 			public void run() {
 				Principal p;
 				try {
-					p = new Principal(getArquivo(url_fonte), getArquivo(url_texto));
+					p = new Principal(getArquivo(url_fonte), getArquivo(url_texto),linguagem);
 				} catch (Exception e) {
 					e.printStackTrace();
 					p = null;
@@ -164,9 +165,17 @@ public class Applet extends java.applet.Applet {
 			
 			String modo = getParameter("modo").toLowerCase();
 			if (modo.equals("janela") || modo.equals("applet")) {
+				//Pega a linguagem
+				Linguagem linguagem = null;
+				if(getParameter("arq_fonte").endsWith(".c") || getParameter("arq_fonte").endsWith(".C"))
+					linguagem = Linguagem.C;
+				else if(getParameter("arq_fonte").endsWith(".pas") || getParameter("arq_fonte").endsWith(".PAS"))
+					linguagem = Linguagem.PASCAL;
+				//Pega a url dos arquivos
 				URL url_fonte = normalizarURL(getParameter("arq_fonte"));
 				URL url_texto = normalizarURL(getParameter("arq_texto"));
-				prepararEntrada(url_fonte, url_texto);
+				
+				prepararEntrada(url_fonte, url_texto,linguagem);
 				Principal principal = getEntrada(url_texto);
 				if (principal == null)
 					throw new Exception("Erro na preparação, veja o Console Java");

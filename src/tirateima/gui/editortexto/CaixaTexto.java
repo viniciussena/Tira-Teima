@@ -37,6 +37,7 @@ import javax.swing.text.TabStop;
 import tirateima.gui.highlighting.c.CParser;
 import tirateima.gui.highlighting.c.CParserConstants;
 import tirateima.gui.highlighting.c.Token;
+import tirateima.gui.highlighting.pascal.Anlex;
 
 class FullLineHighlightPainter implements Highlighter.HighlightPainter {
 	Color color;
@@ -99,6 +100,7 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 
 	/*Fonte básica...*/
 	Font fonte_basica = new Font("Courier New", Font.PLAIN, 14);
+	private Linguagem linguagem;
 
 
 	/*Constantes para identificar as cores a serem alteradas...*/
@@ -145,17 +147,20 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 		});
 	}
 
-	public void setText(String texto){    	
+	public void setText(String texto){
 		try{
 			linhas = getLinhas(texto);
 		}catch(Exception e){
 			linhas = new ArrayList<Integer>();
 		}
-
-		parseText(texto);
+		if(this.linguagem == Linguagem.C)
+			parseTextC(texto);
+		else if (this.linguagem == Linguagem.PASCAL)
+			parseTextPascal(texto);
 	}
 
-	public void setText(Reader reader) throws IOException{
+	public void setText(Reader reader,Linguagem linguagem) throws IOException{
+		this.linguagem = linguagem;
 		StringBuffer s = new StringBuffer("");
 		BufferedReader r = new BufferedReader(reader);
 		String linha = null;
@@ -166,6 +171,7 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 			throw e;
 		}
 
+		
 		this.setText(s.toString());
 	}
 
@@ -254,10 +260,20 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 	}
 
 	private void parseText(){
-		parseText(null);
+		if(this.linguagem == Linguagem.C)
+			parseTextC(null);
+		else if(this.linguagem == Linguagem.PASCAL)
+			parseTextPascal(null);
 	}
 
-	private void parseText(String text){
+	/**
+	 * Faz análise léxica PARA A LINGUAGEM C do arquivo fonte aplicando a ele 
+	 * estilos de acordo com a sintaxe da linguagem. Dessa forma, cada tipo de 
+	 * linguagem fica com uma cor.
+	 * 
+	 * @param text
+	 */
+	private void parseTextC(String text){
 		String texto = text == null ? getText() : text;
 		super.setText("");
 		StyledDocument doc = getStyledDocument();
@@ -459,8 +475,6 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 							estilo = estilos[PONTUACAO];
 						}
 					}
-
-
 	    		try{
 	    			if(insert_line){
 	    				insert_line = false;
@@ -472,12 +486,7 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 
 	    			doc.insertString(doc.getLength(), t.image, doc.getStyle(estilo));
 	    		}catch(Exception e){}
-
-	    		
-	    			
 					t = CParser.getNextToken();
-
-
 				}
 			}
 		}else{
@@ -487,6 +496,95 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 		}
 		analisando = false;
 	}
+	
+	/**
+	 * Faz análise léxica PARA A LINGUAGEM PASCAL do arquivo fonte aplicando a ele 
+	 * estilos de acordo com a sintaxe da linguagem. Dessa forma, cada tipo de 
+	 * linguagem fica com uma cor. 
+	 * @param text
+	 */
+	private void parseTextPascal(String text){
+    	String texto = text == null ? getText() : text;
+    	super.setText("");
+    	StyledDocument doc = getStyledDocument();
+    	analisando = true;
+    	if(highlighted){
+	    	Anlex anlex = new Anlex(texto);
+	    	tirateima.gui.highlighting.pascal.Token t = anlex.getToken();
+	    	boolean coment_chave = false;
+	    	boolean coment_par = false;
+	    	String estilo;
+	    	int line = 1;
+	    	boolean insert_line = true;
+	    	while(t.getId() != tirateima.gui.highlighting.pascal.Token.EOB){
+	    		estilo = estilos[REGULAR];
+	    		switch(t.getId()){
+					case tirateima.gui.highlighting.pascal.Token.IDENTIFIER:
+						if(tirateima.gui.highlighting.pascal.Token.ehPalavraChave(t.getValor())){
+							estilo = estilos[PALAVRA_CHAVE];
+						}else if(tirateima.gui.highlighting.pascal.Token.ehTipo(t.getValor())){
+							estilo = estilos[TIPO];
+						}
+						break;
+					case tirateima.gui.highlighting.pascal.Token.STRING:
+						estilo = estilos[LITERAL];
+						break;
+					case tirateima.gui.highlighting.pascal.Token.BEGINCOMMENT_CH:
+						if(!coment_par){
+							estilo = estilos[COMENTARIO];
+							coment_chave = true;
+						}
+						break;
+					case tirateima.gui.highlighting.pascal.Token.ENDCOMMENT_CH:
+						if(coment_chave){
+							estilo = estilos[COMENTARIO];
+							coment_chave = false;
+						}
+						break;
+					case tirateima.gui.highlighting.pascal.Token.BEGINCOMMENT_PAR:
+						if(!coment_chave){
+							estilo = estilos[COMENTARIO];
+							coment_par = true;
+						}
+						break;
+					case tirateima.gui.highlighting.pascal.Token.ENDCOMMENT_PAR:
+						if(coment_par){
+							estilo = estilos[COMENTARIO];
+							coment_par = false;
+						}
+						break;
+					case tirateima.gui.highlighting.pascal.Token.PONT:
+						estilo = estilos[PONTUACAO];
+						break;
+					case tirateima.gui.highlighting.pascal.Token.NUM:
+						estilo = estilos[NUMEROS];
+						break;
+				}
+	    		
+	    		if(coment_par || coment_chave)
+	    			estilo = estilos[COMENTARIO];
+	    		
+	    		try{
+	    			if(insert_line){
+//	    				doc.insertString(doc.getLength(), line + " ", doc.getStyle(estilos[NUMEROS]));
+	    				insert_line = false;
+	    				line++;
+	    			}
+	    			if("\n".equals(t.getValor())){
+	    				insert_line = true;
+	    			}
+	    			doc.insertString(doc.getLength(), t.getValor(), doc.getStyle(estilo));
+	    		}catch(Exception e){}
+	    		
+	    		t = anlex.getToken();
+	    	}
+    	}else{
+    		try{
+    			doc.insertString(0, texto, doc.getStyle(estilos[REGULAR]));
+    		}catch(Exception e){}
+    	}
+    	analisando = false;
+    }
 	
 	void setTabs( JTextPane textPane, int charactersPerTab)
 	{

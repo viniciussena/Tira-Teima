@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import tirateima.gui.arquivos.AbstractArquivo;
+import tirateima.gui.editortexto.Linguagem;
 
 /**
  * Esta é uma classe temporária para testar applet com
@@ -61,7 +62,13 @@ public class AppletEscondida extends Applet {
 		try {
 			instance = this;
 			AbstractArquivo.url_base = normalizarURL("").toString();
-			
+			//Pega a linguagem
+			Linguagem linguagem = null;
+			if(getParameter("arq_fonte").endsWith(".c") || getParameter("arq_fonte").endsWith(".C"))
+				linguagem = Linguagem.C;
+			else if(getParameter("arq_fonte").endsWith(".pas") || getParameter("arq_fonte").endsWith(".PAS"))
+				linguagem = Linguagem.PASCAL;
+			//Pega a url dos arquivos
 			URL url_fonte = normalizarURL(getParameter("arq_fonte"));
 			URL url_texto = normalizarURL(getParameter("arq_texto"));
 			
@@ -85,7 +92,7 @@ public class AppletEscondida extends Applet {
 				altura = 600;
 			}
 			
-			janela = new Programa(getArquivo(url_fonte), getArquivo(url_texto));
+			janela = new Programa(getArquivo(url_fonte), getArquivo(url_texto),linguagem);
 			
 			janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			janela.setSize(largura, altura);

@@ -50,6 +50,7 @@ import tirateima.gui.arquivos.ArquivoVisivelEventListener;
 import tirateima.gui.arquivos.GerenciadorArquivos;
 import tirateima.gui.console.Console;
 import tirateima.gui.editortexto.EditorTexto;
+import tirateima.gui.editortexto.Linguagem;
 import tirateima.gui.variaveis.Mostrador;
 import tirateima.gui.variaveis.Mostrador.zoom;
 import tirateima.ui.Ajuda;
@@ -104,9 +105,9 @@ public class Principal extends JPanel {
 	 * 
 	 * @throws Exception
 	 */
-	public Principal(Reader arq_fonte, Reader arq_texto) throws Exception{		
+	public Principal(Reader arq_fonte, Reader arq_texto, Linguagem linguagem) throws Exception{		
 		inicializar();
-		editor.getCaixaTexto().setText(arq_fonte);
+		editor.getCaixaTexto().setText(arq_fonte,linguagem);
 		
 		control = new Controlador(
 				arq_texto,
