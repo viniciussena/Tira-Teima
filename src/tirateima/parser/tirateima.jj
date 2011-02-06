@@ -20,7 +20,7 @@ import java.util.Stack;
 
 import tirateima.controlador.Controlador;
 import tirateima.controlador.Command;
-import tirateima.controlador.Operando;
+import tirateima.controlador.Operador;
 
 import tirateima.controlador.CommandAttribution;
 import tirateima.controlador.CommandJump;
@@ -226,7 +226,7 @@ void UnaryExpression(Stack<Object> pilhaSimbolos) : {}
 
 void AssignmentOperator(Stack<Object> pilhaSimbolos) : {}
 {
-	<ATTRIBUTION> {pilhaSimbolos.push(Operando.ASSIGN);}
+	<ATTRIBUTION> {pilhaSimbolos.push(Operador.ASSIGN);}
 }
 
 void ConditionalExpression(Stack<Object> pilhaSimbolos) : {}
@@ -236,7 +236,7 @@ void ConditionalExpression(Stack<Object> pilhaSimbolos) : {}
 
 void UnaryOperator(Stack<Object> pilhaSimbolos) : {}
 {
-	<NOT_OP> {pilhaSimbolos.push(Operando.NOT_OP);}
+	<NOT_OP> {pilhaSimbolos.push(Operador.NOT_OP);}
 }
 
 void PrimaryExpression(Stack<Object> pilhaSimbolos) :
@@ -247,15 +247,15 @@ void PrimaryExpression(Stack<Object> pilhaSimbolos) :
 {
 	variavel(var_stack) {pilhaSimbolos.push(var_stack);}      |
 	(constante = constant()) {pilhaSimbolos.push(constante);} |
-	<OPEN_PAR> {pilhaSimbolos.push(Operando.OPEN_PAR);}
+	<OPEN_PAR> {pilhaSimbolos.push(Operador.OPEN_PAR);}
 	expression(pilhaSimbolos)
-	<CLOSE_PAR> {pilhaSimbolos.push(Operando.CLOSE_PAR);}
+	<CLOSE_PAR> {pilhaSimbolos.push(Operador.CLOSE_PAR);}
 }
 
 void LogicalORExpression(Stack<Object> pilhaSimbolos) : {}
 {
 	LogicalANDExpression(pilhaSimbolos)
-	[ <OR_OP> {pilhaSimbolos.push(Operando.OR_OP);}
+	[ <OR_OP> {pilhaSimbolos.push(Operador.OR_OP);}
 		LogicalORExpression(pilhaSimbolos)
 	]
 }
@@ -263,7 +263,7 @@ void LogicalORExpression(Stack<Object> pilhaSimbolos) : {}
 void LogicalANDExpression(Stack<Object> pilhaSimbolos) : {}
 {
 	EqualityExpression(pilhaSimbolos)
-	[ <AND_OP> {pilhaSimbolos.push(Operando.AND_OP);}
+	[ <AND_OP> {pilhaSimbolos.push(Operador.AND_OP);}
 		LogicalANDExpression(pilhaSimbolos)
 	]
 }
@@ -272,8 +272,8 @@ void EqualityExpression(Stack<Object> pilhaSimbolos) : {}
 {
 	RelationalExpression(pilhaSimbolos)
 	[
-		(<EQ_OP> {pilhaSimbolos.push(Operando.EQ_OP);}|
-		 <NE_OP> {pilhaSimbolos.push(Operando.NE_OP);})
+		(<EQ_OP> {pilhaSimbolos.push(Operador.EQ_OP);}|
+		 <NE_OP> {pilhaSimbolos.push(Operador.NE_OP);})
 		EqualityExpression(pilhaSimbolos)
 	]
 }
@@ -282,10 +282,10 @@ void RelationalExpression(Stack<Object> pilhaSimbolos) : {}
 {
 	AdditiveExpression(pilhaSimbolos)
 	[
-		(<LT_OP> {pilhaSimbolos.push(Operando.LT_OP);}|
-		 <GT_OP> {pilhaSimbolos.push(Operando.GT_OP);}|
-		 <LE_OP> {pilhaSimbolos.push(Operando.LE_OP);}|
-		 <GE_OP> {pilhaSimbolos.push(Operando.GE_OP);})
+		(<LT_OP> {pilhaSimbolos.push(Operador.LT_OP);}|
+		 <GT_OP> {pilhaSimbolos.push(Operador.GT_OP);}|
+		 <LE_OP> {pilhaSimbolos.push(Operador.LE_OP);}|
+		 <GE_OP> {pilhaSimbolos.push(Operador.GE_OP);})
 		RelationalExpression(pilhaSimbolos)
 	]
 }
@@ -294,8 +294,8 @@ void AdditiveExpression(Stack<Object> pilhaSimbolos) : {}
 {
 	MultiplicativeExpression(pilhaSimbolos)
 	[
-		(<ADD_OP> {pilhaSimbolos.push(Operando.ADD_OP);}|
-		 <SUB_OP> {pilhaSimbolos.push(Operando.SUB_OP);})
+		(<ADD_OP> {pilhaSimbolos.push(Operador.ADD_OP);}|
+		 <SUB_OP> {pilhaSimbolos.push(Operador.SUB_OP);})
 		AdditiveExpression(pilhaSimbolos)
 	]
 }
@@ -304,9 +304,9 @@ void MultiplicativeExpression(Stack<Object> pilhaSimbolos) : {}
 {
 	UnaryExpression(pilhaSimbolos)
 	[
-		(<MULT_OP> {pilhaSimbolos.push(Operando.MULT_OP);}|
-		 <DIV_OP>  {pilhaSimbolos.push(Operando.DIV_OP);}|
-		 <MOD_OP>  {pilhaSimbolos.push(Operando.MOD_OP);})
+		(<MULT_OP> {pilhaSimbolos.push(Operador.MULT_OP);}|
+		 <DIV_OP>  {pilhaSimbolos.push(Operador.DIV_OP);}|
+		 <MOD_OP>  {pilhaSimbolos.push(Operador.MOD_OP);})
 		MultiplicativeExpression(pilhaSimbolos)
 	]
 }

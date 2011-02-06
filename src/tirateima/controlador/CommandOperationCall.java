@@ -324,5 +324,5 @@ public class CommandOperationCall extends Command
 			Token cmd) {
 			//marca estado para tocar um som
 			c.alerta.tocaSom();
-		}
+	}
 }

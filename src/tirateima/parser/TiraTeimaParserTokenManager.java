@@ -9,7 +9,7 @@ import java.util.ListIterator;
 import java.util.Stack;
 import tirateima.controlador.Controlador;
 import tirateima.controlador.Command;
-import tirateima.controlador.Operando;
+import tirateima.controlador.Operador;
 import tirateima.controlador.CommandAttribution;
 import tirateima.controlador.CommandJump;
 import tirateima.controlador.CommandConditionalJump;

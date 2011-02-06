@@ -11,7 +11,7 @@ import java.util.Stack;
 
 import tirateima.controlador.Controlador;
 import tirateima.controlador.Command;
-import tirateima.controlador.Operando;
+import tirateima.controlador.Operador;
 
 import tirateima.controlador.CommandAttribution;
 import tirateima.controlador.CommandJump;
@@ -255,7 +255,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   final public void AssignmentOperator(Stack<Object> pilhaSimbolos) throws ParseException {
     jj_consume_token(ATTRIBUTION);
-                       pilhaSimbolos.push(Operando.ASSIGN);
+                       pilhaSimbolos.push(Operador.ASSIGN);
   }
 
   final public void ConditionalExpression(Stack<Object> pilhaSimbolos) throws ParseException {
@@ -264,7 +264,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   final public void UnaryOperator(Stack<Object> pilhaSimbolos) throws ParseException {
     jj_consume_token(NOT_OP);
-                  pilhaSimbolos.push(Operando.NOT_OP);
+                  pilhaSimbolos.push(Operador.NOT_OP);
   }
 
   final public void PrimaryExpression(Stack<Object> pilhaSimbolos) throws ParseException {
@@ -278,10 +278,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
                                   pilhaSimbolos.push(constante);
     } else if (jj_2_26(3)) {
       jj_consume_token(OPEN_PAR);
-                    pilhaSimbolos.push(Operando.OPEN_PAR);
+                    pilhaSimbolos.push(Operador.OPEN_PAR);
       expression(pilhaSimbolos);
       jj_consume_token(CLOSE_PAR);
-                     pilhaSimbolos.push(Operando.CLOSE_PAR);
+                     pilhaSimbolos.push(Operador.CLOSE_PAR);
     } else {
       jj_consume_token(-1);
       throw new ParseException();
@@ -292,7 +292,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     LogicalANDExpression(pilhaSimbolos);
     if (jj_2_27(3)) {
       jj_consume_token(OR_OP);
-                   pilhaSimbolos.push(Operando.OR_OP);
+                   pilhaSimbolos.push(Operador.OR_OP);
       LogicalORExpression(pilhaSimbolos);
     } else {
       ;
@@ -303,7 +303,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     EqualityExpression(pilhaSimbolos);
     if (jj_2_28(3)) {
       jj_consume_token(AND_OP);
-                    pilhaSimbolos.push(Operando.AND_OP);
+                    pilhaSimbolos.push(Operador.AND_OP);
       LogicalANDExpression(pilhaSimbolos);
     } else {
       ;
@@ -315,10 +315,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     if (jj_2_31(3)) {
       if (jj_2_29(3)) {
         jj_consume_token(EQ_OP);
-                          pilhaSimbolos.push(Operando.EQ_OP);
+                          pilhaSimbolos.push(Operador.EQ_OP);
       } else if (jj_2_30(3)) {
         jj_consume_token(NE_OP);
-                          pilhaSimbolos.push(Operando.NE_OP);
+                          pilhaSimbolos.push(Operador.NE_OP);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
@@ -334,16 +334,16 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     if (jj_2_36(3)) {
       if (jj_2_32(3)) {
         jj_consume_token(LT_OP);
-                          pilhaSimbolos.push(Operando.LT_OP);
+                          pilhaSimbolos.push(Operador.LT_OP);
       } else if (jj_2_33(3)) {
         jj_consume_token(GT_OP);
-                          pilhaSimbolos.push(Operando.GT_OP);
+                          pilhaSimbolos.push(Operador.GT_OP);
       } else if (jj_2_34(3)) {
         jj_consume_token(LE_OP);
-                          pilhaSimbolos.push(Operando.LE_OP);
+                          pilhaSimbolos.push(Operador.LE_OP);
       } else if (jj_2_35(3)) {
         jj_consume_token(GE_OP);
-                          pilhaSimbolos.push(Operando.GE_OP);
+                          pilhaSimbolos.push(Operador.GE_OP);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
@@ -359,10 +359,10 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     if (jj_2_39(3)) {
       if (jj_2_37(3)) {
         jj_consume_token(ADD_OP);
-                           pilhaSimbolos.push(Operando.ADD_OP);
+                           pilhaSimbolos.push(Operador.ADD_OP);
       } else if (jj_2_38(3)) {
         jj_consume_token(SUB_OP);
-                           pilhaSimbolos.push(Operando.SUB_OP);
+                           pilhaSimbolos.push(Operador.SUB_OP);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
@@ -378,13 +378,13 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     if (jj_2_43(3)) {
       if (jj_2_40(3)) {
         jj_consume_token(MULT_OP);
-                            pilhaSimbolos.push(Operando.MULT_OP);
+                            pilhaSimbolos.push(Operador.MULT_OP);
       } else if (jj_2_41(3)) {
         jj_consume_token(DIV_OP);
-                            pilhaSimbolos.push(Operando.DIV_OP);
+                            pilhaSimbolos.push(Operador.DIV_OP);
       } else if (jj_2_42(3)) {
         jj_consume_token(MOD_OP);
-                            pilhaSimbolos.push(Operando.MOD_OP);
+                            pilhaSimbolos.push(Operador.MOD_OP);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
