@@ -1,0 +1,7 @@
+programa
+	inicio
+		inteiro a,b,resultado;
+		a = 1;
+		b = 1;
+		resultado = 1 + 1;
+	fim

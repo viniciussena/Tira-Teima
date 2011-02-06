@@ -157,6 +157,8 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 			parseTextC(texto);
 		else if (this.linguagem == Linguagem.PASCAL)
 			parseTextPascal(texto);
+		else
+			parseTextOutraLinguagem(texto);
 	}
 
 	public void setText(Reader reader,Linguagem linguagem) throws IOException{
@@ -264,6 +266,8 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 			parseTextC(null);
 		else if(this.linguagem == Linguagem.PASCAL)
 			parseTextPascal(null);
+		else
+			parseTextOutraLinguagem(null);
 	}
 
 	/**
@@ -584,6 +588,27 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
     		}catch(Exception e){}
     	}
     	analisando = false;
+    }
+	
+	/**
+	 * Faz análise léxica PARA AS OUTRAS LINGUAGEMS.
+	 * 
+	 * Nesse caso, por não ser uma linguagem reconhecida e suportada no 
+	 * tira-teima para fins de linguagens, simplesmente faz o parse sem 
+	 * highlighting, mas com as demais funcionalidades (como destaque de linha
+	 * e quebra de linha)
+	 * 
+	 * @param text
+	 */
+	private void parseTextOutraLinguagem(String text){
+    	String texto = text == null ? getText() : text;
+    	super.setText("");
+    	StyledDocument doc = getStyledDocument();
+    	analisando = true;    	
+		try{
+			doc.insertString(0, texto, doc.getStyle(estilos[REGULAR]));
+		}catch(Exception e){}
+		analisando = false;
     }
 	
 	void setTabs( JTextPane textPane, int charactersPerTab)
