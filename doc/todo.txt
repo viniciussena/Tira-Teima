@@ -3,3 +3,4 @@ TODO:
 [ ] Fazer o tira-teima voltar a aceitar Pascal como linguagem para fins de highlighting.
 [ ] Passar a aceitar expressões à direita da atribuição.
 [ ] Padronizar o arquivo tirateima.jj usando a mesma nomenclatura de metodos.
+[ ] Cuidar para que codificações aceitem acento.
