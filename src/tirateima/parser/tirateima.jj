@@ -596,14 +596,14 @@ void cmd_new_var(Step p) : {
 */
 void cmd_atrib(Step p) : {
 	Stack<Object> var_stack = new Stack<Object>();
-	Object value;
+	Stack<Object> pilhaSimbolos = new Stack<Object>();
 }
 {
 	variavel(var_stack)
 	<ATTRIBUTION>
-	value = constant()
+	expression(pilhaSimbolos)
 	<SEMICOLON> {
-		p.addCommand(new CommandAttribution(var_stack, value));
+		p.addCommand(new CommandAttribution(var_stack, pilhaSimbolos));
 	}
 }
 

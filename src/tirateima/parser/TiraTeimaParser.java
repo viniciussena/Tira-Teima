@@ -717,12 +717,12 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 */
   final public void cmd_atrib(Step p) throws ParseException {
         Stack<Object> var_stack = new Stack<Object>();
-        Object value;
+        Stack<Object> pilhaSimbolos = new Stack<Object>();
     variavel(var_stack);
     jj_consume_token(ATTRIBUTION);
-    value = constant();
+    expression(pilhaSimbolos);
     jj_consume_token(SEMICOLON);
-                p.addCommand(new CommandAttribution(var_stack, value));
+                p.addCommand(new CommandAttribution(var_stack, pilhaSimbolos));
   }
 
 /**	Aponta o ponteiro para outra variavel, representando-se essa operacao por meio de uma seta de tamanho determinado
@@ -2247,7 +2247,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
   private boolean jj_3R_13() {
     if (jj_3R_30()) return true;
     if (jj_scan_token(ATTRIBUTION)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_32()) return true;
     return false;
   }
 
