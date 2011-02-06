@@ -78,14 +78,12 @@ public class AvaliadorDeExpressao {
 					//tira o parênteses de abertura encontrado da pilha
 					pilhaEsperaOperadores.pop();
 				} else {
-					//enquanto a pilha de operadores estiver vazia
-					while(!pilhaEsperaOperadores.empty()){
-						//e sua precedência for menor que os mais recentemente acessados
-						if(pilhaEsperaOperadores.peek().getPrecedencia() >= 
-							((Operador)elemento).getPrecedencia()){
-							//desempilhe os operadores e copie-os na saída
+					/*enquanto a pilha de operadores estiver vazia e sua 
+					 * precedência for menor que os mais recentemente acessados*/
+					while(!pilhaEsperaOperadores.empty() &&
+							(pilhaEsperaOperadores.peek().getPrecedencia() >= 
+								((Operador)elemento).getPrecedencia())){
 							pilhaSaida.push(pilhaEsperaOperadores.pop());
-						}
 					}
 					//empilhe o operador encontrado
 					pilhaEsperaOperadores.push((Operador)elemento);
@@ -102,7 +100,7 @@ public class AvaliadorDeExpressao {
 			pilhaSaida.push(pilhaEsperaOperadores.pop());
 		}
 		//atualiza a pilha de símbolos com sua versão pós fixada
-		pilhaSimbolos = pilhaSaida;
+		copiaPilha(pilhaSimbolos, pilhaSaida);
 	}	
 	
 	/**
@@ -112,10 +110,128 @@ public class AvaliadorDeExpressao {
 	 */
 	private static Object calculaValorExpressaoPosFixa(
 			Stack<Object> pilhaSimbolos) {
-		//TODO: implementar cálculo de valor de expressão pós-fixada.
-		return null;
+		
+		invertePilha(pilhaSimbolos);
+		
+		
+		Stack<Object> pilhaAuxiliar = new Stack<Object>();
+		Object operandoEsquerda, operandoDireita, resultado;
+		//para cada elemento da expressão, verifica seu tipo
+		while(!pilhaSimbolos.empty()){
+			Object elemento = pilhaSimbolos.pop();
+			//se for um operando
+			if(!(elemento instanceof Operador)){
+				//empilha-o na pilha temporária
+				pilhaAuxiliar.push(elemento);
+			}
+			//se for um operador
+			else{
+				//desempilha o(s) operando(s) e calcular o valor
+				operandoDireita = pilhaAuxiliar.pop();
+				if(!isOperadorUnario((Operador)elemento)){
+					operandoEsquerda = pilhaAuxiliar.pop();
+					resultado = opera(operandoEsquerda,(Operador)elemento,operandoDireita);
+				}
+				else{
+					resultado = opera(null,(Operador)elemento,operandoDireita);
+				}
+				pilhaAuxiliar.push(resultado);
+			}
+		}
+		//o valor que sobrou na pilha é o resultado da expressão
+		return pilhaAuxiliar.pop();
 	}
 	
+	/**
+	 * Opera um ou dois elementos de acordo coma a operação passada.
+	 * 
+	 * @param operandoEsquerda
+	 * @param elemento
+	 * @param operandoDireita
+	 * @return
+	 */
+	private static Object opera(Object operandoEsquerda, Operador operador,
+			Object operandoDireita) {
+		switch (operador) {
+		case NOT_OP:
+			return (!(Boolean)operandoDireita);
+		case MULT_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Integer)operandoEsquerda * (Integer)operandoDireita;
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Double) operandoEsquerda * (Double)operandoDireita;
+		case DIV_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Integer)operandoEsquerda / (Integer)operandoDireita;
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Double) operandoEsquerda / (Double)operandoDireita;
+		case MOD_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Integer)operandoEsquerda % (Integer)operandoDireita;
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Double) operandoEsquerda % (Double)operandoDireita;
+		case ADD_OP:
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Integer)operandoEsquerda + (Integer)operandoDireita;
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Double) operandoEsquerda + (Double)operandoDireita;
+		case SUB_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Integer)operandoEsquerda - (Integer)operandoDireita;
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Double) operandoEsquerda - (Double)operandoDireita;
+		case LT_OP:
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Boolean)((Integer)operandoEsquerda < (Integer)operandoDireita);
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Boolean)((Double) operandoEsquerda < (Double)operandoDireita);
+		case GT_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Boolean)((Integer)operandoEsquerda > (Integer)operandoDireita);
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Boolean)((Double) operandoEsquerda > (Double)operandoDireita);
+		case LE_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Boolean)((Integer)operandoEsquerda <= (Integer)operandoDireita);
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Boolean)((Double) operandoEsquerda <= (Double)operandoDireita);
+		case GE_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Boolean)((Integer)operandoEsquerda >= (Integer)operandoDireita);
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Boolean)((Double) operandoEsquerda >= (Double)operandoDireita);
+		case EQ_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Boolean)((Integer)operandoEsquerda == (Integer)operandoDireita);
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Boolean)((Double) operandoEsquerda == (Double)operandoDireita);
+			else if(operandoEsquerda instanceof String && operandoDireita instanceof String)
+				return (Boolean)((String) operandoEsquerda == (String)operandoDireita);
+			else if(operandoEsquerda instanceof Character && operandoDireita instanceof Character)
+				return (Boolean)((Character) operandoEsquerda == (Character)operandoDireita);
+		case NE_OP: 
+			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
+				return (Boolean)((Integer)operandoEsquerda != (Integer)operandoDireita);
+			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
+				return (Boolean)((Double) operandoEsquerda != (Double)operandoDireita);
+			else if(operandoEsquerda instanceof String && operandoDireita instanceof String)
+				return (Boolean)((String) operandoEsquerda != (String)operandoDireita);
+			else if(operandoEsquerda instanceof Character && operandoDireita instanceof Character)
+				return (Boolean)((Character) operandoEsquerda != (Character)operandoDireita);
+		case AND_OP: 
+			if(operandoEsquerda instanceof Boolean && operandoDireita instanceof Boolean)
+				return (Boolean)operandoEsquerda && (Boolean)operandoDireita;
+		case OR_OP: 
+			if(operandoEsquerda instanceof Boolean || operandoDireita instanceof Boolean)
+				return (Boolean)operandoEsquerda || (Boolean)operandoDireita;
+		case ASSIGN:
+				if(operandoEsquerda.getClass() == operandoDireita.getClass())
+					return (operandoEsquerda = operandoDireita);
+		default:
+			return null;
+		}
+	}
+
 	/**
 	 * Copia a pilha de símbolos para não alterar seu valor e poder ser 
 	 * re-utilizada.
@@ -145,12 +261,33 @@ public class AvaliadorDeExpressao {
 	 * @param pilhaSimbolos
 	 */
 	private static void invertePilha(Stack<Object> pilhaSimbolos) {
-		Stack<Object> pilhaAux = new Stack<Object>();
+		Stack<Object> pilhaIntermediaria = new Stack<Object>();
+		Stack<Object> pilhaAuxiliar = new Stack<Object>();
 		while(!pilhaSimbolos.empty()){
-			pilhaAux.push(pilhaSimbolos.pop());
+			pilhaIntermediaria.push(pilhaSimbolos.pop());
 		}
-		pilhaSimbolos = pilhaAux;
+		while(!pilhaIntermediaria.empty()){
+			pilhaAuxiliar.push(pilhaIntermediaria.pop());
+		}
+		while(!pilhaAuxiliar.empty()){
+			pilhaSimbolos.push(pilhaAuxiliar.pop());
+		}
 	}
+	
+	/**
+	 * Verifica se o operador é unário.
+	 * 
+	 * @param elemento
+	 * @return
+	 */
+	private static boolean isOperadorUnario(Operador operador) {
+		if(operador == Operador.NOT_OP){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}	
 }
 
 
