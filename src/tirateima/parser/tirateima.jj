@@ -209,24 +209,13 @@ void cmd_conditional_jump(Step p) :
  * @param Stack<Object> pilha de símbolos para receber cada valor lido.
  */
 void expression(Stack<Object> pilhaSimbolos) : {}
-{	AssignmentExpression(pilhaSimbolos)
-}
-
-void AssignmentExpression(Stack<Object> pilhaSimbolos) : {}
-{
-	  LOOKAHEAD(UnaryExpression(pilhaSimbolos) AssignmentOperator(pilhaSimbolos)) UnaryExpression(pilhaSimbolos) AssignmentOperator(pilhaSimbolos) AssignmentExpression(pilhaSimbolos) |
-	  LOOKAHEAD(3) ConditionalExpression(pilhaSimbolos)
+{	ConditionalExpression(pilhaSimbolos)
 }
 
 void UnaryExpression(Stack<Object> pilhaSimbolos) : {}
 {
 	LOOKAHEAD(3) PrimaryExpression(pilhaSimbolos) |
 	UnaryOperator(pilhaSimbolos) UnaryExpression(pilhaSimbolos)
-}
-
-void AssignmentOperator(Stack<Object> pilhaSimbolos) : {}
-{
-	<ATTRIBUTION> {pilhaSimbolos.push(Operador.ASSIGN);}
 }
 
 void ConditionalExpression(Stack<Object> pilhaSimbolos) : {}

@@ -4,3 +4,4 @@ TODO:
 [ ] Passar a aceitar expressões à direita da atribuição.
 [ ] Padronizar o arquivo tirateima.jj usando a mesma nomenclatura de metodos.
 [ ] Cuidar para que codificações aceitem acento.
+[ ] Criar interceptor para exceções (mostrar para o usuário).

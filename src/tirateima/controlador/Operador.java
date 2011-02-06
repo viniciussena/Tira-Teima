@@ -10,22 +10,21 @@ package tirateima.controlador;
  */
 public enum Operador {
 	OPEN_PAR(0), 
-	CLOSE_PAR(0),
-	NOT_OP(1), 
-	MULT_OP(2), 
-	DIV_OP(2), 
-	MOD_OP(2), 
-	ADD_OP(3), 
-	SUB_OP(3), 
-	LT_OP(4), 
-	GT_OP(4), 
-	LE_OP(4), 
-	GE_OP(4), 
-	EQ_OP(5), 
-	NE_OP(5), 
-	AND_OP(6), 
-	OR_OP(6), 
-	ASSIGN(7);	
+	CLOSE_PAR(0),	
+	AND_OP(1), 
+	OR_OP(1), 
+	NE_OP(2), 
+	EQ_OP(2), 
+	GT_OP(3), 
+	LE_OP(3), 
+	LT_OP(3), 
+	GE_OP(3), 
+	ADD_OP(4), 
+	SUB_OP(4), 
+	MULT_OP(5), 
+	DIV_OP(5), 
+	MOD_OP(5), 
+	NOT_OP(6); 
 	
 	private Integer precedencia;
 

@@ -164,7 +164,7 @@ public class AvaliadorDeExpressao {
 			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
 				return (Integer)operandoEsquerda / (Integer)operandoDireita;
 			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
-				return (Double) operandoEsquerda / (Double)operandoDireita;
+				return Math.round(((Double) operandoEsquerda / (Double)operandoDireita)*1000)/1000d;
 		case MOD_OP: 
 			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
 				return (Integer)operandoEsquerda % (Integer)operandoDireita;
@@ -206,30 +206,28 @@ public class AvaliadorDeExpressao {
 			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
 				return (Boolean)((Double) operandoEsquerda == (Double)operandoDireita);
 			else if(operandoEsquerda instanceof String && operandoDireita instanceof String)
-				return (Boolean)((String) operandoEsquerda == (String)operandoDireita);
+				return (Boolean)(((String)operandoEsquerda).equals((String)operandoDireita));
 			else if(operandoEsquerda instanceof Character && operandoDireita instanceof Character)
-				return (Boolean)((Character) operandoEsquerda == (Character)operandoDireita);
+				return (Boolean)(((Character) operandoEsquerda).equals((Character)operandoDireita));
 		case NE_OP: 
 			if(operandoEsquerda instanceof Integer && operandoDireita instanceof Integer)
 				return (Boolean)((Integer)operandoEsquerda != (Integer)operandoDireita);
 			else if(operandoEsquerda instanceof Double && operandoDireita instanceof Double)
 				return (Boolean)((Double) operandoEsquerda != (Double)operandoDireita);
 			else if(operandoEsquerda instanceof String && operandoDireita instanceof String)
-				return (Boolean)((String) operandoEsquerda != (String)operandoDireita);
+				return (Boolean)!(((String) operandoEsquerda).equals((String)operandoDireita));
 			else if(operandoEsquerda instanceof Character && operandoDireita instanceof Character)
-				return (Boolean)((Character) operandoEsquerda != (Character)operandoDireita);
+				return (Boolean)!(((Character) operandoEsquerda).equals((Character)operandoDireita));
 		case AND_OP: 
 			if(operandoEsquerda instanceof Boolean && operandoDireita instanceof Boolean)
 				return (Boolean)operandoEsquerda && (Boolean)operandoDireita;
 		case OR_OP: 
 			if(operandoEsquerda instanceof Boolean || operandoDireita instanceof Boolean)
 				return (Boolean)operandoEsquerda || (Boolean)operandoDireita;
-		case ASSIGN:
-				if(operandoEsquerda.getClass() == operandoDireita.getClass())
-					return (operandoEsquerda = operandoDireita);
 		default:
-			return null;
+			break;
 		}
+		throw new RuntimeException("Problema ao avaliar a expressão. Possivelmente expressão mal formada.");
 	}
 
 	/**
