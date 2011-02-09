@@ -44,7 +44,7 @@
 
 PARSER_BEGIN(CParser)
 
-package tirateima.gui.highlighting;
+package tirateima.gui.highlighting.c;
 
 import java.util.*;
 
