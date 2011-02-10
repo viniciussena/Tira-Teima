@@ -1,0 +1,14 @@
+módulo TRANSFERE(N,origem, destino, auxiliar):
+se N=1
+	então move o disco da origem para o destino
+	senão
+		início
+			TRANSFERE(N-1, origem, auxiliar, destino)
+			move disco de origem para o destino
+			TRANSFERE(N-1, auxiliar, destino, origem)
+		fim
+
+programa PRINCIPAL:
+se N>0
+	então TRANSFERE(N, origem, destino, auxiliar)
+fim

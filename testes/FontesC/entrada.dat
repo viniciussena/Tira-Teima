@@ -1,0 +1,4 @@
+3;
+4 int a cor(170,170,170) tamanho(50,20) posicao(10,10);
+5 recebe(a);
+6 writeln(a);
