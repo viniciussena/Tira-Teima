@@ -1,0 +1,109 @@
+1;
+3;
+4 real a[10] cor(200,0,0) corexterna(200,200,0) tamanho(40,30) posicao(30,120);
+5 int i cor(100,0,255) tamanho(60,30) posicao(30,30);
+6 real aux cor(230,20,20) tamanho(60,30) posicao(120,30);
+8;
+9 i = 1;
+10;
+11 writeln ("entre com o elemento  a1");
+12 { writeln ("6.2"); a[1]=6.2;}
+13;
+9 i = 2;
+10;
+11 writeln ("entre com o elemento  a2");
+12 { writeln ("5.5"); a[2]=5.5;}
+13;
+9 i = 3;
+10;
+11 writeln ("entre com o elemento  a3");
+12 { writeln ("0.65"); a[3]=0.65;}
+13;
+9 i = 4;
+10;
+11 writeln ("entre com o elemento  a4");
+12 { writeln ("7.9"); a[4]=7.9;}
+13;
+9 i = 5;
+10;
+11 writeln ("entre com o elemento  a5");
+12 { writeln ("0.0"); a[5]=0.0;}
+13;
+9 i = 6;
+10;
+11 writeln ("entre com o elemento  a6");
+12 { writeln ("12.0"); a[6]=12.0;}
+13;
+9 i = 7;
+10;
+11 writeln ("entre com o elemento  a7");
+12 { writeln ("8.8"); a[7]=8.8;}
+13;
+9 i = 8;
+10;
+11 writeln ("entre com o elemento  a8");
+12 { writeln ("9.1"); a[8]=9.1;}
+13;
+9 i = 9;
+10;
+11 writeln ("entre com o elemento  a9");
+12 { writeln ("3.7"); a[9]=3.7;}
+13;
+9 i = 10;
+10;
+11 writeln ("entre com o elemento  a10");
+12 { writeln ("2.5"); a[10]=2.5;}
+13;
+14 i=1; 
+15;
+16 aux = 6.2;
+17 a[1] = 2.5;
+18 a[10] = 6.2;
+19;
+14 i=2; 
+15;
+16 aux = 5.5;
+17 a[2] = 3.7;
+18 a[9] = 5.5;
+19;
+14 i=3; 
+15;
+16 aux = 0.65;
+17 a[3] = 9.1;
+18 a[8] = 0.65;
+19;
+14 i=4; 
+15;
+16 aux = 7.9;
+17 a[4] = 8.8;
+18 a[7] = 7.9;
+19;
+14 {i=5; 
+   comenta("Observe que o laço de repetição vai até i = 5, que corresponde ao meio do array. Se o valor de i se estendesse até o final do array, os elementos seriam trocados novamente e o array final ficaria idêntico ao inicial.");
+   som();}
+15;
+16 aux = 0.0;
+17 a[5] = 12.0;
+18 a[6] = 0.0;
+19;
+20;
+21 writeln ("elemento a1 =   2.50");
+20;
+21 writeln ("elemento a2 =   3.70");
+20;
+21 writeln ("elemento a3 =   9.10");
+20;
+21 writeln ("elemento a4 =   8.80");
+20;
+21 writeln ("elemento a5 =  12.00");
+20;
+21 writeln ("elemento a6 =   0.00");
+20;
+21 writeln ("elemento a7 =   7.90");
+20;
+21 writeln ("elemento a8 =   0.65");
+20;
+21 writeln ("elemento a9 =   5.50");
+20;
+21 writeln ("elemento a10 =   6.20");
+22;

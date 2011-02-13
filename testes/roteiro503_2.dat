@@ -1,0 +1,132 @@
+1;
+3;
+4 text arq1;
+5 string nomearq cor(250,50,50) tamanho(90,30) posicao(30,30);
+6 string nome cor(250,50,50) tamanho(90,30) posicao(30,90);
+7 int idade cor(200,200,100) tamanho(60,30) posicao(30,150);
+8 real nota cor(100,0,255) tamanho(60,30) posicao(30,210);
+9 int i cor(200,200,100) tamanho(60,30) posicao(30,270),
+      j cor(200,200,100) tamanho(60,30) posicao(110,270);
+11;
+12 writeln ("entre com o nome do arquivo");
+13 {nomearq = "arq32.txt"; writeln("arq32.txt");}
+14 assign (arq1, "arq32.txt");
+15 {rewrite (arq1);
+   comenta("O comando rewrite abre o arquivo para gravação. Se o arquivo não existia, este comando o cria. Se ele já existia, este comando o limpa e o prepara para ser gravado a partir do início.");
+   som();}
+16 i = 1;
+17;
+18 writeln("entre com um nome");
+19 {nome = "Maria"; writeln("Maria");}
+20 writeln ("entre com uma idade");
+21 {idade = 25; writeln("25");}
+22 {write (arq1, "     Maria      25 ");
+   comenta("Este comando write está gravando os dados nome e idade, que são de tipos diferentes, no arquivo. Observe o quadro verde que representa o arquivo.");
+   som();}
+23 j = 1;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 10.0; writeln("10");}
+27 write (arq1, "1.000000000000000E+001 "); 
+28;
+23 j = 2;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 9.0; writeln("9");}
+27 write (arq1, "9.000000000000000E+000 "); 
+28;
+23 j = 3;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 8.0; writeln("8");}
+27 write (arq1, "8.000000000000000E+000 "); 
+28;
+29 {writeln (arq1);
+   comenta("Este comando writeln está pulando para a próxima linha no arquivo.");
+   som();}
+30;
+16 i = 2;
+17;
+18 writeln("entre com um nome");
+19 {nome = "Pedro"; writeln("Pedro");}
+20 writeln ("entre com uma idade");
+21 {idade = 26; writeln("26");}
+22 write (arq1, "     Pedro      26 ");
+23 j = 1;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 4.0; writeln("4");}
+27 write (arq1, "4.000000000000000E+000 "); 
+28;
+23 j = 2;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 9.6; writeln("9.6");}
+27 write (arq1, "9.600000000000000E+000 "); 
+28;
+23 j = 3;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 7.8; writeln("7.8");}
+27 write (arq1, "7.800000000000000E+000 "); 
+28;
+29 writeln (arq1);
+30;
+16 i = 3;
+17;
+18 writeln("entre com um nome");
+19 {nome = "Paulo"; writeln("Paulo");}
+20 writeln ("entre com uma idade");
+21 {idade = 20; writeln("20");}
+22 write (arq1, "     Paulo      20 ");
+23 j = 1;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 10.0; writeln("10");}
+27 write (arq1, "1.00000000000000E+001 "); 
+28;
+23 j = 2;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 5.0; writeln("5");}
+27 write (arq1, "5.00000000000000E+000 "); 
+28;
+23 j = 3;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 5.0; writeln("5");}
+27 write (arq1, "5.00000000000000E+000 "); 
+28;
+29 writeln (arq1);
+30;
+16 i = 4;
+17;
+18 writeln("entre com um nome");
+19 {nome = "Carolina"; writeln("Carolina");}
+20 writeln ("entre com uma idade");
+21 {idade = 59; writeln("59");}
+22 write (arq1, "  Carolina      59 ");
+23 j = 1;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 10.0; writeln("10");}
+27 write (arq1, "1.00000000000000E+001 "); 
+28;
+23 j = 2;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 10.0; writeln("10");}
+27 write (arq1, "1.00000000000000E+001 "); 
+28;
+23 j = 3;
+24;
+25 writeln ("entre com uma nota");
+26 {nota = 10.0; writeln("10");}
+27 write (arq1, "1.00000000000000E+001 "); 
+28;
+29 writeln (arq1);
+30;
+31 {close (arq1);
+   comenta("O comando close encerra a fase de gravação. O quadro verde vazio indica que o arquivo não está aberto nem para leitura nem para gravação. Mas está apto para ser utilizado, por este ou por outro programa.");
+   som();}
+32;

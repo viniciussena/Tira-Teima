@@ -1,0 +1,122 @@
+1;
+3;
+4 text arq1;
+5 string nomearq cor(250,50,50) tamanho(90,30) posicao(30,30);
+6 real nota cor(100,0,255) tamanho(60,30) posicao(30,90);
+7 int i cor(200,200,100) tamanho(60,30) posicao(30,150),
+      j cor(200,200,100) tamanho(60,30) posicao(110,150);
+9;
+10 writeln ("entre com o nome do arquivo");
+11 nomearq = "arq3.txt";
+12 assign (arq1, "arq3.txt");
+13 {rewrite (arq1);
+   comenta("O comando rewrite abre o arquivo para gravação. Se o arquivo não existia, este comando o cria. Se ele já existia, este comando o limpa e o prepara para ser gravado a partir do início.");
+   som();}
+14 writeln (arq1, "     Nota1    Nota2    Nota3");
+15 writeln (arq1);
+
+16 i = 1;
+17;
+18 writeln ("entrada dos dados da linha 1");
+
+19 j = 1;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 10.0; writeln("10");}
+23 {write (arq1, "    10.00"); 
+    comenta("Observe a formatação dos dados na gravação do arquivo. As regras de formatação são as mesmas que funcionam quando a saída é feita pelo console.");
+	som();}
+24;
+
+19 j = 2;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 9.0; writeln("9");}
+23 write (arq1, "     9.00"); 
+24;
+
+19 j = 3;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 8.0; writeln("8");}
+23 write (arq1, "     8.00"); 
+24;
+
+25 {writeln (arq1);
+   comenta("Este comando writeln está pulando para a próxima linha no arquivo.");
+   som();}
+
+26;
+16 i = 2;
+17;
+18 writeln ("entrada dos dados da linha 2");
+19 j = 1;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 4.0; writeln("4");}
+23 write (arq1, "     4.00"); 
+24;
+19 j = 2;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 9.6; writeln("9.6");}
+23 write (arq1, "     9.60"); 
+24;
+19 j = 3;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 7.8; writeln("7.8");}
+23 write (arq1, "     7.80"); 
+24;
+25 writeln (arq1);
+26;
+16 i = 3;
+17;
+18 writeln ("entrada dos dados da linha 3");
+19 j = 1;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 10.0; writeln("10");}
+23 {write (arq1, "    10.00"); read (arq1, nota);}
+24;
+19 j = 2;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 5.0; writeln("5");}
+23 write (arq1, "     5.00"); 
+24;
+19 j = 3;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 5.0; writeln("5");}
+23 write (arq1, "     5.00"); 
+24;
+25 writeln (arq1);
+26;
+16 i = 4;
+17;
+18 writeln ("entrada dos dados da linha 4");
+19 j = 1;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 10.0; writeln("10");}
+23 write (arq1, "    10.00"); 
+24;
+19 j = 2;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 8.40; writeln("8.4");}
+23 write (arq1, "     8.40"); 
+24;
+19 j = 3;
+20;
+21 writeln ("entre com uma nota");
+22 {nota = 9.5; writeln("9.5");}
+23 write (arq1, "     9.50"); 
+24;
+25 writeln (arq1);
+26;
+27 {close (arq1);
+   comenta("O comando close encerra a fase de gravação. O quadro verde vazio indica que o arquivo não está aberto nem para leitura nem para gravação. Mas está apto para ser utilizado, por este ou por outro programa.");
+   som();}
+28;

@@ -5,7 +5,7 @@ const
 
 var
   v : array [1..n] of integer;
-  dado, i : integer;
+  i, dado : integer;
   inicio, meio, fim : integer;
   arq : text;
   nomearq : string;

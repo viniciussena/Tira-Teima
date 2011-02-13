@@ -1,0 +1,43 @@
+1;
+3;
+4 text arq1;
+5 int n cor(180,180,50) tamanho(50,30) posicao(30,30),
+      soma cor(180,180,50) tamanho(50,30) posicao(110,30),
+	  i cor(180,180,50) tamanho(50,30) posicao(190,30);
+7;
+8 assign (arq1, "arq11.txt");
+9 {reset (arq1);
+  comenta("O arquivo foi aberto para leitura. Abra a janela verde que representa o arquivo, para visualizar todo o seu conteúdo.");
+   som();}
+10 soma = 0;
+11 {i = 1;
+  comenta("Neste exemplo é conhecido que o arquivo tem apenas uma linha com 5 elementos. Por isso a leitura pode ser feita com um único comando for.");
+   som();}
+12;
+13 {read (arq1, n);
+  comenta("Observe a marca amarela no arquivo. Ela indica o elemento que acaba de ser lido.");
+   som();}
+14 soma = 2;
+15;
+11 i = 2;
+12;
+13 read (arq1, n);
+14 soma = 6;
+15;
+11 i = 3;
+12;
+13 read (arq1, n);
+14 soma = 12;
+15;
+11 i = 4;
+12;
+13 read (arq1, n);
+14 soma = 20;
+15;
+11 i = 5;
+12;
+13 read (arq1, n);
+14 soma = 30;
+15;
+16 writeln ("30");
+17;
