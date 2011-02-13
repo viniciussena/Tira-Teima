@@ -143,20 +143,18 @@ public class Controlador {
         /*Botão para reiniciar.*/
         this.btnReiniciar = btnReiniciar;
         /*Cria evento.*/
-        //TODO: arrumar reset, pois valores de variáveis não são apagados.
         btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
         		indice = -1;
         		ajustarBotoes();
-        		//Reseta os valores do controlador.
-        		setEstado(new Estado());
-        		estado = null;
-        		jump = Boolean.FALSE;
-        		jumpTo = null;
         	}
         });
         ajustarBotoes();
 	}
+	
+	/**
+	 * 
+	 */
 	/** 
 	* Método ajusta os botoes do controle.
 	* Botão Anterior, Reiniciar -> Ativa quando estiver depois do primeiro estado.
@@ -239,7 +237,6 @@ public class Controlador {
 		//Caso os passos não tenham acabado
 		if(passo != null){
 			try{
-			
 				/*Executa os commandos relativos ao passo selecionado.*/
 				for(Command c : passo.commands){
 					c.execute(this);
@@ -265,6 +262,20 @@ public class Controlador {
 		ajustarBotoes();
 	}
 	
+	/**
+	 * Define o estado anterior decrementando índice e chama método setEstado
+	 * @throws TiraTeimaLanguageException 
+	 * @see setEstado
+	 */
+	public void antEstado () throws TiraTeimaLanguageException{
+		/*Retira o estado da pilha*/
+		estado = estados.pop();
+		indice = passos.indexOf(estado.est_passo);
+		
+		/*Seta o estado no Tira-Teima*/		
+		setEstado(estado);
+	}
+	
 	/** Procura o passo com um label indicado. 
 	 * @return Step passo */
 	private Step procuraPassoPorLabel() {
@@ -278,19 +289,6 @@ public class Controlador {
 			}
 		}
 		return null;
-	}
-	/**
-	 * Define o estado anterior decrementando índice e chama método setEstado
-	 * @throws TiraTeimaLanguageException 
-	 * @see setEstado
-	 */
-	public void antEstado () throws TiraTeimaLanguageException{
-		/*Retira o estado da pilha*/
-		estado = estados.pop();
-		indice = passos.indexOf(estado.est_passo);
-		
-		/*Seta o estado no Tira-Teima*/		
-		setEstado(estado);
 	}
 	
 	/**

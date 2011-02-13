@@ -1,4 +1,4 @@
-program Exemplo507;
+program Programa507;
 
 var
   arq1 : text;

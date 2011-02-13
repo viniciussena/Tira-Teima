@@ -1,4 +1,4 @@
-program Exemplo807;
+program Programa807;
 
 type
   vetor = array [1..5] of real;
