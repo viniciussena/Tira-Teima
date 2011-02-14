@@ -1,0 +1,1 @@
+java -jar tirateima.jar funcoes.c funcoes.dat
