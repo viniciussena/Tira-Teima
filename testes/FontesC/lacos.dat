@@ -1,0 +1,9 @@
+3;
+4 {int max cor(170,170,170) tamanho(50,20) posicao(10,10);int cont cor(0,170,170) tamanho(50,20) posicao(110,10);}
+5 recebe(max);
+6 cont = 0;
+6 label_for: se(cont <= max) vaipara(begin_for);
+8 vaipara(end_for);
+7 begin_for:writeln("valor de cont: ",cont);
+6 {cont = cont + 1; vaipara(label_for);}	
+9 end_for:;

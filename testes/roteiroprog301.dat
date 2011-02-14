@@ -8,7 +8,7 @@
 8 {writeln ("2 9 5"); a = 2; b = 9; c = 5;}
 9 ;
 10 {writeln ("2 9");
-   comenta("Neste if foi encontrada a soluÁ„o. No entanto, como este programa n„o est· otimizado, ele continuar· procurando em todos os outros if's.");
+   comenta("Neste if foi encontrada a solu√ß√£o. No entanto, como este programa n√£oo est√£o otimizado, ele continuar procurando em todos os outros if's.");
    som();}
 11;
 12;
