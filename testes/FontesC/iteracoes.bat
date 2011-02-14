@@ -1,1 +1,0 @@
-java -jar tirateima.jar iteracoes.c iteracoes.dat

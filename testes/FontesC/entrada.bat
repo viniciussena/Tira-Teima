@@ -1,0 +1,1 @@
+java -jar tirateima.jar entrada.c entrada.dat
