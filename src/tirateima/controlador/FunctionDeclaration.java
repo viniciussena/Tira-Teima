@@ -42,12 +42,16 @@ public class FunctionDeclaration extends Command
 	 * @param Gerador g
 	 */
 	public void execute(Controlador c)
-			throws TiraTeimaLanguageException {
-		/** Testa se já não há declaração com o nome dado */
-		if (c.declared_functions.containsKey(name))
-			gerarErro("Função '" + name + "' redeclarada!");
+			throws TiraTeimaLanguageException {		
 		/** Declara a função colocando-a na lista de declarações do gerador. */
 		c.declared_functions.put(name, this);
+	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/**

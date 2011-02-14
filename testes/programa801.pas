@@ -1,4 +1,4 @@
-program Exemplo801;
+program Programa801;
 
 var
   x, y, z : integer;

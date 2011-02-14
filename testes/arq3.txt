@@ -1,0 +1,6 @@
+      Nome   Idade    Nota1    Nota2    Nota3
+
+     Maria      25    10.00     9.00     8.00
+     Pedro      26     4.00     9.60     7.80
+     Paulo      20    10.00     5.00     5.00
+     Cleni      59    10.00    10.00    10.00

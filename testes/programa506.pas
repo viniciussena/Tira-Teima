@@ -1,8 +1,8 @@
-program Exemplo506;
+program Programa506;
 
 var
-  arq1 : text;
-  nomearq : string;
+  arq1: text;
+  nomearq: string;
   x: integer;
 
 begin

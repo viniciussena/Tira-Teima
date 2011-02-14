@@ -17,5 +17,12 @@ public class CommandDirectPointer extends Command {
 	public void execute(Controlador c) throws TiraTeimaLanguageException {
 		criarSeta(c.mostrador, var_stack, posicaoApontada);
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		removerSeta(c.mostrador, var_stack);
+		
+	}
 
 }

@@ -22,4 +22,11 @@ public class CommandNewVarText extends Command {
 		VarText arq = new VarText(name);
 		c.ga.adicionarArquivo(arq);
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 }

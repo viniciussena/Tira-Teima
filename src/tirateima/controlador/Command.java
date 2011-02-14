@@ -38,7 +38,17 @@ public abstract class Command {
 	 * @throws ExecutionException 
 	 */
 	public abstract void execute(Controlador c)
-			throws TiraTeimaLanguageException, ExecutionException;
+		throws TiraTeimaLanguageException, ExecutionException;
+	
+	/**
+	 * Reverte o comando executado, quando for necessário para manter
+	 * a consistência da visualização.
+	 * @param c
+	 * @throws TiraTeimaLanguageException
+	 * @throws ExecutionException
+	 */
+	public abstract void revert(Controlador c)
+		throws TiraTeimaLanguageException, ExecutionException;
 	
 	/**
 	 * Cria uma nova exceção com a mensagem especificada.
@@ -177,6 +187,30 @@ public abstract class Command {
 			gerarErro("Variavel '" + nome_var + "' não foi declarada!");
 		mostrador.adicionarSeta(nome_var,new Seta(nome_var,posicaoApontada));
 		mostrador.modificarVariavel(nome_var, "");
+		restaurarPilha(var_stack,pilhaAux);
+	}
+	
+	/**
+	 * Insere uma seta na variavel de pilha para representar um ponteiro.
+	 * Possui direcao e tamanho especificados.
+	 * @param mostrador
+	 * @param var_stack
+	 * @param direcao
+	 * @param tamanho
+	 */
+	protected void removerSeta(Mostrador mostrador, Stack<Object> var_stack) throws TiraTeimaLanguageException{
+		//Pilha auxiliar para armazenar temporariamente os valores da pilha.
+		Stack<Object> pilhaAux = new Stack<Object>();
+		
+		Object parent;
+		
+		parent = var_stack.pop();
+		pilhaAux.push(parent);
+				
+		String nome_var = (String) parent;
+		if (!mostrador.hasVariavel(nome_var))
+			gerarErro("Variavel '" + nome_var + "' não foi declarada!");
+		mostrador.removerSeta(nome_var);
 		restaurarPilha(var_stack,pilhaAux);
 	}
 	

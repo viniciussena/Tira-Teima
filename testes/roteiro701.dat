@@ -1,73 +1,75 @@
 1;
-
 3;
-4 record ficha {string nome; int matric; real nota;}
+4 record data {
+  int dia cor(200,200,0) tamanho(210,20); 
+  int mes cor(200,200,0); 
+  int ano cor(200,200,0);}
 5;
 6;
-7;
-
+8 record ficha {
+  string nome cor(0,255,0); 
+  data nascimento cor(255,200,0); 
+  real divida cor(100,100,255);}
+9;
 10;
-11 ficha aluno, alumax;
-12 text arq;
-13 real notamax;
-
-15;
-16 assign (arq, "arq701.txt");
-17 reset (arq);
-18 notamax = 0.0;
-
-19;
-20;
-21 {read(arq,aluno.nome,10); read(arq,aluno.matric); readln(arq,aluno.nota);}
-22;
-23;
+11;
+12;
+14;
+15 text arq1;
+16 ficha pessoa cor(255,50,50) posicao (30,10),
+   pessoanova cor(255,50,50) posicao (350,10);
+18;
+19 assign (arq1, "arq71.txt");
+20 reset (arq1);
+21 {read(arq1,pessoanova.nome,10); 
+    read(arq1,pessoanova.nascimento.dia); 
+	read(arq1,pessoanova.nascimento.mes);
+	read(arq1,pessoanova.nascimento.ano);
+	readln(arq1,pessoanova.divida);}
 24;
-25 {alumax.nome = "Beto"; alumax.matric = 123; alumax.nota = 5.0;}
-26 notamax = 5.0;
-27;
-28;
-
-19;
-20;
-21 {read(arq,aluno.nome,10); read(arq,aluno.matric); readln(arq,aluno.nota);}
-22;
-23;
+25;
+26 {read(arq1,pessoa.nome,10); read(arq1,pessoa.nascimento.dia); 
+    read(arq1,pessoa.nascimento.mes);
+    read(arq1,pessoa.nascimento.ano);
+	readln(arq1,pessoa.divida);}
+29;
+35;
+36 {pessoanova.nome = "Marcos"; 
+    pessoanova.nascimento.dia = 10; 
+	pessoanova.nascimento.mes = 03; 
+	pessoanova.nascimento.ano = 1990; 
+	pessoanova.divida = 51.9;}
+37;
 24;
-25 {alumax.nome = "Daniela"; alumax.matric = 324; alumax.nota = 8.0;}
-26 notamax = 8.0;
-27;
-28;
-
-19;
-20;
-21 {read(arq,aluno.nome,10); read(arq,aluno.matric); readln(arq,aluno.nota);}
-22;
-28;
-
-19;
-20;
-21 {read(arq,aluno.nome,10); read(arq,aluno.matric); readln(arq,aluno.nota);}
-22;
-23;
+25;
+26 {read(arq1,pessoa.nome,10); 
+    read(arq1,pessoa.nascimento.dia); 
+	read(arq1,pessoa.nascimento.mes);
+	read(arq1,pessoa.nascimento.ano);
+	readln(arq1,pessoa.divida);}
+29;
+35;
+36 {pessoanova.nome = "Carol"; 
+    pessoanova.nascimento.dia = 18; 
+	pessoanova.nascimento.mes = 04; 
+	pessoanova.nascimento.ano = 1990; 
+	pessoanova.divida = 22.8;}
+37;
 24;
-25 {alumax.nome = "Maria"; alumax.matric = 234; alumax.nota = 9.8;}
-26 notamax = 9.8;
-27;
-28;
-
-19;
-29 writeln ("Maria     234 9.8");
-30;
-
-
-
-
-
-
-
-
-
-
-
-
-
+25;
+26 {read(arq1,pessoa.nome,10); 
+    read(arq1,pessoa.nascimento.dia); 
+	read(arq1,pessoa.nascimento.mes);
+	read(arq1,pessoa.nascimento.ano);
+	readln(arq1,pessoa.divida);}
+29;
+35;
+36 {pessoanova.nome = "Ana Maria"; 
+    pessoanova.nascimento.dia = 20; 
+	pessoanova.nascimento.mes = 04; 
+	pessoanova.nascimento.ano = 1990; 
+	pessoanova.divida = 76.4;}
+37;
+24;
+38 writeln ("pessoa mais nova:  Ana Maria   20   4    1990   76.40");
+41;

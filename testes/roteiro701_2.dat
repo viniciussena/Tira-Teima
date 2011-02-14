@@ -1,0 +1,71 @@
+1;
+3;
+4 record ficha {string nome cor(255,200,0) tamanho(210,30); 
+                int dia cor(200,255,100), 
+			    mes cor(200,255,100), 
+			    ano cor(200,255,100); 
+			    real divida cor(100,200,200);}
+5;
+6;
+7;
+8;
+10;
+11 text arq1;
+12 ficha pessoa cor(255,50,50) posicao (30,10),
+   pessoanova cor(255,50,50) posicao (350,10);
+14;
+15 assign (arq1, "arq71-2.txt");
+16 reset (arq1);
+17 {read (arq1, pessoanova.nome, 10); 
+    read (arq1, pessoanova.dia); 
+	read (arq1, pessoanova.mes); 
+	read (arq1, pessoanova.ano); 
+	readln (arq1, pessoanova.divida);}
+19;
+20;
+21 {read(arq1, pessoa.nome, 10); 
+    read(arq1, pessoa.dia); 
+	read(arq1, pessoa.mes); 
+	read(arq1, pessoa.ano); 
+	readln(arq1, pessoa.divida);}
+23;
+29;
+30 {pessoanova.nome = "Marcos"; 
+    pessoanova.dia = 10; 
+	pessoanova.mes = 03; 
+	pessoanova.ano = 1990; 
+	pessoanova.divida = 51.9;}
+31;
+19;
+20;
+21 {read(arq1, pessoa.nome, 10); 
+    read(arq1, pessoa.dia); 
+	read(arq1, pessoa.mes); 
+	read(arq1, pessoa.ano); 
+	readln(arq1, pessoa.divida);}
+23;
+29;
+30 {pessoanova.nome = "Carol"; 
+    pessoanova.dia = 18; 
+	pessoanova.mes = 04; 
+	pessoanova.ano = 1990; 
+	pessoanova.divida = 22.8;}
+31;
+19;
+20;
+21 {read(arq1, pessoa.nome, 10); 
+    read(arq1, pessoa.dia); 
+	read(arq1, pessoa.mes); 
+	read(arq1, pessoa.ano); 
+	readln(arq1, pessoa.divida);}
+23;
+29;
+30 {pessoanova.nome = "Ana Maria"; 
+    pessoanova.dia = 20; 
+	pessoanova.mes = 04; 
+	pessoanova.ano = 1990; 
+	pessoanova.divida = 76.4;}
+31;
+19;
+32 writeln ("pessoa mais nova:  Ana Maria   20   4    1990   76.40");
+35;

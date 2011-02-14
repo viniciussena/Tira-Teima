@@ -61,6 +61,13 @@ public class CommandReadInput extends Command{
 			throw new ExecutionException("Valor incorreto.", this.getClass().toString());
 		}
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/**
 	 * Copia pilha para possível restauração.

@@ -42,4 +42,11 @@ public class CommandStartFunction extends Command {
 		c.mostrador.startFunction(c.declared_functions.get(name)
 				.newFunction(c, values));
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 }

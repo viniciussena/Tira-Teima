@@ -1,4 +1,4 @@
-program Exemplo508;
+program Programa508;
 
 var
   arq1 : text;
@@ -18,6 +18,6 @@ begin
   readln (idade);
   writeln ('entre com a nota');
   readln (nota);
-  write (arq1, nome, idade:4, nota:6:1);
+  writeln (arq1, nome, idade:4, nota:6:1);
   close (arq1);
 end.

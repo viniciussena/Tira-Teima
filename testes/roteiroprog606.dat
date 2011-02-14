@@ -1,0 +1,101 @@
+1;
+3;
+4 {int n cor(0,200,200) tamanho(60,30) posicao(30,30); 
+  n = 15;}
+6;
+7 int v[15] cor(200,0,0) corexterna(200,200,0) tamanho(50,30) posicao(30,120);
+8 int i cor(100,100,255) tamanho(60,30) posicao(120,30),
+      dado cor(230,100,100) tamanho(60,30) posicao(210,30);
+9 int inicio cor(100,100,255) tamanho(60,30) posicao(30,230),
+      meio cor(100,100,255) tamanho(60,30) posicao(120,230), 
+	  fim cor(100,100,255) tamanho(60,30) posicao(210,230);
+10 text arq;
+11 string nomearq cor(240,240,100) tamanho(120,30) posicao(30,310);
+13;
+14 writeln ("entre com o nome do arquivo");
+15 {writeln ("arq606.txt"); 
+   nomearq = "arq606.txt";}
+16 assign (arq, "arq606.txt");
+17 reset (arq);
+18 i = 1;
+19 read (arq, v[1]);
+18 i = 2;
+19 read (arq, v[2]);
+18 i = 3;
+19 read (arq, v[3]);
+18 i = 4;
+19 read (arq, v[4]);
+18 i = 5;
+19 read (arq, v[5]);
+18 i = 6;
+19 read (arq, v[6]);
+18 i = 7;
+19 read (arq, v[7]);
+18 i = 8;
+19 read (arq, v[8]);
+18 i = 9;
+19 read (arq, v[9]);
+18 i = 10;
+19 read (arq, v[10]);
+18 i = 11;
+19 read (arq, v[11]);
+18 i = 12;
+19 read (arq, v[12]);
+18 i = 13;
+19 read (arq, v[13]);
+18 i = 14;
+19 read (arq, v[14]);
+18 i = 15;
+19 read (arq, v[15]);
+20 writeln ("entre com o elemento a ser procurado");
+21 { writeln ("22"); dado = 22;}
+22 inicio = 1;
+23 fim = 15;
+24 meio= 8;
+25 {comenta("O programa está verificando se o dado procurado está na posição 8, que corresponde ao elemento do meio do array.");
+   som();}
+26;
+27 {comenta("O programa está verificando se o dado procurado está na primeira metade ou na segunda metade do array.");
+   som();} 
+28 {inicio = 9;
+   comenta("Como o dado está na segunda metade do array, a variável inicio é alterada, de modo que o programa vai procurar agora na segunda metade do array, isto é, entre os índices 9 e 15.");
+   som();}
+30 meio = 12;
+31;
+25 {comenta("O programa está verificando se o dado procurado está na posição 12, que corresponde ao elemento do meio da segunda metade do array.");
+   som();}
+26;
+27{comenta("O programa está verificando se o dado procurado está na primeira metade ou na segunda metade do pedaço de array que está sendo examinado.");
+   som();} 
+29 {fim = 11;
+   comenta("Como o dado está na primeira metade do array que está sendo examinado, a variável fim é alterada, de modo que o programa vai procurar agora entre os índices 9 e 11.");
+   som();}
+30 meio = 10;
+31;
+25{comenta("O programa está verificando se o dado procurado está na posição 10, que corresponde ao elemento do meio da parte do array que está sendo examinada.");
+   som();}
+26;
+27;
+28 {inicio = 11;
+   comenta("O intervalo ficou reduzido a um elemento, que é o de índice 11.");
+   som();}
+30 meio = 11;
+31;
+25 {comenta("O programa está verificando se o dado procurado está na posição 11. Como o dado procurado está exatamente nessa posição, o laço de repetição será encerrado. Se o dado procurado não estivesse presente no array, no próximo laço o valor do início seria maior que o valor do fim, e o laço seria encerrado.");
+   som();}
+32;
+33 writeln ("achou na posicao: 11");
+35;
+
+
+
+
+
+
+
+
+
+
+
+
+

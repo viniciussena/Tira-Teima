@@ -1,0 +1,47 @@
+1;
+3;
+4 record data {
+  int dia cor(200,200,0) tamanho(210,20); 
+  int mes cor(200,200,0); 
+  int ano cor(200,200,0);}
+5;
+6;
+8 record ficha {
+  string nome cor(0,255,0); 
+  data nascimento cor(255,200,0); 
+  real divida cor(100,100,255);}
+9;
+10;
+11;
+12;
+14;
+15 text arq1;
+16 ficha pessoa cor(255,50,50) posicao (30,40);
+17 real soma cor(0,0,255) tamanho(60,30) posicao(300,80);
+19;
+20 assign (arq1, "arq71-3.txt");
+21 reset (arq1);
+22 soma = 0.0;
+23;
+24;
+25 {read(arq1, pessoa.nome, 10); read(arq1, pessoa.nascimento.dia); read(arq1, pessoa.nascimento.mes); read(arq1, pessoa.nascimento.ano); readln(arq1, pessoa.divida);}
+27 soma = 100.2;
+28;
+23;
+24;
+25 {read(arq1, pessoa.nome, 10); read(arq1, pessoa.nascimento.dia); read(arq1, pessoa.nascimento.mes); read(arq1, pessoa.nascimento.ano); readln(arq1, pessoa.divida);}
+27 soma = 152.1;
+28;
+23;
+24;
+25 {read(arq1, pessoa.nome, 10); read(arq1, pessoa.nascimento.dia); read(arq1, pessoa.nascimento.mes); read(arq1, pessoa.nascimento.ano); readln(arq1, pessoa.divida);}
+27 soma = 174.9;
+28;
+23;
+24;
+25 {read(arq1, pessoa.nome, 10); read(arq1, pessoa.nascimento.dia); read(arq1, pessoa.nascimento.mes); read(arq1, pessoa.nascimento.ano); readln(arq1, pessoa.divida);}
+27 soma = 251.3;
+28;
+23;
+29 writeln ("soma das dividas:    251.30");
+30;

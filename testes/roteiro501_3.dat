@@ -1,0 +1,48 @@
+1;
+3;
+4 text arq1;
+5 int n cor(180,180,50) tamanho(50,30) posicao(30,30),
+      soma cor(180,180,50) tamanho(50,30) posicao(110,30),
+	  i cor(180,180,50) tamanho(50,30) posicao(190,30);
+6 string nomearq cor(50,150,150) tamanho(90,30) posicao(30,100);
+8;
+9 {writeln ("entre com o nome do arquivo");
+  comenta("O nome do arquivo pode ser dado pelo usuário, como neste caso. Aqui o nome do arquivo fica armazenado na variável nomearq.");
+   som();}
+10 {nomearq = "arq13.txt"; writeln("arq13.txt");}
+11 {assign (arq1, "arq13.txt");
+  comenta("Este comando apenas associa a variável arq1 ao nome escolhido pelo usuário, guardado na variável nomearq. Observe o quadro verde. O nome arq1 está associado ao nome arq13.txt, mas o arquivo ainda não foi aberto, e por isso o conteúdo do arquivo não aparece.");
+   som();}
+12 {reset (arq1);
+  comenta("O arquivo foi aberto para leitura. Abra a janela verde que representa o arquivo, para visualizar todo o seu conteúdo.");
+   som();}
+13 soma = 0;
+14 {i = 1;
+  comenta("Neste exemplo é conhecido que o arquivo tem apenas uma linha com 5 elementos. Por isso a leitura pode ser feita com um único comando for.");
+   som();}
+15;
+16 read (arq1, n);
+17 soma = 2;
+18;
+14 i = 2;
+15;
+16 read (arq1, n);
+17 soma = 6;
+18;
+14 i = 3;
+15;
+16 read (arq1, n);
+17 soma = 12;
+18;
+14 i = 4;
+15;
+16 read (arq1, n);
+17 soma = 20;
+18;
+14 i = 5;
+15;
+16 read (arq1, n);
+17 soma = 30;
+18;
+19 writeln ("30");
+20;

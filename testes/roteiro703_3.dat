@@ -1,0 +1,175 @@
+1;
+3;
+4 record ficha {string nome cor(255,200,0) tamanho(60,20); 
+			    real nota1 cor(200,200,0) tamanho(60,20),
+				     nota2 cor(200,200,0) tamanho(60,20),
+					 nota3 cor(200,200,0) tamanho(60,20);
+				real media cor(200,200,0) tamanho(60,20);}
+5;
+6;
+7;
+8;
+10;
+11 text arq1;
+12 ficha alunos[10] corexterna(240,0,0) posicao(20,20);
+13 int i cor(255,200,0) tamanho(60,30) posicao(180, 260),
+       j cor(255,200,0) tamanho(60,30) posicao(270,260), 
+	   numalunos cor(255,200,0) tamanho(60,30) posicao(360,260);
+14 real soma cor(255,50,0) tamanho(60,30) posicao(450,260);
+15 ficha aux corexterna(240,0,0) posicao(20,260);
+17;
+18 assign (arq1, "arq73-3.txt");
+19 reset (arq1);
+20 i = 0;
+21;
+22;
+23 i = 1;
+24 {read (arq1, alunos[1].nome, 10); read (arq1, alunos[1].nota1); read (arq1, alunos[1].nota2); readln (arq1, alunos[1].nota3);}
+26 soma = 22.0;
+27 alunos[1].media = 7.3;
+28;
+21;
+22;
+23 i = 2;
+24 {read (arq1, alunos[2].nome, 10); read (arq1, alunos[2].nota1); read (arq1, alunos[2].nota2); readln (arq1, alunos[2].nota3);}
+26 soma = 3.4;
+27 alunos[2].media = 1.13;
+28;
+21;
+22;
+23 i = 3;
+24 {read (arq1, alunos[3].nome, 10); read (arq1, alunos[3].nota1); read (arq1, alunos[3].nota2); readln (arq1, alunos[3].nota3);}
+26 soma = 16.8;
+27 alunos[3].media = 5.6;
+28;
+21;
+22;
+23 i = 4;
+24 {read (arq1, alunos[4].nome, 10); read (arq1, alunos[4].nota1); read (arq1, alunos[4].nota2); readln (arq1, alunos[4].nota3);}
+26 soma = 24.5;
+27 alunos[4].media = 8.17;
+28;
+21;
+22;
+23 i = 5;
+24 {read (arq1, alunos[5].nome, 10); read (arq1, alunos[5].nota1); read (arq1, alunos[5].nota2); readln (arq1, alunos[5].nota3);}
+26 soma = 13.5;
+27 alunos[5].media = 4.5;
+28;
+21;
+22;
+23 i = 6;
+24 {read (arq1, alunos[6].nome, 10); read (arq1, alunos[6].nota1); read (arq1, alunos[6].nota2); readln (arq1, alunos[6].nota3);}
+26 soma = 27.5;
+27 alunos[6].media = 9.17;
+28;
+21;
+29 numalunos = 6;
+30 i = 1;
+31 j = 2;
+32;
+31 j = 3;
+32;
+31 j = 4;
+32;
+33;
+34;
+35 {aux.nome = "Fernando  "; aux.nota1 = 5.5; aux.nota2 = 6.7; aux.nota3 = 9.8; aux.media = 7.3;}
+36 {alunos[1].nome = "Marcela   "; alunos[1].nota1 = 8.1; alunos[1].nota2 = 7.5; alunos[1].nota3 = 8.9; alunos[1].media = 8.17;}
+37 {alunos[4].nome = "Fernando  "; alunos[4].nota1 = 5.5; alunos[4].nota2 = 6.7; alunos[4].nota3 = 9.8; alunos[4].media = 7.3;}
+38;
+31 j = 5;
+32;
+31 j = 6;
+32;
+33;
+34;
+35 {aux.nome = "Marcela   "; aux.nota1 = 8.1; aux.nota2 = 7.5; aux.nota3 = 8.9; aux.media = 8.17;}
+36 {alunos[1].nome = "Carolina  "; alunos[1].nota1 = 8.9; alunos[1].nota2 = 8.8; alunos[1].nota3 = 9.8; alunos[1].media = 9.17;}
+37 {alunos[6].nome = "Marcela   "; alunos[6].nota1 = 8.1; alunos[6].nota2 = 7.5; alunos[6].nota3 = 8.9; alunos[6].media = 8.17;}
+38;
+30 i = 2;
+31 j = 3;
+32;
+33;
+34;
+35 {aux.nome = "Paulo     "; aux.nota1 = 0.5; aux.nota2 = 2.1; aux.nota3 = 0.8; aux.media = 1.13;}
+36 {alunos[2].nome = "Patricia  "; alunos[2].nota1 = 7.8; alunos[2].nota2 = 2.3; alunos[2].nota3 = 6.7; alunos[2].media = 5.6;}
+37 {alunos[3].nome = "Paulo     "; alunos[3].nota1 = 0.5; alunos[3].nota2 = 2.1; alunos[3].nota3 = 0.8; alunos[3].media = 1.13;}
+38;
+31 j = 4;
+32;
+33;
+34;
+35 {aux.nome = "Patricia  "; aux.nota1 = 7.8; aux.nota2 = 2.3; aux.nota3 = 6.7; aux.media = 5.6;}
+36 {alunos[2].nome = "Fernando  "; alunos[2].nota1 = 5.5; alunos[2].nota2 = 6.7; alunos[2].nota3 = 9.8; alunos[2].media = 7.3;}
+37 {alunos[4].nome = "Patricia  "; alunos[4].nota1 = 7.8; alunos[4].nota2 = 2.3; alunos[4].nota3 = 6.7; alunos[4].media = 5.6;}
+38;
+31 j = 5;
+32;
+31 j = 6;
+32;
+33;
+34;
+35 {aux.nome = "Fernando  "; aux.nota1 = 5.5; aux.nota2 = 6.7; aux.nota3 = 9.8; aux.media = 7.3;}
+36 {alunos[2].nome = "Marcela   "; alunos[2].nota1 = 8.1; alunos[2].nota2 = 7.5; alunos[2].nota3 = 8.9; alunos[2].media = 8.17;}
+37 {alunos[6].nome = "Fernando  "; alunos[6].nota1 = 5.5; alunos[6].nota2 = 6.7; alunos[6].nota3 = 9.8; alunos[6].media = 7.3;}
+38;
+30 i = 3;
+31 j = 4;
+32;
+33;
+34;
+35 {aux.nome = "Paulo     "; aux.nota1 = 0.5; aux.nota2 = 2.1; aux.nota3 = 0.8; aux.media = 1.13;}
+36 {alunos[3].nome = "Patricia  "; alunos[3].nota1 = 7.8; alunos[3].nota2 = 2.3; alunos[3].nota3 = 6.7; alunos[3].media = 5.6;}
+37 {alunos[4].nome = "Paulo     "; alunos[4].nota1 = 0.5; alunos[4].nota2 = 2.1; alunos[4].nota3 = 0.8; alunos[4].media = 1.13;}
+38;
+31 j = 5;
+32;
+31 j = 6;
+32;
+33;
+34;
+35 {aux.nome = "Patricia  "; aux.nota1 = 7.8; aux.nota2 = 2.3; aux.nota3 = 6.7; aux.media = 5.6;}
+36 {alunos[3].nome = "Fernando  "; alunos[3].nota1 = 5.5; alunos[3].nota2 = 6.7; alunos[3].nota3 = 9.8; alunos[3].media = 7.3;}
+37 {alunos[6].nome = "Patricia  "; alunos[6].nota1 = 7.8; alunos[6].nota2 = 2.3; alunos[6].nota3 = 6.7; alunos[6].media = 5.6;}
+38;
+30 i = 4;
+31 j = 5;
+32;
+33;
+34;
+35 {aux.nome = "Paulo     "; aux.nota1 = 0.5; aux.nota2 = 2.1; aux.nota3 = 0.8; aux.media = 1.13;}
+36 {alunos[4].nome = "Pedro     "; alunos[4].nota1 = 2.3; alunos[4].nota2 = 4.5; alunos[4].nota3 = 6.7; alunos[4].media = 4.5;}
+37 {alunos[5].nome = "Paulo     "; alunos[5].nota1 = 0.5; alunos[5].nota2 = 2.1; alunos[5].nota3 = 0.8; alunos[5].media = 1.13;}
+38;
+31 j = 6;
+32;
+33;
+34;
+35 {aux.nome = "Pedro     "; aux.nota1 = 2.3; aux.nota2 = 4.5; aux.nota3 = 6.7; aux.media = 4.5;}
+36 {alunos[4].nome = "Patricia  "; alunos[4].nota1 = 7.8; alunos[4].nota2 = 2.3; alunos[4].nota3 = 6.7; alunos[4].media = 5.6;}
+37 {alunos[6].nome = "Pedro     "; alunos[6].nota1 = 2.3; alunos[6].nota2 = 4.5; alunos[6].nota3 = 6.7; alunos[6].media = 4.5;}
+38;
+30 i = 5;
+31 j = 6;
+32;
+33;
+34;
+35 {aux.nome = "Paulo     "; aux.nota1 = 0.5; aux.nota2 = 2.1; aux.nota3 = 0.8; aux.media = 1.13;}
+36 {alunos[5].nome = "Pedro     "; alunos[5].nota1 = 2.3; alunos[5].nota2 = 4.5; alunos[5].nota3 = 6.7; alunos[5].media = 4.5;}
+37 {alunos[6].nome = "Paulo     "; alunos[6].nota1 = 0.5; alunos[6].nota2 = 2.1; alunos[6].nota3 = 0.8; alunos[6].media = 1.13;}
+38;
+39 i = 1;
+40 writeln ("Carolina    9.17");
+39 i = 2;
+40 writeln ("Marcela     8.17");
+39 i = 3;
+40 writeln ("Fernando    7.33");
+39 i = 4;
+40 writeln ("Patricia    5.60");
+39 i = 5;
+40 writeln ("Pedro       4.50");
+39 i = 6;
+40 writeln ("Paulo       1.13");
+41;
