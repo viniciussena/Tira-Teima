@@ -1,13 +1,10 @@
-TODO:
+﻿TODO:
 [ ] Remover warnings do JavaCC (problema com lookahead).
-[V] Fazer o tira-teima voltar a aceitar Pascal como linguagem para fins de highlighting.
-[ ] Passar a aceitar expressões à direita da atribuição.
 [ ] Padronizar o arquivo tirateima.jj usando a mesma nomenclatura de metodos.
 [ ] Cuidar para que codificações aceitem acento.
-[ ] Criar interceptor para exceções (mostrar para o usuário).
+[ ] Criar interceptor para exceções (mostrar para o usuário que houve erro).
 [ ] Passar mensagens personalizadas para o usuário em caso de entrada errada de dados (tipo incorreto, valor vazio etc.).
 [ ] Encontrar uma gramática para Pascal no JavaCC e refatorar código usando apenas um método de highighting(parseText) para todas as linguagens, ponderando apenas se haverá highlighting ou não. Para cada tipo de linguagem suportada, passar a chamar apenas um parser do pacote highlighting. Assim todos ficarão parecidos com o do C, que é mais elegante.
 [ ] Reescrever o manual do programador, explicando o código como ficou após execução de estados em tempo real. 
-[ ] Reescrever o manual do professor, explicando os novos comandos implementados.
 [ ] Refazer o manual do usuário, retirando das figuras o campo de inserir a linha, que foi removido.
 [ ] Refatorar a parte de variáveis, retirando os resquícios de quando elas eram posicionadas automaticamente. Isso simplificaria o código.
