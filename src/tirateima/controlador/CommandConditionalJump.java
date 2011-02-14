@@ -25,6 +25,13 @@ public class CommandConditionalJump extends Command {
 		}
 	}
 	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * Recupera os valores das variáveis colocando no lugar da pilha em que estava
 	 * a variável o seu valor corrente para cálculo.

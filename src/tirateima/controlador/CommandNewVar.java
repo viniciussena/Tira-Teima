@@ -20,4 +20,13 @@ public class CommandNewVar extends Command {
 			throws TiraTeimaLanguageException {
 		c.mostrador.adicionarVariavel(newVar(c, ref));
 	}
+	
+	/**
+	 * Desfaz o comando de criação de variável removendo a nova variável do mostrador
+	 */
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		c.mostrador.removerVariavel(ref.getName());		
+	}
 }

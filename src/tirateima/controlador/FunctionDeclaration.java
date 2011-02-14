@@ -47,6 +47,13 @@ public class FunctionDeclaration extends Command
 		c.declared_functions.put(name, this);
 	}
 	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * Cria uma nova função, com os parâmetros passados por valor.
 	 * 

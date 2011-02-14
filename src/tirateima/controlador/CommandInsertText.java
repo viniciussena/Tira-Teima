@@ -21,5 +21,12 @@ public class CommandInsertText extends Command {
 		c.mostrador.adicionarTexto(new Texto(conteudo,tamanho,posicao));
 		
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

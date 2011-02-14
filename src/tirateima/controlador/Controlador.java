@@ -146,6 +146,13 @@ public class Controlador {
         btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
         		indice = -1;
+        		while(!estados.empty()){
+        			try{
+        				antEstado();
+        			}catch (Exception e) {
+						e.printStackTrace();
+					}
+        		}
         		ajustarBotoes();
         	}
         });
@@ -269,6 +276,16 @@ public class Controlador {
 	 */
 	public void antEstado () throws TiraTeimaLanguageException{
 		/*Retira o estado da pilha*/
+		try{
+			if(estado != null){
+				for(Command c : ((Step)(estado.est_passo)).commands){
+					c.revert(this);
+				}
+			}
+		}catch(ExecutionException e){
+			e.printStackTrace();
+		}
+		
 		estado = estados.pop();
 		indice = passos.indexOf(estado.est_passo);
 		

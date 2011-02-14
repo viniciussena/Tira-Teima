@@ -20,5 +20,12 @@ public class CommandJump extends Command {
 		c.jump = Boolean.TRUE;
 		c.jumpTo = this.label;
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

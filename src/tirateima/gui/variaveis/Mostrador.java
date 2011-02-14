@@ -170,7 +170,6 @@ public class Mostrador extends JScrollPane implements IEstado {
 		}
 	}
 	
-	
 	/**
 	 * Modifica o valor de uma variável.
 	 * @param nome   nome da variável a ser modificada.

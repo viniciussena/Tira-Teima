@@ -32,4 +32,11 @@ public class CommandNewType extends Command {
 		
 		c.declared_records.put(name, new RecordDefinition(name, vars));
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 }

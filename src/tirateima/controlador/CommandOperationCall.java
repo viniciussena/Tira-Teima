@@ -84,6 +84,13 @@ public class CommandOperationCall extends Command
 				break;
 		}
 	}
+	
+	@Override
+	public void revert(Controlador c) throws TiraTeimaLanguageException,
+			ExecutionException {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/**
 	 * Recebe um gerador e argumentos e retorna um arquivo.
