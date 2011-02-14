@@ -4,8 +4,8 @@ int main(){
     int a;
     scanf("%d",&a);
     if((a>=0) && (a<5))
-        printf("número entre 0 e 5");
+        printf("numero entre 0 e 4");
     else
-        printf("número negativo ou maior que 6");
+        printf("numero negativo ou maior que 4");
     return 0;
 }

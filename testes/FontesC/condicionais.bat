@@ -1,0 +1,1 @@
+java -jar tirateima.jar condicionais.c condicionais.dat
