@@ -1,0 +1,1221 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<base target="_top">
+<style type="text/css">
+  
+
+/* default css */
+
+table {
+  font-size: 1em;
+  line-height: inherit;
+  border-collapse: collapse;
+}
+
+
+tr {
+  
+  text-align: left;
+  
+}
+
+
+div, address, ol, ul, li, option, select {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+
+pre {
+  font-family: Courier New;
+  white-space: pre-wrap;
+  margin:0;
+}
+
+body {
+  margin: 6px;
+  padding: 0px;
+  font-family: Verdana, sans-serif;
+  font-size: 10pt;
+  background-color: #ffffff;
+  color: #000;
+}
+
+
+img {
+  -moz-force-broken-image-icon: 1;
+}
+
+@media screen {
+  html.pageview {
+    background-color: #f3f3f3 !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  
+
+  body {
+    min-height: 1100px;
+    
+    counter-reset: __goog_page__;
+  }
+  
+  * html body {
+    height: 1100px;
+  }
+  /* Prevent repaint errors when scrolling in Safari. This "Star-7" css hack
+     targets Safari 3.1, but not WebKit nightlies and presumably Safari 4.
+     That's OK because this bug is fixed in WebKit nightlies/Safari 4 :-). */
+  html*#wys_frame::before {
+    content: '\A0';
+    position: fixed;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+  }
+  
+  .pageview body {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+    width: 648px !important;
+    margin: 15px auto 25px;
+    padding: 40px 50px;
+  }
+  /* IE6 */
+  * html {
+    overflow-y: scroll;
+  }
+  * html.pageview body {
+    overflow-x: auto;
+  }
+  
+
+  
+    
+    .writely-callout-data {
+      display: none;
+    }
+    
+
+    .writely-footnote-marker {
+      background-image: url('MISSING');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      width: 7px;
+      overflow: hidden;
+      height: 16px;
+      vertical-align: top;
+
+      
+      -moz-user-select: none;
+    }
+    .editor .writely-footnote-marker {
+      cursor: move;
+    }
+    .writely-footnote-marker-highlight {
+      background-position: -15px 0;
+      -moz-user-select: text;
+    }
+    .writely-footnote-hide-selection ::-moz-selection, .writely-footnote-hide-selection::-moz-selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection ::selection, .writely-footnote-hide-selection::selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection {
+      cursor: move;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+
+  
+
+
+  
+  .br_fix span+br:not(:-moz-last-node) {
+    
+    position:relative;
+    
+    left: -1ex
+    
+  }
+
+  
+  #cb-p-tgt {
+    font-size: 8pt;
+    padding: .4em;
+    background-color: #ddd;
+    color: #333;
+  }
+  #cb-p-tgt-can {
+    text-decoration: underline;
+    color: #36c;
+    font-weight: bold;
+    margin-left: 2em;
+  }
+  #cb-p-tgt .spin {
+    width: 16px;
+    height: 16px;
+    background: url(//ssl.gstatic.com/docs/clipboard/spin_16o.gif) no-repeat;
+  }
+}
+
+h6 { font-size: 8pt }
+h5 { font-size: 8pt }
+h4 { font-size: 10pt }
+h3 { font-size: 12pt }
+h2 { font-size: 14pt }
+h1 { font-size: 18pt }
+
+blockquote {padding: 10px; border: 1px #DDD dashed }
+
+.webkit-indent-blockquote { border: none; }
+
+a img {border: 0}
+
+.pb {
+  border-width: 0;
+  page-break-after: always;
+  /* We don't want this to be resizeable, so enforce a width and height
+     using !important */
+  height: 1px !important;
+  width: 100% !important;
+}
+
+.editor .pb {
+  border-top: 1px dashed #C0C0C0;
+  border-bottom: 1px dashed #C0C0C0;
+}
+
+div.google_header, div.google_footer {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+/* Table of contents */
+.editor div.writely-toc {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+}
+.writely-toc > ol {
+  padding-left: 3em;
+  font-weight: bold;
+}
+ol.writely-toc-subheading {
+  padding-left: 1em;
+  font-weight: normal;
+}
+/* IE6 only */
+* html writely-toc ol {
+  list-style-position: inside;
+}
+.writely-toc-none {
+  list-style-type: none;
+}
+.writely-toc-decimal {
+  list-style-type: decimal;
+}
+.writely-toc-upper-alpha {
+  list-style-type: upper-alpha;
+}
+.writely-toc-lower-alpha {
+  list-style-type: lower-alpha;
+}
+.writely-toc-upper-roman {
+  list-style-type: upper-roman;
+}
+.writely-toc-lower-roman {
+  list-style-type: lower-roman;
+}
+.writely-toc-disc {
+  list-style-type: disc;
+}
+
+/* Ordered lists converted to numbered lists can preserve ordered types, and
+   vice versa. This is confusing, so disallow it */
+ul[type="i"], ul[type="I"], ul[type="1"], ul[type="a"], ul[type="A"] {
+  list-style-type: disc;
+}
+
+ol[type="disc"], ol[type="circle"], ol[type="square"] {
+  list-style-type: decimal;
+}
+
+/* end default css */
+
+
+  /* default print css */
+  @media print {
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    div.google_header, div.google_footer {
+      display: block;
+      min-height: 0;
+      border: none;
+    }
+
+    div.google_header {
+      flow: static(header);
+    }
+
+    /* used to insert page numbers */
+    div.google_header::before, div.google_footer::before {
+      position: absolute;
+      top: 0;
+    }
+
+    div.google_footer {
+      flow: static(footer);
+    }
+
+    /* always consider this element at the start of the doc */
+    div#google_footer {
+      flow: static(footer, start);
+    }
+
+    span.google_pagenumber {
+      content: counter(page);
+    }
+
+    span.google_pagecount {
+      content: counter(pages);
+    }
+
+    .endnotes {
+      page: endnote;
+    }
+
+    /* MLA specifies that endnotes title should be 1" margin from the top of the page. */
+    @page endnote {
+      margin-top: 1in;
+    }
+
+    callout.google_footnote {
+      
+      display: prince-footnote;
+      footnote-style-position: inside;
+      /* These styles keep the footnote from taking on the style of the text
+         surrounding the footnote marker. They can be overridden in the
+         document CSS. */
+      color: #000;
+      font-family: Verdana;
+      font-size: 10.0pt;
+      font-weight: normal;
+    }
+
+    /* Table of contents */
+    #WritelyTableOfContents a::after {
+      content: leader('.') target-counter(attr(href), page);
+    }
+
+    #WritelyTableOfContents a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+  }
+
+  @page {
+    @top {
+      content: flow(header);
+    }
+    @bottom {
+      content: flow(footer);
+    }
+    @footnotes {
+      border-top: solid black thin;
+      padding-top: 8pt;
+    }
+  }
+  /* end default print css */
+
+
+/* custom css */
+
+
+/* end custom css */
+
+/* ui edited css */
+
+body {
+  font-family: Verdana;
+  
+  font-size: 10.0pt;
+  line-height: normal;
+  background-color: #ffffff;
+}
+/* end ui edited css */
+
+
+/* editor CSS */
+.editor a:visited {color: #551A8B}
+.editor table.zeroBorder {border: 1px dotted gray}
+.editor table.zeroBorder td {border: 1px dotted gray}
+.editor table.zeroBorder th {border: 1px dotted gray}
+
+
+.editor div.google_header, .editor div.google_footer {
+  border: 2px #DDDDDD dashed;
+  position: static;
+  width: 100%;
+  min-height: 2em;
+}
+
+.editor .misspell {background-color: yellow}
+
+.editor .writely-comment {
+  font-size: 9pt;
+  line-height: 1.4;
+  padding: 1px;
+  border: 1px dashed #C0C0C0
+}
+
+
+/* end editor CSS */
+
+</style>
+
+  
+  <title>Manual do Programador</title>
+
+</head>
+
+<body 
+    
+    >
+    
+    
+    
+<h1>
+  <a id=Manual_do_Programador_72503750 name=Manual_do_Programador_72503750></a>Manual do Programador
+</h1>
+<br>
+Com o objetivo de viabilizar a colaboração com o projeto foi criado este manual do programador. Nele se pretende explicar em que se baseia o projeto, assim como descrever o modo como ele foi implementado. No manual, o programador que pretende colaborar com o projeto encontra tudo o que precisa para compreender o código fonte. Para maiores detalhes consultar o JavaDOC.<br>
+<br>
+<div class=writely-toc id=WritelyTableOfContents toctype=none+none>
+  <ol class=writely-toc-none>
+    <li>
+      <a href=#Manual_do_Programador_72503750 target=_self>Manual do Programador</a>
+    </li>
+    <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+      <li>
+        <a href=#Introdu_o_38926935100973437_7355170535020805 target=_self>Introdução</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+        <li>
+          <a href=#Id_ias_fundamentais_7261438309 target=_self>Idéias fundamentais</a>
+        </li>
+        <li>
+          <a href=#Pr_requisitos_6823353190018681_563243963315416 target=_self>Pré-requisitos</a>
+        </li>
+      </ol>
+      <li>
+        <a href=#Configura_o_de_Ambiente_457375 target=_self>Configuração de Ambiente</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+        <li>
+          <a href=#IDE_3260877853603238_046449238155563344 target=_self>IDE</a>
+        </li>
+        <li>
+          <a href=#Compilando_e_executando_o_tira target=_self>Compilando e executando o tira-teima</a>
+        </li>
+      </ol>
+      <li>
+        <a href=#Funcionamento_do_Programa_6717 target=_self>Funcionamento do Programa</a>
+      </li>
+      <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+        <li>
+          <a href=#Ciclo_de_Vida_790364402851159_24782999170057107 target=_self>Ciclo de Vida</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+          <li>
+            <a href=#Recebimento_dos_arquivos_71156 target=_self>Recebimento dos arquivos</a>
+          </li>
+          <li>
+            <a href=#Inicializa_o_do_Programa_42060 target=_self>Inicialização do Programa</a>
+          </li>
+          <li>
+            <a href=#Gera_o_de_Estados_776802049619 target=_self>Geração de Passos</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#Algoritmo_de_Gera_o_de_Estados target=_self>Algoritmo de Geração de Estados:</a>
+            </li>
+            <li>
+              <a href=#Execu_o_dos_Comandos_172584099 target=_self>Execução dos Comandos</a>
+            </li>
+            <li>
+              <a href=#Salvamento_de_Estados_31468903 target=_self>Salvamento de Estados</a>
+            </li>
+          </ol>
+          <li>
+            <a href=#Controle_de_Estados_6079580524 target=_self>Controle de Estados</a>
+          </li>
+        </ol>
+        <li>
+          <a href=#Descri_o_dos_Pacotes_966414167 target=_self>Descrição dos Pacotes</a>
+        </li>
+        <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+          <li>
+            <a href=#Controlador_3831499024066891_8044217709187415 target=_self>Controlador</a>
+          </li>
+          <li>
+            <a href=#GUI_692677178718273_8414449301681425 target=_self>GUI</a>
+          </li>
+          <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+            <li>
+              <a href=#Principal_04721598340200028_6422748666102772 target=_self>Principal</a>
+            </li>
+            <li>
+              <a href=#Funcionamento_da_Principal_jav target=_self>Funcionamento da Principal.java:</a>
+            </li>
+            <ol class="writely-toc-none writely-toc-subheading" style=MARGIN-LEFT:0pt>
+              <li>
+                <a href=#_a_Instancia_a_Principal_49992 target=_self>(a) Instancia a Principal():</a>
+              </li>
+              <li>
+                <a href=#_b_Insere_o_texto_do_arquivo_f target=_self>(b) Insere o texto do arquivo fonte na caixa de texto(Editor de Texto)</a>
+              </li>
+            </ol>
+            <li>
+              <a href=#Alerta_8164846411879956_2444530730195863 target=_self>Alerta</a>
+            </li>
+            <li>
+              <a href=#Console_18880616493196523_4274793777656164 target=_self>Console</a>
+            </li>
+            <li>
+              <a href=#Variaveis_17631637823961532_6812777539424475 target=_self>Variaveis</a>
+            </li>
+            <li>
+              <a href=#Editor_de_Texto_18600356133368 target=_self>Editor de Texto</a>
+            </li>
+          </ol>
+        </ol>
+      </ol>
+    </ol>
+  </ol>
+</div>
+<br>
+<h2>
+  <a id=Introdu_o_38926935100973437_7355170535020805 name=Introdu_o_38926935100973437_7355170535020805></a>Introdução
+</h2>
+O Tirateima é uma ferramenta educacional para auxiliar no ensino de disciplinas introdutórias de Computação. Ele apresenta a execução iterativa de um código fonte fornecido&nbsp; e, através de um roteiro, gera animações e comentários em Tela. Fornecendo assim uma visão dos estados de execução do programa estudado.<br>
+<br>
+<h3>
+  <a id=Id_ias_fundamentais_7261438309 name=Id_ias_fundamentais_7261438309></a>Idéias fundamentais
+</h3>
+<br>
+A idéia básica do programa é um interpretador de textos que destaca as palavras chaves do algoritmo estudado junto com a linha que está sendo executada, ao mesmo tempo que o painel à direita exibe desenhos a partir de roteiros fornecidos junto com o algoritmo estudado. O programa executa um varredura no arquivo texto contendo o algoritmo estudado e no arquivo contendo o roteiro de animação, gera uma lista de estados de execução, associando cada linha do código fonte com desenhos, comentários e animações. Após a lista de estados montada, o usuário pode controlar a execução do algoritmo utilizando um menu de controle apresentado na tela.<br>
+<br>
+<br>
+<h3>
+  <a id=Pr_requisitos_6823353190018681_563243963315416 name=Pr_requisitos_6823353190018681_563243963315416></a>Pré-requisitos
+</h3>
+<br>
+<i>Orientação a Objeto (OO)</i>: O Tirateima foi concebido a partir de uma modelação orientada a Objetos, então seu entendimento depende diretamente de conhecimentos prévio de OO.<br>
+<br>
+<i>Swing</i>: Toda a interface gráfica de menus do programa utiliza componentes do pacote Swing, então seu conhecimento é fundamental para alterar a exibição do programa.<br>
+<br>
+<i>JavaCC</i>: O programador que quiser alterar a forma de reconhecimento de comandos a partir dos arquivos textos de imput deve ter conhecimentos básicos do plugin JavaCC, que é utilizado para gerar as classes de parse do programa. Sua utilização de dá devido à dificuldade e complexidade no desenvolvimento de um sistema que reconheça uma linguagem apartir de uma gramática definida.<br>
+<br>
+<h2>
+  <a id=Configura_o_de_Ambiente_457375 name=Configura_o_de_Ambiente_457375></a>Configuração de Ambiente
+</h2>
+<h3>
+  <a id=IDE_3260877853603238_046449238155563344 name=IDE_3260877853603238_046449238155563344></a>IDE
+</h3>
+O tira-teima é um programa desenvolvido no Eclipse IDE. A utilização dessa ferramenta facilitará a compreensão do código através de plugins que permitem o highlighting de arquivos com extensão do javacc (.jj) e facilitam o acesso ao repositório escolhido pelo desenvolvedor (subclipse – caso opte pelo svn).<br>
+<br>
+O Eclipse pode ser baixado seguindo-se os seguintes passos:<br>
+<br>
+<ol>
+  <li>
+    Baixe o Eclipse Classic (o último da lista) relativo ao seu sistema operacional em http://www.eclipse.org/downloads/
+  </li>
+</ol>
+<br>
+&nbsp;&nbsp; &nbsp;<i>Obs. 1</i>: no linux, faça "sudo apt-get install eclipse" para baixá-lo&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp; &nbsp;<i>Obs. 2</i>: no windows, basta descompactar o eclipse na pasta desejada.<br>
+<br>
+<ol start=2>
+  <li>
+    Com a IDE corretamente instalada, faça o download dos plugins javacc e subclipse.
+  </li>
+</ol>
+<br>
+<ol start=2>
+  <ol type=a>
+    <li>
+      Javacc
+    </li>
+  </ol>
+</ol>
+&nbsp;&nbsp; &nbsp;<br>
+O Javacc é um gerador de analisador sintático para o Java. Ele é utilizado no tira-teima com duas finalidades: cria o parser para os arquivos de instrução do tira-teima (funcionalidade padrão) e fazer o highlighting dos arquivos com extensão .jj<br>
+<br>
+Você pode fazer o download do plugin Javacc para o Eclipse com os seguintes passos:<br>
+<br>
+<ol>
+  <ol start=2 type=a>
+    <ol>
+      <li>
+        No eclipse, cliquem em Help, Install New Software e coloquem o seguinte link em Work with:<br>
+        <br>
+        http://eclipse-javacc.sourceforge.net/<br>
+        <br>
+      </li>
+      <li>
+        Marque o JavaCC Eclipse Plug-in e o instale.<br>
+        <br>
+        Faça também o download do Javacc pelo site oficial: https://javacc.dev.java.net/<br>
+        <br>
+      </li>
+    </ol>
+    <li>
+      Subclipse
+    </li>
+  </ol>
+</ol>
+<br>
+Este é um plugin que permite o acesso a servidores SVN. Você pode baixá-lo com os seguintes passos:<br>
+<br>
+<ol>
+  <ol start=2 type=a>
+    <ol>
+      <li>
+        No eclipse, cliquem em Help, Install New Software e coloquem o seguinte link em Work with:<br>
+        <br>
+        http://subclipse.tigris.org/update_1.6.x<br>
+        <br>
+      </li>
+      <li>
+        Marque todos os três e os instalem.<br>
+      </li>
+    </ol>
+  </ol>
+</ol>
+&nbsp;&nbsp;&nbsp;<br>
+<h3>
+  <a id=Compilando_e_executando_o_tira name=Compilando_e_executando_o_tira></a>Compilando e executando o tira-teima
+</h3>
+Para a correta compilação e posterior execução do programa é necessário que sejam passados dois parâmetros para ele: um arquivo texto com o código fonte do programa a ser analisado pelo usuário e um arquivo com extensão .dat com um script que dirá as ações que o tira-teima irá realizar.<br>
+<br>
+Caso opte pela utilização do Eclipse, poderá utilizar tais parâmetros de compilação de maneira mais fácil:<br>
+<br>
+<ol>
+  <li>
+    Clique em Run -&gt; Run Configurations -&gt; Java Aplication-&gt; Arguments.
+  </li>
+  <li>
+    Selecione os arquivos com extensões .pas e .dat e cole-os na aba dos argumentos nessa ordem.
+  </li>
+  <li>
+    Clique em Run.
+  </li>
+</ol>
+<br>
+Caso opte pela compilação por linha de código leia o artigo “Documentação Tira Teima” presente na pasta “doc” do tira-teima.<br>
+<br>
+<h2>
+  <a id=Funcionamento_do_Programa_6717 name=Funcionamento_do_Programa_6717></a>Funcionamento do Programa
+</h2>
+<h3>
+  <a id=Ciclo_de_Vida_790364402851159_24782999170057107 name=Ciclo_de_Vida_790364402851159_24782999170057107></a>Ciclo de Vida
+</h3>
+<div style=BACKGROUND-COLOR:#ffffff;TEXT-ALIGN:left>
+  <div style=TEXT-ALIGN:left>
+    <div id=ff9l style=TEXT-ALIGN:left>
+      <img src="images/etapas.png" style=HEIGHT:492.991px;WIDTH:648px>
+    </div>
+    <br>
+  </div>
+  <br>
+  <br>
+  <ol>
+    <li>
+      <h4>
+        <a id=Recebimento_dos_arquivos_71156 name=Recebimento_dos_arquivos_71156></a>Recebimento dos arquivos
+      </h4>
+    </li>
+  </ol>
+</div>
+<div style=BACKGROUND-COLOR:#ffffff;TEXT-ALIGN:left>
+  &nbsp;&nbsp;&nbsp; <i><u>Principais Partes Envolvidas</u></i>: <b>Programa</b>, <b>Applet</b> ou <b>AppletEscondida</b>.<br>
+  &nbsp;&nbsp;&nbsp;<br>
+  &nbsp;&nbsp; &nbsp;O programa se inicia com o recebimento de dois arquivos, um fonte em Pascal,&nbsp; C ou outra linguagem e um roteiro do tirateima.<br>
+  <br>
+  &nbsp;&nbsp; &nbsp;Esses arquivos são recebidos: &nbsp;&nbsp; &nbsp;<br>
+  <ul>
+    <li>
+      como argumentos da função main, localizada na classe <b>Programa</b>;
+    </li>
+    <li>
+      ou como parâmetros do Applet, por meio das classes <b>Applet</b> ou <b>AppletEscondida</b>.
+    </li>
+  </ul>
+  <br>
+  &nbsp;&nbsp; &nbsp;Usualmente recebe-se um <i>programa.pas</i> como primeiro parâmetro e um <i>roteiro.dat </i>como segundo. Esse parâmetros (arquivos) são passados para a classe <b>Principal</b>, a qual é instanciada com seu construtor recebendo esses dois arquivos.<br>
+  <ol start=2>
+    <li>
+      <h4>
+        <a id=Inicializa_o_do_Programa_42060 name=Inicializa_o_do_Programa_42060></a>Inicialização do Programa
+      </h4>
+    </li>
+  </ol>
+  &nbsp;&nbsp;&nbsp; <i><u>Principais Partes Envolvidas</u></i>: <b>Principal</b> e <b>Controlador</b><br>
+  &nbsp;&nbsp; &nbsp;<br>
+  &nbsp;&nbsp; &nbsp;A inicialização do programa fica por conta da classe <b>Principal</b>, a qual quando construída utiliza o método <i>inicializar()</i> para setar os principais componentes da tela, como os painéis que darão origem às partes do programa. Em seguida a <b>Principal</b> coloca o texto do arquivo fonte em pascal no editor de texto. Instancia, então, um&nbsp;<b>Controlador</b>. Após inicializado, o programa volta para quem chamou a <b>Principal</b> (ou seja, para a <b>Programa</b> ou para a <b>Applet</b>) recebendo enfim o comando para tornar visível o tirateima.<br>
+  &nbsp;&nbsp; &nbsp;Desse modo, é possível ver que a lógica de inicialização do programa ocorre basicamente na construção do <b>Controlador</b>. Será explicado, então, como o programa tem todos os seus estados carregados antes de ser exibido e como o programa caminha entre esses estados sob demanda do usuário.<br>
+  <br>
+</div>
+<ol start=3>
+  <li>
+    <h4>
+      <a id=Gera_o_de_Estados_776802049619 name=Gera_o_de_Estados_776802049619></a>Geração de Passos
+    </h4>
+  </li>
+</ol>
+<br>
+&nbsp;&nbsp; &nbsp;<i><u>Principais Partes Envolvidas</u></i>: <b>Parser</b> e <b>Controlador</b><br>
+<br>
+&nbsp;&nbsp;&nbsp; O <b>Parser</b> é um pacote gerado automaticamente pelo programa <a href=https://javacc.dev.java.net/ title=JavaCC>JavaCC</a>. Este programa cria analisadores sintáticos (parsers) a partir de um arquivo fonte criado pelo programador em uma linguagem projetada para essa finalidade. O arquivo que gera esse pacote, no caso do tirateima, é o <i>tirateima.jj</i>. Compilando este arquivo, o JavaCC cria automaticamente uma série de classes java que funcionarão como um parser.<br>
+&nbsp;&nbsp;&nbsp; No caso do tirateima, o <b>Parser</b> analisa sintaticamente um certo <i>roteiro.dat</i> procurando em seu conteúdo um conjunto de passos (<b>Steps</b>), os quais não passam de uma lista de comandos (<b>Commands</b>). O que o parser basicamente faz, então, é receber o roteiro e retornar um passo por vez.<br>
+<br>
+&nbsp;&nbsp;&nbsp; O <b>Controlador</b>, por sua vez, é uma classe responsável por receber os passos (<b>Steps</b>) lidos pelo Parser e colocar estes em uma lista de passos. Em seguida a lista de <b>Estados</b> é controlada por essa mesma classe.<br>
+&nbsp;&nbsp;&nbsp;<br>
+<h5>
+  <a id=Algoritmo_de_Gera_o_de_Estados name=Algoritmo_de_Gera_o_de_Estados></a><i>Algoritmo de Geração de Estados:</i>
+</h5>
+<ol>
+  <li>
+    Para poder receber os passos, o <b>Controlador</b> executa um método <i>parse(Reader reader), </i>que recebe o descritor do roteiro.
+  </li>
+  <li>
+    O método citado instancia um <b>Parser</b> repassando para ele o roteiro.
+  </li>
+  <li>
+    O <b>Controlador</b>, em laço, recebe passo por passo do <b>Parser</b>; para cada passo, ele:
+  </li>
+  <ol type=a>
+    <li>
+      Adiciona na lista de passos.
+    </li>
+  </ol>
+</ol>
+<h5>
+  <a id=Execu_o_dos_Comandos_172584099 name=Execu_o_dos_Comandos_172584099></a><i>Execução dos Comandos</i>
+</h5>
+&nbsp;&nbsp;&nbsp; No <b>pacote </b>Controlador existe uma série de classes que herdam o método <b>execute()</b> da classe abstrata <b>Command</b>. É com esse método que cada comando específico é executado.<br>
+&nbsp;&nbsp;&nbsp; O que esses comandos fazem, basicamente, é chamarem a camada de visualização (GUI) para <u>guardar como se irá desenhar</u> na tela o que o comando mandar, ou realizar alguma outra operação, como tocar um som.<br>
+&nbsp;&nbsp;&nbsp; Por exemplo, a classe CommandNewVar em seu método execute() chama o método adicionarVariavel() do objeto <b>Mostrador</b>, o qual pertence ao pacote GUI.<br>
+&nbsp;&nbsp; &nbsp;Para entender os detalhes de como cada comando é executado é necessário navegar no corpo da implementação de cada execute() específico, observando sobretudo o momento em que ele guarda como pintará elementos na tela ou que ele de fato executará o comando, se for uma operação diferente de pintar.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Observe-se que esses comandos são executados incrementalmente, sempre pintando algo além do que já existia. Assim que esses comandos são terminados, o programa precisa salvar esse estado para que seja possível ao usuário voltar na linha de execução do tirateima. Para isso foi desenvolvido o salvamento de estados.<br>
+<h5>
+  <a id=Salvamento_de_Estados_31468903 name=Salvamento_de_Estados_31468903></a><i>Salvamento de Estados</i>
+</h5>
+&nbsp;&nbsp;&nbsp; O <b>pacote</b> Controlador possui uma classe chamdada <b>Estado</b>. Esta classe modela uma determinada configuração do tirateima, ou seja, um estado do mesmo. Essa configuração é caracterizada por como está cada componente da tela: o mostrador, o editor, a console, os alertas e o gerenciador de arquivos. Se em um dado momento o programa está com uma certa linha do editor destacada e com duas variáveis exibidas no mostrador, essa configuração pode ser salva em um estado.<br>
+&nbsp;&nbsp; &nbsp;Para salvar os estados o Controlador utiliza-se de uma <b>Pilha de Estados</b>. Essa pilha armazena um estado e caso o usuário avance, um estado é colocado na pilha. Caso o usuário volte para um estado anterior o estado atual é descartado, e é carregado um estado anterior retirado da pilha.<br>
+&nbsp;&nbsp;&nbsp; Esse estado é salvo através do método <i>saveEstate()</i> contido no Controlador. Esse método recebe um estado e um passo e salva esse estado de acordo com os o panorama momentâneo do Tira-Teima.<br>
+&nbsp;&nbsp;&nbsp; Um ponto importante a se observar é que o programa executa cada comando de cada passo em tempo de execução, na medida que o usuário avança para os próximos passos e dependendo às vezes de entradas dos usuários (em condicionais e repetições).<br>
+<ol start=4>
+  <li>
+    <h4>
+      <a id=Controle_de_Estados_6079580524 name=Controle_de_Estados_6079580524></a>Controle de Estados
+    </h4>
+  </li>
+</ol>
+&nbsp;&nbsp;&nbsp; <i><u>Principais Partes Envolvidas</u></i>: <b>Controlador</b> e <b>GUI</b><br>
+&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp; &nbsp;O <b>Controlador</b> é uma classe que é responsável por interceptar as ações do usuário e caminhar na lista de passos. O que ela faz, então, é receber um arquivo fonte, gerar uma lista de passos e percorrê-los executando os comandos contidos nesses passos de acordo com a demanda do usuário.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Para tanto, o controlador seleciona um passo da lista de passos e utiliza um método denominado <i>setEstado(Estado e)</i> para carregar esse estado após executar os comandos contidos no passo que o gerou. A <b>interface IEstado</b> é quem define esse método, o qual é implementado por diversos elementos da camada GUI, cada qual a seu modo.<br>
+<br>
+&nbsp;&nbsp;&nbsp; O <b>Console</b>, por exemplo, tem como principal elemento de seu estado atual uma string contendo todo o texto que está escrito nele. No caso dele, o estado preserva a string e esta é desenhada na tela no carregamento do estado. Assim, o método setEstado do console pinta o texto armazenado na tela.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Com isso o programa caminha nos estados até que o usuário feche a janela do programa, momento em que ele terminará o programa.<b><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp; Veja, por fim, um diagrama mais completo contendo o papel de cada módulo em vermelho.<br>
+<br>
+&nbsp;&nbsp; &nbsp;</b>
+<div style=TEXT-ALIGN:left>
+  <div id=pfum style=TEXT-ALIGN:left>
+    <img src="images/etapas_e_funcionamento.png" style=HEIGHT:349.357px;WIDTH:648px>
+  </div>
+  <br>
+</div>
+<br>
+<h3>
+  <a id=Descri_o_dos_Pacotes_966414167 name=Descri_o_dos_Pacotes_966414167></a>Descrição dos Pacotes
+</h3>
+<h4>
+  <a id=Controlador_3831499024066891_8044217709187415 name=Controlador_3831499024066891_8044217709187415></a>Controlador
+</h4>
+<p>
+  Um dos papéis do controlador é receber passos do parser, construir uma lista de passos para controlar o programa a partir dessa lista de passos.<br>
+  <br>
+  Os <b>passos</b> são conjuntos de comandos para o Tirateima. Ao acessar o método step() do parser, é fornecido um Reader de um roteiro no ponto onde ele estava sendo lido e é recebido um passo, o qual possui uma lista de comandos.<br>
+  <br>
+  Os <b>comandos</b> são classes herdadas da classe abstrata Command. Eles modelam uma operação a ser realizada no tirateima. Novas variáveis, avisos sonoros, escrita na tela e emissão de alertas na tela são exemplos de commandos. Por padrão, os comandos são nomeados como <b>Command[Nome_do_Commando]</b>. Um exemplo é o comando CommandNewVar, que comando é responsável por criar no mostrador uma nova variável. Todos os comandos implementam um método abstrato Command.execute().<br>
+  <br>
+  Basicamente, o que o método <b>execute()</b> faz é modificar os objetos que serão afetados pelo comando. O método CommandNewVar, por exemplo, em seu método execute() chama o método mostraror.adicionarVariavel(), ou seja, altera o estado do mostrador de acordo com os comandos descritos no roteiro escrito pelo professor.
+</p>
+<p>
+  <br>
+</p>
+<p>
+  Há também o médodo <b>revert(),</b> que desfaz o que o <b>execute()</b> fez. Isso ocorre em alguns comandos específicos em que é necessário desfazer alguma ações para manter a lógica do programa.
+</p>
+<p>
+  <br>
+  Antes de executar um passo, o Controlador salva o estado atual na pilha de estados, e depois executa cada passo do comando, salvando esse estado como estado corrente (<b>saveState() </b>) e setando (<b>setEstado()</b>) esse estado.
+</p>
+<br>
+Cabe ressaltar, pela particularidade das soluções, o papel de algumas classes.<br>
+<br>
+A classe Index modela uma matriz, que inclusive pode ser uma matriz 1xn (ou seja, um vetor). Essa classe possui dois índices, o first e o second, os quais representam as dimensões da matriz.<br>
+<br>
+A classe <b>TirateimaLanguageExeption</b> é uma classe que estende a classe Exception do Java. A idéia de exceções, no Java, é ao capturar uma exceção, lançá-la para quem a chamou até que alguém a trate. Logo, todas aquelas Classes que podem gerar exceções relacionadas à natureza do programa estão com a marca throws TirateimaLanguageExeption. No momento não há nenhum Interceptor que trate tais classes, mas o importante é não interromper o programa em tempo de execução.<br>
+<br>
+Para as demais classes, consulte o Javadoc do projeto<br>
+<p>
+</p>
+<p>
+  <br>
+</p>
+<p>
+  É a através do controlador que o usuário controla a execução do programa e ela que seta qual o estado que será mostrado em Tela.
+</p>
+<p>
+  <br>
+</p>
+<p>
+  <br>
+</p>
+<b>Métodos Relevantes</b><br>
+<p>
+  <br>
+</p>
+<p>
+  <i>proxEstado()</i>
+</p>
+<p>
+  <br>
+</p>
+<p>
+  Ação:
+</p>
+<p>
+  <br>
+</p>
+<p>
+  Coloca o estado atual do Tira-Teima na pilha de estados e carrega o próximo estado.<br>
+</p>
+<p>
+  <br>
+</p>
+<p>
+  A partir do estado corrente esta classe define tudo que será mostrado em tela, seja escolhendo o estado através dos botões próximo/anterior, como através do botão pular (botão que pula para um label específico marcado pelo professor que escreveu o roteiro.
+</p>
+<p>
+  <br>
+</p>
+<p>
+  O método que define o estado que será mostrado é o setEstado(Estado e) e ele passa os atributos do estado corrente aos objetos mostrador, editor, console, alerta e ga.
+</p>
+<p>
+  <br>
+</p>
+<p>
+  Ver:
+</p>
+<p>
+  <br>
+</p>
+<p>
+  private void setEstado(Estado e){
+</p>
+<p>
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; mostrador.setEstado(e.est_mostrador);
+</p>
+<p>
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; editor.setEstado(e.est_editor);
+</p>
+<p>
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; console.setEstado(e.est_console);
+</p>
+<p>
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; alerta.setEstado(e.est_alerta);
+</p>
+<p>
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; ga.setEstado(e.est_ga);
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; ajustarBotoes();
+</p>
+<p>
+  }<br>
+</p>
+<p>
+  <br>
+</p>
+<p>
+  <b>Estado.java</b>
+</p>
+<p>
+  <br>
+</p>
+<p>
+  Classe abstrata que define o tipo “estado”
+</p>
+<p>
+  <br>
+</p>
+<p>
+  public class Estado {&nbsp;&nbsp;<br>
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; public Object est_mostrador;
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; public Object est_editor;
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; public Object est_console;
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; public Object est_alerta;
+</p>
+<p>
+  &nbsp;&nbsp;&nbsp; public Object est_ga;
+</p>
+<p>
+  }<br>
+</p>
+<h4>
+  <a id=GUI_692677178718273_8414449301681425 name=GUI_692677178718273_8414449301681425></a>GUI
+</h4>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font face=verdana size=2>O tirateima.gui é o pacote responsável pela interface gráfica com o usuário dentro do tirateima. Ele é composto por 5 subpacotes e 2 arquivos: tirateima.gui.alerta, tirateima.gui.arquivos, tirateima.gui.console, tirateima.gui.editortexto, tirateima.gui.variaveis, Constantes.java e Principal.java.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<h5 style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <a id=Principal_04721598340200028_6422748666102772 name=Principal_04721598340200028_6422748666102772></a><font size=2><b>Principal</b></font>
+</h5>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>A classe principal.java é chamada a partir do Programa.java e recebe como parâmetros os arquivos fonte e texto, respectivamente. Ela é responsável pela renderização de toda as divisões da janela principal do tirateima. </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>A tela é dividida em 3 grandes painéis: o Navegador (barra do topo), Editor de Texto (esquerda) e o Painel da direita, que por sua vez, é composto por outras quatro divisões: o Mostrador (onde ficam as animações), o Gerenciador de Arquivos, o Console e o Alerta que aparece esporadicamente.</font>
+</p>
+<h5 style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <a id=Funcionamento_da_Principal_jav name=Funcionamento_da_Principal_jav></a><font size=2><b>Funcionamento da Principal.java: </b></font>
+</h5>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Inicializa o programa (Programa.java)</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<h6 style=FONT-FAMILY:verdana;MARGIN-RIGHT:0pt>
+  <a id=_a_Instancia_a_Principal_49992 name=_a_Instancia_a_Principal_49992></a><b><font size=2><i>(a) Instancia a Principal():</i></font></b>
+</h6>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Chama o método Inicializar() : Define o layout do painel</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>(1) Chama criarPaineldeTexto(): Define as propriedades da caixa de texto</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>(2) Chama criarPainelDireita():</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Instancia Console</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Instancia Alerta</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Adiciona Console e Alerta na parte inferior do PainelDireita(spl_painel_abaixo)</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Chama criarAreaDesenho()</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Chama criarPainelMostrador(): Define os paineis e os layouts do mostrador</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Instancia o Gerenciador de Arquivos: Define o tamanho do painel e seu evento</font>
+</p>
+<font face=verdana size=2><br>
+(3) Adiciona o getBarraTopo() no painel principal:<br>
+</font>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Adiciona os botoes de navegação(btnanterior, btnproximo, btn reiniciar...) (controlenavegação)</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Adiciona os botoes de zoom e define seus eventos (zoom+, zoom-, zerar zoom) (controlezoom)</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Adiciona os botoes de som e ajuda bem como seus eventos (controleoutros)</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Por fim, adiciona os tres painéis (controlenavegação, controlezoom e controleoutros que se ligam respectivamente aos três tópicos acima) ao spl_barra_topo.&nbsp; </font>
+</p>
+<p>
+  <font size=2><br>
+  </font>
+</p>
+<p>
+  <font face=verdana size=2>Adiciona (1), (2) e (3) ao painel principal: spl_principal</font><br>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Define o controle de navegação pelas setas operacionais(up, down, left, right)</font>
+</p>
+<p>
+</p>
+<h6>
+  <a id=_b_Insere_o_texto_do_arquivo_f name=_b_Insere_o_texto_do_arquivo_f></a><i><font face=verdana size=2>(b) Insere o texto do arquivo fonte na caixa de texto(Editor de Texto)</font></i>
+</h6>
+<p>
+</p>
+<p>
+  <font face=verdana size=2>Chama outro método chamado Inicializar() diferente de (a)</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Adiciona o layout ao JFrame ( janela do tirateima)</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Adiciona tudo o que foi elaborado na principal ao JFrame</font>
+</p>
+<h5>
+  <a id=Alerta_8164846411879956_2444530730195863 name=Alerta_8164846411879956_2444530730195863></a><font face=verdana size=2><b>Alerta</b></font>
+</h5>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>A classe alerta é instanciada durante a execução da classe Principal da GUI. Ela extende a classe JtextPane e implementa a interface IEstado. A classe Alerta é responsável pelas características do painel Alerta.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Essa classe define a cores e a fonte do Alerta e possui também alguns métodos que administram o som do tirateima. Ela muda os valores, por exemplo,&nbsp; da variável somAtivado, que é setada quando o usuário clica no botão de deixar o som mudo. Além disso controla quando o som de alerta será executado.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>A classe Alerta implementa um método importante, o setEstado(), que é um método da IEstado.java. Esse método é chamado a partir da classe Controladora e é responsável pela renderização do estado de Alerta na tela.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<h5 style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <a id=Console_18880616493196523_4274793777656164 name=Console_18880616493196523_4274793777656164></a><font size=2><b>Console</b></font>
+</h5>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>A classe console tem um funcionamento bem semelhante à Alerta. Ela também é instanciada durante a execução da classe Principal, porém extende a classe JtextArea. </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>O Primeiro ponto a ser ressaltado é que o console é uma area de texto, que pode receber uma string bem grande (que guarda todo o conteúdo do console) e mostra a string quebrando-a em várias linhas, ou seja, cada linha que é mostrada no console, na verdade, é um elemento de um ArrayList de Strings. </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Durante a construção da lista de estados do programa, o Controlador manda para a classe Console, a string a ser adicionada em cada estado e o método gui.console.print(String s) adiciona a respectiva string à lista de strings existente no Console por meio da gui.console.organizarLinhas(String s). Feito isso o método gui.console.organizarTexto() fica responsável por renderizar o novo estado do console.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Essa classe também é responsável por transformar tudo o que recebe (números float, int ...) em strings que serão mostradas no console. O metodo gui.console.setEstado(Object o) é responsável simplesmente chamar o método gui.console.print(String s) .<br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<h5 style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <a id=Variaveis_17631637823961532_6812777539424475 name=Variaveis_17631637823961532_6812777539424475></a><font size=2><b>Variaveis</b></font>
+</h5>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>O Pacote gui.variaveis é constituído de um conjunto de classes que possuem uma relação de herança entre si. A classe variável extende a classe JComponent&nbsp; e é a classe pai de todas as classes com definição de váriaveis ( classes cujo nome iniciam com Var).&nbsp; Por exmplo, as classes VarGrade e VarLinha extendem Variavel. VarGrade é a classe pai das classes que representam structs, matriz ou vetores, enquanto VarLinha é a classe pai das outras classes, como VarBoolean, VarChar, VarFloat e etc.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <font size=2>Essas classes de variáveis tem como função principal a definição do funcionamento dos desenhos de cada tipo de dado que será mostrado na tela, ou seja, definem tamanho, posição e cor. Além disso, nesse pacote se encontra a implementação da borda das variáveis.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+</p>
+<h5 style=FONT-FAMILY:Verdana;MARGIN-RIGHT:0pt>
+  <a id=Editor_de_Texto_18600356133368 name=Editor_de_Texto_18600356133368></a><font size=2><b>Editor de Texto</b></font>
+</h5>
+<p style=FONT-FAMILY:Verdana;TEXT-ALIGN:justify>
+  <font size=2>O pacote editortexto é a parte da GUI responsável pela parte do editor de texto do tirateima, ou seja, da parte onde fica o código em pascal. Esse pacote trabalha juntamente com a classe Principal da gui.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;TEXT-ALIGN:justify>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;TEXT-ALIGN:justify>
+  <font size=2>A principal contribuição do pacote gui.editortexto é a de dar o highlighting no código pascal e também de deixar marcada ( com o fundo amarelo ) a linha correspondente ao que o tirateima está mostrando nas outras janelas.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;TEXT-ALIGN:justify>
+  <font size=2><br>
+  </font>
+</p>
+<p style=FONT-FAMILY:Verdana;TEXT-ALIGN:justify>
+  <font size=2>Em linhas gerais o texto é mostrado da seguinte forma: A gui.Principal manda o arquivo texto para a EditorTexto, que por sua vez, manda para CaixaTexto. Nessa classe ele define os tipos de estilo (comentario, palavra chave, literal, tipos e outros). Feito isso, o método parseText() da própria CaixaTexto, jutamente com Anlex e Token ( outras classes do pacote editortexto), vão lendo token a token do arquivo, definindo qual o estilo ele deve receber, colorindo-o (de acordo com cada estilo) e o escrevendo em um documento da classe StyledDocument.&nbsp; Para tanto, foi implementado um analisador léxico por meio de uma máquina de estados. Depois do documento pronto, a classe EditorTexto insere o documento em um painel, que por sua vez, é inserido no JTextPane, juntamente com os números das linhas.</font>
+</p>
+<p style=FONT-FAMILY:Verdana;TEXT-ALIGN:justify>
+  <br>
+</p>
+</body>
+</html>

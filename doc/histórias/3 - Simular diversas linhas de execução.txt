@@ -1,5 +1,0 @@
-### História 3 - Simular diversas linhas de execução ###
-
-COMO professor
-PARA dar mais interatividade ao tirateima
-QUERO poder simular diversas linhas de execução de um programa de acordo com entradas do aluno  
