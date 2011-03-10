@@ -7,6 +7,5 @@ int main(int argc, char *argv[]){
     p = &numero;
     numero = 10;
     printf("%d",*p);
-    free(p);
     return 0;
 }

@@ -181,13 +181,15 @@ public class Mostrador extends JScrollPane implements IEstado {
 	 */
 	public void restaurarSetaRemovida() {
 		Seta setaRemovida = restauraSeta();
-		if(!hasVariavel(setaRemovida.nome)){
-			throw new RuntimeException("Variavel " + setaRemovida.nome + " nao localizada.");
-		}		
-		if (function != null) {
-			function.adicionarSeta(setaRemovida.nome,setaRemovida);
-		} else {
-			setas.adicionarSeta(setaRemovida.nome, setaRemovida);
+		if(setaRemovida != null){
+			if(!hasVariavel(setaRemovida.nome)){
+				throw new RuntimeException("Variavel " + setaRemovida.nome + " nao localizada.");
+			}		
+			if (function != null) {
+				function.adicionarSeta(setaRemovida.nome,setaRemovida);
+			} else {
+				setas.adicionarSeta(setaRemovida.nome, setaRemovida);
+			}
 		}
 	}
 	

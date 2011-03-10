@@ -38,11 +38,12 @@ public class VarChar extends VarLinha {
 	 * Cria uma nova variável do tipo string. 
 	 * @param nome  nome da variável.
 	 */
-	public VarChar(String nome, Color cor, Dimension dimensao, Point posicao) {
+	public VarChar(String nome, Color cor, Dimension dimensao, Point posicao,Boolean mostraNome) {
 		super(nome, "\"\\n\"");
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -57,12 +58,13 @@ public class VarChar extends VarLinha {
 	 * Cria uma nova variável do tipo string. 
 	 * @param nome  nome da variável.
 	 */
-	public VarChar(String nome, Character valor, Color cor, Dimension dimensao, Point posicao) {
+	public VarChar(String nome, Character valor, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		this(nome);
 		setValor(valor);
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -79,9 +81,9 @@ public class VarChar extends VarLinha {
 	public VarChar criarCopia() {
 		VarChar ret;
 		if (lixo)
-			ret = new VarChar(nome, cor, dimensao, posicao);
+			ret = new VarChar(nome, cor, dimensao, posicao, mostraNome);
 		else
-			ret = new VarChar(nome, valor, cor, dimensao, posicao);
+			ret = new VarChar(nome, valor, cor, dimensao, posicao, mostraNome);
 		ret.modificado = modificado;
 		modificado = false;
 		return ret;

@@ -74,7 +74,7 @@ public class VarMatriz extends VarGrade {
 	 * @param rows       número de linhas.
 	 * @param variaveis  variáveis.
 	 */
-	public VarMatriz(String nome, int rows, int cols, List<Variavel> variaveis, Color cor, Color corExterna, Dimension dimensao, Point posicao) {
+	public VarMatriz(String nome, int rows, int cols, List<Variavel> variaveis, Color cor, Color corExterna, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, rows, cols, variaveis);
 		this.rows = rows;
 		this.cols = cols;
@@ -82,6 +82,7 @@ public class VarMatriz extends VarGrade {
 		super.corExterna = corExterna;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -175,7 +176,7 @@ public class VarMatriz extends VarGrade {
 		for (int i = 0; i < tamanho; i++)
 			novo[i] = variaveis.get(i).criarCopia();
 		try {
-			VarMatriz ret = new VarMatriz(nome, rows, cols, Arrays.asList(novo), cor, corExterna, dimensao, posicao);
+			VarMatriz ret = new VarMatriz(nome, rows, cols, Arrays.asList(novo), cor, corExterna, dimensao, posicao, mostraNome);
 			ret.modificado = modificado;
 			modificado = false;
 			return ret;

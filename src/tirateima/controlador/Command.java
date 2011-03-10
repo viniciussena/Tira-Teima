@@ -81,22 +81,22 @@ public abstract class Command {
 		Type t = var_def.getType();
 		switch (t.getId()) {
 			case INTEGER:
-				v = new VarInteger(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao());
+				v = new VarInteger(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao(), var_def.getMostraNome());
 				break;
 			case REAL:
-				v = new VarReal(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao());
+				v = new VarReal(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao(), var_def.getMostraNome());
 				break;
 			case CHAR:
-				v = new VarChar(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao());
+				v = new VarChar(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao(), var_def.getMostraNome());
 				break;
 			case STRING:
-				v = new VarString(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao());
+				v = new VarString(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao(), var_def.getMostraNome());
 				break;
 			case BOOLEAN:
-				v = new VarBoolean(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao());
+				v = new VarBoolean(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao(), var_def.getMostraNome());
 				break;
 			case POINTER:
-				v = new VarPointer(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao());
+				v = new VarPointer(var_def.getName(), var_def.getColor(), var_def.getDimension(), var_def.getPosicao(), var_def.getMostraNome());
 				break;
 			case RECORD:
 				if (!c.declared_records.containsKey(t.getName()))
@@ -104,7 +104,7 @@ public abstract class Command {
 				
 				RecordDefinition def = c.declared_records.get(t.getName()).clone();
 				v = new VarRecord(t.getName(), var_def.getName(), def.fields, var_def.getColor(), 
-						var_def.getcorExterna(), var_def.getDimension(), var_def.getPosicao());
+						var_def.getcorExterna(), var_def.getDimension(), var_def.getPosicao(),var_def.getMostraNome());
 				break;
 		}
 		/** Se for uma variável composta (array ou registro) entra */

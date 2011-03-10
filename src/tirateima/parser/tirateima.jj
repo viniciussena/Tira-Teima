@@ -414,6 +414,7 @@ VarDefinition new_var(Type type) : {
 	Color colorOutside = null;
 	Dimension dimension = null;
 	Point posicao = null;
+	boolean mostraNome = true;
 }
 {
 	(t_name_var = <IDENTIFIER>)
@@ -422,8 +423,9 @@ VarDefinition new_var(Type type) : {
 	(colorOutside = corExterna())?
 	(dimension = dimensao())?
 	(posicao = posicao())?
+	(mostraNome = mostraNome())?
 	{
-		return new VarDefinition(type, t_name_var.image, i, color, colorOutside, dimension, posicao);
+		return new VarDefinition(type, t_name_var.image, i, color, colorOutside, dimension, posicao, new Boolean(mostraNome));
 	}
 }
 
@@ -518,6 +520,17 @@ Point posicao() : {
 		return coordenadas;
 	}	  
 }
+
+/**
+* Verifica se um nome de uma variável vai ser mostrado ou não
+*/
+boolean mostraNome() : {
+	boolean valorBooleano = true;
+}
+{
+  	<KW_SHOW_NAME>	<OPEN_PAR>
+	(<KW_TRUE> {valorBooleano = true;} | <KW_FALSE> {valorBooleano = false;})
+	<CLOSE_PAR> {return valorBooleano;}}  
 
 /**
 *   Cria um par de coordenadas x, y 
@@ -957,7 +970,8 @@ TOKEN [IGNORE_CASE] : {
 	<KW_GOTO : "vaipara"> |
 	<KW_READ_FROM_USER : "recebe"> |
 	<KW_IF : "se" > |
-	<KW_REMOVE_VAR : "removeVariavel" >
+	<KW_REMOVE_VAR : "removeVariavel" > |
+	<KW_SHOW_NAME : "mostraNome" >
 	}
 	
 // Constantes

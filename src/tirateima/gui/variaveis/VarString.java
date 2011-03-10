@@ -46,11 +46,12 @@ public class VarString extends VarLinha {
 	 * Cria uma nova variável do tipo string com cor e tamanhos customizados.
 	 * @param nome  nome da variável.
 	 */
-	public VarString(String nome, Color cor, Dimension dimensao, Point posicao) {
+	public VarString(String nome, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, "TAMANHO NORMAL DE STRING!!! =)");
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -78,7 +79,7 @@ public class VarString extends VarLinha {
 	
 	@Override
 	public VarString criarCopia() {
-		VarString ret = new VarString(nome, cor, dimensao, posicao);
+		VarString ret = new VarString(nome, cor, dimensao, posicao, mostraNome);
 		ret.valor = valor;
 		ret.setTexto("'" + valor + "'");
 		ret.lixo = lixo;

@@ -42,11 +42,12 @@ public class VarArray extends VarGrade {
 	 * @param nome       nome da variável.
 	 * @param variaveis  variáveis.
 	 */
-	public VarArray(String nome, List<Variavel> variaveis, Color cor, Dimension dimensao, Point posicao) {
+	public VarArray(String nome, List<Variavel> variaveis, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, 1, variaveis.size(), variaveis);
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -56,12 +57,13 @@ public class VarArray extends VarGrade {
 	 * @param nome       nome da variável.
 	 * @param variaveis  variáveis.
 	 */
-	public VarArray(String nome, List<Variavel> variaveis, Color cor,  Color corExterna, Dimension dimensao, Point posicao) {
+	public VarArray(String nome, List<Variavel> variaveis, Color cor,  Color corExterna, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, 1, variaveis.size(), variaveis);
 		super.cor = cor;
 		super.corExterna = corExterna;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -72,8 +74,9 @@ public class VarArray extends VarGrade {
 	 * @throws Exception lança uma exceção caso haja algum erro ao criar
 	 *                   as variáveis. 
 	 */
-	public VarArray(String nome, int tamanho, Class<Variavel> tipo) throws Exception {
+	public VarArray(String nome, int tamanho, Class<Variavel> tipo, Boolean mostraNome) throws Exception {
 		super(nome, 1, tamanho, criarVariaveis(tamanho, tipo));
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -162,7 +165,7 @@ public class VarArray extends VarGrade {
 		for (int i = 0; i < tamanho; i++)
 			novo[i] = variaveis.get(i).criarCopia();
 		try {
-			VarArray ret = new VarArray(nome, Arrays.asList(novo), cor, corExterna, dimensao, posicao);
+			VarArray ret = new VarArray(nome, Arrays.asList(novo), cor, corExterna, dimensao, posicao, mostraNome);
 			ret.modificado = modificado;
 			modificado = false;
 			return ret;

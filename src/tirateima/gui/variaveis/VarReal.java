@@ -46,23 +46,25 @@ public class VarReal extends VarLinha {
 	 * Cria uma nova variável do tipo real com cor e tamanhos customizados. 
 	 * @param nome  nome da variável.
 	 */
-	public VarReal(String nome, Color cor, Dimension dimensao, Point posicao) {
+	public VarReal(String nome, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, "000.000000");
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
 	 * Cria uma nova variável do tipo real com cor e tamanhos customizados. 
 	 * @param nome  nome da variável.
 	 */
-	public VarReal(String nome, double valor, Color cor, Dimension dimensao, Point posicao) {
+	public VarReal(String nome, double valor, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		this(nome);
 		setValor(valor);
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 
 	/**
@@ -79,9 +81,9 @@ public class VarReal extends VarLinha {
 	public VarReal criarCopia() {
 		VarReal ret;
 		if (lixo)
-			ret = new VarReal(nome, cor, dimensao, posicao);
+			ret = new VarReal(nome, cor, dimensao, posicao, mostraNome);
 		else
-			ret = new VarReal(nome, valor, cor, dimensao, posicao);
+			ret = new VarReal(nome, valor, cor, dimensao, posicao, mostraNome);
 		ret.modificado = modificado;
 		modificado = false;
 		return ret;

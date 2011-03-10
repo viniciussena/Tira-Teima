@@ -99,65 +99,67 @@ public interface TiraTeimaParserConstants {
   /** RegularExpression Id. */
   int KW_REMOVE_VAR = 49;
   /** RegularExpression Id. */
-  int INT_NUMBER = 50;
+  int KW_SHOW_NAME = 50;
   /** RegularExpression Id. */
-  int IDENTIFIER = 51;
+  int INT_NUMBER = 51;
   /** RegularExpression Id. */
-  int FLOAT_NUMBER = 52;
+  int IDENTIFIER = 52;
   /** RegularExpression Id. */
-  int STRING_LITERAL = 53;
+  int FLOAT_NUMBER = 53;
   /** RegularExpression Id. */
-  int CHAR_LITERAL = 54;
+  int STRING_LITERAL = 54;
   /** RegularExpression Id. */
-  int OPEN_BRACE = 55;
+  int CHAR_LITERAL = 55;
   /** RegularExpression Id. */
-  int CLOSE_BRACE = 56;
+  int OPEN_BRACE = 56;
   /** RegularExpression Id. */
-  int OPEN_BRACKET = 57;
+  int CLOSE_BRACE = 57;
   /** RegularExpression Id. */
-  int CLOSE_BRACKET = 58;
+  int OPEN_BRACKET = 58;
   /** RegularExpression Id. */
-  int OPEN_PAR = 59;
+  int CLOSE_BRACKET = 59;
   /** RegularExpression Id. */
-  int CLOSE_PAR = 60;
+  int OPEN_PAR = 60;
   /** RegularExpression Id. */
-  int DOT = 61;
+  int CLOSE_PAR = 61;
   /** RegularExpression Id. */
-  int COMMA = 62;
+  int DOT = 62;
   /** RegularExpression Id. */
-  int COLON = 63;
+  int COMMA = 63;
   /** RegularExpression Id. */
-  int SEMICOLON = 64;
+  int COLON = 64;
   /** RegularExpression Id. */
-  int ATTRIBUTION = 65;
+  int SEMICOLON = 65;
   /** RegularExpression Id. */
-  int OR_OP = 66;
+  int ATTRIBUTION = 66;
   /** RegularExpression Id. */
-  int AND_OP = 67;
+  int OR_OP = 67;
   /** RegularExpression Id. */
-  int EQ_OP = 68;
+  int AND_OP = 68;
   /** RegularExpression Id. */
-  int NE_OP = 69;
+  int EQ_OP = 69;
   /** RegularExpression Id. */
-  int LT_OP = 70;
+  int NE_OP = 70;
   /** RegularExpression Id. */
-  int GT_OP = 71;
+  int LT_OP = 71;
   /** RegularExpression Id. */
-  int LE_OP = 72;
+  int GT_OP = 72;
   /** RegularExpression Id. */
-  int GE_OP = 73;
+  int LE_OP = 73;
   /** RegularExpression Id. */
-  int NOT_OP = 74;
+  int GE_OP = 74;
   /** RegularExpression Id. */
-  int ADD_OP = 75;
+  int NOT_OP = 75;
   /** RegularExpression Id. */
-  int SUB_OP = 76;
+  int ADD_OP = 76;
   /** RegularExpression Id. */
-  int MULT_OP = 77;
+  int SUB_OP = 77;
   /** RegularExpression Id. */
-  int DIV_OP = 78;
+  int MULT_OP = 78;
   /** RegularExpression Id. */
-  int MOD_OP = 79;
+  int DIV_OP = 79;
+  /** RegularExpression Id. */
+  int MOD_OP = 80;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -214,6 +216,7 @@ public interface TiraTeimaParserConstants {
     "\"recebe\"",
     "\"se\"",
     "\"removeVariavel\"",
+    "\"mostraNome\"",
     "<INT_NUMBER>",
     "<IDENTIFIER>",
     "<FLOAT_NUMBER>",

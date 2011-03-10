@@ -49,11 +49,12 @@ public class VarPointer extends VarLinha {
 	 * Cria uma nova variável do tipo string com cor e tamanhos customizados.
 	 * @param nome  nome da variável.
 	 */
-	public VarPointer(String nome, Color cor, Dimension dimensao, Point posicao) {
+	public VarPointer(String nome, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, "TAMANHO NORMAL DE STRING!!! =)");
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -81,7 +82,7 @@ public class VarPointer extends VarLinha {
 	
 	@Override
 	public VarPointer criarCopia() {
-		VarPointer ret = new VarPointer(nome, cor, dimensao, posicao);
+		VarPointer ret = new VarPointer(nome, cor, dimensao, posicao, mostraNome);
 		ret.valor = valor;
 		ret.setTexto(valor);
 		ret.lixo = lixo;

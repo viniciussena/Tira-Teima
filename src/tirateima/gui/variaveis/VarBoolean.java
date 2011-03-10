@@ -47,11 +47,12 @@ public class VarBoolean extends VarLinha {
 	 * @param nome   nome da variável.
 	 * @param valor  valor inicial.
 	 */
-	public VarBoolean(String nome, Color cor, Dimension dimensao, Point posicao) {
+	public VarBoolean(String nome, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, "false");
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -59,21 +60,22 @@ public class VarBoolean extends VarLinha {
 	 * @param nome   nome da variável.
 	 * @param valor  valor inicial.
 	 */
-	public VarBoolean(String nome, boolean valor, Color cor, Dimension dimensao, Point posicao) {
+	public VarBoolean(String nome, boolean valor, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		this(nome);
 		setValor(valor);
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	@Override
 	public VarBoolean criarCopia() {
 		VarBoolean ret;
 		if (lixo)
-			ret = new VarBoolean(nome, cor, dimensao, posicao);
+			ret = new VarBoolean(nome, cor, dimensao, posicao, mostraNome);
 		else
-			ret = new VarBoolean(nome, valor, cor, dimensao, posicao);
+			ret = new VarBoolean(nome, valor, cor, dimensao, posicao, mostraNome);
 		ret.modificado = modificado;
 		modificado = false;
 		return ret;

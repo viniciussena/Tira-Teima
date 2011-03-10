@@ -23,6 +23,9 @@ public class VarDefinition implements TiraTeimaParserConstants {
 	private Dimension dimension;
 	private Point posicao;
 	
+	/** Atributo que informa se o nome da variável aparecerá ou não (alocação dinâmica)*/
+	private Boolean mostraNome = Boolean.TRUE;
+	
 	/** Construtor de variável padrão */
 	public VarDefinition(Type type, String name, Index index) {
 		this.type = type;
@@ -39,8 +42,18 @@ public class VarDefinition implements TiraTeimaParserConstants {
 		this.dimension = dimension;
 	}
 	
+	/** Construtor de variável customizada com mais um campo de mostrar ou não o nome */
+	public VarDefinition(Type type, String name, Index index, Color color, Dimension dimension, Point posicao, Boolean mostraNome) {
+		this.type = type;
+		this.name = name;
+		this.index = index;
+		this.color = color;
+		this.dimension = dimension;
+		this.mostraNome = mostraNome;
+	}
+	
 	/** Construtor de variável mais customizada */
-	public VarDefinition(Type type, String name, Index index, Color color, Color corExterna, Dimension dimension, Point posicao) {
+	public VarDefinition(Type type, String name, Index index, Color color, Color corExterna, Dimension dimension, Point posicao, Boolean mostraNome) {
 		this.type = type;
 		this.name = name;
 		this.index = index;
@@ -48,6 +61,7 @@ public class VarDefinition implements TiraTeimaParserConstants {
 		this.corExterna = corExterna;
 		this.dimension = dimension;
 		this.posicao = posicao;
+		this.mostraNome = mostraNome;
 	}
 
 	public Type getType() {
@@ -77,5 +91,12 @@ public class VarDefinition implements TiraTeimaParserConstants {
 	public Point getPosicao() {
 		return posicao;
 	}
-	
+
+	public Boolean getMostraNome() {
+		return mostraNome;
+	}
+
+	public void setMostraNome(Boolean mostraNome) {
+		this.mostraNome = mostraNome;
+	}
 }

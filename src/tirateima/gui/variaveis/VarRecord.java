@@ -84,12 +84,13 @@ public class VarRecord extends VarGrade {
 	 * @param nome       nome da variável.
 	 * @param variaveis  variáveis contidas no record (nesta ordem).
 	 */
-	public VarRecord(String typeName, String nome, List<Variavel> variaveis, Color cor,  Color corExterna, Dimension dimensao, Point posicao) {
+	public VarRecord(String typeName, String nome, List<Variavel> variaveis, Color cor,  Color corExterna, Dimension dimensao, Point posicao,Boolean mostraNome) {
 		super(nome, variaveis.size(), 1, variaveis);
 		super.cor = cor;
 		super.corExterna = corExterna;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 		
 		this.typeName = typeName;
 		
@@ -109,7 +110,7 @@ public class VarRecord extends VarGrade {
 		for (int i = 0; i < tamanho; i++)
 			novo[i] = variaveis.get(i).criarCopia();
 		try {
-			VarRecord ret = new VarRecord(typeName, nome, Arrays.asList(novo), cor, corExterna, dimensao, posicao);
+			VarRecord ret = new VarRecord(typeName, nome, Arrays.asList(novo), cor, corExterna, dimensao, posicao, mostraNome);
 			ret.modificado = modificado;
 			modificado = false;
 			return ret;

@@ -48,11 +48,12 @@ public class VarInteger extends VarLinha {
 	 * Cria uma nova variável do tipo integer com cor e tamanhos customizados.  
 	 * @param nome  nome da variável.
 	 */
-	public VarInteger(String nome, Color cor, Dimension dimensao, Point posicao) {
+	public VarInteger(String nome, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		super(nome, base);
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	
@@ -60,12 +61,13 @@ public class VarInteger extends VarLinha {
 	 * Cria uma nova variável do tipo integer com cor e tamanhos customizados.  
 	 * @param nome  nome da variável.
 	 */
-	public VarInteger(String nome, int valor, Color cor, Dimension dimensao, Point posicao) {
+	public VarInteger(String nome, int valor, Color cor, Dimension dimensao, Point posicao, Boolean mostraNome) {
 		this(nome);
 		setValor(valor);
 		super.cor = cor;
 		super.dimensao = dimensao;
 		super.posicao = posicao;
+		super.mostraNome = mostraNome;
 	}
 	
 	/**
@@ -82,9 +84,9 @@ public class VarInteger extends VarLinha {
 	public VarInteger criarCopia() {
 		VarInteger ret;
 		if (lixo)
-			ret = new VarInteger(nome, cor, dimensao, posicao);
+			ret = new VarInteger(nome, cor, dimensao, posicao, mostraNome);
 		else
-			ret = new VarInteger(nome, valor, cor, dimensao, posicao);
+			ret = new VarInteger(nome, valor, cor, dimensao, posicao, mostraNome);
 		ret.modificado = modificado;
 		modificado = false;
 		return ret;

@@ -46,6 +46,7 @@ import tirateima.gui.arquivos.IDataReader;
 @SuppressWarnings("serial")
 public abstract class Variavel extends JComponent implements IDataReader {
 	protected String nome;
+	protected Boolean mostraNome;
 	protected boolean modificado = true;
 	protected boolean destacado;
 	protected double proporcao;
@@ -112,7 +113,6 @@ public abstract class Variavel extends JComponent implements IDataReader {
 				                                tamAtual.height, arc, arc);
 		((Graphics2D)g).clip(rect);
 	}
-	
 	
 	/**
 	 * O estado atual da variável, modificada ou não. Quando modificada,
@@ -296,4 +296,14 @@ public abstract class Variavel extends JComponent implements IDataReader {
 		//throw new AssertionError("O nome não deve ser modificado.");
 		this.nome = name == null ? "" : name;
 	}
+
+	public Boolean getMostraNome() {
+		return mostraNome;
+	}
+
+	public void setMostraNome(Boolean mostraNome) {
+		this.mostraNome = mostraNome;
+	}
+	
+	
 }
