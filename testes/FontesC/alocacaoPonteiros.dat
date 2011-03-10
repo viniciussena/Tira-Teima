@@ -1,0 +1,8 @@
+3;
+4 pointer p1 cor(150,150,255) tamanho(50,20) posicao (363,170);
+5 {p1 aponta(388,130); int numero cor(150,150,150) tamanho(80,30) posicao (350,90) mostraNome(false);}
+6 numero = 10;
+7 writeln("10");
+8 removeVariavel(numero);
+9 p1 = null;
+10;
