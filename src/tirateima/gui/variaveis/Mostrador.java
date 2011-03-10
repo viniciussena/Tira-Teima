@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -68,6 +69,10 @@ public class Mostrador extends JScrollPane implements IEstado {
 	private Variaveis vars = new Variaveis();
 	private Setas setas = new Setas();
 	private List<Texto> textos = new ArrayList<Texto>();
+	
+	/** Componentes removidos guardados para fins de restauração (reversão de comando) */
+	private Stack<Variavel> variaveisRemovidas = new Stack<Variavel>();
+	private Stack<Seta> setasRemovidas = new Stack<Seta>();
 
 	/** Conjunto de painéis que compõem o mostrador */
 	private JPanel painelPrincipal;
@@ -146,28 +151,76 @@ public class Mostrador extends JScrollPane implements IEstado {
 	}
 	
 	/**
-	 * Remove uma variável do mostrador.
-	 * @param nome  nome da variável a ser removida.
+	 * Armazena uma variável removida para fins de restauração em caso de reversão de 
+	 * comando
+	 * @param variavelRemovida
 	 */
-	public void removerVariavel(String nome) {
-		vars.removerVariavel(nome);
+	public void armazenarVariavelRemovida(Variavel variavelRemovida) {
+		if (function != null) {
+			function.armazenarVariavelRemovida(variavelRemovida);
+		} else {
+			armazenarVariavel(variavelRemovida);
+		}		
 	}
 	
 	/**
-	 * Cria uma seta em uma variável
-	 * @param nome
-	 * @param direcao
-	 * @param tamanho
+	 * Restaura uma variável removida. 
+	 * @param variavelRemovida
 	 */
-	public void adicionarSeta(String nome, Seta s) {
-		if(!hasVariavel(nome)){
-			throw new RuntimeException("Variavel " + nome + " nao localizada.");
+	public void restaurarVariavelRemovida() {
+		if (function != null) {
+			function.restaurarVariavelRemovida();
+		} else {
+			//adiciona novamente uma variável excluída
+			adicionarVariavel(restaurarVariavel());
+		}		
+	}
+	
+	/**
+	 * Restaura uma seta removida para fins de reversão de comando
+	 */
+	public void restaurarSetaRemovida() {
+		Seta setaRemovida = restauraSeta();
+		if(!hasVariavel(setaRemovida.nome)){
+			throw new RuntimeException("Variavel " + setaRemovida.nome + " nao localizada.");
 		}		
 		if (function != null) {
-			function.adicionarSeta(nome,s);
+			function.adicionarSeta(setaRemovida.nome,setaRemovida);
 		} else {
-			setas.adicionarSeta(nome, s);
+			setas.adicionarSeta(setaRemovida.nome, setaRemovida);
 		}
+	}
+	
+	/**
+	 * Restaura uma seta removida.
+	 * @return
+	 */
+	private Seta restauraSeta(){
+		return setasRemovidas.pop();
+	}
+	
+	/**
+	 * Remove uma variável do mostrador.
+	 * @param nome  nome da variável a ser removida.
+	 */
+	public Variavel removerVariavel(String nome) {
+		return vars.removerVariavel(nome);
+	}
+	
+	/**
+	 * Armazena uma variável em uma pilha de variáveis removidas
+	 * @param variavelRemovida
+	 */
+	private void armazenarVariavel(Variavel variavelRemovida) {
+		this.variaveisRemovidas.push(variavelRemovida);		
+	}
+	
+	/**
+	 * Restaura uma variável removida de uma pilha
+	 * @return variavel removida
+	 */
+	private Variavel restaurarVariavel(){
+		return this.variaveisRemovidas.pop();
 	}
 	
 	/**
@@ -188,6 +241,28 @@ public class Mostrador extends JScrollPane implements IEstado {
 		
 		return false;
 	}
+	
+
+	/**
+	 * Cria uma seta em uma variável
+	 * @param nome
+	 * @param direcao
+	 * @param tamanho
+	 */
+	public void adicionarSeta(String nome, Seta s) {
+		if(!hasVariavel(nome)){
+			throw new RuntimeException("Variavel " + nome + " nao localizada.");
+		}		
+		if (function != null) {
+			function.adicionarSeta(nome,s);
+		} else {
+			setas.adicionarSeta(nome, s);
+		}
+	}
+	
+	public void armazenarSetaRemovida(Seta setaRemovida){
+		this.setasRemovidas.push(setaRemovida);
+	}
 
 	/**
 	 * Retorna uma cópia de uma variável.
@@ -205,7 +280,7 @@ public class Mostrador extends JScrollPane implements IEstado {
 				new Painel(vars,setas,textos),
 				function);
 	}
-
+	
 	public void setEstado(Object estado) {
 		//esconde durante o desenho: evita flicker na tela
 		painelPrincipal.setVisible(false);
@@ -351,8 +426,8 @@ public class Mostrador extends JScrollPane implements IEstado {
 		 * Remove uma variável do contêiner.
 		 * @param nome  nome da variável a ser removida.
 		 */
-		public void removerVariavel(String nome) {
-			variaveis.remove(nome);
+		public Variavel removerVariavel(String nome) {
+			return variaveis.remove(nome);
 		}
 		
 		/**
@@ -436,8 +511,8 @@ public class Mostrador extends JScrollPane implements IEstado {
 		/**
 		 * Remove uma seta
 		 */
-		public void removerSeta(String nome){
-			setas.remove(nome);
+		public Seta removerSeta(String nome){
+			return setas.remove(nome);
 		}
 		
 		/**
@@ -698,10 +773,12 @@ public class Mostrador extends JScrollPane implements IEstado {
 	 * Remove a seta relativa a variável, caso haja se ela for um ponteiro.
 	 * @param nome_var
 	 */
-	public void removerSeta(String nome_var) {
+	public Seta removerSeta(String nome_var) {
 		if(setas.setas.containsKey(nome_var)){
-			setas.setas.remove(nome_var);
-		}		
+			return setas.setas.remove(nome_var);
+		} else {
+			return null;
+		}
 	}
 
 	public Integer quantidadeDeVariaveis() {

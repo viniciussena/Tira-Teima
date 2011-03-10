@@ -35,6 +35,7 @@ import tirateima.controlador.CommandStartFunction;
 import tirateima.controlador.CommandEndFunction;
 import tirateima.controlador.CommandOperationCall;
 import tirateima.controlador.CommandInsertText;
+import tirateima.controlador.CommandRemoveVar;
 import tirateima.controlador.Index;
 import tirateima.controlador.Step;
 import tirateima.controlador.Type;
@@ -149,6 +150,7 @@ void command(Step p) : {}
 	cmd_jump(p) |
 	cmd_conditional_jump(p)|
 	cmd_read(p) |
+	cmd_remove_var(p) |
 	function_declaration(p) |
 	function_start(p) |
 	function_end(p) |
@@ -580,6 +582,20 @@ void cmd_new_var(Step p) : {
 	}
 }
 
+/**	Remove uma variável e suas setas do Tira-Teima.
+*	@param Step atual sendo lido
+*/
+void cmd_remove_var(Step p) : {
+	Stack<Object> var_stack = new Stack<Object>();
+}
+{
+  <KW_REMOVE_VAR>
+  <OPEN_PAR>
+  variavel(var_stack) {p.addCommand(new CommandRemoveVar(var_stack));}
+  <CLOSE_PAR>
+  <SEMICOLON>
+}
+
 /**	Chama a classe atribuição para representação de atribuição de valor à uma variável
 *	@param Step
 */
@@ -940,7 +956,8 @@ TOKEN [IGNORE_CASE] : {
 	<KW_ENDERECO : "endereco"> |
 	<KW_GOTO : "vaipara"> |
 	<KW_READ_FROM_USER : "recebe"> |
-	<KW_IF : "se" >
+	<KW_IF : "se" > |
+	<KW_REMOVE_VAR : "removeVariavel" >
 	}
 	
 // Constantes
