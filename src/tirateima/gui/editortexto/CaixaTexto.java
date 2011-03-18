@@ -294,7 +294,7 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 				if (parser == null)
 					parser = new CParser(is);
 
-				Token t = CParser.getNextToken();
+				Token t = parser.getNextToken();
 
 				String estilo;
 				int line = 1;
@@ -490,7 +490,7 @@ public class CaixaTexto extends JTextPane implements DocumentListener{
 
 	    			doc.insertString(doc.getLength(), t.image, doc.getStyle(estilo));
 	    		}catch(Exception e){}
-					t = CParser.getNextToken();
+					t = parser.getNextToken();
 				}
 			}
 		}else{

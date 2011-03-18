@@ -42,6 +42,10 @@
 
   */
 
+options {
+	STATIC = false;
+}
+
 PARSER_BEGIN(CParser)
 
 package tirateima.gui.highlighting.c;
