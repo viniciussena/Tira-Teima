@@ -26,7 +26,6 @@ public class CommandRemoveVar extends Command {
 		String nome = (String)var_stack.pop();
 		//remove a seta se houver
 		c.mostrador.armazenarSetaRemovida(c.mostrador.removerSeta(nome));
-		c.mostrador.removerSeta(nome);
 		//remove a variável e coloca a variável em uma pilha de variáveis excluídas
 		c.mostrador.armazenarVariavelRemovida(c.mostrador.removerVariavel(nome));
 		//restaura pilha

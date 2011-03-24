@@ -403,6 +403,11 @@ public class Mostrador extends JScrollPane implements IEstado {
 			(function != null ? function.hasVariavel(nome) : false);
 	}	
 	
+	public boolean hasSeta(String nome) {
+		return setas.contains(nome) ||
+			(function != null ? function.hasSeta(nome) : false);
+	}
+	
 	/**
 	 * Contém as variáveis *sem* mostrá-las.
 	 */

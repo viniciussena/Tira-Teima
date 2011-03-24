@@ -208,8 +208,8 @@ public abstract class Command {
 		pilhaAux.push(parent);
 				
 		String nome_var = (String) parent;
-		if (!mostrador.hasVariavel(nome_var))
-			gerarErro("Variavel '" + nome_var + "' não foi declarada!");
+		/*if (!mostrador.hasSeta(nome_var))
+			gerarErro("Variavel '" + nome_var + "' não foi declarada!");*/
 		mostrador.removerSeta(nome_var);
 		restaurarPilha(var_stack,pilhaAux);
 	}

@@ -1,0 +1,46 @@
+14;
+16 {
+    pointer pont1 cor(255,150,0) tamanho(60,40) posicao (60,150);
+    pointer pont2 cor(255,150,0) tamanho(60,40) posicao (210,150);
+   }
+17 {
+    int x cor(0,200,100) tamanho(80,50) posicao (50,250) mostraNome(false);
+    pont1 aponta(90,250); 
+   }
+18 {
+    int y cor(0,200,100) tamanho(80,50) posicao (200,250) mostraNome(false);
+    pont2 aponta(240,250); 
+   }
+19;
+
+5 {
+   removeVariavel(pont1);
+   pointer p1 cor(0,150,255) tamanho(60,40) posicao (60,150);
+   p1 aponta(90,250);
+   pointer ep2 cor(0,150,255) tamanho(60,40) posicao (210,50);
+   ep2 aponta (240,150);
+  }
+
+7 x = 5;
+8 removeVariavel(y);
+
+9 {
+   int y cor(0,200,100) tamanho(80,50) posicao (250,250) mostraNome(false);
+   pont2 aponta(290,250); 
+  }
+
+10 y = 10;
+11;
+
+20 {
+    removeVariavel(ep2);
+    removeVariavel(p1);
+    pointer pont1 cor(0,150,255) tamanho(60,40) posicao (60,150);
+    pont1 aponta(90,250);
+    writeln("5");
+   }
+21 writeln("10");
+23;
+24;
+
+

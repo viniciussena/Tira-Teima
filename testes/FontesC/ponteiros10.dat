@@ -1,0 +1,51 @@
+4;
+6;
+7;
+8;
+9;
+
+11 {
+   pointer pinicio cor(255,150,0) tamanho(60,40) posicao (60,50);
+   pointer p1 cor(255,150,0) tamanho(60,40) posicao (350,50);
+  }
+
+13 pinicio = NULL;
+
+15 {
+   char c1 cor(0,200,100) tamanho(80,50) posicao (340,220) mostraNome(false);
+   pointer pp1 cor(0,200,100) tamanho(80,50) posicao (340,280) mostraNome(false);
+   p1 aponta(375,220); 
+   }
+16 c1 = 'x';
+17 pp1 = NULL;
+18 pinicio aponta(375,220);
+
+20 {
+   char c2 cor(0,200,100) tamanho(80,50) posicao (200,220) mostraNome(false);
+   pointer pp2 cor(0,200,100) tamanho(80,50) posicao (200,280) mostraNome(false);
+   p1 aponta(235,220); 
+   }
+21 c2 = 'y';
+22 pp2 aponta(340,250);
+23 pinicio aponta(235,220);
+
+25 {
+   char c3 cor(0,200,100) tamanho(80,50) posicao (50,220) mostraNome(false);
+   pointer pp3 cor(0,200,100) tamanho(80,50) posicao (50,280) mostraNome(false);
+   p1 aponta(80,220); 
+   }
+26 c3 = 'z';
+27 pp3 aponta(200,250);
+28 pinicio aponta(80,220);
+
+30 writeln("z");
+31 writeln("y");
+32 writeln("x");
+33;
+34;
+
+
+
+
+
+
