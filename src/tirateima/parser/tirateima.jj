@@ -911,7 +911,11 @@ Object arg() : {
 *   @param Step p.
 */
 void bloco(Step p) : {} {
-	<OPEN_BRACE>(command(p))*<CLOSE_BRACE>
+	<OPEN_BRACE>
+	(
+	  (label(p))?
+	  (command(p))
+  	)*<CLOSE_BRACE>
 }
 
 // Pula espaços em branco e comentários

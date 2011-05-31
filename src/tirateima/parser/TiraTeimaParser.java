@@ -1143,6 +1143,11 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
       } else {
         break label_8;
       }
+      if (jj_2_106(3)) {
+        label(p);
+      } else {
+        ;
+      }
       command(p);
     }
     jj_consume_token(CLOSE_BRACE);
@@ -1883,6 +1888,13 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     finally { jj_save(104, xla); }
   }
 
+  private boolean jj_2_106(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_106(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(105, xla); }
+  }
+
   private boolean jj_3R_11() {
     if (jj_scan_token(KW_RECORD)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
@@ -2346,8 +2358,8 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_105() {
-    if (jj_3R_10()) return true;
+  private boolean jj_3_106() {
+    if (jj_3R_9()) return true;
     return false;
   }
 
@@ -2355,6 +2367,14 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     if (jj_scan_token(KW_READ_FROM_USER)) return true;
     if (jj_scan_token(OPEN_PAR)) return true;
     if (jj_3R_29()) return true;
+    return false;
+  }
+
+  private boolean jj_3_105() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_106()) jj_scanpos = xsp;
+    if (jj_3R_10()) return true;
     return false;
   }
 
@@ -2392,11 +2412,6 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     return false;
   }
 
-  private boolean jj_3_102() {
-    if (jj_3R_29()) return true;
-    return false;
-  }
-
   private boolean jj_3R_46() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2407,6 +2422,11 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
     if (jj_3_104()) return true;
     }
     }
+    return false;
+  }
+
+  private boolean jj_3_102() {
+    if (jj_3R_29()) return true;
     return false;
   }
 
@@ -2979,7 +2999,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
    private static void jj_la1_init_2() {
       jj_la1_2 = new int[] {};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[105];
+  final private JJCalls[] jj_2_rtns = new JJCalls[106];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -3210,7 +3230,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
 
   private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 105; i++) {
+    for (int i = 0; i < 106; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -3322,6 +3342,7 @@ public class TiraTeimaParser implements TiraTeimaParserConstants {
             case 102: jj_3_103(); break;
             case 103: jj_3_104(); break;
             case 104: jj_3_105(); break;
+            case 105: jj_3_106(); break;
           }
         }
         p = p.next;
