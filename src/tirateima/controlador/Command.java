@@ -118,7 +118,7 @@ public abstract class Command {
 						var_def.getcorExterna(), var_def.getDimension(), var_def.getPosicao());
 				} else {
 					v = new VarArray(var_def.getName(), i.first, v, var_def.getColor(), 
-							var_def.getcorExterna(), var_def.getDimension(), var_def.getPosicao());
+							var_def.getcorExterna(), var_def.getDimension(), var_def.getPosicao(),var_def.getMostraNome());
 				}
 			} catch (Exception e) {
 				gerarErro("Falha ao criar variável '" + var_def.getName() + "'.");

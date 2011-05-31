@@ -41,7 +41,7 @@ public class Janela extends Borda {
 		variavel = var;
 		
 		/** Verifica se será mostrado o nome da variável */
-		if (variavel.getMostraNome()){
+		if (variavel.getMostraNome() == null || variavel.getMostraNome()){
 			titulo = variavel.getName();
 		}
 		else{

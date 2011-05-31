@@ -134,6 +134,26 @@ public class VarArray extends VarGrade {
 		super.posicao = posicao;
 	}
 	
+	/**
+	 * Mesmo método anterior, mas com possibilidade de não mostrar nome
+	 * 
+	 * @param nome Nome da variável.
+	 * @param tamanho Tamanho do array.
+	 * @param tipo Instância de variável usada como base para os elementos do array.
+	 * 
+	 * @throws Exception Lança exceção caso haja erro ao criar as variáveis.
+	 * 
+	 * @author Luciano Santos
+	 */
+	public VarArray(String nome, int tamanho, Variavel tipo, Color cor, Color corExterna, Dimension dimensao, Point posicao, boolean mostraNome) throws Exception{
+		super(nome, 1, tamanho, criarVariaveis(tamanho, tipo));
+		super.cor = cor;
+		super.corExterna = corExterna;
+		super.dimensao = dimensao;
+		super.posicao = posicao;
+		super.mostraNome = mostraNome;
+	}
+	
 	private static List<Variavel> criarVariaveis(int tamanho, Class<Variavel> tipo) throws Exception {
 		Variavel[] ret = new Variavel[tamanho];
 		Constructor<Variavel> constr = tipo.getConstructor(String.class);

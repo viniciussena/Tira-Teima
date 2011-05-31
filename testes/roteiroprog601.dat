@@ -6,7 +6,7 @@
 8;
 10;
 11 {real a[10] cor(200,0,0) corexterna(200,200,0) tamanho(40,30) posicao(30,120);
-    real b[10] cor(200,0,0) corexterna(200,200,0) tamanho(40,30) posicao(30,220);}
+    real b[10] cor(200,0,0) corexterna(200,200,0) tamanho(40,30) posicao(30,220) mostraNome(false);}
 12 int i cor(100,0,255) tamanho(60,30) posicao(120,30);
 14;
 15 i = 1 ;
@@ -60,7 +60,7 @@
 18 {writeln ("0"); a[10]=0.0;}
 19;
 20 {i=1;
-   comenta("Observe que à medida que i aumenta, o coeficiente do array b diminui, iniciando na extremidade oposta");
+   comenta("Observe que ï¿½ medida que i aumenta, o coeficiente do array b diminui, iniciando na extremidade oposta");
    som();}
 21 b[10]=11.0; 
 20 i=2;
